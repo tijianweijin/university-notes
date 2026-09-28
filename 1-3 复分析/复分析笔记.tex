@@ -1,0 +1,323 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+\definecolor{main}{HTML}{B33F46}
+\definecolor{mainlight}{HTML}{FFF0F0}
+\definecolor{method}{HTML}{B3797C}
+\definecolor{methodlight}{HTML}{FFF0F0}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\ctexset{
+  section={format=\centering\heiti\zihao{3}\color{main},
+           name={第,章},number=\chinese{section},aftername=\quad,
+           beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\zihao{5}\color{main},
+                 number={（\chinese{subsubsection}）},aftername=,
+                 beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+
+\begin{document}
+
+\begin{center}
+  {\heiti\zihao{1}\color{main} 复分析笔记}
+\end{center}
+
+\begin{relationbox}
+\[
+  \boxed{\text{复数域}}
+  \longrightarrow
+  \boxed{\text{复函数}}
+  \longrightarrow
+  \boxed{\text{极限与连续}}
+  \longrightarrow
+  \boxed{\text{微分学}}
+\]
+\end{relationbox}
+
+\section{复数域}
+正如实分析的基础是Euclid空间$\RR^n$，复分析的基础是复数域$\CC$。复数域可视为实
+二维向量空间 \(\operatorname{span}_{\mathbb R}\{1,\ii\}\) 上进一步赋予乘法结构
+所得。规定基元素的乘法 \(1 \cdot 1=1,\ 1 \cdot \ii=\ii \cdot 1=\ii,\ \ii^2=-1\)，并将其按
+双线性延拓至整个空间，即得到复数域。下面我们将详细描述如何从二维Euclid空
+间$\RR^2$构造出复数域$\CC$。
+
+
+\subsection{复数集}
+先不加定义直接给出虚数单位$\ii$。由此，我们可以给出一组标准正交基$\left \{1, \ii\right \}$，
+并张成二维Euclid空间$\RR^2$。故所有复数都可以对应到$\RR^2$上的点，并记为
+$z=x \cdot 1 + y \cdot \ii$，与点$(x,y)$一一对应起来。由此，我们也不难理解复数
+代数表示$z=x+\ii y$中的加号$+$是什么意思了，其表示的正是二维Euclid空间$\RR^2$
+中的向量加法。
+
+不难注意到，在加法、数乘、长度、角度这些层面上，复数域$\CC$与二维Euclid空间
+$\RR^2$是完全一致的。也就是说作为实Euclid空间，复数域与二维Euclid空间同构，
+即$\CC \cong \RR^2$。
+
+在复数域$\CC$与二维Euclid空间$\RR^2$中，因为同构而定义相似的概念有很多，
+现列举一些：
+\begin{itemize}
+  \item 向量/复数运算：加法、数乘、求长度/求模、求角度等；
+  \item 集合论概念：开集、闭集等；
+  \item 拓扑概念：邻域、边界、内点、聚点等；
+  \item 几何概念：如复平面、Jordan曲线等；
+  \item 分析概念：如极限、连续等。
+  \item 复数间一般不能比较大小。
+\end{itemize}
+
+\subsection{复数域}
+
+在复数集基础上进一步赋予乘法结构，即规定$1\cdot1=1$、$1\cdot \ii=\ii\cdot1=\ii$、
+$\ii^2=-1$，
+我们便得到了复数域$\CC$。这便是复数域$\CC$之区别于二维Euclid空间$\RR^2$的原因。
+复数域$\CC$规定了复数间的乘法（注意不是数乘或叉乘），这使得复数域相对于二维
+Euclid空间$\RR^2$有了更丰富的结构。
+
+因乘法结构而区别于二维Euclid空间$\RR^2$的复数概念有：
+\begin{itemize}
+  \item 复数运算：乘除法、指对幂运算等；
+  \item 分析概念：如导数、可微等。
+\end{itemize}
+
+除此以外，复数的旋转性质也是从此而来。注意到两向量基正交且长度为1，
+故由$1 \cdot \ii = \ii$，$\ii \cdot \ii = -1$，可知道对任意向量乘以$\ii$，
+两向量基均逆时针旋转了$\frac{\pi}{2}$，因此其结果是将该向量逆时针旋转了$\frac{\pi}{2}$。
+这便是复数的旋转性质。
+
+接下来给出复数的基本概念。
+
+\begin{enumerate}
+  \item 形式
+  \begin{center}
+    \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.5cm}X X}
+      \toprule
+      形式 & 表达式 & 适合处理 \\
+      \midrule
+      代数形式 & \(z=x+\ii y\) & 加法 \\
+      三角形式 & \(z=|z|(\cos\theta+\ii\sin\theta)\) & 辐角 \\
+      指数形式 & \(z=|z|\ee^{\ii\theta}\) & 乘法、指对幂 \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+  \item 实部：\(\operatorname{Re}\left ( z \right ) = x\)；虚部：\(\operatorname{Im}\left ( z \right ) = y\)。
+  \item 特例：\(y=0\Rightarrow z\) 为实数；$x=0$且$y\neq0\Rightarrow z$ 为纯虚数。
+  \item 共轭：\(\overline z=x-y\ii\)。
+  \item 运算律：
+    \[
+      \begin{aligned}
+        \overline{z_1\pm z_2}&=\overline{z_1}\pm\overline{z_2},\\
+        \overline{z_1z_2}&=\overline{z_1}\,\overline{z_2},\\
+        \overline{\left(\frac{z_1}{z_2}\right)}
+          &=\frac{\overline{z_1}}{\overline{z_2}}\qquad(z_2\neq0).
+      \end{aligned}
+    \]
+  \item 辐角与其计算
+
+    对 \(z\neq0\)：
+    \[
+      \arg z\in(-\pi,\pi],
+      \qquad
+      \operatorname{Arg}z=\arg z+2k\pi,
+      \quad k\in\mathbb Z.
+    \]
+
+    \[
+    \arg z=
+    \begin{cases}
+      \arctan\dfrac{y}{x}, & x>0,\\[4pt]
+      \arctan\dfrac{y}{x}+\pi, & x<0,\ y>0,\\[4pt]
+      \arctan\dfrac{y}{x}-\pi, & x<0,\ y<0,\\[4pt]
+      \dfrac{\pi}{2}, & x=0,\ y>0,\\[4pt]
+      -\dfrac{\pi}{2}, & x=0,\ y<0,\\[4pt]
+      0, & y=0,\ x>0,\\[4pt]
+      \pi, & y=0,\ x<0.
+    \end{cases}
+    \]
+    计算部分其实直接画图算也没什么不好的。
+\end{enumerate}
+
+\subsection{复球面}
+
+复分析中称模为无穷大的复数为无穷远点，记为$\infty$。
+将$\infty$加入到$\CC$中，便得到了扩充复平面$\CC_\infty$。
+表示扩充复平面常用复球面。
+
+\begin{enumerate}
+  \item 球极投影
+
+在三维空间中，取单位球面$S^2$，其北极点为$(0,0,1)$，南极点为$(0,0,-1)$。
+将复平面$\CC$放在球面$S^2$的赤道平面上，取北极点为投影点，则可将复平面$\CC$上的点
+投影到球面$S^2$上。将$\infty$对应到北极点，则得到了复球面$S^2$与扩充复平面$\CC_\infty$的一一对应关系。
+
+  \item 特征：在复球面上，北极点代表$\infty$，南极点为$0$，$1$、$\ii$都在赤道上。
+\end{enumerate}
+
+\section{复函数}
+
+\subsection{概念}
+
+设$D\subseteq\CC$，$z\in D$，记$w=f(z)$，则称$f$为定义在$D$上的复函数。
+\begin{itemize}
+  \item 若每个 \(z\) 对应一个 \(w\)，则为单值函数。
+  \item 若每个 \(z\) 对应多个 \(w\)，则为多值函数。
+\end{itemize}
+
+若将复函数$f$看作从$D$到$\RR^2$的映射，即令
+\[
+  z=x+\ii y,
+  \qquad
+  w=u+\ii v,
+\]
+则有
+\[
+  w=f(z)
+  \quad\Longleftrightarrow\quad
+  (x,y)\longmapsto\bigl(u(x,y),v(x,y)\bigr).
+\]
+
+\subsection{初等复函数}
+\begin{enumerate}
+  \item 常数函数
+
+\[
+  w=C\quad(C\in\CC).
+\]
+
+  \item 多项式函数
+
+\[
+  w=C_0+C_1z+\cdots+C_nz^n\quad(C_i\in\CC)
+\]
+
+  \item 指数函数  
+
+\[
+  \ee^z=\ee^{x+y\ii}=\ee^x(\cos y+\ii\sin y).
+\]
+
+其中$\ee^x$决定模，$y$决定辐角。
+
+  \item 对数函数  
+
+\[
+\ln z
+=\ln|z|+\ii\operatorname{Arg}z
+=\ln|z|+\ii\bigl(\arg z+2k\pi\bigr),
+\qquad k\in\mathbb Z.
+\]
+
+$\operatorname{Arg}z$的多值性造就了$\ln z$的多值性。
+  
+  \item 幂函数  
+
+\[
+  w=z^n
+\]
+
+在复数域扩展三角函数与双曲函数的定义，便得到了复三角函数与复双曲函数。
+
+  \item 三角函数  
+
+\[
+  \sin z=\frac{\ee^{\ii z}-\ee^{-\ii z}}{2\ii},
+  \qquad
+  \cos z=\frac{\ee^{\ii z}+\ee^{-\ii z}}{2}.
+\]
+
+三角函数的许多性质与实数域的三角函数类似，如奇偶性、周期性、零点等，但请注意：
+\textbf{复三角函数无界}。
+
+\begin{center}
+\begin{tabularx}{0.88\textwidth}{>{\bfseries}p{2.2cm}X X X}
+\toprule
+函数 & 奇偶性 & 周期性 & 零点 \\
+\midrule
+\(\sin z\) & 奇 & $2\pi$ & $n\pi$ \\
+\(\cos z\) & 偶 & $2\pi$ & $n\pi + \frac{\pi}{2}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+  \item 双曲函数
+
+\[
+\sinh z=\frac{\ee^z-\ee^{-z}}{2},
+\qquad
+\cosh z=\frac{\ee^z+\ee^{-z}}{2}.
+\]
+\end{enumerate}
+\begin{methodbox}[【题型】计算复三角函数]
+\[
+\sin(a+\ii b)=\sin a\cosh b+\ii\cos a\sinh b.
+\]
+\[
+\cos(a+\ii b)=\cos a\cosh b-\ii\sin a\sinh b.
+\]
+\end{methodbox}
+
+\section{连续与极限}
+复函数的连续与极限的定义与二元实函数类似，在此不多赘述。
+
+\section{微分学}
+
+\end{document}

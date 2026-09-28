@@ -1,0 +1,233 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,bm,esint}
+\usepackage{booktabs,tabularx,array,longtable,multirow}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+\definecolor{main}{HTML}{8E2C3A}
+\definecolor{mainlight}{HTML}{FFFFFF}
+\definecolor{method}{HTML}{8E5D64}
+\definecolor{methodlight}{HTML}{F8EFF1}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\ctexset{
+  section={format=\centering\heiti\zihao{3}\color{main},
+           name={第,章},number=\chinese{section},aftername=\quad,
+           beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\zihao{5}\color{main},
+                 number={（\chinese{subsubsection}）},aftername=,
+                 beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newtcolorbox{method}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title={#1},fonttitle=\heiti\bfseries
+}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\Prj}{\operatorname{Prj}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{method}解析几何笔记}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+
+\begin{document}
+
+\begin{center}
+  {\heiti\zihao{1}\color{main} 解析几何笔记}
+\end{center}
+
+\subsection{平面}
+
+设平面 $\Pi$ 法向量为 $\bm n=(A,B,C)\ne\bm 0$，$M(x_0,y_0,z_0)\in\Pi$。
+
+\begin{description}[style=multiline,leftmargin=7em,labelwidth=6em,itemsep=0.65em]
+  \item[点法式方程]
+  $A(x-x_0)+B(y-y_0)+C(z-z_0)=0,\quad A^2+B^2+C^2\ne0$
+
+  \item[一般式方程]
+  $Ax+By+Cz+D=0,\quad A^2+B^2+C^2\ne0$
+
+  \hfill（$D=-Ax_0-By_0-Cz_0$）
+
+  \item[截距式方程]
+  $\displaystyle\frac{x}{a}+\frac{y}{b}+\frac{z}{c}=1,\quad abc\ne0$
+
+  \hfill（$a,b,c$ 分别为平面与 $x,y,z$ 三轴的截距。）
+
+  \item[三点式方程]
+  $\displaystyle
+  \begin{vmatrix}
+    x-x_1 & y-y_1 & z-z_1\\
+    x-x_2 & y-y_2 & z-z_2\\
+    x-x_3 & y-y_3 & z-z_3
+  \end{vmatrix}=0$
+\end{description}
+
+\begin{method}[【注意】与谁平行谁为零]
+如与 $x$ 轴平行则 $x=0$，与 $yOz$ 平面平行则 $y=z=0$；
+
+过原点 $D=0$。
+\end{method}
+
+\begin{description}[style=multiline,leftmargin=7em,labelwidth=6em]
+  \item[平面束方程]
+  $\lambda(A_1x+B_1y+C_1z+D_1)+\mu(A_2x+B_2y+C_2z+D_2)=0,$
+
+  \hfill $\lambda^2+\mu^2\ne0$
+\end{description}
+
+\subsection{直线}
+
+设直线 $l$ 方向向量 $\bm s=(l,m,n)\ne\bm 0$，$M(x_0,y_0,z_0)\in l$。
+
+\begin{description}[style=multiline,leftmargin=7em,labelwidth=6em,itemsep=0.7em]
+  \item[参数方程]
+  $\displaystyle
+  \begin{cases}
+    x=x_0+lt,\\
+    y=y_0+mt,\\
+    z=z_0+nt,
+  \end{cases}\quad t\text{ 为参数}$
+
+  \item[标准方程]
+  $\displaystyle\frac{x-x_0}{l}=\frac{y-y_0}{m}=\frac{z-z_0}{n}$
+
+  \hfill（又称点向式方程或对称方程）
+
+  \item[一般方程]
+  $\displaystyle
+  \begin{cases}
+    A_1x+B_1y+C_1z+D_1=0,\quad A_1^2+B_1^2+C_1^2\ne0,\\
+    A_2x+B_2y+C_2z+D_2=0,\quad A_2^2+B_2^2+C_2^2\ne0
+  \end{cases}$
+
+  \hfill（又称普通方程）
+
+  \item[两点式方程]
+  $\displaystyle\frac{x-x_1}{x_2-x_1}=\frac{y-y_1}{y_2-y_1}=\frac{z-z_1}{z_2-z_1}$
+\end{description}
+
+\subsection{夹角}
+
+\begin{align*}
+\text{面面夹角：}\quad
+\cos\langle\bm n_1,\bm n_2\rangle
+&=\frac{|\bm n_1\cdot\bm n_2|}{\norm{\bm n_1}\norm{\bm n_2}},\\[0.4em]
+\text{线面夹角：}\quad
+\sin\langle\bm n_1,\bm s_1\rangle
+&=\frac{|\bm n_1\cdot\bm s_1|}{\norm{\bm n_1}\norm{\bm s_1}},\\[0.4em]
+\text{线线夹角：}\quad
+\cos\langle\bm s_1,\bm s_2\rangle
+&=\frac{|\bm s_1\cdot\bm s_2|}{\norm{\bm s_1}\norm{\bm s_2}}.
+\end{align*}
+
+\subsection{位置关系}
+
+\subsubsection{平面}
+
+\begin{align*}
+\text{垂直：}\quad
+\Pi_1\perp\Pi_2
+&\Longleftrightarrow \bm n_1\perp\bm n_2
+\Longleftrightarrow \bm n_1\cdot\bm n_2=0
+\Longleftrightarrow A_1A_2+B_1B_2+C_1C_2=0,\\[0.6em]
+\text{平行：}\quad
+\Pi_1\parallel\Pi_2
+&\Longleftrightarrow
+\frac{A_1}{A_2}=\frac{B_1}{B_2}=\frac{C_1}{C_2}\ne\frac{D_1}{D_2}
+\Longrightarrow \bm n_1\parallel\bm n_2
+\Longleftrightarrow \bm n_1\times\bm n_2=\bm 0,\\[0.6em]
+\text{重合：}\quad
+\Pi_1\text{ 与 }\Pi_2\text{ 重合}
+&\Longleftrightarrow
+\frac{A_1}{A_2}=\frac{B_1}{B_2}=\frac{C_1}{C_2}=\frac{D_1}{D_2}
+\Longrightarrow \bm n_1\parallel\bm n_2
+\Longleftrightarrow \bm n_1\times\bm n_2=\bm 0.
+\end{align*}
+
+\subsubsection{直线}
+
+\begin{align*}
+\text{异面：}\quad
+l_1\text{ 与 }l_2\text{ 异面}
+&\Longleftrightarrow (\overrightarrow{M_1M_2},\bm s_1,\bm s_2)\ne0,\\
+\text{共面：}\quad
+l_1\text{ 与 }l_2\text{ 共面}
+&\Longleftrightarrow (\overrightarrow{M_1M_2},\bm s_1,\bm s_2)=0.
+\end{align*}
+
+平行、垂直同上。
+
+\subsection{距离}
+
+点到平面距离：
+\[
+d=\Prj(\overrightarrow{P_0P_1},\bm n)
+=\frac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}.
+\]
+
+点到直线距离：
+\[
+d=\sqrt{\left|\overrightarrow{P_0P_1}\right|^2-
+\left(\Prj(\overrightarrow{P_0P_1},\bm n)\right)^2}.
+\]
+
+\end{document}

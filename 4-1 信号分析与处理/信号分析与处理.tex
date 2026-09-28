@@ -1,0 +1,96 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\usepackage{tikz}
+
+
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+\definecolor{main}{HTML}{3E6F9E}
+\definecolor{mainlight}{HTML}{F0F6FF}
+\definecolor{method}{HTML}{6E869E}
+\definecolor{methodlight}{HTML}{f0f6ff}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\ctexset{
+  section={format=\centering\heiti\zihao{3}\color{main},
+           name={第,章},number=\chinese{section},aftername=\quad,
+           beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\zihao{5}\color{main},
+                 number={（\chinese{subsubsection}）},aftername=,
+                 beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+
+\begin{document}
+
+\begin{center}
+  {\heiti\zihao{1}\color{main} 信号分析与处理笔记}
+\end{center}
+
+\section{信号分析}
+
+
+
+\section{信号处理与系统分析}
+
+\section{系统设计}
+
+\end{document}

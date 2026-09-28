@@ -1,0 +1,379 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\definecolor{main}{HTML}{2F6B4F}
+\definecolor{mainlight}{HTML}{FFFFFF}
+\definecolor{method}{HTML}{4D6B5D}
+\definecolor{methodlight}{HTML}{F1F5F2}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\ctexset{
+  section={format=\centering\heiti\zihao{3}\color{main},
+           name={第,章},number=\chinese{section},aftername=\quad,
+           beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\zihao{5}\color{main},
+                 number={（\chinese{subsubsection}）},aftername=,
+                 beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newcommand{\jj}{\mathrm{j}}
+
+\begin{document}
+
+\begin{center}
+  {\heiti\zihao{1}\color{main} 电路分析基础总结}
+\end{center}
+
+\vspace{0.45em}
+
+电路分析基础研究\textbf{集总参数电路}，即电路尺寸远小于电磁波长的电路。与集总参数电路相对的是分布参数电路。电路中每个二端元件就是一个\textbf{支路}，支路的连接点叫作\textbf{节点}，电路中任一闭合路径叫作\textbf{回路}，内部不含支路的回路叫作\textbf{网孔}。此外，分析电路时还应注意\textbf{参考方向}。
+
+\section{元件约束}
+
+\subsection{独立源}
+
+\begin{enumerate}
+  \item 分类：电压源和电流源；理想源与实际源。
+
+  \item VCR
+
+  \begin{center}
+    \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.5cm}XX}
+      \toprule
+      & 数量形式 & 相量形式 \\
+      \midrule
+      电压源 & \(v=V_s\) & \(\dot V=\dot V_s\) \\
+      电流源 & \(i=I_s\) & \(\dot I=\dot I_s\) \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+
+  \item 功率：电阻电路中，电源的功率一般为负。
+
+  \item 理想源等效变换：
+
+  理想电压源串联：\(V_{\mathrm{eq}}=\displaystyle\sum V_s\)，一般不并联。\textbf{与元件并联的电压源等效为该电压源}。
+
+  理想电流源并联：\(I_{\mathrm{eq}}=\displaystyle\sum I_s\)，一般不串联。\textbf{与元件串联的电流源等效为该电流源}。
+
+  \item 实际源等效变换：
+
+  \begin{center}
+    \begin{tabularx}{0.92\textwidth}{XX}
+      \toprule
+      实际电压源：\(v=v_s-R_si\) & 实际电流源：\(i=i_s-G_sv\) \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+
+  上两式满足关系
+  \[
+    \begin{cases}
+      v_s=R_si_s,\\
+      R_sG_s=1.
+    \end{cases}
+  \]
+
+  \item 有源元件与无源元件
+
+  若元件吸收的能量对任意 \(t\)、\(v\)、\(i\) 恒满足
+  \[
+    w=\int_{-\infty}^{t}v(\xi)i(\xi)\,\mathrm{d}\xi\geq 0,
+  \]
+  则该元件无源，否则有源。
+\end{enumerate}
+
+\subsection{受控源}
+
+\begin{enumerate}
+  \item 压控压源（VCVS）：\(v_2=\mu v_1\)，其中 \(\mu\) 为电压比系数。
+  \item 压控流源（VCCS）：\(i_2=gv_1\)，其中 \(g\) 为转移电导。
+  \item 流控流源（CCCS）：\(i_2=\alpha i_1\)，其中 \(\alpha\) 为电流比系数。
+  \item 流控压源（CCVS）：\(v_2=ri_1\)，其中 \(r\) 为转移电阻。
+\end{enumerate}
+
+\subsection{线性非时变电阻}
+
+\begin{enumerate}
+  \item VCR（关联参考方向）
+
+  \begin{center}
+    \begin{tabularx}{0.92\textwidth}{XX}
+      \toprule
+      数量形式：\(v=Ri\quad i=Gv\) & 相量形式：\(\dot V=R\dot I\quad \dot I=G\dot V\) \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+
+  \item 功率：\(p=\dfrac{v^2}{R}=i^2R\)。电阻电路中，电阻的功率恒为正。
+
+  \item 等效电阻
+
+  \begin{center}
+    \begin{tabularx}{0.92\textwidth}{XX}
+      \toprule
+      串联：\(R_{\mathrm{eq}}=\displaystyle\sum R\) & 并联：\(G_{\mathrm{eq}}=\displaystyle\sum G\) \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+
+  \item 输入电阻：\(R_i=\dfrac{u}{i}\)
+\end{enumerate}
+
+\subsection{电容}
+
+\begin{enumerate}
+  \item VCR（关联参考方向）
+
+  \begin{center}
+    \begin{tabularx}{0.92\textwidth}{XX}
+      \toprule
+      数量形式：\(i=C\dfrac{\mathrm{d}v}{\mathrm{d}t}\) & 相量形式：\(\dot I=\jj\omega C\dot V\) \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+
+  \item 导纳 \(Y_C=\jj\omega C\)，容纳 \(B_C=\omega C\)
+  \item 储能：\(w=\dfrac{1}{2}Cv^2\)
+  \item \textbf{并联}等效电容：\(C_{\mathrm{eq}}=\displaystyle\sum C\)
+\end{enumerate}
+
+\subsection{电感}
+
+\begin{enumerate}
+  \item VCR（关联参考方向）
+
+  \begin{center}
+    \begin{tabularx}{0.92\textwidth}{XX}
+      \toprule
+      数量形式：\(v=L\dfrac{\mathrm{d}i}{\mathrm{d}t}\) & 相量形式：\(\dot V=\jj\omega L\dot I\) \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+
+  \item 阻抗 \(Z_L=\jj\omega L\)，感抗 \(X_L=\omega L\)
+  \item 储能：\(w=\dfrac{1}{2}Li^2\)
+  \item \textbf{串联}等效电感：\(L_{\mathrm{eq}}=\displaystyle\sum L\)
+\end{enumerate}
+
+\subsection{耦合电感}
+
+\begin{enumerate}
+  \item 同名端为产生磁链相互加强时，电流流入一端。
+
+  \item VCR（同名端方向一致）
+
+  \begin{center}
+    \footnotesize
+    \begin{tabularx}{\linewidth}{@{}XX@{}}
+      \toprule
+      数量形式：
+      \(\begin{cases}
+        v_1=L\dfrac{\mathrm{d}i_1}{\mathrm{d}t}+M\dfrac{\mathrm{d}i_2}{\mathrm{d}t},\\[5pt]
+        v_2=L\dfrac{\mathrm{d}i_2}{\mathrm{d}t}+M\dfrac{\mathrm{d}i_1}{\mathrm{d}t}
+      \end{cases}\)
+      & 相量形式：
+      \(\begin{cases}
+        \dot V_1=\jj\omega L\dot I_1+\jj\omega M\dot I_2,\\
+        \dot V_2=\jj\omega L\dot I_1+\jj\omega M\dot I_2
+      \end{cases}\) \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+
+  \item 耦合系数 \(k=\dfrac{M}{\sqrt{L_1L_2}}\in[0,1]\)
+  \item 功率 \(p=v_1i_1+v_2i_2\)
+  \item 储能（同名端方向一致）\(w=\dfrac{1}{2}L_1i_1^2+\dfrac{1}{2}L_2i_2^2+Mi_1i_2\)
+\end{enumerate}
+
+\subsection{理想变压器}
+
+\begin{enumerate}
+  \item \(\widetilde S_1+\widetilde S_2=0\)，故有 \(P_1+P_2=0\)，\(Q_1+Q_2=0\)。
+  \item 设 \(n=\dfrac{N_1}{N_2}\)，则同名 \(U_1=nU_2\)，异名 \(U_1=-nU_2\)。
+  \item 等效阻抗 \(Z_2=n^2Z_1\)，与同名端无关。
+  \item 理想变压器的线性性质对 Thevenin 等效电路也适用。注意参考方向与同名端方向
+\end{enumerate}
+
+\section{拓扑约束}
+
+\subsection{Kirchhoff 定律}
+
+\begin{enumerate}
+  \item Kirchhoff 电流定律（KCL）：
+
+  \begin{center}
+    \begin{tabularx}{0.92\textwidth}{XX}
+      \toprule
+      数量形式：\(\displaystyle\sum i=0\) & 相量形式：\(\displaystyle\sum\dot I=0\) \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+
+  \item Kirchhoff 电压定律（KVL）
+
+  \begin{center}
+    \begin{tabularx}{0.92\textwidth}{XX}
+      \toprule
+      数量形式：\(\displaystyle\sum v=0\) & 相量形式：\(\displaystyle\sum\dot V=0\) \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+\end{enumerate}
+
+\subsection{电阻电路分析法}
+
+\begin{methodbox}[【方法】节点电压法]
+\begin{enumerate}
+    \item 文字表述：确定零电位点，设出节点电压，对其他节点运用 KCL，求解方程组。
+    
+    \item 矩阵表示：\(\boldsymbol{I}=\boldsymbol{YV}\)。其中：
+
+    \(\boldsymbol{I}\) 是节点驱动电流向量，输入为正输出为负。（只考虑独立源和受控源）
+
+    \(\boldsymbol{Y}\) 是导纳矩阵，对角线上为自导纳，即与节点相连所有导纳之和，值为正；其他为互导纳，即两节点间导纳，值为负。
+
+    \(\boldsymbol{V}\) 是节点电压向量，与 \(\boldsymbol{I}\) 一一对应。
+\end{enumerate}
+\end{methodbox}
+
+\begin{methodbox}[【方法】网孔电流法]
+\begin{enumerate}[start=2]
+  \item 网孔电流法（略）
+\end{enumerate}
+\end{methodbox}
+
+\subsection{线性定理}
+
+线性电路中激励与响应具有线性，即 \(\boldsymbol{r}=\boldsymbol{K}\boldsymbol{e}\)，分量形式为 \(r(e)=\displaystyle\sum K_i r(e_i)\)，由此有以下定理。
+
+\begin{enumerate}
+  \item 齐性定理：\textbf{单一激励}的线性电路中，激励与响应成正比。
+  \item 叠加定理：\textbf{线性时不变电路}中，总激励等于分激励之和。
+\end{enumerate}
+
+\subsection{替代定理（唯一性定理）}
+
+若所有支路中电压与电流均有\textbf{唯一解}，则可用理想源代替该支路。
+
+\subsection{Thevenin 定理和 Norton 定理}
+
+\begin{enumerate}
+  \item Thevenin 定理：任何含源线性单口网络 N 都可以用一个电压源和一个电阻的串联支路替代。
+  \item Norton 定理：任何含源线性单口网络 N 都可以用一个电流源和一个电阻的并联支路替代。
+\end{enumerate}
+
+注：两定理在正弦稳态电路中同样成立，但此时电阻为复值电阻。
+
+\begin{methodbox}[【题型】Thevenin 与 Norton 等效求法]
+  等效电阻法、外加电源法、短路电流法、VCR 确定法
+\end{methodbox}
+
+\subsection{最大功率传输定理}
+
+\begin{enumerate}
+  \item 线性时不变电路：当 \(R_L=R_s\) 时，电源有最大功率 \(P_{\max}=\dfrac{V_s^2}{4R_s}\)，此时效率为 \(\eta=50\%\)。
+  \item 正弦稳态电路
+\end{enumerate}
+
+\subsection{一阶动态电路三要素法}
+
+\[
+  y(t)=y(\infty)+[y(0^+)-y(\infty)]\mathrm{e}^{-\frac{t}{\tau}}
+\]
+
+其中 \(y(0^+)\) 是初值，\(y(\infty)\) 是终值，\(\tau\) 是时间常数。\(\tau=RC=\dfrac{L}{R}\)，其中 \(R\) 为 Thevenin 等效电阻。
+
+\subsection{正弦稳态电路}
+
+\begin{enumerate}
+  \item 相位规律：串联元件电流同相，并联元件电压同相。
+
+  \item 有效值：\(V=\dfrac{\sqrt{2}}{2}V_m\)，\(I=\dfrac{\sqrt{2}}{2}I_m\)
+
+  \item 阻抗与导纳
+  \begin{itemize}
+    \item 等效阻抗：\(Z=R+\jj X\)。
+    
+    若 \(X>0\)，则阻抗角 \(\psi_z>0\)，电压超前电流，等效为电阻与电感的串联支路；
+
+    若 \(X<0\)，阻抗角 \(\psi_z<0\)，电流超前电压，等效为电阻与电容的串联支路。
+
+    \item 等效导纳：\(Y=G+\jj B\)。
+    
+    若 \(B>0\)，则导纳角 \(\psi_y>0\)，电流超前电压，等效为电阻与电容的并联支路；
+
+    若 \(B<0\)，则导纳角 \(\psi_y<0\)，电压超前电流，等效为电阻与电感的并联支路。
+  \end{itemize}\
+
+  \item 功率
+
+  \begin{enumerate}[label=(\arabic*)]
+    \item 有功功率（平均功率，W）：\(P=UI\cos\varphi\)
+    \item 无功功率（Var）：\(Q=UI\sin\varphi\)
+    \item 视在功率（VA）：\(S=\lVert\widetilde S\rVert=\sqrt{P^2+Q^2}\)
+    \item 复功率（VA）：\(\widetilde S=U\dot I^*=P+\jj Q\)
+  \end{enumerate}
+
+  其中，\(\varphi\) 为压流相位差。称 \(\lambda=\cos\varphi\) 功率因数。
+
+  功率仍然满足 \(P=\displaystyle\sum P_i\)。
+\end{enumerate}
+
+\end{document}

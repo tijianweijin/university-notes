@@ -1,0 +1,1281 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,tabularx,array,longtable,multirow}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage{hyperref}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\definecolor{main}{HTML}{3C7F5F}
+\definecolor{mainlight}{HTML}{FFFFFF}
+\definecolor{method}{HTML}{5E7F6F}
+\definecolor{methodlight}{HTML}{F1F6F3}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\ctexset{
+  section={format=\centering\heiti\zihao{3}\color{main},
+           name={第,章},number=\chinese{section},aftername=\quad,
+           beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\zihao{5}\color{main},
+                 number={（\chinese{subsubsection}）},aftername=,
+                 beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\jj}{\mathrm{j}}
+\newcommand{\parallelsum}{\mathbin{\|}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Av}{\dot A_v}
+
+\begin{document}
+
+\begin{center}
+  {\heiti\zihao{1}\color{main} 模拟电路笔记}
+\end{center}
+
+\vspace{0.45em}
+
+\begin{relationbox}
+\[
+  \boxed{\text{二极管}}
+  \longrightarrow
+  \boxed{\text{晶体管与场效应管}}
+  \longrightarrow
+  \boxed{\text{放大与反馈}}
+  \longrightarrow
+  \boxed{\text{运算电路与稳压电源}}
+\]
+\end{relationbox}
+
+\section{二极管（Diode）}
+
+\subsection{元件特性}
+
+\subsubsection{外部特性}
+
+\begin{enumerate}
+  \item 伏安特性
+  \[
+    i_D=I_S\left(\ee^{\frac{v_D}{V_T}}-1\right)
+  \]
+
+  电压当量：
+  \[
+    V_T=\frac{kT}{q}.
+  \]
+  当 $T=300\,\mathrm K$ 时，$V_T=26\,\mathrm{mV}$；当 $T=290\,\mathrm K$ 时，$V_T=25\,\mathrm{mV}$。
+
+  正向工作区：$i_D=I_S\ee^{v_D/V_T}$，阈值电压 $V_{\mathrm{th}}=0.5\,\mathrm V$，导通电压 $V_{\mathrm{on}}=0.6\sim0.8\,\mathrm V$。
+
+  反向工作区：$i_D=-I_S$，反向饱和电流 $I_S<0.1\,\mu\mathrm A$。
+
+  反向击穿区：反向击穿电压 $V_{(\mathrm{BR})}$。
+
+  \item 等效电阻
+  \[
+    R_D=\frac{V_{DQ}}{I_{DQ}},
+    \qquad
+    r_d=\left.\frac{\dd v_D}{\dd i_D}\right|_Q\approx\frac{V_T}{i_{DQ}}.
+  \]
+
+  \item 反向击穿特性
+
+  齐纳击穿：电压 $V_{(\mathrm{BR})}<6\,\mathrm V$。
+
+  雪崩击穿：电压 $V_{(\mathrm{BR})}>6\,\mathrm V$。
+
+  \item 温度特性
+
+  温度升高，少子数量增加，反向饱和电流 $I_S$ 增大，阈值电压 $V_{\mathrm{th}}$ 下降。
+
+  \item 电容特性
+  \[
+    C_j=C_T+C_D,
+  \]
+  其中 $C_T$ 是势垒电容，$C_D$ 是扩散电容。
+
+  PN 结正偏，电容主要体现为扩散电容；PN 结反偏，电容主要体现为势垒电容。
+\end{enumerate}
+
+\subsubsection{参数}
+
+最大整流电流 $I_F$、最大反向工作电压 $V_R$、反向电流 $I_R$、最高工作频率 $f_M$。
+
+\subsubsection{种类}
+
+\begin{enumerate}
+  \item 稳压二极管（齐纳二极管）
+
+  \textbf{必须与限流电阻串联！}工作在反偏状态，通过电流在一定范围内。
+  \item 变容二极管：工作在反偏状态。
+  \item Schottky 二极管。
+  \item 发光二极管。
+  \item 光电二极管、激光二极管。
+\end{enumerate}
+
+\subsubsection{模型}
+
+\begin{enumerate}
+  \item 数学模型
+  \[
+    i_D=I_S\left(\ee^{\frac{v_D}{V_T}}-1\right).
+  \]
+  \item 理想化模型：正偏电压为 0，反向截止。
+  \item 恒压降模型：正偏电压为 $V_{\mathrm{on}}=0.6\sim0.8\,\mathrm V$，低于阈值电压截止。
+  \item 分段线性模型：高于阈值电压呈线性，低于截止。
+  \item 交流小信号模型：等效为动态电阻，高频电路需要并联结电容。
+\end{enumerate}
+
+\subsection{工作电路}
+
+\begin{methodbox}[【方法】二极管工作电路]
+\begin{enumerate}
+  \item 整流电路：将二极管看作理想化模型，合理连接电路使得电流方向相同。
+  \item 限幅电路：将二极管看作恒压降模型，使得电压幅度被限制在一定范围内。
+  \item 稳压电路：利用稳压管，稳压管与限流电阻串联，与负载并联。
+  \item 开关电路：利用二极管高电位优先导通特性，实现逻辑判断。
+\end{enumerate}
+\end{methodbox}
+
+\newcommand{\latechapters}{%
+\section{反馈放大电路}
+
+\subsection{反馈类型判断}
+
+\begin{methodbox}[【方法】反馈类型判断]
+\begin{enumerate}
+  \item 正反馈/负反馈：从输入端开始标号，遵循如下规则：
+  \begin{enumerate}[label=\textcircled{\arabic*}]
+    \item 输入端标为 $\oplus$；
+    \item 每到三端口元件如此判断：输入端为正端口，接地端为负端口。例：共射三极管 B 为正端口，E 为负端口，C 为输出端口；差分放大电路两端口都是正端口，接地端为负端口，剩余输出两端口；
+    \item 根据输出电流的增益正负依次判断输出端口电压增减，若正则与输入端口相同，负则相反；
+    \item 若最后的符号标在正端口上，则反馈类型与之相同；否则相反。
+  \end{enumerate}
+  \item 电压/电流：将 $v_o$ 置零，若仍有反馈则是电流反馈，否则是电压反馈。
+  \item 串联/并联：反馈电路与输入端同向则为并联，反相则为串联。
+  \item 四种组态
+  \begin{center}
+  \begin{tabular}{cc}
+    电压串联负反馈 & 电压并联负反馈 \\
+    电流串联负反馈 & 电流并联负反馈
+  \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{methodbox}
+
+\subsubsection{反馈组态选择}
+
+\begin{enumerate}
+  \item 稳定量：稳定输出电压——电压取样；稳定输出电流——电流取样。
+  \item 输入电阻：输入电阻大——并联反馈；输入电阻小——串联反馈。
+  \item 带载能力：带载能力强——电压取样。
+\end{enumerate}
+
+\subsubsection{反馈网络判断}
+
+极内反馈比较好判断，一般接地端电阻即反馈元件。
+
+级间反馈需要通过多重判断：
+
+若为电压取样反馈，则反馈网络为从输出电压节点到元件接地节点的分压网络；
+
+若为电流取样反馈，则反馈网络为从输出电流支路到接地支路的所有分流网络——\textbf{要注意每个节点处的分流电阻！}
+
+若为串联反馈，需要关注元件接地点的分压电阻；
+
+若为并联反馈，需要关注元件的所有分流电阻——包括接地电阻！
+
+要考虑到虚短与虚断的情形。此外，电容也是反馈网络的一部分，有分隔交直流的作用。
+
+\subsection{反馈参数计算}
+
+\begin{enumerate}
+  \item 闭环增益
+  \[
+    \dot A_f=\frac{\dot A}{1+\dot A\dot F},
+    \qquad
+    \text{深度负反馈时有 }\dot A_f=\frac1{\dot F}.
+  \]
+
+  \item 反馈回路提高稳定性
+  \[
+    \frac{\dd A_f}{A_f}=\frac1{1+AF}\cdot\frac{\dd A}{A}.
+  \]
+
+  \item 串联负反馈增大输入电阻
+  \[
+    R_{if}'=(1+AF)R_i,
+    \qquad
+    \text{深度负反馈有 }R_{if}'=\infty\text{（开路）}.
+  \]
+
+  \item 并联负反馈减小输入电阻
+  \[
+    R_{if}'=\frac1{1+AF}R_i,
+    \qquad
+    \text{深度负反馈有 }R_{if}'=0\text{（短路）}.
+  \]
+
+  \item 做题时常用：
+  \[
+    \dot A_f=\frac1{\dot F},
+    \qquad
+    R_{if}=R_i\parallelsum R_{if}',
+  \]
+  其中 $R_i$ 为开路输入电阻。
+
+  \item 闭环源电压增益求法：
+  \[
+    \dot A_{vsf}=\frac{\dot V_o}{\dot V_s}
+    =A_{vf}=\frac{R_L'}{R_s}A_{if}
+    =\frac1{R_s}A_{rf}=R_L'A_{gf}.
+  \]
+\end{enumerate}
+
+\begin{methodbox}[【技巧】闭环源电压增益]
+\textcircled{\scriptsize 1} 用 $\dot V_o=R_L'\dot I_o$、$\dot V_s=R_s\dot I_i$ 替换；\textcircled{\scriptsize 2} 可以用单位检验，源电压增益无单位。
+
+此处也要注意相位，输出电压和输入电压不一定都是同相的。（尤其是共射放大电路！）
+\end{methodbox}
+
+\section{基本运算电路}
+
+分析集成运放时一定牢记：
+\[
+  \text{虚短： }v_P=v_N,
+  \qquad
+  \text{虚断： }i_P=i_N=0.
+\]
+
+此外，要看清哪段接地！同相反相电路长得很像，莫搞混。
+
+\subsection{比例电路}
+
+\begin{enumerate}
+  \item 反相比例电路
+  \[
+    A_{vf}=-\frac{R_F}{R_1},
+    \qquad
+    R'=R_1\parallelsum R_F.
+  \]
+
+  \item T 形反相比例电路
+  \[
+    A_{vf}=-\frac{R_{F2}(R_{F1}+R_{F3})+R_{F1}R_{F3}}{R_{F3}R_1},
+  \]
+  \[
+    R'=R_1\parallelsum(R_{F1}+R_{F2}\parallelsum R_{F3}).
+  \]
+
+  \item 同相比例电路
+  \[
+    A_{vf}=1+\frac{R_F}{R_1},
+    \qquad
+    R'=R_1\parallelsum R_F.
+  \]
+
+  \item 分压同相比例电路
+  \[
+    A_{vf}=\frac{R_3}{R_2+R_3}\left(1+\frac{R_F}{R_1}\right).
+  \]
+  （分压比例为输入端子电压与输入电压之比）
+  \[
+    R_2\parallelsum R_3=R_1\parallelsum R_F.
+  \]
+
+  \item 电压跟随器：$R_1\to\infty$ 或 $R_F=0$。
+\end{enumerate}
+
+\subsection{和差电路}
+
+\begin{enumerate}
+  \item 反相加法电路
+  \[
+    v_o=-\left(\frac{R_F}{R_1}v_{i1}+\frac{R_F}{R_2}v_{i2}\right),
+    \qquad
+    R'=R_1\parallelsum R_2\parallelsum R_F.
+  \]
+  输入输出电阻均为 0，$R_{if}$ 约等于 $R_1$。
+
+  \item 同相加法电路
+  \[
+    v_o=-\left(\frac{R_F}{R_2}v_{i1}+\frac{R_F}{R_3}v_{i2}\right),
+  \]
+  \[
+    R_1\parallelsum R_F=R_2\parallelsum R_3\parallelsum R_4.
+  \]
+
+  \item 差分减法电路
+  \[
+    v_o=\frac{R_F}{R_2}v_{i1}-\frac{R_F}{R_1}v_{i2}.
+  \]
+  两级运放
+  \[
+    v_o=\left(1+\frac{R_F}{R_3}\right)(v_{i1}-v_{i2}).
+  \]
+\end{enumerate}
+
+反相减法电路即多个反相比例放大电路之积。
+
+同相减法电路即通过叠加原理使每个输入电压分别分压——
+
+注意，当有的电阻你没想明白干什么用的时候，一般就是电阻分压。
+
+\subsection{反相积分电路}
+
+\[
+  \text{反相 }v_o(t)=-\frac1{RC}\int_{t_0}^t v_I(t)\dd t+v_o(t_0),
+\]
+\[
+  \text{同相 }v_o(t)=\frac1{RC}\int_{t_0}^t v_I(t)\dd t+v_o(t_0).
+\]
+
+若为阶跃信号，则
+\[
+  v_o=-\frac{V_m}{RC}t,
+  \qquad
+  \text{积分时限为 }t=\frac{V_{OL}}{V_m}RC.
+\]
+
+\subsection{电压比较器}
+
+工作在非线性区/限幅区。
+
+\section{直流稳压电源}
+
+组成：变压、整流、滤波、稳压。
+
+\subsection{整流电路}
+
+\begin{enumerate}
+  \item 分类：半波整流、桥式整流、全波整流、正负全波整流。
+  \item 有效值：
+  \[
+    \text{半波整流 }\frac{\sqrt2V_o}{\pi}=0.45V_o,
+    \qquad
+    \text{全波整流 }\frac{2\sqrt2V_o}{\pi}=0.9V_o,
+  \]
+  其中 $V_o$ 为原有效值。
+\end{enumerate}
+
+\subsection{滤波电路}
+
+常用 RC 低通滤波电路，$C$ 要大，数百到上千微法。
+
+\subsection{稳压电路}
+
+\[
+  V_O=\left(1+\frac{R_1}{R_2}\right)V_{\mathrm{REF}}.
+\]
+
+\section{易错整理}
+
+\begin{methodbox}[【易错】判断电路能否放大正弦交流信号]
+A：不可以，VCC 接反了。
+
+B：不可以，输入信号始终为 VBB。
+
+C：不可以，输出信号始终为 VCC。
+
+D：不可以，考虑到 $I_B\ll I_E$，此处基极电压实际上小于射极电压，无法正常放大。
+
+判断是否正常放大两要素：
+\begin{enumerate}
+  \item 晶体管三极电压是否正常工作在放大组态下；
+  \item 是否有直流电源接在输入/输出信号上。
+\end{enumerate}
+\end{methodbox}
+
+\begin{methodbox}[【易错】耦合电容]
+注意耦合电容极性（参考直流通路压降方向）。
+\end{methodbox}
+
+\begin{methodbox}[【方法】如何提高放大倍数]
+\begin{enumerate}
+  \item 增大输出电阻（增大 $R_C$、$R_L$）；
+  \item 减小输入电阻（减小 $R_B$）；
+  \item 增大 $\beta$；
+  \item 采用多级放大电路，尤其是共射--共基放大电路，可有效增强高频性能。
+\end{enumerate}
+
+如何提高单端输出增益——换有源负载。
+
+如何提高输入电阻——串联大电阻。
+\end{methodbox}
+
+\begin{methodbox}[【方法】如何改善高频特性]
+减小输入回路时间常数：
+\begin{enumerate}
+  \item 选择 $r_{bb'}$ 小、$C_{b'c}$ 小、$f_T$ 高的晶体管；
+  \item 减小信号源电阻 $R_S$；
+  \item 减小直流工作点电流。
+\end{enumerate}
+\end{methodbox}
+
+电流源突出特点：直流电阻小，交流电阻大。
+
+电流源加缓冲管 T3 原因：具有更好的恒流和温度特性。
+
+对于差动放大级来说，两臂的基极相差 $100\,\mathrm{mV}$ 时，电位低者进入截止状态。
+
+差放电路好处：抑制共模干扰、信号转换。
+
+根据您提供的多张模电测验截图，以及“以一带多”的要求，我为您整理了一份模拟电子技术高频易混易错知识点清单。这份清单不仅列出了题目中出现的错误选项，还横向扩展了相关电路（如共射/共集/共基的对比），帮助您构建知识网。
+
+\section{模拟电子技术高频易混易错知识点清单（以一带多）}
+
+\subsection{三大基本组态“以一带多”（共射/共集/共基）}
+
+这是模电最核心的易错点，务必牢记三种组态的同与异：
+
+\begin{itemize}
+  \item 共射极放大电路（CE）：反相放大（输入输出相位差 $180^\circ$），输入/输出电阻中等，高频特性较差（存在密勒效应）。常用于主放大级。
+
+  \item 共集电极放大电路（CC / 射极跟随器）：
+  \begin{itemize}
+    \item 独有特点：同相放大，电压增益小于 1 但非常接近 1。
+    \item 阻抗变换：从基极看进去，可将发射极的交流负载电阻扩大为原来的 $(\beta+1)$ 倍。
+    \item 输入输出：输入电阻最大，输出电阻最小。具有很强的电流驱动能力，常作缓冲级（Buffer）。
+  \end{itemize}
+
+  \item 共基极放大电路（CB）：
+  \begin{itemize}
+    \item 独有特点：同相放大，输入电阻最小，输出电阻大。
+    \item 误区警示：它没有电流放大能力，但仍然具备功率放大能力。
+    \item 高频特性：高频特性优于共射极电路。若信号源为电流源（输出电阻大），多级放大电路的输入级最适宜采用共基组态（实现阻抗匹配）。
+  \end{itemize}
+
+  \item 场效应管与 BJT 对比：在同等工作条件下，场效应管（如源极跟随器）的跨导 $g_m$ 小于三极管，因此其跟随特性较 BJT 的射极跟随器差。
+\end{itemize}
+
+\subsection{晶体管高频与物理参数模型}
+
+\begin{itemize}
+  \item 厄利电压（Early Voltage）：反映的是晶体管的基区宽度调制效应。千万不要与温度效应、击穿特性混淆。
+
+  \item 混合 $\pi$ 模型：
+  \begin{itemize}
+    \item PNP 管和 NPN 管放大状态下的电压极性和电流流向虽相反，但其小信号模型完全相同（只处理交流变化量）。
+    \item 模型中 $r_{ce}$ 描述的是基区宽度调制效应的输出电阻；电容分别描述两个 PN 结的等效电容；$r_{bb'}$ 描述的是基区体电阻。
+  \end{itemize}
+
+  \item 频率限制因素：
+  \begin{itemize}
+    \item 高频段产生频率失真的主要原因是：三极管结电容（极间电容）。
+    \item 耦合电容、旁路电容、隔直电容影响的是低频特性。
+  \end{itemize}
+
+  \item JFET 跨导公式：公式必须记住，
+  \[
+    g_m=\frac{-2I_{DSS}}{V_{\mathrm{off}}}
+    \left(1-\frac{V_{GSQ}}{V_{\mathrm{off}}}\right).
+  \]
+  存在平方项的公式是错误的（考题中常见的混淆项）。
+\end{itemize}
+
+\subsection{小信号与大信号分析的边界}
+
+小信号（微变）等效电路法：仅适用于计算小信号时的交流参数，如增益、输入电阻。
+
+大信号分析（图解法）：用于求最大输出电压、功率效率等。功率放大电路中晶体管处于大信号工作状态，微变等效电路法不再适用。
+
+输入/输出电阻误区：
+\begin{itemize}
+  \item 输入电阻是一个交流参数，不能直接用直流工作点的直流电压除以直流电流来计算。
+  \item 共集电极放大电路的输出电阻与信号源内阻大小有关；输出电阻本身与负载电阻大小无关（回顾戴维南定理可知）。
+\end{itemize}
+
+\subsection{负载线与静态工作点}
+
+直流负载线：完全由电源和管外部的负载电路决定，晶体管特性的变化不会对直流负载线产生影响。
+
+交流负载线：重点注意，直流负载线和交流负载线都经过静态工作点 Q。大部分情况下，交流负载线斜率的绝对值要大于直流负载线斜率的绝对值。
+
+静态工作点（Q 点）设定：使用恒流源作为放大电路的有源负载，可以在电源电压不变的情况下，获得较高的电路增益、合适的静态工作点以及较宽的动态范围。（注意：虽然能提高增益，但不能获得更好的频率特性）。
+
+\subsection{多级放大电路与频率响应}
+
+多级电路级联误区：两个单级放大电路的空载增益是 $-10$，直接连成两级后，其电压放大倍数将 $<100$。因为后级放大电路的输入电阻会作为前级的负载，导致增益绝对值减小（负载效应）。
+
+带宽变化：
+\begin{itemize}
+  \item 多级放大电路的带宽窄于其中任何一级单独电路的带宽。
+  \item 多级放大电路的相频特性为各级相频特性之和；幅频特性分贝数为各级分贝数之和。
+\end{itemize}
+
+展宽频带的方法：为提高单管共射放大电路的上限截止频率，可行的措施是减小负载电阻。
+
+测试频率响应：正确的方法是保持输入信号电压幅度不变，改变其频率（扫频法）。
+
+\subsection{功率放大电路}
+
+工作状态：甲类、乙类、甲乙类。为了减少散热，开关电源的调整管通常工作在丁类状态（开关状态）。
+
+乙类互补功放：最容易错的一点：电路输出功率最大的时刻并非管耗最大的时刻。
+
+\subsection{负反馈（逻辑判断高频雷区）}
+
+判定方法：使用瞬时极性法时，不能仅凭反馈信号与输入信号的极性是否相同来判定，还需结合串联/并联的反馈方式。
+
+反馈作用范围：
+\begin{itemize}
+  \item 负反馈只能改善反馈环路内的电路性能，对反馈环路之外无效。
+  \item 负反馈可以改善环路自身产生的失真，但无法消除输入信号本身就已经存在的失真。
+\end{itemize}
+
+稳定输出与输入电阻：
+\begin{itemize}
+  \item 稳定输出电流：需要引入电流负反馈。
+  \item 稳定输出电压：需要引入电压负反馈。
+  \item 增大输入电阻：需要引入串联负反馈；若需要从信号源获取较小电流，则必须串联反馈。
+\end{itemize}
+
+增益带宽积：负反馈可以展宽频带。但绝对不能认为只要反馈深度足够深，就可以用低频管代替高频管。它受限于晶体管的物理特性（特征频率）。
+
+\subsection{运算放大器与比较器}
+
+工作区判断：带有负反馈的运放通常工作在线性区；没有引入负反馈或为正反馈时，运放通常处于非线性区（限幅区），如电压比较器。
+
+运放跟随器与三极管射极跟随器的共性：两者都具有交流输入电阻较高、交流输出电阻较低、电压增益近似为 1 的共同点。
+
+\subsection{直流稳压电源}
+
+线性电源与开关电源：
+\begin{itemize}
+  \item 线性电源：纹波小，但效率低。
+  \item 开关电源：效率高。
+\end{itemize}
+
+开关电源拓扑：
+\begin{itemize}
+  \item 串联型开关电源：只能降压。
+  \item 并联型开关电源：可以升压。
+\end{itemize}
+
+整流滤波：滤波电路的作用是使脉动系数降低；采用复合管是为了提高电源电路的负载能力（提供更大的输出电流）。
+
+选取电压源/电流源与输入/输出电阻大/小的电路有关。电压源适合输入电阻大的电路，电流源适合输入电阻小的电路；输出电阻刚好反之。
+
+}
+
+\section{双极型晶体管（Bipolar Junction Transistor, BJT）}
+
+\subsection{元件特性}
+
+\subsubsection{特性}
+
+\begin{enumerate}
+  \item 分类
+  \[
+    \text{NPN 管： }V_C>V_B>V_E,
+    \qquad
+    \text{PNP 管： }V_E>V_B>V_C.
+  \]
+
+  \item 电流节点方程
+  \[
+    \begin{cases}
+      I_E=I_B+I_C,\\
+      I_E\approx I_C.
+    \end{cases}
+  \]
+
+  \item 四种工作状态
+  \begin{itemize}
+    \item 饱和：发射结正偏，集电结正偏；
+    \item 放大：发射结正偏，集电结反偏；
+    \item 截止：发射结反偏，集电结反偏；
+    \item 倒置：发射结反偏，集电结正偏。
+  \end{itemize}
+  ※ 发射结未导通也算反偏。
+
+  \item 温度影响：温度升高后 $v_{BE}$ 减小，$I_{BEQ}$、$\beta$ 均增大。
+\end{enumerate}
+
+\subsubsection{外部特性}
+
+\begin{enumerate}
+  \item 输入特性曲线 $i_B=f(v_{BE})$
+
+  随着 $v_{CE}$ 不断增大，正向曲线不断右移，当 $v_{CE}>1\,\mathrm V$ 时基本不变。
+  \[
+    V_{(\mathrm{BR})EBO}\approx6\,\mathrm V.
+  \]
+
+  \item 输出特性曲线
+
+  温度升高，放大区曲线上移，即 $\beta$ 增大。
+\end{enumerate}
+
+\subsubsection{工作组态}
+
+\begin{enumerate}
+  \item 共射（CE）：射极接地，$B\to C$；
+  \item 共基（CB）：基极接地，$E\to C$；
+  \item 共集（CC）：集电极接地，$B\to E$。
+\end{enumerate}
+
+\begin{methodbox}[【技巧】判断工作组态]
+不要看哪极接地，复杂电路中不好判断。直接找输入输出端，通过二者判断工作组态。
+\end{methodbox}
+
+\subsubsection{参数}
+
+\begin{enumerate}
+  \item 电流放大系数
+  \[
+    \beta=\frac{I_C}{I_B},
+    \qquad
+    \alpha=\frac{I_C}{I_E}.
+  \]
+  转化关系为
+  \[
+    \beta=\frac{\alpha}{1-\alpha},
+    \qquad
+    \alpha=\frac{\beta}{1+\beta}.
+  \]
+
+  \item 微变等效电阻
+  \[
+    r_{ce}=\frac{V_A}{I_{CQ}}.
+  \]
+
+  \item 射极压降与饱和压降
+  \[
+    V_{BEQ}=0.7\,\mathrm V,
+    \qquad
+    V_{CE(\mathrm{sat})}=0.3\,\mathrm V.
+  \]
+\end{enumerate}
+
+\subsubsection{模型}
+
+\begin{enumerate}
+  \item 直流静态模型。
+  \item 混合 $\pi$ 模型
+  \[
+    \begin{cases}
+      r_{b'e}=\dfrac{V_T}{I_{BQ}},\\[4pt]
+      r_{ce}=\dfrac{V_A}{I_{CQ}},\qquad g_mr_{b'e}=\beta,\\[4pt]
+      g_m=\dfrac{\beta}{r_{b'e}}=\dfrac{I_{CQ}}{V_T}.
+    \end{cases}
+  \]
+\end{enumerate}
+
+\subsubsection{图解法}
+
+图解法有两条线，较缓的是直流线，横截距为直流电压偏置值；较陡的是交流负载线，斜率为 $1/R_L'$。
+
+\subsection{工作电路}
+
+\subsubsection{放大电路}
+
+\begin{enumerate}
+  \item 静态直流工作点（Q 点）
+\end{enumerate}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.1cm}XX}
+\toprule
+ & 无静态稳定 & 含静态稳定 \\
+\midrule
+基极电压 & $V_{BQ}=V_{CC}-V_{BEQ}$ & $V_{BQ}=\dfrac{R_{B2}}{R_{B1}+R_{B2}}V_{CC}$ \\
+基极电流 & $I_{BQ}=\dfrac{V_{BQ}}{R_B}$ & $I_{BQ}=\dfrac{I_{EQ}}{1+\beta}$ \\
+集极电流 & $I_{CQ}=\beta I_{BQ}$ & $I_{CQ}=\dfrac{\beta}{1+\beta}I_{EQ}$ \\
+集极电压 & $V_{CQ}=V_{CC}-R_CI_{CQ}$ & $V_{CQ}=V_{CC}-R_CI_{CQ}$ \\
+射极电流 & $I_{EQ}=(1+\beta)I_{BQ}$ & $I_{EQ}=\dfrac{V_{BQ}-V_{BEQ}}{R_E}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{enumerate}[resume]
+  \item 交流通路
+\end{enumerate}
+
+\begin{center}
+\scriptsize
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{1.7cm}XXX}
+\toprule
+ & 共射（CE） & 共基（CB） & 共集（CC） \\
+\midrule
+$R_L'$ & $R_L'=R_C\parallelsum R_L$ & $R_L'=R_C\parallelsum R_L$ & $R_L'=R_E\parallelsum R_L$ \\
+电压增益 & $\dot A_v=-\dfrac{\beta R_L'}{r_{be}+(1+\beta)R_E}$ & $\dot A_v=\dfrac{\beta R_L'}{r_{be}}$ & $\dot A_v=\dfrac{(1+\beta)R_L'}{r_{be}+(1+\beta)R_L'}$ \\
+输入电阻 & $R_i=R_B\parallelsum[r_{be}+(1+\beta)R_E]$ & $R_i=R_E\parallelsum\dfrac{r_{be}}{1+\beta}$ & $R_i=R_B\parallelsum[r_{be}+(1+\beta)R_L']$ \\
+输出电阻 & $R_o=R_C$ & $R_o=R_C$ & $R_o=R_E\parallelsum\dfrac{R_s\parallelsum R_B+r_{be}}{1+\beta}$ \\
+源电压增益 & \multicolumn{3}{c}{$\dot A_{sv}=\dfrac{R_i}{R_s+R_i}\dot A_v$} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{0.94\textwidth}{>{\bfseries}p{2.4cm}XXX}
+\toprule
+类别 & 共射 & 共集 & 共基 \\
+\midrule
+输入与输出的相位 & 反相 & 同相 & 同相 \\
+$\dot A_v$、$\dot A_i$ & 电压、电流都放大 & 只放大电流 & 只放大电压 \\
+特点 & $|\dot A_v|$ 大，$R_i$、$R_o$ 适中 & $|\dot A_v|\leq1$，$R_i$ 大、$R_o$ 小 & $|\dot A_i|$、$R_o$ 同共射，$R_i$ 小 \\
+高频特性 & 不好 & 好 & 好 \\
+主要用途 & 功率增益最大，应用最广泛 & 输入级、输出级和缓冲级 & 用于高频电路 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{电流源电路}
+
+\begin{enumerate}
+  \item 镜像电流源
+  \[
+    I_R=\frac{V_{CC}-V_{BE}}{R},
+    \qquad
+    I_o=\frac{1}{1+\beta/2}I_R,
+    \qquad
+    R_o=r_{ce2}.
+  \]
+  \item 比例电流源
+  \[
+    I_o=\frac{R_{E1}}{R_{E2}}I_R\quad\text{（射极电阻不同）},
+    \qquad
+    I_o=\frac{S_2}{S_1}I_R\quad\text{（射极面积不同）}.
+  \]
+\end{enumerate}
+
+\subsubsection{差分放大电路}
+
+\begin{enumerate}
+  \item 直流通路
+
+  以交流信号端为地，即 $v_{I1}=v_{I2}=0$。
+  \[
+    \text{电流源驱动时： }I_{EQ}=\frac{I_{EE}}{2},
+    \qquad
+    \text{电压源驱动时： }I_{EQ}=\frac{V_{EE}-V_{BEQ}}{2}.
+  \]
+
+  \item 差模电路
+
+  线性放大条件：
+  \[
+    |v_{ID}|=|v_{BE1}-v_{BE2}|\geq4V_T\approx104\,\mathrm{mV}.
+  \]
+  可增加 $R_E$ 增宽线性区。$R_E$ 越大，线性区越宽，增益越小。
+\end{enumerate}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{0.96\textwidth}{>{\bfseries}p{2cm}XX}
+\toprule
+ & 双端输出 & 单端输出 \\
+\midrule
+$R_L'$ & $R_L'=R_C\parallelsum\dfrac{R_L}{2}$ & $R_L'=R_C\parallelsum R_L$ \\
+电压增益 & $\dot A_{vd}=\dot A_v$ & $\dot A_{vd1}=-\dfrac12\dot A_v,\quad \dot A_{vd2}=\dfrac12\dot A_v$ \\
+输入电阻 & \multicolumn{2}{c}{$R_{id}=2R_i$} \\
+输出电阻 & $R_{od}=2R_o$ & $R_{od1}=R_{od2}=R_o$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+※ 此处不带 $R_E$，带 $R_E$ 时按照共射放大电路处理增益与输入输出电阻。
+
+\begin{enumerate}[resume]
+  \item 共模电路
+\end{enumerate}
+
+\begin{center}
+\scriptsize
+\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{1.8cm}XX}
+\toprule
+ & 双端输出 & 单端输出 \\
+\midrule
+电压增益 & $\dot A_{vc}=0$ & $\dot A_{vc1}=\dot A_{vc2}=-\dfrac{\beta R_L'}{R_B+r_{be}+(1+\beta)(R_E+2R_{EE})}\approx-\dfrac{R_L'}{2R_{EE}}$ \\
+输入电阻 & \multicolumn{2}{c}{$R_i=\dfrac12[R_B+r_{be}+(1+\beta)(R_E+2R_{EE})]\approx\begin{cases}\dfrac12r_{be}+(1+\beta)R_{EE},&R_{EE}\text{较小},\\[2pt]\dfrac\beta2(2R_{EE}\parallelsum\dfrac{r_{ce}}2),&R_{EE}\text{较大}.\end{cases}$} \\
+输出电阻 & $R_{oc}=2R_o$ & $R_{oc1}=R_{oc2}=R_o$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+一般 $|\dot A_{vc1}|=|\dot A_{vc2}|\leq1$，体现为差放电路抑制共模信号。
+
+\begin{enumerate}[resume]
+  \item 共模抑制比
+  \[
+    K_{\mathrm{CMR}}=\left|\frac{\dot A_{vd}}{\dot A_{vc}}\right|,
+    \qquad
+    K_{\mathrm{CMR}}(\mathrm{dB})=20\lg\left|\frac{\dot A_{vd}}{\dot A_{vc}}\right|.
+  \]
+  \item 特性：放大差模信号，抑制共模信号。
+\end{enumerate}
+
+\subsubsection{功率放大电路}
+
+\begin{enumerate}
+  \item 输出功率：
+  \[
+    P_o=\frac{V_{om}^2}{2R_L}.
+  \]
+  \item 电源供给功率：
+  \[
+    P_{DC}=\frac{2V_{CC}}{\pi}\cdot\frac{V_{om}}{R_L}.
+  \]
+  \item 效率：
+  \[
+    \eta=\frac{P_o}{P_{DC}}=\frac{\pi}{4}\cdot\frac{V_{om}}{V_{CC}}.
+  \]
+\end{enumerate}
+
+※ 单电源输入要取 $V_{CC}/2$。
+
+※ 注意题目里写的是有效值还是峰值！
+
+※ 晶体管电路中只有功放电路是大信号放大状态！
+
+\subsubsection{多级放大电路}
+
+共集电路计算输出电阻需要考虑上一级输出电阻，计算输入电阻需要考虑下一级输入电阻。
+
+差放电路计算输出电阻要考虑下一级输入电阻。
+
+\section{场效应晶体管（Field Effect Transistor, FET）}
+
+\subsection{元件特性}
+
+\subsubsection{分类}
+
+\begin{enumerate}
+  \item 小功率场效应管
+
+  MOS 场效应管（Metal-Oxide-Semiconductor Field Effect Transistor, MOSFET，又称 Insulated Gate Field Effect Transistor, IGFET）。
+
+  结型场效应管（Junction Field Effect Transistor, JFET）。
+
+  \item 大功率场效应管
+
+  纵向双扩散 MOS 场效应管（VDMOS）、绝缘栅双极性晶体管（IGBT）等。
+\end{enumerate}
+
+\subsubsection{元件特性}
+
+\[
+  \begin{cases}
+    I_S=I_G+I_D,\\
+    I_S\approx I_D.
+  \end{cases}
+\]
+
+\paragraph{MOS 管}
+
+\begin{enumerate}
+  \item 伏安特性曲线（饱和区）
+  \[
+    i_D=\frac{k_p}{2}\frac WL(v_{GS}-V_{\mathrm{th}})^2.
+  \]
+  考虑沟道长度调制效应则
+  \[
+    i_D=\frac{k_p}{2}\frac WL(v_{GS}-V_{\mathrm{th}})^2(1+\lambda v_{DS}).
+  \]
+
+  \item 输出特性曲线
+  \[
+    g_m=k_p\frac WL(V_{GSQ}-V_{\mathrm{th}})
+    =\sqrt{2k_p\frac WL I_{DQ}}
+    =\frac{2I_{DQ}}{V_{GSQ}-V_{\mathrm{th}}}.
+  \]
+  考虑沟道长度调制效应则
+  \[
+    g_m=k_p\frac WL(V_{GSQ}-V_{\mathrm{th}})(1+\lambda V_{DSQ})
+    =\sqrt{2k_p\frac WL I_{DQ}(1+\lambda V_{DSQ})}
+    =\frac{2I_{DQ}}{V_{GSQ}-V_{\mathrm{th}}}.
+  \]
+
+  \item 微变输出电阻
+  \[
+    r_{ds}=\frac{V_A}{I_{DQ}}=\frac{1}{\lambda I_{DQ}}.
+  \]
+
+  \item 衬底调制效应
+  \[
+    g_{mb}=\eta g_m.
+  \]
+\end{enumerate}
+
+\begin{methodbox}[【技巧】根据特性曲线判断场效应管]
+若伏安特性曲线、输出特性曲线主要位于正半轴，则是 N 型管；否则为 P 型管。
+
+若输出特性曲线完全在正半轴，则是增强型；若一半一半，则耗尽型；若完全在负半轴，则结型管。
+\end{methodbox}
+
+\paragraph{结型管}
+
+\begin{enumerate}
+  \item 伏安特性曲线（饱和区）
+  \[
+    i_D=I_{DSS}\left(1-\frac{v_{GS}}{V_{\mathrm{off}}}\right)^2,
+    \qquad
+    I_{DSS}=\frac{k_p}{2}\frac WL V_{\mathrm{off}}^2.
+  \]
+
+  \item 输出特性曲线
+  \[
+    g_m=-\frac{2I_{DSS}}{V_{\mathrm{off}}}
+    \left(1-\frac{V_{GSQ}}{V_{\mathrm{off}}}\right)
+    =\frac{-2}{V_{\mathrm{off}}}\sqrt{I_{DSS}I_{DQ}}
+    =\frac{2I_{DQ}}{V_{GSQ}-V_{\mathrm{th}}}.
+  \]
+
+  \item 微变输出电阻
+  \[
+    r_{ds}=\frac{V_A}{I_{DQ}}=\frac{1}{\lambda I_{DQ}}.
+  \]
+
+  \item 衬底调制效应
+  \[
+    g_{mb}=\eta g_m.
+  \]
+\end{enumerate}
+
+\begin{landscape}
+\subsubsection{场效应管工作区的电压范围}
+\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{longtable}{>{\bfseries}p{1.7cm}*{6}{p{3.45cm}}}
+\toprule
+工作区间 & N 沟道增强型 & P 沟道增强型 & N 沟道耗尽型 & P 沟道耗尽型 & N 沟道结型 & P 沟道结型 \\
+\midrule
+\endfirsthead
+\toprule
+工作区间 & N 沟道增强型 & P 沟道增强型 & N 沟道耗尽型 & P 沟道耗尽型 & N 沟道结型 & P 沟道结型 \\
+\midrule
+\endhead
+可变电阻区 & $v_{GS}>V_{\mathrm{th}}$；$0<v_{DS}<v_{GS}-V_{\mathrm{th}}$；$v_{GD}>V_{\mathrm{th}}$ & $v_{GS}<V_{\mathrm{th}}$；$0<v_{SD}<|v_{GS}-V_{\mathrm{th}}|$；$v_{GD}<V_{\mathrm{th}}$ & $v_{GS}>V_{\mathrm{off}}$；$0<v_{DS}<v_{GS}-V_{\mathrm{off}}$；$v_{GD}>V_{\mathrm{off}}$ & $v_{GS}<V_{\mathrm{off}}$；$0<v_{SD}<|v_{GS}-V_{\mathrm{off}}|$；$v_{GD}<V_{\mathrm{off}}$ & $V_{\mathrm{off}}<v_{GS}<0$；$0<v_{DS}<v_{GS}-V_{\mathrm{off}}$；$V_{\mathrm{off}}<v_{GD}<0$ & $0<v_{GS}<V_{\mathrm{off}}$；$0<v_{SD}<|v_{GS}-V_{\mathrm{off}}|$；$0<v_{GD}<V_{\mathrm{off}}$ \\
+饱和区 & $v_{GS}>V_{\mathrm{th}}$；$v_{DS}>v_{GS}-V_{\mathrm{th}}$；$v_{GD}<V_{\mathrm{th}}$ & $v_{GS}<V_{\mathrm{th}}$；$v_{SD}>|v_{GS}-V_{\mathrm{th}}|$；$v_{GD}>V_{\mathrm{th}}$ & $v_{GS}>V_{\mathrm{off}}$；$v_{DS}>v_{GS}-V_{\mathrm{off}}$；$v_{GD}<V_{\mathrm{off}}$ & $v_{GS}<V_{\mathrm{off}}$；$v_{SD}>|v_{GS}-V_{\mathrm{off}}|$；$v_{GD}>V_{\mathrm{off}}$ & $V_{\mathrm{off}}<v_{GS}<0$；$v_{DS}>v_{GS}-V_{\mathrm{off}}$；$v_{GD}<V_{\mathrm{off}}$ & $0<v_{GS}<V_{\mathrm{off}}$；$v_{SD}>|v_{GS}-V_{\mathrm{off}}|$；$v_{GD}>V_{\mathrm{off}}$ \\
+截止区 & $v_{GS}<V_{\mathrm{th}}$；$v_{DS}>0$；$v_{GD}<V_{\mathrm{th}}$ & $v_{GS}>V_{\mathrm{th}}$；$v_{SD}>0$；$v_{GD}>V_{\mathrm{th}}$ & $v_{GS}<V_{\mathrm{off}}$；$v_{DS}>0$；$v_{GD}<V_{\mathrm{off}}$ & $v_{GS}>V_{\mathrm{off}}$；$v_{SD}>0$；$v_{GD}>V_{\mathrm{off}}$ & $v_{GS}<V_{\mathrm{off}}$；$v_{DS}>0$；$v_{GD}<V_{\mathrm{off}}$ & $v_{GS}>V_{\mathrm{off}}$；$v_{SD}>0$；$v_{GD}>V_{\mathrm{off}}$ \\
+开启电压 $V_{\mathrm{th}}$ 或夹断电压 $V_{\mathrm{off}}$ & $V_{\mathrm{th}}>0$ & $V_{\mathrm{th}}<0$ & $V_{\mathrm{off}}<0$ & $V_{\mathrm{off}}>0$ & $V_{\mathrm{off}}<0$ & $V_{\mathrm{off}}>0$ \\
+\bottomrule
+\end{longtable}
+\end{landscape}
+
+\subsubsection{工作组态}
+
+\begin{enumerate}
+  \item 截止：$v_{GS}<V_{\mathrm{th}}$；
+  \item 可变电阻：$v_{GS}>V_{\mathrm{th}}$，$v_{GD}>V_{\mathrm{th}}$，$0<v_{DS}<v_{GS}-V_{\mathrm{th}}$；
+  \item 饱和：$v_{GS}>V_{\mathrm{th}}$，$v_{GD}<V_{\mathrm{th}}$，$v_{DS}>v_{GS}-V_{\mathrm{th}}$；
+  \item 击穿。
+\end{enumerate}
+
+\begin{methodbox}[【技巧】判断场效应管工作组态]
+看题后直接抓 $v_{GS}$、$v_{GD}$，不要管其他弯弯绕绕。
+\end{methodbox}
+
+\subsubsection{交流模型}
+
+交流模型含受控电流源 $g_m\dot v_{gs}$、衬底受控电流源 $g_{mb}\dot v_{bs}$ 与输出电阻 $r_{ds}$；忽略衬底调制效应时，模型中不含 $g_{mb}\dot v_{bs}$ 支路。
+
+\subsection{工作电路}
+
+\subsubsection{放大电路}
+
+\begin{enumerate}
+  \item 静态稳定工作点（Q 点）
+\end{enumerate}
+
+\begin{center}
+\scriptsize
+\renewcommand{\arraystretch}{1.55}
+\begin{tabularx}{\textwidth}{XXX}
+\toprule
+固定偏压 & 分压式偏置 & 自给偏压式偏置 \\
+\midrule
+$V_{GQ}=\dfrac{R_{G2}}{R_{G1}+R_{G2}}V_{DD}$
+
+$V_{DSQ}=V_{DD}-I_{DQ}R_D$
+
+$I_{DQ}=\dfrac{k_p}{2}\dfrac WL(V_{GSQ}-V_{\mathrm{th}})^2$
+&
+$V_{GQ}=\dfrac{R_{G2}}{R_{G1}+R_{G2}}V_{DD}$
+
+$V_{GSQ}=V_{GQ}-I_{SQ}R_{SS}\approx V_{GQ}-I_{DQ}R_{SS}$
+
+$I_{DQ}=\dfrac{k_p}{2}\dfrac WL(V_{GSQ}-V_{\mathrm{th}})^2$
+&
+$I_{DQ}=I_{DSS}\left(1+\dfrac{R_{SS}I_{DQ}}{V_{\mathrm{off}}}\right)^2$
+
+$V_{DSQ}=V_{DD}-I_{DQ}(R_D+R_{SS})$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{methodbox}[【题型】求场效应管直流偏置点]
+联立两方程得到关于 $I_{DQ}$ 一元二次方程，求解后根据 $V_{DD}$ 排除错误结果。注意单位是 mA，注意调整 $k_p$ 单位。
+
+此外，增强型 MOS 管不能用自给偏置！只有耗尽型 MOS 管和 JFET 管可以用。
+\end{methodbox}
+
+\begin{enumerate}[resume]
+  \item 交流通路
+\end{enumerate}
+
+提示：若衬底极未连接源极（B、S 两极不相连），则下式中 $g_m$ 全部替换为 $(g_m+g_{mb})$。
+
+\begin{center}
+\scriptsize
+\renewcommand{\arraystretch}{1.55}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{1.8cm}XXX}
+\toprule
+ & 共源（CS） & 共栅（CG） & 共漏（CD） \\
+\midrule
+类比晶体管 & 共射（CE） & 共基（CB） & 共集（CC） \\
+电压增益 & $\dot A_v=-\dfrac{g_m(R_D\parallelsum R_L)}{1+g_mR_{SS}}$ & $\dot A_v=g_m(R_D\parallelsum R_L)$ & $\dot A_v=\dfrac{g_mR_L'}{1+g_mR_L'}$ \\
+输入电阻 & $R_i=R_G$ & $R_i=R_{SS}\parallelsum\dfrac1{g_m}$ & $R_i=R_G$ \\
+输出电阻 & $R_o=R_D$ & $R_o=R_D$ & $R_o=R_{SS}\parallelsum\dfrac1{g_m}$ \\
+源电压增益 & \multicolumn{3}{c}{$\dot A_{vs}=\dfrac{R_i}{R_s+R_i}\dot A_v$} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+※ 注意是否有旁路电容！会影响交流电阻值。
+
+※ 此外还要注意增益相位差别。
+
+\section{小信号放大电路频率特性}
+
+\subsection{简介}
+
+\begin{enumerate}
+  \item 幅度失真与相位失真（二者统称线性失真）。
+  \item 幅频特性与相频特性
+  \[
+    H(s)=\frac{Y(s)}{X(s)}.
+  \]
+  当 $s=\jj2\pi f$ 时，$\dot H$ 即电路的频率特性，也称频率响应。
+
+  对于放大电路，
+  \[
+    \dot H_v(\jj\omega)=\dot A_v(\omega)=|\dot A_v(\omega)|\ee^{\jj\varphi(\omega)}.
+  \]
+  其中 $|\dot A_v(\omega)|$ 称为幅频特性，$\varphi(\omega)$ 称为相频特性。
+
+  \item 工作频率、截止频率与通频带
+
+  上下截止频率为 $|\dot A_v|$ 为中频时 $1/\sqrt2$ 对应的频率，一般取 $-3\,\mathrm{dB}$。
+  \[
+    BW=f_H-f_L.
+  \]
+
+  \item 传输函数、零点与极点
+  \[
+    A=K\frac{\prod(\jj\omega+\omega_{zi})}{\prod(\jj\omega+\omega_{pi})}.
+  \]
+  使分母为 0 的角频率 $\omega_{pi}$ 称为极点角频率，使分子为 0 的角频率 $\omega_{zi}$ 称为零点角频率。
+
+  零点个数小于等于极点个数。有非独立电容的电路，极点个数小于电容数。
+\end{enumerate}
+
+\subsection{高低通滤波电路}
+
+\begin{enumerate}
+  \item 低通滤波电路：RC 电路从电容 $C$ 输出电压。
+  \item 高通滤波电路：RC 电路从电阻 $R$ 输出电压。
+  \item 复合电路传输函数分析法
+
+  将传递函数整理为如下形式
+  \[
+    \dot H(f)=\frac{K}{\displaystyle\prod\left(1-\jj\frac{f_{Li}}f\right)
+    \cdot\prod\left(1+\jj\frac f{f_{Hi}}\right)}.
+  \]
+
+  每个高通截止点提供 $20\,\mathrm{dB/dec}$ 幅频斜率，$-45^\circ$ 相频斜率；每个低通截止点提供 $-20\,\mathrm{dB/dec}$ 幅频斜率，$-45^\circ$ 相频斜率。
+
+  注：此处的高通截止点和低通截止点都是极点。
+\end{enumerate}
+
+\subsection{多级电路}
+
+\begin{enumerate}
+  \item 频率特性
+  \[
+    \dot A_v(\omega)=\prod\dot A_{vi}(\omega)=|\dot A_v(\omega)|\ee^{\jj\varphi(\omega)},
+  \]
+  \[
+    |\dot A_v(\omega)|=\prod|\dot A_{vi}(\omega)|,
+    \qquad
+    \varphi(\omega)=\sum\varphi_i(\omega).
+  \]
+
+  \item 截止频率与通频带
+  \[
+    \frac1{f_H}=1.1\sqrt{\sum\frac1{f_{Hi}^2}},
+    \qquad
+    f_L=1.1\sqrt{\sum f_{Li}^2}.
+  \]
+  当两级截止频率相同时，可用简化公式
+  \[
+    f_H=0.643f_{H1},
+    \qquad
+    f_L=1.56f_{L1}.
+  \]
+\end{enumerate}
+
+\subsection{晶体管与晶体管放大电路}
+
+\begin{enumerate}
+  \item 晶体管频率参数
+
+  $\dot\beta$ 截止频率
+  \[
+    f_\beta=\frac1{2\pi r_{b'e}(C_{b'e}+C_{b'c})}.
+  \]
+
+  晶体管截止频率
+  \[
+    f_T=\beta_0f_\beta=\frac{g_m}{2\pi(C_{b'e}+C_{b'c})}.
+  \]
+
+  $\dot\alpha$ 截止频率
+  \[
+    f_\alpha=(1+\beta_0)f_\beta=\frac1{2\pi r_e(C_{b'e}+C_{b'c})}.
+  \]
+
+  \item 共射放大电路的单向化等效电路
+\end{enumerate}
+
+Miller 电容
+\[
+  \begin{cases}
+    C_M=(1-\dot A)C_{b'c}=(1+g_mR_L')C_{b'c},\\
+    C_M'=C_{b'c}.
+  \end{cases}
+\]
+
+等效输入电容
+\[
+  C_i=C_M+C_{b'e}.
+\]
+
+高频特性
+\[
+  \dot A_{vs}=\frac{\dot A_{vsm}}{1+\jj f/f_H},
+  \qquad
+  \dot A_{vsm}=-\frac{r_{b'e}g_mR_L'}{R_s+r_{be}},
+\]
+\[
+  f_H=\frac1{2\pi R_s'C_i},
+  \qquad
+  R_s'=(R_s+r_{bb'})\parallelsum r_{b'e},
+  \qquad
+  \tau=R_s'C_i=\frac1{2\pi f_H}.
+\]
+
+增益--带宽积
+\[
+  \begin{aligned}
+    GBW&=|\dot A_{vsm}|f_H\\
+    &=\frac{g_mR_L'}{2\pi(R_s+r_{bb'})[C_{b'e}+(1+g_mR_L')C_{b'c}]}\\
+    &=\frac1{2\pi(R_s+r_{bb'})C_{b'c}}.
+  \end{aligned}
+\]
+
+\begin{methodbox}[【题型】求晶体管共射放大电路高频特性]
+※ 不知道为什么，做题时使用的套路与书上不一致，现总结做题套路如下：
+
+第一步：求静态偏置点（略）。
+
+第二步：求晶体管高频混合 $\pi$ 模型参数。
+\[
+  \begin{cases}
+    r_{b'e}=\dfrac{V_T}{I_{BQ}},\\[3pt]
+    g_m=\dfrac{I_{CQ}}{V_T},\qquad g_mr_{b'e}=\beta,\\[3pt]
+    C_{b'e}=\dfrac{g_m}{2\pi f_T}-C_{b'c}.
+  \end{cases}
+\]
+
+第三步：画出微变等效电路并求 Miller 等效电容、输入电容等。
+\[
+  \begin{cases}
+    C_M=(1+g_mR_L')C_{b'c},\\
+    C_i=C_M+C_{b'e},
+  \end{cases}
+  \qquad
+  \begin{cases}
+    R_L'=R_L\parallelsum R_C,\\
+    R_s'=(R_s\parallelsum R_B+r_{bb'})\parallelsum r_{b'e},
+  \end{cases}
+\]
+\[
+  \frac{V_s'}{V_s}=\frac{R_B\parallelsum r_{be}}{R_s+R_B\parallelsum r_{be}}
+  \cdot\frac{r_{b'e}}{r_{bb'}+r_{b'e}}.
+\]
+
+第四步：求出中频增益、高频截止频率与通频带。
+\[
+\begin{cases}
+\dot A_{vs0}=\dfrac{V_s'}{V_s}\dfrac{V_{b'e}}{V_s'}\dfrac{V_o}{V_{b'e}}
+=\dot A_{vs}\dfrac1{(1+\jj f/f_{Hi})(1+\jj f/f_{Ho})},\\[5pt]
+\dot A_{vs}=-\dfrac{V_s'}{V_s}g_mR_L',\\[5pt]
+f_{Hi}=\dfrac1{2\pi R_s'C_i},\\[5pt]
+f_{Ho}=\dfrac1{2\pi R_L'C_{b'c}},\\[5pt]
+f_H=\left[1.1\sqrt{\left(\dfrac1{f_{Hi}}\right)^2+\left(\dfrac1{f_{Ho}}\right)^2}\right]^{-1},\\[5pt]
+GBW=|\dot A_{vs0}|f_H.
+\end{cases}
+\]
+\end{methodbox}
+\latechapters
+\end{document}
+

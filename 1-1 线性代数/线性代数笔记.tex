@@ -1,0 +1,386 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,bm,esint}
+\usepackage{booktabs,tabularx,array,longtable,multirow}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+\definecolor{main}{HTML}{8E2C3A}
+\definecolor{mainlight}{HTML}{FFFFFF}
+\definecolor{method}{HTML}{8E5D64}
+\definecolor{methodlight}{HTML}{F8EFF1}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\ctexset{
+  section={format=\centering\heiti\zihao{3}\color{main},
+           name={第,章},number=\chinese{section},aftername=\quad,
+           beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\zihao{5}\color{main},
+                 number={（\chinese{subsubsection}）},aftername=,
+                 beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newtcolorbox{method}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title={#1},fonttitle=\heiti\bfseries
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Img}{\operatorname{Im}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\Prj}{\operatorname{Prj}}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\renewcommand{\arraystretch}{1.38}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{method}线性代数笔记}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+
+\begin{document}
+
+\begin{center}
+  {\heiti\zihao{1}\color{main} 线性代数笔记}
+\end{center}
+
+\subsection{概念间联系}
+
+\begin{relationbox}
+\centering
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=1.8cm and 3.2cm,
+  every node/.style={align=center},
+  link/.style={-{Latex[length=2.5mm]},thick,draw=main}
+]
+\node (v) {含 $m$ 个向量的\\$n$ 维向量组};
+\node[below left=2.5cm and 4.0cm of v] (e) {含 $n$ 个方程的\\$m$ 元线性方程组};
+\node[below right=2.5cm and 4.0cm of v] (a) {$n\times m$ 矩阵};
+\draw[link,<->] (v)--node[above left] {$\displaystyle\sum_{i=1}^{m}x_i\bm\alpha_i=\bm\beta$} (e);
+\draw[link,<->] (v)--node[above right] {$A=(\bm\alpha_1,\bm\alpha_2,\ldots,\bm\alpha_m)$} (a);
+\draw[link] ($(e.east)+(0,0.2)$)--node[above] {增广矩阵 $(A\mathbin{:}\bm\beta)$} ($(a.west)+(0,0.2)$);
+\draw[link] ($(a.west)+(0,-0.2)$)--node[below] {$A\bm x=\bm\beta$} ($(e.east)+(0,-0.2)$);
+\node[below=3.0cm of e] (h) {齐次线性方程组\\$A\bm x=\bm0$};
+\node[below=3.0cm of a] (nh) {非齐次线性方程组\\$A\bm x=\bm\beta$};
+\draw[link,<->] (h)--node[above] {平移变换 $\pm\bm\beta$} (nh);
+\end{tikzpicture}
+\end{relationbox}
+
+\subsection{相关概念}
+
+\small
+\begin{longtable}{|>{\centering\arraybackslash}p{2.55cm}|>{\centering\arraybackslash}p{4.0cm}|>{\centering\arraybackslash}p{5.2cm}|>{\centering\arraybackslash}p{4.2cm}|}
+\hline
+& 含 $n$ 个方程的 $m$ 元线性方程组 & 含 $m$ 个向量的 $n$ 维向量组 & $n\times m$ 矩阵\\
+\hline
+基本单位
+& $/$
+& 自然基向量组
+
+$\bm\varepsilon_i=(0,\ldots,0,1,0,\ldots,0)^{\mathrm T},\ i\in\N_+$
+& 单位矩阵
+
+$\displaystyle E_r=\begin{pmatrix}
+1&0&\cdots&0\\0&1&\cdots&0\\\vdots&\vdots&\ddots&\vdots\\0&0&\cdots&1
+\end{pmatrix}$\\
+\hline
+秩的标准表示
+& 最简形方程组中主元 $x_1,x_2,\ldots,x_r$ 个数
+& 极大线性无关组 $\bm\alpha_1,\bm\alpha_2,\ldots,\bm\alpha_r$ 中向量个数
+& 矩阵等价标准形 $\begin{pmatrix}E_r&O\\O&O\end{pmatrix}$ 中 $E_r$ 的阶数\\
+\hline
+秩的几何意义
+& $/$
+& 向量组 $\bm\alpha_1,\bm\alpha_2,\ldots,\bm\alpha_m$ 张成的向量空间维数 $\dim V$
+& 将定义域 $\R^n$ 映射到的值域空间维数，$\dim\Img(A)$\\
+\hline
+零维数
+& 最简形方程组中自由变量 $x_{r+1},x_{r+2},\ldots,x_n$ 个数
+& 基础解系 $\bm\xi_1,\bm\xi_2,\ldots,\bm\xi_{n-r}$ 中向量个数
+& $\dim\Ker(A)$
+
+$\Ker(A)=\{\bm x\mid A\bm x=\bm0\}$\\
+\hline
+线性相关等价表述
+& $A\bm x=\bm0$ 有非零解
+& 向量组 $\bm\alpha_1,\bm\alpha_2,\ldots,\bm\alpha_m$ 线性相关；
+
+$r(A)<m$
+& $|A|=0$
+
+$A$ 不可逆／$A^{-1}$ 不存在
+
+$r(A)<m$\\
+\hline
+等价
+& 方程组 $A$ 可以经有限次高斯消元变至方程组 $B$
+& 向量组 $A$ 与 $B$ 可以互相线性表出
+& 矩阵 $A$ 可以经有限次初等变换变至矩阵 $B$\\
+\hline
+\end{longtable}
+\normalsize
+
+\begin{method}[【公式】秩—零维数公式]
+\[
+r(A)+\nullity(A)=n.
+\]
+\end{method}
+
+\subsection{线性方程组}
+
+\small
+\begin{longtable}{|>{\centering\arraybackslash}p{1.35cm}|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{5.75cm}|>{\centering\arraybackslash}p{5.75cm}|}
+\hline
+&& 齐次线性方程组 & 非齐次线性方程组\\
+\hline
+\multirow{3}{*}{形式}
+& 一般形式
+& $\displaystyle\sum_{j=1}^{m}a_{ij}x_j=0,\ i=1,2,\ldots,n$
+& $\displaystyle\sum_{j=1}^{m}a_{ij}x_j=b_i,\ i=1,2,\ldots,n$\\
+\cline{2-4}
+& 矩阵 & $A\bm x=\bm0$ & $A\bm x=\bm\beta$\\
+\cline{2-4}
+& 向量
+& $\displaystyle\sum_{i=1}^{m}x_i\bm\alpha_i=\bm0$
+& $\displaystyle\sum_{i=1}^{m}x_i\bm\alpha_i=\bm\beta$\\
+\hline
+\multirow{2}{*}{解系}
+& 条件
+& $|A|=0\Longleftrightarrow r(A)<n\Longleftrightarrow$ 有非零解
+& $r(A)=r(A\mathbin{:}\bm\beta)\Longleftrightarrow$ 方程组有解\\
+\cline{2-4}
+& 通解
+& $\displaystyle\bm x=\sum_{i=1}^{n-r}k_i\bm\xi_i$
+& $\displaystyle\bm x=\bm\eta^{*}+\sum_{i=1}^{n-r}k_i\bm\xi_i$\\
+\hline
+\multicolumn{2}{|c|}{解空间}
+& $S=\Ker(A)$
+& $S=\bm\eta^{*}+\Ker(A)$\\
+\hline
+\multicolumn{2}{|c|}{联系}
+& \multicolumn{2}{c|}{$A\bm x=\bm\beta$ 的解空间可以由 $A\bm x=\bm0$ 的解空间通过平移变换得到}\\
+\hline
+\end{longtable}
+\normalsize
+
+\subsection{向量组}
+
+\subsubsection{定理}
+
+\subsubsection{三维向量运算}
+
+\small
+\begin{longtable}{|>{\centering\arraybackslash}p{2.1cm}|>{\centering\arraybackslash}p{4.7cm}|>{\centering\arraybackslash}p{4.7cm}|>{\centering\arraybackslash}p{4.7cm}|}
+\hline
+& 数量积（$\bm\alpha\cdot\bm\beta$ 或 $(\bm\alpha,\bm\beta)$）
+& 向量积（$\bm\alpha\times\bm\beta$）
+& 混合积 $(\bm\alpha,\bm\beta,\bm\gamma)$ 或 $[\bm\alpha,\bm\beta,\bm\gamma]$\\
+\hline
+定义
+& $\bm\alpha\cdot\bm\beta=|\bm\alpha||\bm\beta|\cos\langle\bm\alpha,\bm\beta\rangle$
+& $|\bm\alpha\times\bm\beta|=|\bm\alpha||\bm\beta|\sin\langle\bm\alpha,\bm\beta\rangle$
+
+方向满足右手定则
+& $(\bm\alpha,\bm\beta,\bm\gamma)=(\bm\alpha\times\bm\beta)\cdot\bm\gamma$\\
+\hline
+坐标表示
+& $\displaystyle\bm\alpha\cdot\bm\beta=(a_x,a_y,a_z)\begin{pmatrix}b_x\\b_y\\b_z\end{pmatrix}$
+& $\displaystyle\bm\alpha\times\bm\beta=
+\begin{vmatrix}\bm i&a_x&b_x\\\bm j&a_y&b_y\\\bm k&a_z&b_z\end{vmatrix}$
+& $\displaystyle(\bm\alpha,\bm\beta,\bm\gamma)=
+\begin{vmatrix}a_x&b_x&c_x\\a_y&b_y&c_y\\a_z&b_z&c_z\end{vmatrix}$\\
+\hline
+向量关系
+& $\bm\alpha\cdot\bm\beta=0\Longleftrightarrow\bm\alpha\perp\bm\beta$
+& $\bm\alpha\times\bm\beta=\bm0\Longleftrightarrow\bm\alpha\parallel\bm\beta$
+& $(\bm\alpha,\bm\beta,\bm\gamma)=0\Longleftrightarrow\bm\alpha,\bm\beta,\bm\gamma$ 共面\\
+\hline
+几何意义
+& 向量的模乘以另一个向量在其上的投影
+
+$\bm\alpha\cdot\bm\beta=|\bm\alpha|\Prj_{\bm\alpha}\bm\beta=|\bm\beta|\Prj_{\bm\beta}\bm\alpha$
+& $|\bm\alpha\times\bm\beta|$ 表示以两向量为邻边的平行四边形面积
+& $(\bm\alpha,\bm\beta,\bm\gamma)$ 表示以三向量为邻边的平行六面体有向体积\\
+\hline
+\end{longtable}
+\normalsize
+
+\begin{method}[【方法】判断 $n$ 个 $n$ 维向量是否共面]
+计算 $|\bm\alpha_1,\bm\alpha_2,\ldots,\bm\alpha_n|$ 是否为 $0$。
+\end{method}
+
+\subsection{矩阵}
+
+\subsubsection{矩阵关系}
+
+\begin{enumerate}[label=（\arabic*）]
+  \item 同型矩阵：行数、列数均相等的矩阵，如 $A_{n\times m}$ 与 $B_{n\times m}$。
+  \item 相等矩阵：各元素均相等的矩阵。
+  \item 等价矩阵：
+  \item 相似矩阵：
+\end{enumerate}
+
+\subsubsection{特殊矩阵（均为方阵）}
+
+\begin{enumerate}[label=（\arabic*）]
+  \item 零矩阵 $O$\qquad 注：不同型零矩阵不相等
+  \item 单位矩阵 $E$ 或 $I$
+  \item 数量矩阵 $K=kE$
+  \item 对角矩阵 $\Lambda=\diag(\lambda_1,\lambda_2,\ldots,\lambda_m)$
+  \item 上／下三角矩阵
+  \item 对称／反对称矩阵：对角线两侧元素相同／互为相反数的矩阵。
+  \item 初等矩阵
+  \item 可逆矩阵＝满秩矩阵＝非奇异矩阵
+  \item 相似矩阵
+  \item 正交矩阵
+  \item 合同矩阵
+  \item 正定矩阵
+\end{enumerate}
+
+\begin{method}[【注意】特殊矩阵]
+反对称矩阵主对角线元素为 $0$。
+
+对称矩阵线性运算后仍为对称矩阵。
+\end{method}
+
+\subsubsection{矩阵运算}
+
+\begin{enumerate}[label=（\arabic*）]
+  \item 加减法：$A\pm B=(a_{ij}\pm b_{ij})_{n\times m}$，满足交换律、结合律、消去律。
+  \item 数乘：$\lambda A=(\lambda a_{ij})_{n\times m}$，满足交换律、结合律、第一分配律、第二分配律。
+  \item 乘法：满足结合律、左乘分配律、右乘分配律，\textbf{不满足交换律、消去律}。
+\end{enumerate}
+
+\begin{itemize}
+  \item $AB\ne BA$，$AB=AC\nRightarrow B=C$，$AB=O\nRightarrow A=O$ 或 $B=O$。
+  \item 当 $AB$ 满足交换律时，完全平方公式与平方差公式适用，否则不适用。
+  \item $\displaystyle\begin{pmatrix}1&1\\0&1\end{pmatrix}^{n}=\begin{pmatrix}1&n\\0&1\end{pmatrix}$。
+\end{itemize}
+
+\begin{enumerate}[label=（\arabic*）,start=4]
+  \item 方幂／乘幂 $A^k$
+  \item 转置 $A^{\mathrm T}$
+  \item 行列式 $|A|$
+  \item 伴随 $A^{*}$\quad 伴随矩阵的第 $i$ 列元素是原矩阵第 $i$ 行的代数余子式。
+\end{enumerate}
+
+\begin{method}[【公式】伴随矩阵重要公式]
+\[
+AA^{*}=A^{*}A=|A|E.
+\]
+\end{method}
+
+\begin{enumerate}[label=（\arabic*）,start=8]
+  \item 逆 $A^{-1}$
+\end{enumerate}
+
+\begin{itemize}
+  \item 性质
+\end{itemize}
+
+\begin{method}[【方法】逆矩阵的求法]
+求法 1：$\displaystyle A^{-1}=\frac{1}{|A|}A^{*}$
+
+求法 2：
+
+求法 3（对角矩阵）：$\Lambda^{-1}=\diag(\lambda_1^{-1},\lambda_2^{-1},\ldots,\lambda_m^{-1})$
+
+求法 4（次对角矩阵）：次对角线元素取倒后互换
+\end{method}
+
+\begin{enumerate}[label=（\arabic*）,start=9]
+  \item
+\end{enumerate}
+
+\subsubsection{转置矩阵 $A^{\mathrm T}$}
+
+将描述列向量的概念转为研究行向量。如：
+
+列空间 $\Img(A)\subseteq\R^m$，行空间 $\Img(A^{\mathrm T})\subseteq\R^n$；
+
+零空间 $\Ker(A)\subseteq\R^n$，左零空间 $\Ker(A^{\mathrm T})\subseteq\R^m$。
+
+\subsubsection{相似矩阵 $A\sim B$}
+
+\subsection{线性变换}
+
+\subsubsection{}
+
+\subsection{等价叙述}
+
+\subsubsection{矩阵 $A$ 存在逆矩阵}
+
+\begin{enumerate}[label=（\arabic*）]
+  \item $|A|\ne0$；
+  \item $A^{-1}$ 存在；
+  \item $r(A)=n$；
+  \item $\nullity(A)=0$；
+  \item $\Ker(A)=\{\bm0\}$；
+  \item $A$ 的行（列）向量线性无关；
+  \item $A\bm x=\bm0$ 只有零解；
+  \item $A$ 只含非零特征值。
+\end{enumerate}
+
+\subsubsection{表述与矩阵关系转化}
+
+\end{document}
