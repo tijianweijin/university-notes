@@ -1,24 +1,14 @@
 # Fdb version 4
-["xdvipdfmx"] 1790428022.47684 "信号分析与处理.xdv" "信号分析与处理.pdf" "信号分析与处理" 1790428023.12514 0
-  "信号分析与处理.xdv" 1790428022 57308 77e6e0da1eba45026d751969aee7f889 "xelatex"
+["xdvipdfmx"] 1790572265.25428 "信号分析与处理.xdv" "信号分析与处理.pdf" "信号分析与处理" 1790572266.78885 0
+  "信号分析与处理.xdv" 1790572264 13820 57b7dee5ba766f563404da3bbc6e328b "xelatex"
   (generated)
   "信号分析与处理.pdf"
   (rewritten before read)
-["xelatex"] 1790428018.54521 "c:/Users/提剑遗金/Desktop/迄今为止的笔记/4-1 信号分析与处理/信号分析与处理.tex" "信号分析与处理.xdv" "信号分析与处理" 1790428023.1085 0
-  "c:/Users/提剑遗金/Desktop/迄今为止的笔记/4-1 信号分析与处理/信号分析与处理.tex" 1790428014 10081 8ad4944cd4f77fc9aaecc6da4bf0c4e7 ""
+["xelatex"] 1790572256.11482 "c:/Users/提剑遗金/Desktop/大学笔记/4-1 信号分析与处理/信号分析与处理.tex" "信号分析与处理.xdv" "信号分析与处理" 1790572266.73932 0
+  "c:/Users/提剑遗金/Desktop/大学笔记/4-1 信号分析与处理/信号分析与处理.tex" 1790572233 2537 4c33acd184a59cb3f6d24fe08c74ca3d ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1778940926 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1778942685 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1778940319 1004 54797486969f23fa377b128694d548df ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1778940319 916 f87d7c45f9c908e672703b83b72241a3 ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm" 1778940319 924 9904cf1d39e9767e7a3622f2a125a565 ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm" 1778940319 928 2dc8d444221b7a635bb58038579b861a ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1778940319 908 2921f8a10601f252058503cc6570e581 ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1778940319 940 75ac932a52f80982a9f8ea75d03a34cf ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1778940319 940 228d6584342e91276bf566bcf9716b83 ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1778940577 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1778940577 1528 abec98dbc43e172678c11b3b9031252a ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1778940577 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1778940577 1124 6c73e740cf17375f03eec0ee63599741 ""
   "c:/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty" 1778940469 40635 c40361e206be584d448876bba8a64a3b ""
   "c:/texlive/2026/texmf-dist/tex/generic/bitset/bitset.sty" 1778940473 33961 6b5c75130e435b2bfdb9f480a09a39f9 ""
   "c:/texlive/2026/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty" 1778940974 8371 9d55b8bd010bc717624922fb3477d92e ""
@@ -96,8 +86,6 @@
   "c:/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty" 1778942487 7008 f92eaa0a3872ed622bbf538217cd2ab7 ""
   "c:/texlive/2026/texmf-dist/tex/latex/amsfonts/amsfonts.sty" 1778940320 5949 3f3fd50a8cc94c3d4cbf4fc66cd3df1c ""
   "c:/texlive/2026/texmf-dist/tex/latex/amsfonts/amssymb.sty" 1778940320 13829 94730e64147574077f8ecfea9bb69af4 ""
-  "c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd" 1778940320 961 6518c6525a34feb5e8250ffa91731cff ""
-  "c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd" 1778940320 961 d02606146ba5601b5645f987c92e6193 ""
   "c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty" 1778940321 2222 27db7d52163edae53881b71ff62e754e ""
   "c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsgen.sty" 1778940321 4173 1b3e76addfb8afcb47db4811d66e1dc6 ""
   "c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty" 1778940321 88471 b1bb09142edddebd46ba986341b867bd ""
@@ -204,9 +192,9 @@
   "c:/texlive/2026/texmf-dist/web2c/texmf.cnf" 1778940277 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt" 1778942812 5948911 ea8155f9c13d783de6fadab057f9449b ""
   "c:/texlive/2026/texmf.cnf" 1778942707 713 e69b156964470283e0530f5060668171 ""
-  "信号分析与处理.aux" 1790428022 1188 4784bdbee791bde5dd1c4798bd744881 "xelatex"
-  "信号分析与处理.out" 1790428022 697 59f15ca60cdc8d9d1b6d1e4924ade0b1 "xelatex"
-  "信号分析与处理.tex" 1790428014 10081 8ad4944cd4f77fc9aaecc6da4bf0c4e7 ""
+  "信号分析与处理.aux" 1790572264 494 72095c49881d4dc1bf0bb692f7c96ae6 "xelatex"
+  "信号分析与处理.out" 1790572264 265 37f02c9a90c353e03c053ee81b375374 "xelatex"
+  "信号分析与处理.tex" 1790572233 2537 4c33acd184a59cb3f6d24fe08c74ca3d ""
   (generated)
   "信号分析与处理.aux"
   "信号分析与处理.log"
