@@ -10,7 +10,7 @@
 \usepackage{hyperref}
 
 \usepackage{tikz}
-
+\usepackage{diagbox}
 
 \usetikzlibrary{
   positioning,
@@ -53,14 +53,14 @@
 
 \ctexset{
   section={format=\centering\heiti\zihao{3}\color{main},
-           name={第,章},number=\chinese{section},aftername=\quad,
-           beforeskip=0.9em,afterskip=0.5em},
+            name={第,章},number=\chinese{section},aftername=\quad,
+            beforeskip=0.9em,afterskip=0.5em},
   subsection={format=\heiti\zihao{5}\color{main},
               name={,、},number=\chinese{subsection},aftername=,
               beforeskip=0.6em,afterskip=0.22em},
   subsubsection={format=\heiti\zihao{5}\color{main},
-                 number={（\chinese{subsubsection}）},aftername=,
-                 beforeskip=0.55em,afterskip=0.15em}
+                  number={（\chinese{subsubsection}）},aftername=,
+                  beforeskip=0.55em,afterskip=0.15em}
 }
 
 \newtcolorbox{relationbox}{
@@ -74,10 +74,11 @@
   before upper={\setlength{\parindent}{2em}}
 }
 
-\newcommand{\ii}{\mathrm{i}}
+\newcommand{\jj}{\mathrm{j}}
 \newcommand{\ee}{\mathrm{e}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
+\newcommand{\dd}{\mathrm{d}}
 
 \begin{document}
 
@@ -85,11 +86,289 @@
   {\heiti\zihao{1}\color{main} 信号分析与处理笔记}
 \end{center}
 
+\section{信号与系统}
+
+\subsection{信号}
+
+\subsubsection{基本概念}
+
+\begin{enumerate}
+  
+  \item 概念辨析
+  \begin{itemize}
+    \item 消息：信号承载的具体内容；
+    \item 信息：信息是消息中蕴含的有用内容；
+    \item 信号：消息（或信息）的物理表现形式。
+  \end{itemize}
+
+  \item 表示：类似函数，有解析式法、图像法、表格法等。
+
+  \item 特征
+  \begin{enumerate}[label=(\arabic*)]
+
+    \item 功率
+信号归一化瞬时功率可以表示为其Euclid内积的平方，即$p = \left | x(t) \right |^2$。
+故有归一化平均功率（即一般所说的功率）。
+    \item 能量：将瞬时归一化功率对时间积分即得到信号的能量。
+
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+\toprule
+信号 & 平均归一化功率 & 归一化能量 \\
+\midrule
+连续信号 & $P =\displaystyle \lim_{a \to \infty} \frac{1}{2a} \displaystyle\int_{-a}^{a} \left | x(t) \right |^2 \dd t$ & $E = \displaystyle \lim_{a \to \infty} \displaystyle \int_{-a}^{a} \left | x(t) \right |^2 \dd t$ \\
+离散信号 & $P =\displaystyle \lim_{N \to \infty} \frac{1}{2N} \displaystyle\sum_{k=-N}^{N} \left | x[k] \right |^2$ & $E = \displaystyle \lim_{N \to \infty} \displaystyle \sum_{k=-N}^{N} \left | x[k] \right |^2$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+  \end{enumerate}
+\end{enumerate}
+
+\subsubsection{分类}
+
+\begin{enumerate}
+  
+  \item 确定信号与随机信号
+
+能给出确定时间函数的信号称为确定信号，否则称为随机信号。
+
+  \item 连续时间信号与离散时间信号
+  
+连续时间信号对应带有有限个第一类间断点的连续函数，简称连续信号，一般用$x(t)$表示。
+连续信号的时间是连续的，但信号取值可以是连续的也可以是离散的。
+
+离散时间信号对应定义域离散的函数，简称离散信号，一般用$x[n]$表示。
+离散信号的时间是离散的，但信号取值可以是连续的也可以是离散的。
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \setlength{\arrayrulewidth}{0.5pt}
+    
+    \begin{tabular}{|>{\centering\arraybackslash}m{3cm}
+                    |>{\centering\arraybackslash}m{3cm}
+                    |>{\centering\arraybackslash}m{3cm}|}
+        \hline
+        \diagbox[width=3cm,height=1.2cm]{幅值}{时间}
+            & 连续 & 离散 \\
+        \hline
+        连续 & 模拟信号 & 抽样信号 \\
+        \hline
+        离散 &  & 数字信号 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{methodbox}[区分连续信号与离散信号]
+连续信号与离散信号的区别只在于时间是否连续，而不在于幅值是否连续。
+\end{methodbox}
+
+  \item 周期信号与非周期信号
+
+  连续周期信号可以写成$x(t)=x(t+nT)$，其中$T$是周期信号的周期。
+
+  离散周期信号有$x[n]=x[n+N]$，记$\min N$为其基本周期。
+
+  \item 能量受限信号与功率受限信号
+
+能量受限信号$ \Leftrightarrow 0 < E < \infty, P = 0 $ \\
+功率受限信号$ \Leftrightarrow 0 < P < \infty, E = \infty $ 
+\end{enumerate}
+
+\subsubsection{经典信号}
+
+注：如未说明，默认$t \in \left ( -\infty, \infty \right )$。
+
+\begin{enumerate}
+    \item 连续时间信号
+    \begin{itemize}
+      \item 正弦信号：$x(t)=A\sin\left ( \Omega t + \varphi \right )$
+      
+      $A$为幅值，控制信号幅度；$\Omega$为角频率，控制信号周期；$\varphi$为相位，控制信号相位。
+
+      \item 指数信号：$x(t)=Ae^{st}, \, s = \sigma + \jj \Omega$
+    
+      $\sigma$控制指数增大/减小速率，$\Omega$控制振荡周期。
+
+      \begin{methodbox}[正弦信号与指数信号关系]
+        \[
+        \sin \left ( \Omega t \right ) = \frac{1}{\jj 2} \left ( e^{\jj \Omega t} - e^{-\jj \Omega t} \right ), \qquad
+        \cos \left ( \Omega t \right ) = \frac{1}{2} \left ( e^{\jj \Omega t} + e^{-\jj \Omega t} \right )
+        \]
+      \end{methodbox}
+    
+      \item 取样信号（Sa信号）：$\operatorname{Sa}(t)=\dfrac{\sin t}{t}, \, \displaystyle x(t) = A \, \mathrm{Sa}(\Omega t) = A \, \frac{\sin \Omega t}{\Omega t}$
+      
+      \begin{methodbox}[sinc函数]
+        当 $A=1, \, \Omega = \pi$ 时，$\mathrm{Sa}(\Omega t)$ 称为 sinc 函数，
+        记为 $\mathrm{sinc}(t)$。
+        \[
+        \mathrm{sinc}(t)=
+        \begin{cases}
+        \dfrac{\sin(\pi t)}{\pi t}, & t\neq 0,\\[6pt]
+        1, & t=0.
+        \end{cases}
+        \]
+      \end{methodbox}
+
+      \item 单位斜变信号
+      \[
+      r(t)=
+        \begin{cases}
+        0, & t < 0,\\
+        t, & t \geq 0.
+        \end{cases}
+      \]
+      \item 单位阶跃信号
+      \[
+      u(t)=
+        \begin{cases}
+        0, & t < 0,\\
+        1, & t \geq 0.
+        \end{cases}
+      \]
+      \item 单位冲激信号（Dirac定义）
+      \[
+      \int_{-\infty}^{\infty} \delta(t) \dd t = 1, \qquad \delta(t) = 0, \, \forall \, t \neq 0
+      \]
+
+      \begin{methodbox}[【技巧】单位冲激信号用处]
+        \begin{itemize}
+          \item 取样：$\displaystyle x(\tau) = \int_{-\infty}^{\infty} x(t) \delta(t-\tau) \dd t$
+        \end{itemize}
+      \end{methodbox}
+
+      \begin{methodbox}[【技巧】三奇异信号关系]
+        后者是前者的导数，前者是后者的积分。
+        \[
+        r(t) \to u(t) \to \delta(t)
+        \]
+        \[
+        \dfrac{\dd r(t)}{\dd t} = u(t), \qquad \dfrac{\dd u(t)}{\dd t} = \delta(t)
+        \]
+      \end{methodbox}
+
+      \begin{methodbox}[矩形信号]
+        持续时间为$[\tau_1, \tau_2]$的矩形信号可表示为两阶跃信号的差，即
+        \[
+        x(t) = A \left [ u(t-\tau_1) - u(t-\tau_2) \right ]
+        \]
+      \end{methodbox}
+
+      \begin{methodbox}[符号信号]
+        符号函数记为
+        \[
+          \operatorname{sgn}(t) =
+          \begin{cases}
+            1, & t > 0,\\
+            -1, & t < 0.
+          \end{cases}
+          =2 u(t)-1
+        \]
+      \end{methodbox}
+
+    \end{itemize}
+  \end{enumerate}
+\subsubsection{运算}
+
+\begin{enumerate}
+
+  \item 几何变换
+    
+  几何变换可以用通式$\displaystyle y(t)=x\left [ a\left ( t - \dfrac{b}{a} \right ) \right ]$表示。
+    
+    \begin{enumerate}[label=(\arabic*)]
+      \item 移位：$y(t)=x(t-\tau)$
+      \item 反褶：$y(t)=x(-t)$
+      \item 尺度变换：$y(t)=x(at)$
+    \end{enumerate}
+  
+    \begin{methodbox}[【技巧】几何变换顺序]
+      一般将信号函数整理为$\displaystyle y(t)=x\left [ a\left ( t - \dfrac{b}{a} \right ) \right ]$
+      的形式后再考虑如何变换，否则容易出现问题。
+    \end{methodbox}
+
+  \item 微积分
+  
+    \begin{enumerate}[label=(\arabic*)]
+      \item 微分：$y(t)=\dfrac{\dd x(t)}{\dd t}$
+      \item 积分：$y(t)=\displaystyle \int_{-\infty}^t x(\tau) \dd \tau$
+    \end{enumerate}
+
+  \item 复合运算
+    \begin{enumerate}[label=(\arabic*)]
+      \item 加法：$y(t)=x_1(t) + x_2(t)$
+      \item 乘法：$y(t)=x_1(t) \cdot x_2(t)$
+      \item 卷积：$y(t)=x(t) * h(t) = \displaystyle \int_{-\infty}^{\infty} x(\tau) h(t-\tau) \dd \tau$
+      
+      \begin{methodbox}[卷积意义]
+      \end{methodbox}
+      \begin{methodbox}[卷积性质]
+      \end{methodbox}
+      \begin{methodbox}[【技巧】图解法]
+        
+      \end{methodbox}
+    \end{enumerate}
+\end{enumerate}
+\subsection{系统}
+
+\subsubsection{基本概念}
+系统是对输入信号进行加工、变换、处理，并产生输出信号的物理装置。
+
+\subsubsection{分类}
+
+\begin{enumerate}
+  
+  \item 线性系统与非线性系统
+  
+  线性系统满足齐次性和叠加性，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$是线性算子。
+  
+  \item 时变系统与时不变系统
+  
+  时不变系统的运行规则不会随时间推移发生改变，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$不是$t$的函数，而满足$[y(t-t_0)]=\mathcal{T}[x(t-t_0)]$。
+
+  \item 因果系统与非因果系统
+  
+  因果系统的输出仅由当前和过去的输入决定，亦即$y(t_0)$只依赖于$x(t), \, t \in \left ( -\infty, t_0 \right ]$。
+
+  \item 稳定系统与不稳定系统
+
+  稳定系统在接入有限大小的输入信号时，能够产生有限范围的输出信号。
+
+\end{enumerate}
+
 \section{信号分析}
 
 
+\subsection{频域分析}
 
-\section{信号处理与系统分析}
+\begin{methodbox}[时频不确定性原理]
+
+  $\Delta t$与$\Delta f$分别表示以能量分布定义的标准差宽度，则有
+  \[
+    \Delta t \cdot \Delta f \geq \frac{1}{4\pi}
+  \]
+
+  或写成角频率版本则为
+  \[
+    \Delta t \cdot \Delta \Omega \geq \frac12
+  \]
+
+  在时谱与频谱中的关系体现为时谱越宽，频谱越窄，反之亦然。
+  这是由Fourier变换性质决定的。比较常见的例子是
+  \[
+  x(t)=\delta (t) \leftrightarrow X(\Omega)=1, \qquad x(t)=1 \leftrightarrow X(\Omega)=2\pi \delta (\Omega)
+  \]
+  \[
+  x(t)=\operatorname{rect}\left ( \frac{\Omega}{2} \right ) \leftrightarrow X(\Omega)=\operatorname{Sa}(t) , \qquad x(t)= \operatorname{Sa}(\Omega) \leftrightarrow X(\Omega)=\pi \operatorname{rect}(t)
+  \]
+
+\end{methodbox}
+
+\subsection{复频域分析}
+
+\section{系统分析}
 
 \section{系统设计}
 

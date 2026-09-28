@@ -1,11 +1,11 @@
 # Fdb version 4
-["xdvipdfmx"] 1790428667.2834 "物理笔记.xdv" "物理笔记.pdf" "物理笔记" 1790428668.06195 0
-  "物理笔记.xdv" 1790428667 166588 d5b508990b23e4565cacf3b99e0d2e29 "xelatex"
+["xdvipdfmx"] 1790575142.81115 "物理笔记.xdv" "物理笔记.pdf" "物理笔记" 1790575144.42788 0
+  "物理笔记.xdv" 1790575142 175860 18dac8b33404f9bd6fc2ee4a4223145d "xelatex"
   (generated)
   "物理笔记.pdf"
   (rewritten before read)
-["xelatex"] 1790428663.24524 "c:/Users/提剑遗金/Desktop/迄今为止的笔记/1-7 物理/物理笔记.tex" "物理笔记.xdv" "物理笔记" 1790428668.0404 0
-  "c:/Users/提剑遗金/Desktop/迄今为止的笔记/1-7 物理/物理笔记.tex" 1790428658 29854 ab62e7d91325b8991e17195e745002ba ""
+["xelatex"] 1790575133.35942 "c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理/物理笔记.tex" "物理笔记.xdv" "物理笔记" 1790575144.38455 0
+  "c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理/物理笔记.tex" 1790575132 32362 16223fd4bec2da4f9b50058f8d6b5be1 ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1778940926 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1778942685 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1778940319 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -67,9 +67,15 @@
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex" 1778941714 35251 5ff5b5b310c5ac882610e0ccc99095e7 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex" 1778941714 22012 81b34a0aa8fa1a6158cc6220b00e4f10 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex" 1778941714 8893 e851de2175338fdf7c17f3e091d94618 ""
+  "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex" 1778941714 15929 463535aa2c4268fead6674a75c0e8266 ""
+  "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex" 1778941714 5650 0ccd824135f363f45d6a97602e59d55a ""
+  "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex" 1778941714 1319 0b2de5126c6cbc295f0eb77f7344b34d ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfadings.code.tex" 1778941714 1179 5483d86c1582c569e665c74efab6281f ""
+  "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex" 1778941715 3937 3f208572dd82c71103831da976d74f1a ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex" 1778941715 11518 738408f795261b70ce8dd47459171309 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex" 1778941715 186859 0445d9a41a87648b4723e04765409541 ""
+  "c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex" 1778941715 7474 f05a7223b140f230922562ac6a9fede5 ""
+  "c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex" 1778941715 58801 1e750fb0692eb99aaac45698bbec96b1 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex" 1778941715 2563 d5b174eb7709fd6bdcc2f70953dbdf8e ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex" 1778941715 32995 ac577023e12c0e4bd8aa420b2e852d1a ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfint.code.tex" 1778941715 3063 8c415c68a0f3394e45cfeca0b65f6ee6 ""
@@ -87,6 +93,7 @@
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex" 1778941715 92405 f515f31275db273f97b9d8f52e1b0736 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex" 1778941715 37733 0fe471ac50324723cf6ab693e5c0916c ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex" 1778941715 8471 c2883569d03f69e8e1cabfef4999cfd7 ""
+  "c:/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex" 1778941715 71742 3da44a8be6626eef1c400c68776c7a0f ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex" 1778941715 21211 1e73ec76bd73964d84197cc3d2685b01 ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex" 1778941715 16218 98503859deba28f16813029fd927ed8e ""
   "c:/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex" 1778941715 44792 c4a5a3feba777682c1d16420f2f01a5b ""
@@ -220,9 +227,9 @@
   "c:/texlive/2026/texmf-dist/web2c/texmf.cnf" 1778940277 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt" 1778942812 5948911 ea8155f9c13d783de6fadab057f9449b ""
   "c:/texlive/2026/texmf.cnf" 1778942707 713 e69b156964470283e0530f5060668171 ""
-  "物理笔记.aux" 1790428667 7724 4a3acbdd2d170e93edf1fa0e8c30835a "xelatex"
-  "物理笔记.out" 1790428667 6641 e270ad6f4bfcb72947762166410814ae "xelatex"
-  "物理笔记.tex" 1790428658 29854 ab62e7d91325b8991e17195e745002ba ""
+  "物理笔记.aux" 1790575142 8261 a6ad28bac13c83d59290d2f6d81eba00 "xelatex"
+  "物理笔记.out" 1790575142 6845 65434c3bc04d18aa0a02155d51addb8e "xelatex"
+  "物理笔记.tex" 1790575132 32362 16223fd4bec2da4f9b50058f8d6b5be1 ""
   (generated)
   "物理笔记.aux"
   "物理笔记.log"

@@ -1,8 +1,8 @@
-PWD c:/Users/提剑遗金/Desktop/迄今为止的笔记/1-7 物理
+PWD c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理
 INPUT c:/texlive/2026/texmf.cnf
 INPUT c:/texlive/2026/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt
-INPUT c:/Users/提剑遗金/Desktop/迄今为止的笔记/1-7 物理/物理笔记.tex
+INPUT c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理/物理笔记.tex
 OUTPUT 物理笔记.log
 INPUT c:/texlive/2026/texmf-dist/tex/latex/ctex/ctexart.cls
 INPUT c:/texlive/2026/texmf-dist/tex/latex/ctex/ctexart.cls
@@ -278,6 +278,20 @@ INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/ti
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/latex/tcolorbox/tcbposter.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/tools/indentfirst.sty

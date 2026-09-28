@@ -5,7 +5,8 @@
 \usepackage{booktabs,tabularx,array,longtable}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
-\usepackage{tikz}
+\usepackage{tikz}
+
 \usetikzlibrary{
   positioning,
   calc,
@@ -506,7 +507,12 @@
   \item 电场线切线方向指示电场强度方向；
   \item 电场线密集程度指示电场强度大小。
 \end{enumerate}
-& \centering\arraybackslash 磁场线\\ \hline
+& \centering\arraybackslash 磁场线
+\begin{enumerate}
+  \item 电场线切线方向指示电场强度方向；
+  \item 电场线密集程度指示电场强度大小。
+\end{enumerate}
+\\ \hline
 
 \centering 电等势面
 \begin{enumerate}
@@ -520,17 +526,24 @@
   \item 定义式：\(\displaystyle\vect E=\frac{\vect F}{q}\)。
   \item 电场强度加法具有矢量性，即电场强度叠加原理。
 \end{enumerate}
-& \centering\arraybackslash 磁感应强度 \(\vect B\)\\ \hline
+& \centering\arraybackslash 磁感应强度 \(\vect B\)
+\begin{enumerate}
+  \item 定义式：\(\displaystyle\vect B=\frac{\dif \vect F}{I \dif \vect l}\)。
+  \item 磁感应强度加法具有矢量性，即磁感应强度叠加原理。
+  \item Ampère力公式: \(\dif \vect F = \vect B \cdot I \dif \vect l\)
+  \item Biot-Savart 定律：\(\displaystyle \dif \vect B = \frac{\mu_0}{4\pi} \frac{I \dif \vect l \times \vect r}{r^3}\)。
+\end{enumerate}
+\\ \hline
 
-\centering 电通量 \(\Phi_{\mathrm e}\)
+\centering 电通量 \(\varPhi_{\mathrm e}\)
 \begin{enumerate}
   \item 定义式：
   \[
-    \Phi_{\mathrm e}=\iint\dif\Phi_{\mathrm e}=\iint\vect E\cdot\dif\vect S.
+    \varPhi_{\mathrm e}=\iint\dif\varPhi_{\mathrm e}=\iint\vect E\cdot\dif\vect S.
   \]
 \end{enumerate}
 \vspace{0.45em}
-& \centering\arraybackslash 磁通量 \(\Phi_{\mathrm b}\)\\ \hline
+& \centering\arraybackslash 磁通量 \(\varPhi_{\mathrm b}\)\\ \hline
 
 \centering 电势 \(V\)
 \begin{enumerate}
@@ -577,9 +590,15 @@
     \item 若静电场方向处处相同，则沿垂直于该方向的方向上电场强度大小不变。
   \end{enumerate}
 \end{enumerate}
-& \\ \hline
+& \centering\arraybackslash Ampère环路定理
+\begin{enumerate}
+  \item 积分形式：\(\displaystyle\oint\vect B\cdot\dif\vect l=\mu_0 \sum_L I_{i}\)。
+  \item 微分形式：\(\nabla\times\vect B=\mu_0\vect J\)。
+  \item 理解：恒定磁场是有旋场，故磁场线可以闭合；
+\end{enumerate}
+\\ \hline
 
-\centering 静电场 Gauss 定理
+\centering 电Gauss定理
 \begin{enumerate}
   \item 积分形式：
   \[
@@ -594,7 +613,17 @@
     \item Gauss 定理+各向同性=Coulomb 定律。
   \end{enumerate}
 \end{enumerate}
-& \\ \hline
+& \centering\arraybackslash 磁Gauss定理
+\begin{enumerate}
+  \item 积分形式：
+  \[
+    \oiint\vect B\cdot\dif\vect S=0.
+  \]
+  \item 微分形式：\(\displaystyle\nabla\cdot\vect B=0\)。
+  \item 正方向：闭合曲面一般取向外为正方向。
+  \item 理解：磁场无源。
+\end{enumerate}
+\\ \hline
 
 \centering 完备性描述
 
@@ -651,6 +680,22 @@ Gauss 定理和环路定理能完备描述静电场。
 \end{enumerate}
 \end{method}
 
+\subsection{电生磁}
+微观形式：运动电荷产生磁场：$\vect B=\frac{\mu_0}{4\pi}\frac{q\vect v\times\vect e_r}{r^2}$
+宏观形式：Biot-Savart 定律：$\vect B=\frac{\mu_0}{4\pi}\int\frac{I\dif\vect l\times\vect e_r}{r^2}$
+运动电荷电磁场关系：$ \vect B = \mu_0 \epsilon_0 \vect v \times \vect E $
+
+\subsection{磁场对电流的作用}
+\begin{enumerate}
+  \item 微观表现：Lorentz力：$\vect F = q \vect v \times \vect B$
+  \\ 洛伦兹力不作功。
+  \item 宏观表现：Ampère力：$ \dif \vect F = I \dif \vect l \times \vect B$
+  \item 电磁场对运动电荷的力：$\vect F = q \left (\vect E + \vect v \times \vect B \right )$
+  \item 匀强磁场对平面载流线圈：$\vect F = I \dif \vect l \times \vect B$
+  \\ 磁矩$ \vect m = I S \vect e_\mathrm{n}$
+  \\ 磁力矩 $ \vect M = \vect m \times \vect B$
+\end{enumerate}
+
 \subsection{常见电学理想模型}
 
 \begin{center}
@@ -677,7 +722,7 @@ Gauss 定理和环路定理能完备描述静电场。
 \toprule
  & 电容 \(C\) & 电场能 \(W\)\\
 \midrule
-带电金属球 & \(\displaystyle C=\frac{1}{4\pi\varepsilon_0}\frac qR\) & \(\displaystyle W=\frac{q^2}{8\pi\varepsilon_0a}\)\\
+带电金属球 & \(\displaystyle C=4\pi\varepsilon_0 R\) & \(\displaystyle W=\frac{Q^2}{8\pi\varepsilon_0R}\)\\
 平行板电容器 & \(\displaystyle C=\frac{\varepsilon_0S}{d}\) & \\
 同轴圆柱电容器 & \(\displaystyle C=\frac{2\pi\varepsilon_0L}{\ln(R_2/R_1)}\) & \(\displaystyle W=\frac{Q^2}{4\pi\varepsilon_0l}\ln\frac{R_2}{R_1}\)\\
 同心球电容器 & \(C=4\pi\varepsilon_0(R_1\parallel R_2)\) & \\
