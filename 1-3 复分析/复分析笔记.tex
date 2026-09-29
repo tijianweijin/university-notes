@@ -2,6 +2,7 @@
 
 \usepackage[a4paper,margin=2cm]{geometry}
 \usepackage{amsmath,amssymb,mathtools}
+\usepackage[nolimits]{cmupint}
 \usepackage{booktabs,tabularx,array}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
@@ -9,7 +10,8 @@
 \usepackage{indentfirst}
 \usepackage{hyperref}
 \usepackage{tikz}
-
+
+
 \usetikzlibrary{
   positioning,
   calc,
@@ -51,14 +53,14 @@
 
 \ctexset{
   section={format=\centering\heiti\zihao{3}\color{main},
-           name={第,章},number=\chinese{section},aftername=\quad,
-           beforeskip=0.9em,afterskip=0.5em},
+            name={第,章},number=\chinese{section},aftername=\quad,
+            beforeskip=0.9em,afterskip=0.5em},
   subsection={format=\heiti\zihao{5}\color{main},
               name={,、},number=\chinese{subsection},aftername=,
               beforeskip=0.6em,afterskip=0.22em},
   subsubsection={format=\heiti\zihao{5}\color{main},
-                 number={（\chinese{subsubsection}）},aftername=,
-                 beforeskip=0.55em,afterskip=0.15em}
+                  number={（\chinese{subsubsection}）},aftername=,
+                  beforeskip=0.55em,afterskip=0.15em}
 }
 
 \newtcolorbox{relationbox}{
@@ -175,9 +177,9 @@ Euclid空间$\RR^2$有了更丰富的结构。
 
     对 \(z\neq0\)：
     \[
-      \arg z\in(-\pi,\pi],
+      \arg z\in(-\uppi,\uppi],
       \qquad
-      \operatorname{Arg}z=\arg z+2k\pi,
+      \operatorname{Arg}z=\arg z+2k\uppi,
       \quad k\in\mathbb Z.
     \]
 
@@ -185,12 +187,12 @@ Euclid空间$\RR^2$有了更丰富的结构。
     \arg z=
     \begin{cases}
       \arctan\dfrac{y}{x}, & x>0,\\[4pt]
-      \arctan\dfrac{y}{x}+\pi, & x<0,\ y>0,\\[4pt]
-      \arctan\dfrac{y}{x}-\pi, & x<0,\ y<0,\\[4pt]
-      \dfrac{\pi}{2}, & x=0,\ y>0,\\[4pt]
-      -\dfrac{\pi}{2}, & x=0,\ y<0,\\[4pt]
+      \arctan\dfrac{y}{x}+\uppi, & x<0,\ y>0,\\[4pt]
+      \arctan\dfrac{y}{x}-\uppi, & x<0,\ y<0,\\[4pt]
+      \dfrac{\uppi}{2}, & x=0,\ y>0,\\[4pt]
+      -\dfrac{\uppi}{2}, & x=0,\ y<0,\\[4pt]
       0, & y=0,\ x>0,\\[4pt]
-      \pi, & y=0,\ x<0.
+      \uppi, & y=0,\ x<0.
     \end{cases}
     \]
     计算部分其实直接画图算也没什么不好的。
@@ -262,7 +264,7 @@ Euclid空间$\RR^2$有了更丰富的结构。
 \[
 \ln z
 =\ln|z|+\ii\operatorname{Arg}z
-=\ln|z|+\ii\bigl(\arg z+2k\pi\bigr),
+=\ln|z|+\ii\bigl(\arg z+2k\uppi\bigr),
 \qquad k\in\mathbb Z.
 \]
 
@@ -292,8 +294,8 @@ $\operatorname{Arg}z$的多值性造就了$\ln z$的多值性。
 \toprule
 函数 & 奇偶性 & 周期性 & 零点 \\
 \midrule
-\(\sin z\) & 奇 & $2\pi$ & $n\pi$ \\
-\(\cos z\) & 偶 & $2\pi$ & $n\pi + \frac{\pi}{2}$ \\
+\(\sin z\) & 奇 & $2\uppi$ & $n\uppi$ \\
+\(\cos z\) & 偶 & $2\uppi$ & $n\uppi + \frac{\uppi}{2}$ \\
 \bottomrule
 \end{tabularx}
 \end{center}

@@ -2,6 +2,8 @@
 
 \usepackage[a4paper,margin=2cm]{geometry}
 \usepackage{amsmath,amssymb,mathtools}
+\usepackage{upgreek}
+\usepackage[nolimits]{cmupint}
 \usepackage{booktabs,tabularx,array}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
@@ -79,6 +81,7 @@
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\dd}{\mathrm{d}}
+\newcommand{\ppi}{\uppi}
 
 \begin{document}
 
@@ -116,8 +119,8 @@
 \toprule
 信号 & 平均归一化功率 & 归一化能量 \\
 \midrule
-连续信号 & $P =\displaystyle \lim_{a \to \infty} \frac{1}{2a} \displaystyle\int_{-a}^{a} \left | x(t) \right |^2 \dd t$ & $E = \displaystyle \lim_{a \to \infty} \displaystyle \int_{-a}^{a} \left | x(t) \right |^2 \dd t$ \\
-离散信号 & $P =\displaystyle \lim_{N \to \infty} \frac{1}{2N} \displaystyle\sum_{k=-N}^{N} \left | x[k] \right |^2$ & $E = \displaystyle \lim_{N \to \infty} \displaystyle \sum_{k=-N}^{N} \left | x[k] \right |^2$ \\
+连续信号 & $P =\displaystyle \lim_{a \to \infty} \frac{1}{2a} \displaystyle\int_{-a}^{a} \left | x \left (t \right ) \right |^2 \dd t$ & $E = \displaystyle \lim_{a \to \infty} \displaystyle \int_{-a}^{a} \left | x \left (t \right ) \right |^2 \dd t$ \\
+离散信号 & $P =\displaystyle \lim_{N \to \infty} \frac{1}{2N} \displaystyle\sum_{k=-N}^{N} \left | x \left [ k \right ] \right |^2$ & $E = \displaystyle \lim_{N \to \infty} \displaystyle \sum_{k=-N}^{N} \left | x \left [ k \right ] \right |^2$ \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -183,30 +186,30 @@
 \begin{enumerate}
     \item 连续时间信号
     \begin{itemize}
-      \item 正弦信号：$x(t)=A\sin\left ( \Omega t + \varphi \right )$
+      \item 正弦信号：$x(t)=A\sin\left ( \varOmega t + \varphi \right )$
       
-      $A$为幅值，控制信号幅度；$\Omega$为角频率，控制信号周期；$\varphi$为相位，控制信号相位。
+      $A$为幅值，控制信号幅度；$\varOmega$为角频率，控制信号周期；$\varphi$为相位，控制信号相位。
 
-      \item 指数信号：$x(t)=Ae^{st}, \, s = \sigma + \jj \Omega$
+      \item 指数信号：$x(t)=Ae^{st}, \, s = \sigma + \jj \varOmega$
     
-      $\sigma$控制指数增大/减小速率，$\Omega$控制振荡周期。
+      $\sigma$控制指数增大/减小速率，$\varOmega$控制振荡周期。
 
       \begin{methodbox}[正弦信号与指数信号关系]
         \[
-        \sin \left ( \Omega t \right ) = \frac{1}{\jj 2} \left ( e^{\jj \Omega t} - e^{-\jj \Omega t} \right ), \qquad
-        \cos \left ( \Omega t \right ) = \frac{1}{2} \left ( e^{\jj \Omega t} + e^{-\jj \Omega t} \right )
+        \sin \left ( \varOmega t \right ) = \frac{1}{\jj 2} \left ( e^{\jj \varOmega t} - e^{-\jj \varOmega t} \right ), \qquad
+        \cos \left ( \varOmega t \right ) = \frac{1}{2} \left ( e^{\jj \varOmega t} + e^{-\jj \varOmega t} \right )
         \]
       \end{methodbox}
     
-      \item 取样信号（Sa信号）：$\operatorname{Sa}(t)=\dfrac{\sin t}{t}, \, \displaystyle x(t) = A \, \mathrm{Sa}(\Omega t) = A \, \frac{\sin \Omega t}{\Omega t}$
+      \item 取样信号（Sa信号）：$\operatorname{Sa}(t)=\dfrac{\sin t}{t}, \, \displaystyle x(t) = A \, \mathrm{Sa}(\varOmega t) = A \, \frac{\sin \varOmega t}{\varOmega t}$
       
       \begin{methodbox}[sinc函数]
-        当 $A=1, \, \Omega = \pi$ 时，$\mathrm{Sa}(\Omega t)$ 称为 sinc 函数，
+        当 $A=1, \, \varOmega = \ppi$ 时，$\mathrm{Sa}(\varOmega t)$ 称为 sinc 函数，
         记为 $\mathrm{sinc}(t)$。
         \[
         \mathrm{sinc}(t)=
         \begin{cases}
-        \dfrac{\sin(\pi t)}{\pi t}, & t\neq 0,\\[6pt]
+        \dfrac{\sin(\ppi t)}{\ppi t}, & t\neq 0,\\[6pt]
         1, & t=0.
         \end{cases}
         \]
@@ -270,7 +273,7 @@
 
     \end{itemize}
   \end{enumerate}
-\subsubsection{运算}
+  \subsubsection{运算}
 
 \begin{enumerate}
 
@@ -311,6 +314,51 @@
       \end{methodbox}
     \end{enumerate}
 \end{enumerate}
+
+\subsubsection{分量与分解}
+
+  信号分解为正交分量时，各分量间不相互干扰，且各分量的能量之和等于原信号的能量。
+  若任意两信号的Euclid内积为零，则称这两个信号在时域中正交，即
+  \[
+  \left \langle  x_n, x_m \right \rangle  = \int_{-\infty}^{\infty} x_n(t) \cdot x_m(t) \dd t = 0, \, \forall \, t \in \left ( -\infty, \infty\right )
+  \]
+  若额外满足$\displaystyle \left \langle  x_n, x_n \right \rangle  = \left | x_n \right | ^2 = 1$
+  则称之为单位正交函数。
+
+  下面介绍几种常见的正交分量。
+
+\begin{enumerate}
+
+  \item 直流分量与交流分量
+  对于周期为$T$的周期信号$x(t)$，其交直流分量分别为
+  
+  \[
+  x_\mathrm{DC}(t) = \frac{1}{T} \int_{t_0}^{t_0+T} x(t) \dd t
+  \]
+  \[
+  x_\mathrm{AC}(t) = x(t) - x_\mathrm{DC}(t)
+  \]
+
+  直流分量平均量等于原信号平均量，交流分量平均量为零。二者有功率关系
+  \[
+  P=\left | x_\mathrm{DC}(t) \right |^2 + \frac{1}{T} \int_{t_0}^{t_0+T} \left | x_\mathrm{AC}(t) \right |^2 \dd t
+  \]
+
+  \item 奇分量与偶分量
+  
+  任意信号都可以分解为奇分量与偶分量，分解式如下
+  \[
+  x_\mathrm{e} = \frac{x(t) + x(-t)}{2}
+  \]
+  \[
+  x_\mathrm{o} = \frac{x(t) - x(-t)}{2}
+  \]
+
+  \item 实分量与虚分量
+  
+
+\end{enumerate}
+
 \subsection{系统}
 
 \subsubsection{基本概念}
@@ -347,21 +395,21 @@
 
   $\Delta t$与$\Delta f$分别表示以能量分布定义的标准差宽度，则有
   \[
-    \Delta t \cdot \Delta f \geq \frac{1}{4\pi}
+    \Delta t \cdot \Delta f \geq \frac{1}{4\ppi}
   \]
 
   或写成角频率版本则为
   \[
-    \Delta t \cdot \Delta \Omega \geq \frac12
+    \Delta t \cdot \Delta \varOmega \geq \frac12
   \]
 
   在时谱与频谱中的关系体现为时谱越宽，频谱越窄，反之亦然。
   这是由Fourier变换性质决定的。比较常见的例子是
   \[
-  x(t)=\delta (t) \leftrightarrow X(\Omega)=1, \qquad x(t)=1 \leftrightarrow X(\Omega)=2\pi \delta (\Omega)
+  x(t)=\delta (t) \leftrightarrow X(\varOmega)=1, \qquad x(t)=1 \leftrightarrow X(\varOmega)=2\ppi \delta (\varOmega)
   \]
   \[
-  x(t)=\operatorname{rect}\left ( \frac{\Omega}{2} \right ) \leftrightarrow X(\Omega)=\operatorname{Sa}(t) , \qquad x(t)= \operatorname{Sa}(\Omega) \leftrightarrow X(\Omega)=\pi \operatorname{rect}(t)
+  x(t)=\operatorname{rect}(t) \leftrightarrow X(\varOmega)=\operatorname{Sa}\left (\dfrac{\varOmega}{2}\right ) , \qquad x(t)= \operatorname{Sa}(t) \leftrightarrow X(\varOmega)=\ppi \operatorname{rect}(\dfrac{\varOmega}{2})
   \]
 
 \end{methodbox}
