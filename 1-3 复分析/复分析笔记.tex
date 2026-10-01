@@ -2,6 +2,7 @@
 
 \usepackage[a4paper,margin=2cm]{geometry}
 \usepackage{amsmath,amssymb,mathtools}
+\usepackage{upgreek}
 \usepackage[nolimits]{cmupint}
 \usepackage{booktabs,tabularx,array}
 \usepackage{xcolor}
@@ -78,6 +79,7 @@
 \newcommand{\ee}{\mathrm{e}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
+\newcommand{\dd}{\mathrm{d}}
 
 \begin{document}
 
@@ -321,5 +323,28 @@ $\operatorname{Arg}z$的多值性造就了$\ln z$的多值性。
 复函数的连续与极限的定义与二元实函数类似，在此不多赘述。
 
 \section{微分学}
+
+
+\subsection{导数}
+  
+\subsection{微分}
+
+$\dd w = f'(z) \dd z$
+
+\subsection{解析}
+  
+  \begin{enumerate}
+    
+    \item 解析：在点$z_0$及其某一邻域均存在导数的复函数称为在点$z_0$解析。
+    
+    \item 解析函数：在区域$D$内每一点均解析的复函数称为在区域$D$解析。 
+  
+  \end{enumerate}
+
+  \begin{methodbox}[解析与可导、可微关系]
+    
+    解析 $\Rightarrow$ 可导 $\Leftrightarrow$ 可微
+
+  \end{methodbox}
 
 \end{document}
