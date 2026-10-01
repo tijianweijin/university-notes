@@ -82,6 +82,11 @@
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\ppi}{\uppi}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\Sa}{\operatorname{Sa}}
+\newcommand{\RRe}{\operatorname{Re}}
+\newcommand{\IIm}{\operatorname{Im}}
 
 \begin{document}
 
@@ -214,7 +219,11 @@
         \end{cases}
         \]
       \end{methodbox}
+    \end{itemize}
 
+    \item 奇异信号
+    
+    \begin{itemize}
       \item 单位斜变信号
       \[
       r(t)=
@@ -272,6 +281,20 @@
       \end{methodbox}
 
     \end{itemize}
+
+    \item 其他特殊信号
+
+    \begin{itemize}
+      \item 三角信号
+      
+      最大值为$E$，长度为$T$的三角信号可以视为两个值为$\sqrt{E}$，长度为$\dfrac{T}{2}$的矩形信号的差。
+      
+      其Fourier变换为
+      \[
+      \FF \left\{ x(t) \right\} = \dfrac{ET}{2} \Sa^2 \left( \frac{T}{4} \varOmega \right)
+      \]
+    \end{itemize}
+
   \end{enumerate}
   \subsubsection{运算}
 
@@ -304,15 +327,125 @@
       \item 加法：$y(t)=x_1(t) + x_2(t)$
       \item 乘法：$y(t)=x_1(t) \cdot x_2(t)$
       \item 卷积：$y(t)=x(t) * h(t) = \displaystyle \int_{-\infty}^{\infty} x(\tau) h(t-\tau) \dd \tau$
-      
-      \begin{methodbox}[卷积意义]
-      \end{methodbox}
-      \begin{methodbox}[卷积性质]
-      \end{methodbox}
-      \begin{methodbox}[【技巧】图解法]
-        
-      \end{methodbox}
     \end{enumerate}
+    \begin{methodbox}[卷积意义]
+      \begin{itemize}
+        \item 面积解释： 当两个信号均为非负信号时，卷积值可理解为两信号乘积的重叠“面积”；若信号存在正负，则应理解为乘积的代数积分，而不能简单看成几何面积。
+
+        \item 系统意义： 卷积本质上就是 LTI 系统对各时刻输入所产生响应的叠加。
+      \end{itemize}
+    \end{methodbox}
+    \begin{methodbox}[卷积性质]
+      \begin{enumerate}
+
+      \item \textbf{代数性质}
+
+      \begin{itemize}
+        \item 交换律
+        \[
+        x_1(t)\ast x_2(t)
+        =
+        x_2(t)\ast x_1(t)
+        \]
+
+        \item 分配律
+        \[
+        x_1(t)\ast \left[x_2(t)+x_3(t)\right]
+        =
+        x_1(t)\ast x_2(t)
+        +
+        x_1(t)\ast x_3(t)
+        \]
+
+        \item 结合律
+        \[
+        \left[x_1(t)\ast x_2(t)\right]\ast x_3(t)
+        =
+        x_1(t)\ast\left[x_2(t)\ast x_3(t)\right]
+        \]
+
+      \end{itemize}
+
+      \item \textbf{与奇异信号的卷积}
+
+      \begin{itemize}
+        \item 与单位冲激卷积
+        \[
+        x(t)\ast\delta(t)=x(t)
+        \]
+
+        即 $\delta(t)$ 为卷积运算的恒等元。
+
+        \item 与移位冲激卷积
+        \[
+        x(t)\ast\delta(t-t_0)
+        =
+        x(t-t_0)
+        \]
+
+        即与移位冲激卷积可使信号整体时移 $t_0$。
+
+        \item 与冲激导数卷积
+        \[
+        x(t)\ast\delta'(t)
+        =
+        x'(t)
+        \]
+
+        即与 $\delta'(t)$ 卷积相当于对信号求导。
+      \end{itemize}
+
+      \item \textbf{微分与积分性质}
+
+      \begin{itemize}
+        \item 微分性质
+        \[
+        \left[x_1(t)\ast x_2(t)\right]'
+        =
+        x_1'(t)\ast x_2(t)
+        =
+        x_1(t)\ast x_2'(t)
+        \]
+
+        \item 积分性质
+        \[
+        x_1^{(-1)}(t)\ast x_2(t)
+        =
+        x_1(t)\ast x_2^{(-1)}(t)
+        \]
+
+        其中
+        \[
+        x^{(-1)}(t)
+        =
+        \int_{-\infty}^{t}x(\tau)\dd\tau.
+        \]
+
+  \end{itemize}
+  若卷积的某一函数求导完是单位冲激函数，常常一个求导一个积分，使计算简洁，如、
+  \[
+  y(t) = x(t) \ast u(t) = \int_{-\infty}^{t}x(\tau)\dd\tau \ast \delta(t) = \int_{-\infty}^{t}x(\tau)\dd\tau
+  \]
+\end{enumerate}
+    \end{methodbox}
+    \begin{methodbox}[【技巧】图解法]
+      \begin{enumerate}[label=(\arabic*)]
+        \item 反褶： 将 \(h(\tau)\) 关于纵轴反褶，得到\(h(-\tau)\)
+      
+        \item 平移： 将 \(h(-\tau)\) 沿 \(\tau\) 轴平移 \(t\)，得到\(h(t-\tau)\)
+        
+        \item 相乘： 将 \(x(\tau)\) 与 \(h(t-\tau)\) 相乘，得到 \(y(t)\)
+        
+        \item 积分： 对整个 \(\tau\) 轴积分
+        \[
+        y(t)
+        =
+        \int_{-\infty}^{+\infty}
+        x(\tau)h(t-\tau)\dd\tau.
+        \]
+      \end{enumerate}
+    \end{methodbox}
+    
 \end{enumerate}
 
 \subsubsection{分量与分解}
@@ -349,13 +482,18 @@
   任意信号都可以分解为奇分量与偶分量，分解式如下
   \[
   x_\mathrm{e} = \frac{x(t) + x(-t)}{2}
-  \]
-  \[
+  ,\qquad
   x_\mathrm{o} = \frac{x(t) - x(-t)}{2}
   \]
 
   \item 实分量与虚分量
   
+  若信号为复信号，则可以分解为实分量与虚分量，分解式如下
+  \[
+  x_\mathrm{R}(t)=\dfrac{x(t)+x^\ast(t)}{2}
+  ,\qquad
+  x_\mathrm{I}(t)=\dfrac{x(t)-x^\ast(t)}{\jj 2}
+  \]
 
 \end{enumerate}
 
@@ -388,7 +526,6 @@
 
 \section{信号分析}
 
-
 \subsection{频域分析}
 
 \begin{methodbox}[时频不确定性原理]
@@ -414,7 +551,535 @@
 
 \end{methodbox}
 
+\subsubsection{Fourier级数}
+
+Fourier级数有三角形式与指数形式两种表示方法，在数学分析中已学习过，此处不再赘述。
+二者的幅频谱不同。
+
+三角形式只有单边频谱，指数形式有对称的双边频谱，且双边频谱的幅值为三角形式的幅值的一半，且相位相同。
+
+\subsubsection{Fourier变换}
+
+可以通过Fourier级数的极限形式得到Fourier变换，即
+\[
+X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\varOmega t} \dd t
+\]
+
+非周期函数与周期函数的Fourier变换对比如下。
+
+\begin{methodbox}[周期信号与非周期信号的Fourier变换比较]
+
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X}
+  \toprule
+  特征 & Fourier级数频谱图 & Fourier变换频谱图 \\
+  \midrule
+
+  频谱性质
+  & 离散谱
+  & 连续谱 \\
+
+  展开形式
+  & 级数求和 $\displaystyle \sum$
+  & 积分变换 $\displaystyle \int$ \\
+
+  频率取值
+  & $n\varOmega_0$（间隔 $\varOmega_0$）
+  & $\varOmega$ 连续变化 \\
+
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+\end{methodbox}
+
+\begin{methodbox}[周期函数Fourier级数频谱图（FS）与Fourier变换频谱图（FT）比较]
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X}
+  \toprule
+  特征 & Fourier级数频谱图 & Fourier变换频谱图 \\
+  \midrule
+
+  y轴名称
+  &
+  $|F_n|$
+  &
+  $|X(\varOmega)|$
+  \\
+
+
+  表示
+  &
+  末端带圈线段
+  &
+  箭头
+  \\
+
+  代表内容
+  &
+  Fourier系数
+  &
+  冲激串
+  \\
+
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+\end{methodbox}
+
+\subsubsection{具体信号的Fourier变换}
+
+\begin{enumerate}
+
+
+  \item 非周期信号
+    \begin{center}
+    \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X X}
+    \toprule
+    信号 & 时域信号 & Fourier变换 \\
+    \midrule
+
+    直流信号
+    &
+    $\displaystyle
+    x(t)=A
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    2\uppi A\delta(\varOmega)
+    $
+    \\
+
+    单位冲激信号
+    &
+    $\displaystyle
+    x(t)=\delta(t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)=1
+    $
+    \\
+
+    单位阶跃信号
+    &
+    $\displaystyle
+    x(t)=u(t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \uppi\delta(\varOmega)
+    +
+    \frac{1}{\jj\varOmega}
+    $
+    \\
+
+    符号函数
+    &
+    $\displaystyle
+    x(t)=\operatorname{sgn}(t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \frac{2}{\jj\varOmega}
+    $
+    \\
+
+    矩形脉冲信号
+    &
+    $\displaystyle
+    x(t)
+    =
+    E\left[
+    u\left(t+\frac{\tau}{2}\right)
+    -
+    u\left(t-\frac{\tau}{2}\right)
+    \right]
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    E\tau
+    \operatorname{Sa}
+    \left(
+    \frac{\varOmega\tau}{2}
+    \right)
+    $
+    \\
+
+    单边指数信号
+    &
+    $\displaystyle
+    x(t)=e^{-at}u(t),
+    \quad a>0
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \frac{1}{a+\jj\varOmega}
+    $
+    \\
+
+    \bottomrule
+    \end{tabularx}
+    \end{center}
+  
+  \item 周期信号
+  
+    设$\displaystyle \varOmega_0=\frac{2\uppi}{T_0}$，则
+
+    \begin{center}
+    \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X}
+    \toprule
+    信号 & 时域信号 & Fourier变换 \\
+    \midrule
+
+    余弦信号
+    &
+    $\displaystyle
+    x(t)=\cos(\varOmega_0 t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \uppi
+    \left[
+    \delta(\varOmega-\varOmega_0)
+    +
+    \delta(\varOmega+\varOmega_0)
+    \right]
+    $
+    \\
+
+    正弦信号
+    &
+    $\displaystyle
+    x(t)=\sin(\varOmega_0 t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \frac{\uppi}{\jj}
+    \left[
+    \delta(\varOmega-\varOmega_0)
+    -
+    \delta(\varOmega+\varOmega_0)
+    \right]
+    $
+    \\
+
+    周期冲激信号
+    &
+    $\displaystyle
+    x(t)
+    =
+    \sum_{n=-\infty}^{\infty}
+    \delta(t-nT_0)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \frac{2\uppi}{T_0}
+    \sum_{k=-\infty}^{\infty}
+    \delta(\varOmega-k\varOmega_0)
+    $
+    \\
+
+    \bottomrule
+    \end{tabularx}
+    \end{center}
+  \end{enumerate}
+
+\subsubsection{Fourier变换性质}
+
+\begin{enumerate}
+  \item 线性
+  
+  \[
+  \FF \left\{ ax_1(t) + bx_2(t) \right\} = a \FF \left\{ x_1(t) \right\} + b \FF \left\{ x_2(t) \right\} 
+  \]     
+
+设$\displaystyle \FF \{ x(t) \} = X(\varOmega)$，则有
+
+  \item 时频对称性
+  
+  若
+  \[
+  \FF \{ x(t) \} = X(\varOmega)
+  \]
+  则有
+  \[
+  \FF \{ X(t) \} = 2 \uppi x(\varOmega)
+  \]
+
+  \item 共轭对称性
+  
+  \[
+  \FF \left\{ x^\ast(t) \right\} = X^\ast(-\varOmega)
+  \]
+
+  当$x(t)$为实信号时，有$\displaystyle X(-\varOmega) = X^\ast(\varOmega)$。此时，$x(t)$额外有奇偶虚实性、
+
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|}
+    \hline
+    实偶：$\RRe X=\RRe X^\ast$
+    &
+    虚奇：$\IIm X=-\IIm X^\ast$
+    \\
+    \hline
+    幅偶：$|X|=|X^\ast|$
+    &
+    相奇：$\varphi(X)=-\varphi(X^\ast)$
+    \\
+    \hline
+    \end{tabular}
+    \end{center}
+
+  \item 运算性质
+    \begin{center}
+    \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+    \toprule
+    运算 & Fourier变换 & Fourier逆变换 \\
+    \midrule
+
+    尺度变换
+    &
+    $\displaystyle
+    \FF \{ x(at) \}
+    =
+    \frac{1}{|a|}
+    X\left(\frac{\varOmega}{a}\right)
+    $
+    &
+    $\displaystyle
+    \FF^{-1} \{ X(a\varOmega) \}
+    =
+    \frac{1}{|a|}
+    x\left(\frac{t}{a}\right)
+    $
+    \\
+
+    平移
+    &
+    $\displaystyle
+    \FF \{ x(t-t_0) \}
+    =
+    X(\varOmega)\ee^{-\jj \varOmega t_0}
+    $
+    &
+    $\displaystyle
+    \FF^{-1} \{ X(\varOmega-\varOmega_0) \}
+    =
+    x(t)\ee^{\jj t\varOmega_0}
+    $
+    \\
+
+    微分
+    &
+    $\displaystyle
+    \FF \{ x'(t) \}
+    =
+    \jj \varOmega X(\varOmega)
+    $
+
+
+    &
+    $\displaystyle
+    \FF^{-1} \{ X'(\varOmega) \}
+    =
+    -\jj t x(t)
+    $
+    \\
+
+    积分
+    &
+    $\displaystyle
+    \FF
+    \left\{
+    \int_{-\infty}^{t} x(\tau)\dd\tau
+    \right\}
+    =
+    X(\varOmega)
+    \left(
+    \frac{1}{\jj\varOmega}
+    +
+    \uppi\delta(\varOmega)
+    \right)
+    $
+    &
+    $\displaystyle
+    \FF^{-1}
+    \left\{
+    \int_{-\infty}^{\varOmega} X(\xi)\dd\xi
+    \right\}
+    =
+    -\frac{x(t)}{\jj t}
+    +
+    \uppi x(0)\delta(t)
+    $
+    \\
+
+    卷积
+    &
+    $\displaystyle
+    \FF \{ x(t)\ast y(t) \}
+    =
+    X(\varOmega)Y(\varOmega)
+    $
+    &
+    $\displaystyle
+    \FF^{-1}
+    \{ X(\varOmega)\ast Y(\varOmega) \}
+    =
+    2\uppi x(t)y(t)
+    $
+    \\
+
+    \bottomrule
+    \end{tabularx}
+    \end{center}
+
+\end{enumerate}
+
+\begin{methodbox}[【技巧】时移与尺度变换对应]
+  \[
+  \FF \{x(at-b)\}=\FF \left\{x\left[ a \left( x - \frac{b}{a} \right)  \right] \right\} = \frac{1}{|a|} X \left( \frac{\varOmega}{a} \right) \ee^{-\jj \varOmega \frac{b}{a}}
+  \]
+\end{methodbox}
+
+
+\begin{methodbox}[【理解】微分的实际意义]
+  由于乘了$\jj \varOmega$，所以幅谱高频增强，低频减弱；相谱正频率超前$\dfrac{\uppi}{2}$，负频率滞后$\dfrac{\uppi}{2}$。
+\end{methodbox}
+
+\begin{methodbox}[【技巧】用微分性质求Fourier变换]
+  【例】求$x(t)=\dfrac{1}{t^2}$的Fourier变换。
+  
+  【解】由微分性质有
+  \[
+  x(t)=-\frac{\dd}{\dd t}\left ( \frac{1}{t} \right )
+  \]
+  同时对两边做Fourier变换得
+  \[
+  X(\varOmega) = -\jj \varOmega \FF \left \{ \frac{1}{t} \right \} = -\jj \varOmega \left ( -\jj \uppi \operatorname{sgn}(\varOmega) \right ) = - \varOmega \uppi \operatorname{sgn} (\varOmega)
+  \]
+\end{methodbox}
+
+\begin{methodbox}[【理解】微分的实际意义]
+  观察时域积分Fourier变换，不难发现$\displaystyle \FF \left\{ \int_{-\infty}^{t} x(\tau)\dd\tau \right\} = \FF\left\{x(t) \ast u(t) \right\} = X(\varOmega) \cdot \left( \frac{1}{\jj\varOmega} + \uppi\delta(\varOmega) \right)$
+\end{methodbox}
+
+\begin{methodbox}[【技巧】时频变换对应]
+  设 $\FF\{x(t)\}=X(\varOmega)$，则有
+
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.4cm}X X}
+  \toprule
+  关系对 & Fourier变换 & Fourier逆变换 \\
+  \midrule
+
+  乘指数与平移
+  &
+  $\displaystyle
+  \FF\{x(t)\ee^{\jj\varOmega_0 t}\}
+  =
+  X(\varOmega-\varOmega_0)
+  $
+  &
+  $\displaystyle
+  \FF^{-1}
+  \{X(\varOmega)\ee^{-\jj\varOmega t_0}\}
+  =
+  x(t-t_0)
+  $
+  \\
+
+  乘变量与微分
+  &
+  $\displaystyle
+  \FF\{t x(t)\}
+  =
+  \jj X'(\varOmega)
+  $
+  &
+  $\displaystyle
+  \FF^{-1}\{\varOmega X(\varOmega)\}
+  =
+  -\jj x'(t)
+  $
+  \\
+
+  积分与除变量
+  &
+  $\displaystyle
+  \FF
+  \left\{
+    \int_{-\infty}^{t}x(\tau)\dd\tau
+  \right\}
+  =
+  X(\varOmega)
+  \left(
+    \frac{1}{\jj\varOmega}
+    +
+    \uppi\delta(\varOmega)
+  \right)
+  $
+  &
+  $\displaystyle
+  \FF^{-1}
+  \left\{
+    \int_{-\infty}^{\varOmega}X(\xi)\dd\xi
+  \right\}
+  =
+  -\frac{x(t)}{\jj t}
+  +
+  \uppi x(0)\delta(t)
+  $
+  \\
+
+  乘法与卷积
+  &
+  $\displaystyle
+  \FF\{x(t)y(t)\}
+  =
+  \frac{1}{2\uppi}
+  \left[
+    X(\varOmega)\ast Y(\varOmega)
+  \right]
+  $
+  &
+  $\displaystyle
+  \FF^{-1}
+  \{X(\varOmega)Y(\varOmega)\}
+  =
+  x(t)\ast y(t)
+  $
+  \\
+
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
+  看到熟悉的操作时，不妨反过来思考原函数是什么。
+\end{methodbox}
+
 \subsection{复频域分析}
+
+\subsubsection{Laplace级数}
+
+\subsubsection{Laplace变换}
 
 \section{系统分析}
 
