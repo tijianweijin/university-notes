@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  30 SEP 2026 09:46
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  7 OCT 2026 10:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1066,9 +1066,11 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 
 \c@lstlisting=\count392
 Package hyperref Info: Link coloring ON on input line 84.
-(./复分析笔记.out) (./复分析笔记.out)
 \@outlinefile=\write4
 \openout4 = `复分析笔记.out'.
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
 
 
 Package fontspec Info: 
@@ -1092,7 +1094,7 @@ Package fontspec Info:
 (fontspec)             <->"[FandolHei-Bold.otf]/OT:script=hani;language=dflt;"
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 91.
- (c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
+(c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 91.
@@ -1132,16 +1134,23 @@ Package fontspec Info:
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
-Package rerunfilecheck Info: File `复分析笔记.out' has not changed.
-(rerunfilecheck)             Checksum: AFD729373F9AF079F2FCE9F3E05A4892;919.
+
+
+Package rerunfilecheck Warning: File `复分析笔记.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `复分析笔记.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  AFD729373F9AF079F2FCE9F3E05A4892;919.
  ) 
 Here is how much of TeX's memory you used:
- 34992 strings out of 468168
- 792208 string characters out of 5436524
- 1255862 words of memory out of 5000000
- 63142 multiletter control sequences out of 15000+600000
+ 34983 strings out of 468168
+ 792111 string characters out of 5436524
+ 1254672 words of memory out of 5000000
+ 63137 multiletter control sequences out of 15000+600000
  634005 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  116i,11n,121p,487b,922s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 复分析笔记.xdv (4 pages, 63168 bytes).
+Output written on 复分析笔记.xdv (4 pages, 64076 bytes).
