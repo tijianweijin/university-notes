@@ -79,7 +79,7 @@
 \newcommand{\ee}{\mathrm{e}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
-\newcommand{\dd}{\mathrm{d}}
+\newcommand{\dd}{\,\mathrm{d}}
 
 \begin{document}
 
@@ -327,33 +327,93 @@ $\operatorname{Arg}z$的多值性造就了$\ln z$的多值性。
 \subsection{导数}
   
   复导数与二元实导数的定义类似，但由于复数域$\CC$中乘法的特殊性，复导数有更强的性质。
+  
   \begin{enumerate}
     
     \item 复导数只需要两个自由度描述，而二元实导数需要四个；
     
-    \item 复导数一阶可导即无穷阶可导，即$\CC^{\infty}$。
+    \item 可导函数任意阶复导数均存在，即属于$\CC^{\infty}$。
   
   \end{enumerate}
 
 \subsection{微分}
 
-$\dd w = f'(z) \dd z$
+与二元实微分定义类似，$\dd w = f'(z) \dd z$，不赘述.
 
 \subsection{解析}
-  
-  \begin{enumerate}
-    
-    \item 解析：在点$z_0$及其某一邻域均存在导数的复函数称为在点$z_0$解析。
-    
-    \item 解析函数：在区域$D$内每一点均解析的复函数称为在区域$D$解析。 
-  
-  \end{enumerate}
 
-  \begin{methodbox}[解析与可导、可微关系]
-    
-    $f$在$z_0$解析 $\Rightarrow$ $f$在$z_0$可导 $\Leftrightarrow$ $f$在$z_0$可微
-    $f$在$D$解析 $\Leftrightarrow$ $f$在$D$可导 $\Leftrightarrow$ $f$在$D$可微
+\begin{methodbox}[解析与可导、可微关系]
+
+  $f$在$z_0$解析 $\Rightarrow$ $f$在$z_0$可导 $\Leftrightarrow$ $f$在$z_0$可微
   
-  \end{methodbox}
+  $f$在$D$解析 $\Leftrightarrow$ $f$在$D$可导 $\Leftrightarrow$ $f$在$D$可微
+
+\end{methodbox}
+
+\begin{enumerate}
+  
+  \item 微分性质
+  
+  解析函数的微分性质与二元实函数类似，如微分四则运算、链式法则、复合函数微分等，在此不多赘述。
+  此外，有$z'(t)=x'(t)+\ii y'(t)$。
+
+  \item Cauchy-Riemann定理（可微充要条件）
+  
+  设$f(z)=u(x,y)+\ii v(x,y)$。如$u(x,y)$和$v(x,y)$在$z_0$均可微，且满足
+
+  \[
+  u_x=v_y, \qquad u_y=-v_x
+  \]
+
+  则$f$在点$z_0$可微。
+
+  此定理将适用范围拓展为开集$D$同样成立。
+
+  \item 可微的充分不必要条件
+  
+  将Cauchy-Riemann定理中的$u(x,y)$和$v(x,y)$在$z_0$均可微
+  替换为更强的$u_x$、$u_y$、$v_x$、$v_y$均连续，可得到可微的充分不必要条件。
+
+  设$f(z)=u(x,y)+\ii v(x,y)$。如$u_x$、$u_y$、$v_x$、$v_y$均连续，且满足
+
+  \[
+  u_x=v_y, \qquad u_y=-v_x
+  \]
+
+  则$f$在点$z_0$可微。
+
+  此定理将适用范围拓展为开集$D$同样成立。
+
+\end{enumerate}
+
+\section{积分学}
+
+\subsection{积分}
+
+\begin{enumerate}
+  
+  \item 计算式
+  
+  \[
+  \int_{l} f(z) \dd z = \int_l u(x,y)\dd x - v(x,y)\dd y + \ii\int_l v(x,y)\dd x + u(x,y)\dd y
+  \]
+  \[
+  \int_{l} f(z) \dd z = = \int_{\alpha}^{\beta} f\bigl[z(t)\bigr]z'(t) \dd t.
+  \]
+
+  \item 常用公式
+  
+  \[
+  \oint_l \frac{\mathrm{d}z}{(z-a)^n}
+  =
+  \begin{cases}
+  2\uppi\ii, & n=1, \\[6pt]
+  0, & n\text{为}\,n\ne 1\text{的整数}.
+  \end{cases}
+  \]
+
+  其中 \(l\) 为包含 \(a\) 的正向简单闭曲线，\(n\in\mathbb Z\)。
+
+\end{enumerate}
 
 \end{document}

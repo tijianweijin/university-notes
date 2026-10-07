@@ -1,11 +1,11 @@
 # Fdb version 4
-["xdvipdfmx"] 0 "复分析笔记.xdv" "复分析笔记.pdf" "复分析笔记" 0 -1
-  "复分析笔记.xdv" 1791341677 64076 58fc74d091e6888312fff85ffc61d3b3 "xelatex"
+["xdvipdfmx"] 1791378964.26911 "复分析笔记.xdv" "复分析笔记.pdf" "复分析笔记" 1791378964.99798 0
+  "复分析笔记.xdv" 1791378963 71860 e6a44a316ba40ddca79b952afd2b7a8a "xelatex"
   (generated)
   "复分析笔记.pdf"
   (rewritten before read)
-["xelatex"] 1791341678.87392 "c:/Users/提剑遗金/Desktop/大学笔记/1-3 复分析/复分析笔记.tex" "复分析笔记.xdv" "复分析笔记" 1791341680.49499 2
-  "c:/Users/提剑遗金/Desktop/大学笔记/1-3 复分析/复分析笔记.tex" 1791341671 11076 e61f53549e8c2ff0c1882d4be5aed4b0 ""
+["xelatex"] 1791378959.8329 "c:/Users/提剑遗金/Desktop/大学笔记/1-3 复分析/复分析笔记.tex" "复分析笔记.xdv" "复分析笔记" 1791378964.9784 0
+  "c:/Users/提剑遗金/Desktop/大学笔记/1-3 复分析/复分析笔记.tex" 1791378959 12427 c72bf986da2dc8a3d54d21661808259f ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1778940926 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1778942685 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1778940319 1004 54797486969f23fa377b128694d548df ""
@@ -211,13 +211,12 @@
   "c:/texlive/2026/texmf-dist/web2c/texmf.cnf" 1778940277 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt" 1778942812 5948911 ea8155f9c13d783de6fadab057f9449b ""
   "c:/texlive/2026/texmf.cnf" 1778942707 713 e69b156964470283e0530f5060668171 ""
-  "复分析笔记.aux" 1791341677 1536 fc2eb7720d38242f8d8b6889477f7a8f "xelatex"
-  "复分析笔记.out" 1791341677 919 afd729373f9af079f2fce9f3e05a4892 "xelatex"
-  "复分析笔记.tex" 1791341671 11076 e61f53549e8c2ff0c1882d4be5aed4b0 ""
+  "复分析笔记.aux" 1791378963 1766 763747bd5ac831f01887dd57f1adf10f "xelatex"
+  "复分析笔记.out" 1791378963 1061 ea4c626ddbd696746b1193932ca051a2 "xelatex"
+  "复分析笔记.tex" 1791378959 12427 c72bf986da2dc8a3d54d21661808259f ""
   (generated)
   "复分析笔记.aux"
   "复分析笔记.log"
   "复分析笔记.out"
   "复分析笔记.xdv"
   (rewritten before read)
-  "复分析笔记.out"

@@ -342,6 +342,12 @@ INPUT ./复分析笔记.aux
 INPUT 复分析笔记.aux
 OUTPUT 复分析笔记.aux
 INPUT c:/texlive/2026/texmf-dist/tex/latex/graphics/color.sty
+INPUT ./复分析笔记.out
+INPUT ./复分析笔记.out
+INPUT 复分析笔记.out
+INPUT 复分析笔记.out
+INPUT ./复分析笔记.out
+INPUT ./复分析笔记.out
 OUTPUT 复分析笔记.out
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
