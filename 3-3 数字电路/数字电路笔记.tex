@@ -8,7 +8,8 @@
 \usepackage{enumitem}
 \usepackage{indentfirst}
 \usepackage{hyperref}
-\usepackage{tikz}
+\usepackage{tikz}
+
 \usetikzlibrary{
   positioning,
   calc,
@@ -1086,5 +1087,151 @@ Gray码的主要优点是减少了在数字电路中由于信号变化引起的�
     \end{methodbox}
 
 \subsubsection{逻辑函数}
+
+\subsubsection{逻辑函数的化简}
+
+\begin{enumerate}
+
+  \item 代数法
+    \begin{itemize}
+    \end{itemize}
+
+  \item Karnaugh图法
+
+\begin{methodbox}[Karnaugh图的数学结构]
+
+\begin{enumerate}
+    \item \textbf{输入空间：}
+    对于 $n$ 个逻辑变量，所有输入组合构成二进制空间
+    \[
+        \{0,1\}^n,
+    \]
+    可视为 $n$ 维超立方体 $Q_n$ 的 $2^n$ 个顶点。
+    两顶点 $x,y$ 的 Hamming 距离为
+    \[
+        d_H(x,y)=\sum_{i=1}^n |x_i-y_i|.
+    \]
+    当 $d_H(x,y)=1$ 时，两输入组合仅有一个变量不同，对应超立方体中的一条边。
+
+    \item \textbf{Gray坐标：}
+    Karnaugh图按 Gray 码排列各坐标，使相邻码字满足
+    \[
+        d_H=1.
+    \]
+    因而Karnaugh图中的几何邻接对应逻辑空间中的边邻接，即
+    \[
+        \boxed{\text{几何相邻}
+        \Longleftrightarrow
+        \text{仅一个逻辑变量发生变化}}.
+    \]
+    图的上下、左右边界同样相邻，因此Karnaugh图具有周期边界。
+
+    \item \textbf{笛卡尔积分解：}
+    将 $n$ 个变量分为两组，分别作为行、列坐标，则
+    \[
+        Q_n \cong Q_p \square Q_q,
+        \qquad p+q=n,
+    \]
+    其中 $\square$ 表示图的笛卡尔积。
+    例如四变量Karnaugh图满足
+    \[
+        Q_4\cong Q_2\square Q_2,
+    \]
+    行、列均按
+    \[
+        00,\ 01,\ 11,\ 10
+    \]
+    的 Gray 顺序排列，从而将四维二进制空间表示为二维坐标表。
+
+    \item \textbf{子立方体与矩形：}
+    一个逻辑乘积项中，未出现的变量可以自由取 $0$ 或 $1$。
+    若有 $k$ 个自由变量，则该项对应一个含
+    \[
+        2^k
+    \]
+    个顶点的 $k$ 维子立方体。
+
+    若其中 $r$ 个自由变量属于行坐标，其余 $k-r$ 个属于列坐标，则该子立方体在Karnaugh图中表现为
+    \[
+        2^r\times 2^{k-r}
+    \]
+    的矩形，因此其面积恒为
+    \[
+        \boxed{2^k}.
+    \]
+
+    \item \textbf{代数消元：}
+    相邻顶点仅在一个变量上互补，因此可利用
+    \[
+        AX+A\overline{X}
+        =A(X+\overline{X})
+        =A
+    \]
+    消去该变量。
+    每使一个变量自由变化，相当于沿一个坐标方向扩展一维，因此
+    \[
+        \boxed{
+        2^k\text{ 个相邻格组成的子立方体}
+        \Longleftrightarrow
+        \text{消去 }k\text{ 个变量}
+        }.
+    \]
+
+    例如
+    \[
+        AB\overline{C}+ABC
+        =AB(\overline{C}+C)
+        =AB,
+    \]
+    几何上对应两个顶点沿 $C$ 方向合并为一条边。
+
+    \item \textbf{与或式的几何意义：}
+    一个乘积项对应 $\{0,1\}^n$ 中一个轴对齐的子立方体；
+    逻辑或对应这些子立方体的集合并。因此
+    \[
+        F=P_1+P_2+\cdots+P_m
+    \]
+    可理解为用若干子立方体覆盖
+    \[
+        F^{-1}(1)
+        =\{x\in\{0,1\}^n\mid F(x)=1\}.
+    \]
+    Karnaugh图化简的本质即为：
+    \[
+        \boxed{
+        \text{用尽可能大的子立方体覆盖全部 }1\text{ 格}
+        }.
+    \]
+    对偶地，或与式则通过圈取 $0$ 格，用子立方体描述
+    $F^{-1}(0)$。
+\end{enumerate}
+
+\[
+\boxed{
+\begin{array}{c|c}
+\text{逻辑代数} & \text{离散几何} \\ \hline
+n\text{ 个变量} & n\text{ 维超立方体 }Q_n\\
+\text{一个输入组合} & \text{一个顶点}\\
+d_H=1 & \text{一条边}\\
+\text{最小项} & \text{一个顶点}\\
+\text{一个变量自由} & \text{沿一维扩展}\\
+2^k\text{ 项合并} & k\text{ 维子立方体}\\
+\text{消去 }k\text{ 个变量} & \text{增加 }k\text{ 个自由维度}\\
+\text{逻辑或} & \text{集合并}\\
+\text{与或式化简} & \text{用大子立方体覆盖 }F^{-1}(1)
+\end{array}}
+\]
+
+\[
+\boxed{
+\text{Karnaugh图}
+=
+\text{以Gray码保持邻接关系的超立方体二维坐标化}
+}
+\]
+
+\end{enumerate}
+
+\end{methodbox}
 
 \end{document}

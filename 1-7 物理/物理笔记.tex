@@ -2,6 +2,8 @@
 
 \usepackage[a4paper,margin=2cm]{geometry}
 \usepackage{amsmath,amssymb,mathtools,bm,esint}
+\usepackage{upgreek}
+\usepackage[nolimits]{cmupint}
 \usepackage{booktabs,tabularx,array,longtable}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
@@ -82,6 +84,7 @@
 \newcommand{\ee}{\mathrm{e}}
 \newcommand{\vect}[1]{\bm{#1}}
 \newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\s}{def}
 
 \begin{document}
 \pagestyle{plain}
@@ -500,7 +503,9 @@
   \]
   \item 匀强电场中电势能 \(W=-\vect p\cdot\vect E\)。
 \end{enumerate}
-& \centering\arraybackslash 磁偶极子\\ \hline
+& \centering\arraybackslash 磁偶极子 \\
+磁偶极子做功$U=- \vect m \cdot \vect B$
+\hline
 
 \centering 电场线
 \begin{enumerate}
@@ -682,18 +687,29 @@ Gauss 定理和环路定理能完备描述静电场。
 
 \subsection{电生磁}
 微观形式：运动电荷产生磁场：$\vect B=\frac{\mu_0}{4\pi}\frac{q\vect v\times\vect e_r}{r^2}$
+
 宏观形式：Biot-Savart 定律：$\vect B=\frac{\mu_0}{4\pi}\int\frac{I\dif\vect l\times\vect e_r}{r^2}$
+
 运动电荷电磁场关系：$ \vect B = \mu_0 \epsilon_0 \vect v \times \vect E $
 
 \subsection{磁场对电流的作用}
 \begin{enumerate}
   \item 微观表现：Lorentz力：$\vect F = q \vect v \times \vect B$
   \\ 洛伦兹力不作功。
+  
   \item 宏观表现：Ampère力：$ \dif \vect F = I \dif \vect l \times \vect B$
+  
+  做功：$ W = I \Delta \varPhi $
+  
   \item 电磁场对运动电荷的力：$\vect F = q \left (\vect E + \vect v \times \vect B \right )$
+  
   \item 匀强磁场对平面载流线圈：$\vect F = I \dif \vect l \times \vect B$
-  \\ 磁矩$ \vect m = I S \vect e_\mathrm{n}$
-  \\ 磁力矩 $ \vect M = \vect m \times \vect B$
+  
+  磁矩$ \vect m = I S \vect e_\mathrm{n}$
+  
+  磁力矩 $ \vect M = \vect m \times \vect B$
+
+  磁力矩做功为$ W = I \Delta \varPhi $
 \end{enumerate}
 
 \subsection{常见电学理想模型}

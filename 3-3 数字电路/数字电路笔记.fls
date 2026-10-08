@@ -1,8 +1,8 @@
-PWD c:/Users/提剑遗金/Desktop/迄今为止的笔记/3-3 数字电路
+PWD c:/Users/提剑遗金/Desktop/大学笔记/3-3 数字电路
 INPUT c:/texlive/2026/texmf.cnf
 INPUT c:/texlive/2026/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt
-INPUT c:/Users/提剑遗金/Desktop/迄今为止的笔记/3-3 数字电路/数字电路笔记.tex
+INPUT c:/Users/提剑遗金/Desktop/大学笔记/3-3 数字电路/数字电路笔记.tex
 OUTPUT 数字电路笔记.log
 INPUT c:/texlive/2026/texmf-dist/tex/latex/ctex/ctexart.cls
 INPUT c:/texlive/2026/texmf-dist/tex/latex/ctex/ctexart.cls
@@ -319,13 +319,22 @@ INPUT c:/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT c:/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT c:/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
-INPUT c:/texlive/2026/texmf-dist/tex/latex/circuitikz/circuitikz.sty
-INPUT c:/texlive/2026/texmf-dist/tex/latex/circuitikz/circuitikz.sty
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+INPUT c:/texlive/2026/texmf-dist/tex/latex/circuitikz/circuitikz.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/circuitikz/circuitikz.sty
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybending.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybending.code.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmodulebending.code.tex
@@ -349,26 +358,11 @@ INPUT c:/texlive/2026/texmf-dist/tex/generic/circuitikz/pgfcirclabel.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/circuitikz/pgfcircvoltage.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/circuitikz/pgfcirccurrent.tex
 INPUT c:/texlive/2026/texmf-dist/tex/generic/circuitikz/pgfcircflow.tex
-INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
-INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
-INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
-INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
-INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
-INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
-INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
-INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex
-INPUT c:/texlive/2026/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex
 INPUT ./数字电路笔记.aux
 INPUT ./数字电路笔记.aux
 INPUT 数字电路笔记.aux
 OUTPUT 数字电路笔记.aux
 INPUT c:/texlive/2026/texmf-dist/tex/latex/graphics/color.sty
-INPUT ./数字电路笔记.out
-INPUT ./数字电路笔记.out
-INPUT 数字电路笔记.out
-INPUT 数字电路笔记.out
-INPUT ./数字电路笔记.out
-INPUT ./数字电路笔记.out
 OUTPUT 数字电路笔记.out
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
