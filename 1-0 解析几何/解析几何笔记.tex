@@ -2,6 +2,8 @@
 
 \usepackage[a4paper,margin=2cm]{geometry}
 \usepackage{amsmath,amssymb,mathtools,bm,esint}
+\usepackage{upgreek}
+\usepackage[nolimits]{cmupint}
 \usepackage{booktabs,tabularx,array,longtable,multirow}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
@@ -81,6 +83,7 @@
 
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\Prj}{\operatorname{Prj}}
+\newcommand{\vect}[1]{\bm{#1}}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -129,9 +132,9 @@
 
 \begin{description}[style=multiline,leftmargin=7em,labelwidth=6em]
   \item[平面束方程]
-  $\lambda(A_1x+B_1y+C_1z+D_1)+\mu(A_2x+B_2y+C_2z+D_2)=0,$
+  $\lambda(A_1x+B_1y+C_1z+D_1)+\mu(A_2x+B_2y+C_2z+D_2)=0,\qquad\lambda^2+\mu^2\ne0$
 
-  \hfill $\lambda^2+\mu^2\ne0$
+  注：若原来的两个平面不在所求范围内，只设一个未知数即可。
 \end{description}
 
 \subsection{直线}
@@ -165,6 +168,12 @@
   $\displaystyle\frac{x-x_1}{x_2-x_1}=\frac{y-y_1}{y_2-y_1}=\frac{z-z_1}{z_2-z_1}$
 \end{description}
 
+
+\subsection{曲线}
+
+\begin{enumerate}
+  \item 参数方程：
+\end{enumerate}
 \subsection{夹角}
 
 \begin{align*}
@@ -217,17 +226,95 @@ l_1\text{ 与 }l_2\text{ 共面}
 平行、垂直同上。
 
 \subsection{距离}
+\begin{enumerate}
 
-点到平面距离：
+  \item 点到平面距离：
 \[
 d=\Prj(\overrightarrow{P_0P_1},\bm n)
-=\frac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}.
+=\frac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}
 \]
 
-点到直线距离：
+  
+  \item 点到直线距离：
 \[
 d=\sqrt{\left|\overrightarrow{P_0P_1}\right|^2-
-\left(\Prj(\overrightarrow{P_0P_1},\bm n)\right)^2}.
+\left(\Prj(\overrightarrow{P_0P_1},\bm n)\right)^2}
 \]
+  设直线$L$，点$M_1$。
+
+  \begin{enumerate}[label=(\arabic*)]
+    \item 过$M_1$找垂面$\varPi$，$\varPi$与$L$交于$M_2$，求$M_1M_2$的长度，即为点到直线的距离 $d$。
+  
+    \item 求$L$上任意一点$M$到点$M_1$的最短距离，从而转化为条件极值问题，可用Lagrange法求解。
+    
+    \item 向量乘法几何意义
+    \[
+    d=\frac{\left|\overrightarrow{M_0M_1}\times\vect s\right|}{|\vect s|}
+    =\left|
+    \frac{1}{\sqrt{l^2+m^2+n^2}}
+    \begin{vmatrix}
+    \vect i & \vect j & \vect k \\
+    x_1-x_0 & y_1-y_0 & z_1-z_0\\
+    l & m & n
+    \end{vmatrix}
+    \right|
+    \]
+  \end{enumerate}
+
+  \item 公垂线距离
+  
+  思路：用向量乘法求出垂直方向，再求连接两直线上两点向量在其上的投影长度。
+  \[
+  d
+  =\Prj(\overrightarrow{P_1P_2},\vect s_1\times\vect s_2)
+  =\frac{\left|\overrightarrow{P_1P_2}\cdot(\vect s_1\times\vect s_2)\right|}{|\vect s_1\times\vect s_2|}
+  \]
+
+\end{enumerate}
+
+\subsection{三点构成三角形面积}
+
+二维空间：
+
+\[
+S=
+\frac{1}{2}
+\left|\begin{vmatrix}
+x_1 & y_1 & 1\\
+x_2 & y_2 & 1\\
+x_3 & y_3 & 1
+\end{vmatrix}
+\right|
+\]
+
+三维同理
+
+\[
+S=\dfrac{1}{2}
+\left|\begin{vmatrix}
+x_1 & y_1 & z_1\\
+x_2 & y_2 & z_2\\
+x_3 & y_3 & z_3
+\end{vmatrix}\right|
+\]
+
+\subsection{典型例题}
+已知直线与平面，求共法平面
+
+\begin{enumerate}
+  \item 设过直线的平面束，利用法向量之点积为0即可；
+  \item 利用共法平面同时垂直于直线与平面，利用方向向量与法向量垂直，与两法向量共同垂直，即可求出共法平面。
+  \[
+  \boxed{
+  \ker\begin{pmatrix}
+  \vect a^{\mathsf T}\\
+  \vect b^{\mathsf T}
+  \end{pmatrix}
+  =
+  \operatorname{span}\{\vect a\times\vect b\}
+  }
+  \] 
+\end{enumerate}
+
 
 \end{document}
