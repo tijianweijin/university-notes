@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  8 OCT 2026 13:24
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  15 OCT 2026 15:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -980,27 +980,201 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 LaTeX Info: Redefining \textbf on input line 23.
 Package hyperref Info: Option `colorlinks' set `true' on input line 45.
  (./物理笔记.aux)
-c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理/物理笔记.tex:89: I can't write on file `物理笔记.aux'.
-\document ...ate \openout \@mainaux \jobname .aux 
-                                                  \immediate \write \@mainau...
-l.89 \begin{document}
-                     
-(Press Enter to retry, or Control-Z to exit; default file extension is `.tex')
-Please type another output file name
-c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理/物理笔记.tex:89: Emergency stop.
-\document ...ate \openout \@mainaux \jobname .aux 
-                                                  \immediate \write \@mainau...
-l.89 \begin{document}
-                     
-*** (job aborted, file error in nonstop mode)
+\openout1 = `物理笔记.aux'.
 
- 
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+
+Package fontspec Info: 
+(fontspec)             Adjusting the maths setup (use [no-math] to avoid
+(fontspec)             this).
+
+\symlegacymaths=\mathgroup12
+LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 89.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 89.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 89.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 89.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 89.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 89.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 89.
+LaTeX Font Info:    Redeclaring math accent \check on input line 89.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 89.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 89.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 89.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 89.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 89.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 89.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 89.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 89.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 89.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 89.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 89.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 89.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 89.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 89.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 89.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 89.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 89.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+*geometry* verbose mode - [ preamble ] result:
+* driver: xetex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(56.9055pt, 483.69687pt, 56.9055pt)
+* v-part:(T,H,B)=(56.9055pt, 731.23584pt, 56.9055pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=483.69687pt
+* \textheight=731.23584pt
+* \oddsidemargin=-15.36449pt
+* \evensidemargin=-15.36449pt
+* \topmargin=-52.36449pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+\c@lstlisting=\count397
+Package hyperref Info: Link coloring ON on input line 89.
+(./物理笔记.out) (./物理笔记.out)
+\@outlinefile=\write4
+\openout4 = `物理笔记.out'.
+
+
+Package fontspec Info: 
+(fontspec)             Script 'CJK' not explicitly supported within font
+(fontspec)             'FandolHei-Regular'. Check the typeset output, and if
+(fontspec)             it is okay then ignore this warning. Otherwise a
+(fontspec)             different font should be chosen.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'FandolHei-Regular(0)' created for font
+(fontspec)             'FandolHei-Regular' with options
+(fontspec)             [Script={CJK},Extension={.otf},BoldFont={FandolHei-Bold}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"[FandolHei-Regular.otf]/OT:script=hani;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->"[FandolHei-Bold.otf]/OT:script=hani;language=dflt;"
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 99.
+ (c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 99.
+ (c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+esint on input line 99.
+ (c:/texlive/2026/texmf-dist/tex/latex/esint/uesint.fd
+File: uesint.fd 
+)
+LaTeX Font Info:    Trying to load font information for U+cmupint on input line 99.
+ (c:/texlive/2026/texmf-dist/tex/latex/cmupint/ucmupint.fd
+File: ucmupint.fd 
+) [1
+
+]
+
+Package fontspec Info: 
+(fontspec)             Script 'CJK' not explicitly supported within font
+(fontspec)             'FandolKai-Regular'. Check the typeset output, and if
+(fontspec)             it is okay then ignore this warning. Otherwise a
+(fontspec)             different font should be chosen.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'FandolKai-Regular(0)' created for font
+(fontspec)             'FandolKai-Regular' with options
+(fontspec)             [Script={CJK},Extension={.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"[FandolKai-Regular.otf]/OT:script=hani;language=dflt;"
+
+ [2] [3] [4] [5]
+ignored: Infinite glue shrinkage found in box being split [6]
+ignored: Infinite glue shrinkage found in box being split [7] [8] [9] [10] [11] [12] [13] [14] [15] (./物理笔记.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2022/08/05>
+ ***********
+Package rerunfilecheck Info: File `物理笔记.out' has not changed.
+(rerunfilecheck)             Checksum: 0572EF187ACD92667D642E27EDCCCE15;6967.
+ ) 
 Here is how much of TeX's memory you used:
- 34785 strings out of 468168
- 777519 string characters out of 5436524
- 1216845 words of memory out of 5000000
- 62980 multiletter control sequences out of 15000+600000
- 629803 words of font info for 53 fonts, out of 8000000 for 9000
+ 35619 strings out of 468168
+ 819180 string characters out of 5436524
+ 1285035 words of memory out of 5000000
+ 63726 multiletter control sequences out of 15000+600000
+ 643734 words of font info for 137 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 116i,2n,121p,481b,286s stack positions out of 10000i,1000n,20000p,200000b,200000s
-No pages of output.
+ 116i,16n,121p,481b,1032s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on 物理笔记.xdv (15 pages, 180436 bytes).
