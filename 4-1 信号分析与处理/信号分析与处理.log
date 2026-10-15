@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  1 OCT 2026 21:31
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  15 OCT 2026 09:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1160,57 +1160,23 @@ Package fontspec Info:
 LaTeX Font Info:    Font shape `TU/FandolSong-Regular(0)/m/sl' in size <10.53937> not available
 (Font)              Font shape `TU/FandolSong-Regular(0)/m/it' tried instead on input line 173.
 [1
+c:/Users/提剑遗金/Desktop/大学笔记/4-1 信号分析与处理/信号分析与处理.tex:173: I can't write on file `信号分析与处理.xdv'.
+(Press Enter to retry, or Control-Z to exit; default file extension is `.xdv')
+Please type another file name for output
+c:/Users/提剑遗金/Desktop/大学笔记/4-1 信号分析与处理/信号分析与处理.tex:173: Emergency stop.
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.173 \end{methodbox}
+                     
+*** (job aborted, file error in nonstop mode)
 
-] [2] [3] [4] [5] [6]
-Overfull \hbox (14.56456pt too wide) in paragraph at lines 731--732
- [] 
- []
-
-
-Overfull \hbox (14.56456pt too wide) in paragraph at lines 799--800
- [] 
- []
-
-[7]
-Overfull \hbox (14.56456pt too wide) in paragraph at lines 951--952
- [] 
- []
-
-[8]
-Underfull \hbox (badness 1590) in paragraph at lines 981--982
-[]\TU/FandolSong-Regular(0)/m/it/10.53937 观 察 时 域 积 分 \TU/lmr/m/n/10.53937 Fourier \TU/FandolSong-Regular(0)/m/it/10.53937 变 换，|  不 难 发 现 $\OMS/cmsy/m/n/10.53937 F [] \OT1/cmr/m/n/10.53937 = \OMS/cmsy/m/n/10.53937 F [] \OT1/cmr/m/n/10.53937 = \OML/cmm/m/it/10.53937 X\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 
-\OT1/cmr/m/n/10.53937 ) \OMS/cmsy/m/n/10.53937 ^^A
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1072--1072
-[]|$\OMS/cmsy/m/n/10.53937 F [] \OT1/cmr/m/n/10.53937 =
- []
-
-
-Underfull \hbox (badness 7907) in paragraph at lines 1072--1072
-[]|$\OMS/cmsy/m/n/10.53937 F[] [] \OT1/cmr/m/n/10.53937 = \OMS/cmsy/m/n/10.53937 ^^@[] \OT1/cmr/m/n/10.53937 +
- []
-
-[9] (./信号分析与处理.aux)
- ***********
-LaTeX2e <2025-11-01>
-L3 programming layer <2022/08/05>
- ***********
-
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-Package rerunfilecheck Info: File `信号分析与处理.out' has not changed.
-(rerunfilecheck)             Checksum: 966C2FF33DBBE5934CFDB516389C0286;2069.
- ) 
+ 
 Here is how much of TeX's memory you used:
- 35455 strings out of 468168
- 808195 string characters out of 5436524
- 1255259 words of memory out of 5000000
- 63594 multiletter control sequences out of 15000+600000
+ 35216 strings out of 468168
+ 795912 string characters out of 5436524
+ 1254588 words of memory out of 5000000
+ 63358 multiletter control sequences out of 15000+600000
  633989 words of font info for 89 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 116i,18n,121p,493b,1176s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-Output written on 信号分析与处理.xdv (9 pages, 160428 bytes).
+ 116i,18n,121p,493b,753s stack positions out of 10000i,1000n,20000p,200000b,200000s
+No pages of output.

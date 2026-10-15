@@ -510,19 +510,64 @@
   
   线性系统满足齐次性和叠加性，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$是线性算子。
   
+  \begin{methodbox}[线性系统的判定]
+  
+    \[\mathcal{T}\left\{ax_1(t) + bx_2(t)\right\} = a\mathcal{T}\left\{x_1(t)\right\} + b\mathcal{T}\left\{x_2(t)\right\}\]
+  
+  一般线性系统的响应可以写成各输入信号的线性组合。
+
+  加法、微分、积分等运算都是线性算子。
+  
+  注意：表达式带常数的系统一般不是线性系统，例如$y(t)=2x(t)+3$。
+  可用$\mathcal{T}\left\{x(0)\right\}=0$快速判断。
+  
+  \end{methodbox}
+
   \item 时变系统与时不变系统
   
-  时不变系统的运行规则不会随时间推移发生改变，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$不是$t$的函数，而满足$[y(t-t_0)]=\mathcal{T}[x(t-t_0)]$。
+  时不变系统的运行规则不会随时间推移发生改变，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$不是$t$的函数。
+
+  \begin{methodbox}[时不变系统的判定]
+    \[\mathcal{T}\left\{x(t-t_0)\right\} = y(t-t_0)\]
+    
+    常见反例：$y(t)=x(2t)$，$y(t)=tx(t)$。
+  \end{methodbox}
 
   \item 因果系统与非因果系统
   
   因果系统的输出仅由当前和过去的输入决定，亦即$y(t_0)$只依赖于$x(t), \, t \in \left ( -\infty, t_0 \right ]$。
 
+  \begin{methodbox}[因果系统的判定]
+    一般包含$x(t+a),\, a>0$的都是非因果系统，如$y(t)=x(t+1)$。
+  \end{methodbox}
+
   \item 稳定系统与不稳定系统
 
   稳定系统在接入有限大小的输入信号时，能够产生有限范围的输出信号。
 
+  \begin{methodbox}[稳定系统的判定]
+    \[\int_{-\infty}^{+\infty} h(t) \dd t < \infty\]
+    
+    常见反例：$h(t)=sin(\omega_0 t)u(t)$。
+  \end{methodbox}
+
+
 \end{enumerate}
+
+\subsubsection{典型冲激响应}
+
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X}
+\toprule
+系统类型 & 冲激响应 $h(t)$ \\
+\midrule
+        标量乘法器 & $h(t)=a\delta(t)$ \\
+        微分器 & $h(t)=\dfrac{\mathrm{d}\delta(t)}{\mathrm{d}t}=\delta'(t)$ \\
+        积分器 & $h(t)=\displaystyle\int_{-\infty}^{t}\delta(\tau)\,\mathrm{d}\tau=u(t)$ \\
+        延时器 & $h(t)=\delta(t-\tau)$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
 
 \section{信号分析}
 
@@ -1082,6 +1127,29 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
 \subsubsection{Laplace变换}
 
 \section{系统分析}
+
+系统分析主要围绕冲激响应$h(t)$、$H(\jj \varOmega)$和$H(s)$进行。
+
+\subsection{时域分析}
+
+
+
+\subsection{频域分析}
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X X X}
+\toprule
+分析方式 & 特性 & 微分方程形式 & 零极点形式 \\
+\midrule
+频域分析 & 
+$H(\jj \varOmega) = \dfrac{Y_\mathrm{ZS}(\varOmega)}{X(\varOmega)}$ & 
+$H(\jj \varOmega) = \dfrac{\displaystyle\sum_{j=0}^{m}b_j\left(\jj \varOmega\right)^j}{\displaystyle\sum_{i=0}^{n}a_i\left(\jj \varOmega\right)^i}$ & \\
+复频域分析 & 
+$H(s) = \dfrac{Y_\mathrm{ZS}(s)}{X(s)}$ & 
+$H(s) = \dfrac{\displaystyle\sum_{j=0}^{m}b_j s^j}{\displaystyle\sum_{i=0}^{n}a_i s^i}$ &
+$H(s)=H_0\frac{\displaystyle\prod_{j=1}^{m}(s-z_j)}{\displaystyle\prod_{i=1}^{n}(s-p_i)}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
 
 \section{系统设计}
 
