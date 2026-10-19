@@ -79,6 +79,7 @@
 \newcommand{\ee}{\mathrm{e}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\dd}{\,\mathrm{d}}
 
 \begin{document}
@@ -332,7 +333,7 @@ $\operatorname{Arg}z$的多值性造就了$\ln z$的多值性。
     
     \item 复导数只需要两个自由度描述，而二元实导数需要四个；
     
-    \item 可导函数任意阶复导数均存在，即属于$\CC^{\infty}$。
+    \item 在开集$D$上解析的函数任意阶复导数均存在，即属于$\CC^{\infty}$。
   
   \end{enumerate}
 
@@ -398,21 +399,89 @@ $\operatorname{Arg}z$的多值性造就了$\ln z$的多值性。
   \int_{l} f(z) \dd z = \int_l u(x,y)\dd x - v(x,y)\dd y + \ii\int_l v(x,y)\dd x + u(x,y)\dd y
   \]
   \[
-  \int_{l} f(z) \dd z = = \int_{\alpha}^{\beta} f\bigl[z(t)\bigr]z'(t) \dd t.
+  \int_{l} f(z) \dd z = \int_{\alpha}^{\beta} f\bigl[z(t)\bigr]z'(t) \dd t.
   \]
 
-  \item 常用公式
+  \item 基本积分公式
   
   \[
   \oint_l \frac{\mathrm{d}z}{(z-a)^n}
   =
   \begin{cases}
   2\uppi\ii, & n=1, \\[6pt]
-  0, & n\text{为}\,n\ne 1\text{的整数}.
+  0, & n \in \ZZ \, \text{且} \, n \ne 1
   \end{cases}
   \]
 
   其中 \(l\) 为包含 \(a\) 的正向简单闭曲线，\(n\in\mathbb Z\)。
+
+  \item Cauchy积分定理
+  
+  若$f(z)$在单连通区域$D$内解析，则
+  \[
+  \oint_{\partial D} f(z) \dd z = 0
+  \]
+
+  推论：解析函数积分与路径无关。
+
+  \item 复合闭路定理
+
+  若$f(z)$在复连通区域$D$内解析，则
+  
+  \[
+  \oint_{C_0}f(z)\,dz+
+  \sum_{k=1}^{n}\oint_{C_k}f(z)\,dz=0
+  \]
+
+  \begin{methodbox}[【技巧】运用复合闭路定理计算定积分]
+    若$f(z)$形如$\dfrac{P(z)}{Q(z)}$，可通过分解有理分式技巧将其分为若干个简单
+    分式，则可将定积分转换为多个定积分。随后再根据基本公式化为只与区域奇点
+    有关的简单和式。例：
+
+    \[
+    f(z)=\frac{2z-1}{z^2-z}=\frac{1}{z}+\frac{1}{z-1}
+    \]
+    \[
+    \oint_{C}f(z)\dd z=\oint_{C}\frac{1}{z}\dd z+\oint_{C}\frac{1}{z-1}\dd z=2\uppi\ii+0=2\uppi\ii,\qquad
+    C=\left\{z\left|\left|z\right|=\frac{1}{2}\right.\right\}
+    \]
+
+    此外请注意路径方向，这决定积分正负！
+  \end{methodbox}
+
+  \item Cauchy积分公式
+  
+  \[
+  f(z)=\frac{1}{2\uppi\ii}\oint_{C}\frac{f(\xi)}{\xi-z}\dd \xi
+  \]
+
+  \begin{methodbox}[【技巧】运用Cauchy积分公式计算定积分]
+    常运用
+    \[
+    \frac{1}{2\uppi\ii}\oint_{C}\frac{f(\xi)}{\xi-z}\dd \xi=2\uppi\ii f(z)
+    \]
+    将奇点单独移到分母，其他部分均移到分子，即可构造出$f(\xi)$去计算奇点定积分。例：
+    \[
+    C=\left\{z\left|\left|z-\ii\right|=\frac{1}{2}\right.\right\}
+    \]
+    \[
+    \oint_{C}\frac{1}{z(z^2+1)}
+    =\oint_{C}\frac{\dfrac{1}{z(z+\ii)}}{z-\ii}
+    =2\uppi\ii\cdot\left. \frac{1}{z(z+\ii)} \right|_{z=\ii} = -\uppi\ii
+    \]
+    此外请注意路径方向，这决定积分正负！
+  \end{methodbox}
+
+  \item Cauchy高阶导数公式
+  
+  \[
+  f^{(n)}(z)=\oint_{C}\frac{f(\xi)}{\left(\xi-z\right)^(n+1)}\dd \xi
+  =\frac{n!}{2\uppi\ii}f(z)
+  \]
+
+  \begin{methodbox}
+    注意公式中的$n!$
+  \end{methodbox}
 
 \end{enumerate}
 

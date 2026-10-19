@@ -14,6 +14,10 @@
 \usepackage{tikz}
 \usepackage{diagbox}
 
+\newcolumntype{W}[1]{%
+  >{\hsize=#1\hsize\linewidth=\hsize
+    \centering\arraybackslash}X}
+
 \usetikzlibrary{
   positioning,
   calc,
@@ -499,8 +503,47 @@
 
 \subsection{系统}
 
+\subsubsection{表示}
+
+\begin{itemize}
+  \item 基本运算单元
+  \item 线性常系数微分方程
+\end{itemize}
+
 \subsubsection{基本概念}
 系统是对输入信号进行加工、变换、处理，并产生输出信号的物理装置。
+
+\subsubsection{冲激响应与阶跃响应}
+
+冲激响应是系统对单位冲激信号的响应，记为$h(t)$。冲激响应是系统的特征函数，能够完全描述系统的性质。
+
+阶跃响应是系统对单位阶跃信号的响应，记为$g(t)$。
+
+\begin{methodbox}[二者关系]
+  \[
+  g(t)=\int_{-\infty}^{t}h(\tau)\dd\tau=h(t) \ast u(t),\, h(t)=\frac{\dd g(t)}{\dd t}
+  \]
+\end{methodbox}
+
+任意输入信号$x(t)$的输出信号$y(t)$可以表示为冲激响应的卷积，即
+\[
+y(t) = x(t) \ast h(t)
+\]
+
+\subsubsection{典型冲激响应}
+
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X}
+\toprule
+系统类型 & 冲激响应 $h(t)$ \\
+\midrule
+        标量乘法器 & $h(t)=a\delta(t)$ \\
+        微分器 & $h(t)=\dfrac{\mathrm{d}\delta(t)}{\mathrm{d}t}=\delta'(t)$ \\
+        积分器 & $h(t)=\displaystyle\int_{-\infty}^{t}\delta(\tau)\,\mathrm{d}\tau=u(t)$ \\
+        延时器 & $h(t)=\delta(t-\tau)$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
 
 \subsubsection{分类}
 
@@ -538,12 +581,14 @@
   因果系统的输出仅由当前和过去的输入决定，亦即$y(t_0)$只依赖于$x(t), \, t \in \left ( -\infty, t_0 \right ]$。
 
   \begin{methodbox}[因果系统的判定]
+    因果系统冲激响应满足$h(t)=0,\, t<0$的一般都是非因果系统。
+    
     一般包含$x(t+a),\, a>0$的都是非因果系统，如$y(t)=x(t+1)$。
   \end{methodbox}
 
   \item 稳定系统与不稳定系统
 
-  稳定系统在接入有限大小的输入信号时，能够产生有限范围的输出信号。
+  稳定系统（BIBO稳定）在接入有限大小的输入信号时，能够产生有限范围的输出信号。
 
   \begin{methodbox}[稳定系统的判定]
     \[\int_{-\infty}^{+\infty} h(t) \dd t < \infty\]
@@ -551,23 +596,11 @@
     常见反例：$h(t)=sin(\omega_0 t)u(t)$。
   \end{methodbox}
 
+  \begin{methodbox}[因果稳定系统的判定]
+    零极点图上的极点均位于左半平面。
+  \end{methodbox}
 
 \end{enumerate}
-
-\subsubsection{典型冲激响应}
-
-\begin{center}
-\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X}
-\toprule
-系统类型 & 冲激响应 $h(t)$ \\
-\midrule
-        标量乘法器 & $h(t)=a\delta(t)$ \\
-        微分器 & $h(t)=\dfrac{\mathrm{d}\delta(t)}{\mathrm{d}t}=\delta'(t)$ \\
-        积分器 & $h(t)=\displaystyle\int_{-\infty}^{t}\delta(\tau)\,\mathrm{d}\tau=u(t)$ \\
-        延时器 & $h(t)=\delta(t-\tau)$ \\
-\bottomrule
-\end{tabularx}
-\end{center}
 
 \section{信号分析}
 
@@ -1130,10 +1163,6 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
 
 系统分析主要围绕冲激响应$h(t)$、$H(\jj \varOmega)$和$H(s)$进行。
 
-\subsection{时域分析}
-
-
-
 \subsection{频域分析}
 \begin{center}
 \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X X X}
@@ -1142,7 +1171,8 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
 \midrule
 频域分析 & 
 $H(\jj \varOmega) = \dfrac{Y_\mathrm{ZS}(\varOmega)}{X(\varOmega)}$ & 
-$H(\jj \varOmega) = \dfrac{\displaystyle\sum_{j=0}^{m}b_j\left(\jj \varOmega\right)^j}{\displaystyle\sum_{i=0}^{n}a_i\left(\jj \varOmega\right)^i}$ & \\
+$H(\jj \varOmega) = \dfrac{\displaystyle\sum_{j=0}^{m}b_j\left(\jj \varOmega\right)^j}{\displaystyle\sum_{i=0}^{n}a_i\left(\jj \varOmega\right)^i}$ &
+$H(\jj \varOmega)=H_0\frac{\displaystyle\prod_{j=1}^{m}(\jj \varOmega-z_j)}{\displaystyle\prod_{i=1}^{n}(\jj \varOmega-p_i)}$ \\
 复频域分析 & 
 $H(s) = \dfrac{Y_\mathrm{ZS}(s)}{X(s)}$ & 
 $H(s) = \dfrac{\displaystyle\sum_{j=0}^{m}b_j s^j}{\displaystyle\sum_{i=0}^{n}a_i s^i}$ &
@@ -1151,6 +1181,81 @@ $H(s)=H_0\frac{\displaystyle\prod_{j=1}^{m}(s-z_j)}{\displaystyle\prod_{i=1}^{n}
 \end{tabularx}
 \end{center}
 
-\section{系统设计}
+\begin{methodbox}[【注意】]
+  不要忘记零极点形式中的$H_0$！
+\end{methodbox}
+
+\begin{methodbox}[频域分析的其他零极点形式]
+  零点矢量可以写作$\jj\varOmega-z_j=N_j e^{\jj\psi_j}$，极点矢量可以写作$\jj\varOmega-p_i=M_i e^{\jj\theta_i}$。
+  
+  由两矢量的指数形式可得
+  
+  \[
+  H(\jj\varOmega) = \left|H(\jj\varOmega)\right|\ee^{-\jj\varOmega\varphi(\varOmega)} = H_0\frac{\displaystyle\prod_{j=1}^{m}N_j}{\displaystyle\prod_{i=1}^{n}M_i}\ee^{\displaystyle\jj\left(\displaystyle\sum_{k=1}^{m}\psi_k-\displaystyle\sum_{l=1}^{n}\theta_{l}\right)}
+  \]
+
+  其中$\left|H(\jj\varOmega)\right|= H_0\frac{\displaystyle\prod_{j=1}^{m}N_j}{\displaystyle\prod_{i=1}^{n}M_i}$称为幅频响应，
+  $\displaystyle\varphi(\varOmega)=\displaystyle\sum_{k=1}^{m}\psi_k-\displaystyle\sum_{l=1}^{n}\theta_{l}$称为相频响应。
+\end{methodbox}
+
+\begin{methodbox}[【技巧】从微分方程推得频域冲激响应]
+  做变换$\displaystyle \frac{\dd^n}{\dd t^n} \longrightarrow (\jj \varOmega)^n$，即可得到频域冲激响应。例：
+
+  \[
+  \frac{\dd^2}{\dd t^2}y(t)+6\frac{\dd}{\dd t}y(t)+5y(t)=\frac{\dd}{\dd t}x(t)+2x(t)
+  \]
+  \[
+  \left[(\jj \varOmega)^2+6(\jj \varOmega)+5\right]Y(\varOmega)=(\jj \varOmega+2)X(\varOmega)
+  \]
+  \[
+  H(\jj\varOmega)=\frac{Y(\varOmega)}{X(\varOmega)}=\frac{(\jj \varOmega)^2+6(\jj \varOmega)+5}{\jj \varOmega+2}
+  \]
+
+\end{methodbox}
+
+\subsection{信号流图}
+
+\subsubsection{从信号流图求冲激响应}
+
+原理过于复杂不叙述，这里只介绍一般的做题方法。
+
+从$X(s)$出发，将能够到达$Y(s)$的最简路径全部列出，路径内部相乘路径之间相加（后称写成线性形式）作为分子；
+从$X(s)$出发，将能够到达$X(s)$的最简路径（包括1）全部列出，写成线性形式作为分母；
+这样便得到了冲激响应$H(s)$。
+
+\subsubsection{从冲激响应求信号流图}
+
+\begin{enumerate}
+  \item 直接法
+  \[
+  H(s)=H_1(s) \cdot H_2(s)
+  \]
+  \begin{methodbox}[用直接法做信号流图]
+    两类直接法的作图过程为求冲激响应的逆过程，具体不赘述。
+    \begin{itemize}
+      \item 直接法\uppercase\expandafter{\romannumeral1}：先画$b$，再画$a$。
+      
+      \item 直接法\uppercase\expandafter{\romannumeral2}：先画$a$，再画$b$。
+    \end{itemize}
+  \end{methodbox}
+  \item 级联法
+  \[
+  H(s)=\prod_{i=1}^{n}H_i(s)
+  \]
+  优点：方便调控零点与极点
+
+  缺点：误差累积较大
+  
+  \item 并联法
+  \[
+  H(s)=\sum_{i=1}^{n}H_i(s)
+  \]
+  
+  优点：方便调控极点，同时减小误差累积。
+
+  缺点：不方便调控零点。
+\end{enumerate}
+
+\section{滤波器设计}
 
 \end{document}

@@ -12,6 +12,7 @@
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{pdflscape}
+\usepackage{bm}
 
 \newfontfamily\russianfont{Times New Roman}
 
@@ -83,6 +84,7 @@
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\dd}{\,\mathrm{d}}
 \newcommand{\FF}{\mathcal{F}}
+\newcommand{\vect}[1]{\bm{#1}}
 
 \begin{document}
 
@@ -116,6 +118,62 @@
 
 \subsection{随机变量$X$}
 
+随机变量是定义在样本空间上的函数$X(\omega),\, \omega \in \varOmega$，将事件映射为实数。
+
+随机变量包括离散型随机变量、连续型随机变量等。
+
+\begin{enumerate}
+  \item 概率分布函数$F(x)$
+
+\begin{center}
+  \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.3cm}X X}
+    \toprule
+    概念 & 一元随机变量$X$ & 多元随机变量$\vect X$ \\
+    \midrule
+    概率分布函数 & $F(x)$ & $F(\vect x)$ \\
+    单调性 & 非严格单调增加 & 对$x,\, y$分别非严格单调增加 \\
+    有界性 & $F(x) \in \left[ 0,\, 1 \right]$ & $F(\vect x) \in \left[ 0,\, 1 \right]$ \\
+    非负性 & 可由单调性给出 & $\Delta_{a_n}^{b_n} \cdots \Delta_{a_1}^{b_1}F(\vect x) \geq 0$ \\
+    正则性 & $F(-\infty)=0,\,F(+\infty)=1$ & $F(-\infty,\cdots,-\infty)=0,\,F(+\infty,\cdots,+\infty)=1$ \\
+    \bottomrule
+  \end{tabularx}
+\end{center}
+
+此外，概率分布函数是右连续的。
+
+\begin{methodbox}[【注意】]
+二元随机变量的联合分布函数$F(x,y)$还满足
+\[
+F(x, -\infty)=F(-\infty, y)=0
+\]
+但
+\[
+F(x, +\infty)=F_X(x),\, F(+\infty, y)=F_Y(y)
+\]
+故
+\[
+F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
+\]
+\end{methodbox}
+
+  \item 分布律
+
+  \item 概率密度函数$f(x)$
+
+\begin{center}
+  \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.3cm}X X}
+    \toprule
+    概念 & 一元随机变量$X$ & 多元随机变量$\vect X$ \\
+    \midrule
+    概率密度函数 & $f(x)$ & $f(\vect x)$ \\
+    非负性 & $f(x) \geq 0$ & $f(\vect x) \geq 0$ \\
+    正则性 & $\displaystyle \int_{-\infty}^{+\infty} f(x)\dd x=1$ & $\displaystyle \int_{\RR^n} f(\vect x)\dd \vect x=1$ \\
+    \bottomrule
+  \end{tabularx}
+\end{center}
+
+\end{enumerate}
+
 \subsection{常见分布}
 
 \subsubsection{离散型分布}
@@ -123,14 +181,14 @@
 \begin{center}
   \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.3cm}c c c c}
     \toprule
-    名称 & 分布律 & 累积概率函数 & 期望$E(X)$ & 标准差$D(X)$ \\
+    名称 & 分布律 & 期望$E(X)$ & 标准差$D(X)$ \\
     \midrule
-    两点分布（0-1分布） & $\displaystyle P(X=1)=p,\ P(X=0)=1-p$ & $F(X)=P(X\leq x)=1-p+px$ & $E(X)=p$ & $\sqrt{p(1-p)}$ \\
-    二项分布 & $\displaystyle P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}$ & $F(X)=P(X\leq x)$ & $E(X)=np$ & $\sqrt{np(1-p)}$ \\
-    Poisson分布 & $\displaystyle P(X=k)=\frac{\lambda^k e^{-\lambda}}{k!}$ & $F(X)=P(X\leq x)$ & $E(X)=\lambda$ & $\sqrt{\lambda}$ \\
-    几何分布 & $\displaystyle P(X=k)=(1-p)^{k-1}p$ & $F(X)=P(X\leq x)$ & $E(X)=\frac{1}{p}$ & $\sqrt{\frac{1-p}{p^2}}$ \\
-    Pascal分布 & $\displaystyle P(X=k)=\binom{k-1}{r-1}p^r(1-p)^{k-r}$ & $F(X)=P(X\leq x)$ & $E(X)=\frac{r}{p}$ & $\sqrt{\frac{r(1-p)}{p^2}}$ \\
-    超几何分布 & $\displaystyle P(X=k)=\frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}}$ & $F(X)=P(X\leq x)$ & $E(X)=\frac{nM}{N}$ & $\sqrt{\frac{nM(N-M)(N-n)}{N^2(N-1)}}$ \\
+    两点分布（0-1分布） & $\displaystyle P(X=1)=p,\ P(X=0)=1-p$ & $E(X)=p$ & $\sqrt{p(1-p)}$ \\
+    二项分布 & $\displaystyle P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}$ & $E(X)=np$ & $\sqrt{np(1-p)}$ \\
+    Poisson分布 & $\displaystyle P(X=k)=\dfrac{\lambda^k e^{-\lambda}}{k!}$ & $E(X)=\lambda$ & $\sqrt{\lambda}$ \\
+    几何分布 & $\displaystyle P(X=k)=(1-p)^{k-1}p$ & $E(X)=\dfrac{1}{p}$ & $\sqrt{\dfrac{1-p}{p^2}}$ \\
+    Pascal分布 & $\displaystyle P(X=k)=\binom{k-1}{r-1}p^r(1-p)^{k-r}$ & $E(X)=\dfrac{r}{p}$ & $\sqrt{\dfrac{r(1-p)}{p^2}}$ \\
+    超几何分布 & $\displaystyle P(X=k)=\frac{\displaystyle \binom{M}{k} \displaystyle \binom{N-M}{n-k}}{\displaystyle \binom{N}{n}}$ & $E(X)=\dfrac{nM}{N}$ & $\sqrt{\dfrac{nM(N-M)(N-n)}{N^2(N-1)}}$ \\
     \bottomrule
   \end{tabularx}
 \end{center}
@@ -138,13 +196,14 @@
 \subsubsection{连续型分布}
 
 \begin{center}
-  \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.3cm}c c c c}
+  \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{1.8cm}c c c c}
     \toprule
     名称 & 概率密度函数$f(x)$ & 累积概率函数$F(x)$ & 期望$E(X)$ & 标准差$D(X)$ \\
     \midrule
-    均匀分布 & $\displaystyle f(x)=\frac{1}{b-a},\ a<x<b$ & $F(X)=P(X\leq x)=\frac{x-a}{b-a}$ & $E(X)=\frac{a+b}{2}$ & $\sqrt{\frac{(b-a)^2}{12}}$ \\
-    指数分布 & $\displaystyle f(x)=\lambda e^{-\lambda x},\ x>0$ & $F(X)=P(X\leq x)=1-e^{-\lambda x}$ & $E(X)=\frac{1}{\lambda}$ & $\sqrt{\frac{1}{\lambda^2}}$ \\
-    正态分布（Gauss分布） & $\displaystyle \varphi(x)=\frac{1}{\sigma \sqrt{2 \uppi}} e^{-\frac{(x-\mu)^2}{2 \sigma^2}}$ & $\varPhi(X)=P(X\leq x)$ & $E(X)=\mu$ & $D(X)=\sigma$ \\
+    均匀分布 & $\displaystyle f(x)=\frac{1}{b-a},\ a<x<b$ & $F(X)=P(X\leq x)=\dfrac{x-a}{b-a}$ & $E(X)=\dfrac{a+b}{2}$ & $\sqrt{\dfrac{(b-a)^2}{12}}$ \\
+    指数分布 & $\displaystyle f(x)=\lambda \ee^{-\lambda x},\ x>0$ & $F(X)=P(X\leq x)=1-\ee^{-\lambda x}$ & $E(X)=\dfrac{1}{\lambda}$ & $\sqrt{\dfrac{1}{\lambda^2}}$ \\
+    正态分布 & $\displaystyle f(x)=\frac{1}{\sigma \sqrt{2 \uppi}} \ee^{-\dfrac{(x-\mu)^2}{2 \sigma^2}}$ & $\varPhi(X)=P(X\leq x)$ & $E(X)=\mu$ & $D(X)=\sigma$ \\
+    标准正态 & $\displaystyle \varphi(x)=\frac{1}{\sqrt{2 \uppi}} \ee^{-\dfrac{x^2}{2}}$ & $\varPhi(X)=P(X\leq x)$ & $E(X)=0$ & $D(X)=1$ \\
     \bottomrule
   \end{tabularx}
 \end{center}

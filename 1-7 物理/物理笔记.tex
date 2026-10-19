@@ -548,7 +548,14 @@
   \]
 \end{enumerate}
 \vspace{0.45em}
-& \centering\arraybackslash 磁通量 \(\varPhi_{\mathrm b}\)\\ \hline
+& \centering\arraybackslash 磁通量 \(\varPhi_{\mathrm b}\)\\ 
+\begin{enumerate}
+  \item 定义式：
+  \[
+    \varPhi_{\mathrm b}=\iint\dif\varPhi_{\mathrm b}=\iint\vect B\cdot\dif\vect S.
+  \]
+\end{enumerate}\\
+\hline
 
 \centering 电势 \(V\)
 \begin{enumerate}
@@ -705,7 +712,7 @@ Gauss 定理和环路定理能完备描述静电场。
   
   \item 匀强磁场对平面载流线圈：$\vect F = I \dif \vect l \times \vect B$
   
-  磁矩$ \vect m = I S \vect e_\mathrm{n}$
+  磁矩$ \vect m = I S \vect \ee_\mathrm{n}$
   
   磁力矩 $ \vect M = \vect m \times \vect B$
 
@@ -720,12 +727,12 @@ Gauss 定理和环路定理能完备描述静电场。
 \toprule
  & 电场强度 \(\vect E\) & 电势 \(V\)\\
 \midrule
-无限长均匀带电直线 & \(\displaystyle\vect E=\frac{\lambda}{2\pi r\varepsilon_0}\vect e_r\) & \(\displaystyle V_P=-\frac{\lambda}{2\pi\varepsilon_0}\ln\frac r{r_0}\)（其中 \(r_0\) 为参考点半径）\\
-无限大均匀带电平面 & \(\displaystyle\vect E=\frac{\sigma}{2\varepsilon_0}\vect e_n\) & \\
+无限长均匀带电直线 & \(\displaystyle\vect E=\frac{\lambda}{2\pi r\varepsilon_0}\vect \ee_r\) & \(\displaystyle V_P=-\frac{\lambda}{2\pi\varepsilon_0}\ln\frac r{r_0}\)（其中 \(r_0\) 为参考点半径）\\
+无限大均匀带电平面 & \(\displaystyle\vect E=\frac{\sigma}{2\varepsilon_0}\vect \ee_n\) & \\
 均匀带电细圆环（对称轴上） & \(\displaystyle E=\frac{1}{4\pi\varepsilon_0}\frac{qx}{(R^2+x^2)^{3/2}}\) & \\
-均匀带电圆平板（对称轴上） & \(\displaystyle\vect E=\frac{q}{2\pi\varepsilon_0R^2}\left[1-\frac{x}{(R^2+x^2)^{1/2}}\right]\vect i\) & \(\displaystyle V=\frac{1}{4\pi\varepsilon_0}\frac qx\)\\
-均匀带电球壳 & \(\displaystyle\vect E=\frac{q}{4\pi r^2\varepsilon_0}\vect e_r\) & \(\displaystyle V=\begin{cases}\frac{1}{4\pi\varepsilon_0}\frac qR,&0<r\le R,\\[2pt]\frac{1}{4\pi\varepsilon_0}\frac qr,&r>R.\end{cases}\)\\
-均匀带电球体 & \(\displaystyle\vect E=\begin{cases}\frac{\rho}{3\varepsilon_0}\vect r,&0<r\le R,\\[2pt]\frac{\rho}{3\varepsilon_0}\frac{R^3}{r^2}\vect e_r,&r>R.\end{cases}\) & \(\displaystyle V=\begin{cases}\frac{Q(3R^2-r^2)}{8\pi\varepsilon_0R^3},&0<r\le R,\\[2pt]\frac{1}{4\pi\varepsilon_0}\frac qr,&r>R.\end{cases}\)\\
+均匀带电圆平板（对称轴上） & \(\displaystyle\vect E=\frac{q}{2\pi\varepsilon_0R^2}\left[1-\frac{x}{(R^2+x^2)^{1/2}}\right]\vect \ee_i\) & \(\displaystyle V=\frac{1}{4\pi\varepsilon_0}\frac qx\)\\
+均匀带电球壳 & \(\displaystyle\vect E=\frac{q}{4\pi r^2\varepsilon_0}\vect \ee_r\) & \(\displaystyle V=\begin{cases}\frac{1}{4\pi\varepsilon_0}\frac qR,&0<r\le R,\\[2pt]\frac{1}{4\pi\varepsilon_0}\frac qr,&r>R.\end{cases}\)\\
+均匀带电球体 & \(\displaystyle\vect E=\begin{cases}\frac{\rho}{3\varepsilon_0}\vect r,&0<r\le R,\\[2pt]\frac{\rho}{3\varepsilon_0}\frac{R^3}{r^2}\vect \ee_r,&r>R.\end{cases}\) & \(\displaystyle V=\begin{cases}\frac{Q(3R^2-r^2)}{8\pi\varepsilon_0R^3},&0<r\le R,\\[2pt]\frac{1}{4\pi\varepsilon_0}\frac qr,&r>R.\end{cases}\)\\
 电偶极子 & \(\displaystyle E=\frac{p}{4\pi\varepsilon_0r^3}\sqrt{3\cos^2\theta+1}\) & \(\displaystyle V=\frac{1}{4\pi\varepsilon_0}\frac{p}{\sqrt{y^2+x^2}}\cos\theta\)\\
 \bottomrule
 \end{tabularx}
@@ -766,21 +773,21 @@ $\displaystyle
 \vect B =
 \frac{\mu_0 I}{4\pi r}
 (\sin\theta_1+\sin\theta_2)
-\vect e_\varphi
+\vect \ee_\varphi
 $ \\
 
 半无限长均匀载流直导线 &
 $\displaystyle
 \vect B =
 \frac{\mu_0 I}{4\pi r}
-\vect e_\varphi
+\vect \ee_\varphi
 $ \\
 
 无限长均匀载流直导线 &
 $\displaystyle
 \vect B =
 \frac{\mu_0 I}{2\pi r}
-\vect e_\varphi
+\vect \ee_\varphi
 $ \\
 
 载流圆线圈轴线上 &
@@ -788,7 +795,7 @@ $\displaystyle
 \vect B =
 \frac{\mu_0 NIR^2}
 {2(R^2+x^2)^{3/2}}
-\vect e_z
+\vect \ee_z
 $ \\
 
 Helmholtz 线圈轴线上 &
@@ -799,7 +806,7 @@ $\displaystyle
 \frac{1}{(R^2+x^2)^{3/2}}
 +
 \frac{1}{(R^2+(x-R)^2)^{3/2}}
-\right]\vect e_z
+\right]\vect \ee_z
 $ \\
 
 有限长载流螺线管轴线上 &
@@ -807,12 +814,12 @@ $\displaystyle
 \vect B =
 \frac{\mu_0 nI}{2}
 (\cos\theta_1-\cos\theta_2)
-\vect e_z
+\vect \ee_z
 $ \\
 
 无限长载流螺线管内部 &
 $\displaystyle
-\vect B = \mu_0 nI\vect e_z
+\vect B = \mu_0 nI\vect \ee_z
 $ \\
 
 无限长载流螺线管外部 &
@@ -823,7 +830,7 @@ $ \\
 无限宽均匀载流平面 &
 $\displaystyle
 \vect B =
-\pm\frac{\mu_0 K}{2}\vect e_y
+\pm\frac{\mu_0 K}{2}\vect \ee_y
 $ \\
 
 \bottomrule
