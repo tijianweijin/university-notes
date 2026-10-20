@@ -1198,6 +1198,18 @@ $H(s)=H_0\frac{\displaystyle\prod_{j=1}^{m}(s-z_j)}{\displaystyle\prod_{i=1}^{n}
   $\displaystyle\varphi(\varOmega)=\displaystyle\sum_{k=1}^{m}\psi_k-\displaystyle\sum_{l=1}^{n}\theta_{l}$称为相频响应。
 \end{methodbox}
 
+\begin{methodbox}[由零极点图求幅频响应与相频响应]
+  由零极点图可得
+  \[
+  \left|H(\jj\varOmega)\right|= H_0\frac{\displaystyle\prod_{j=1}^{m}N_j}{\displaystyle\prod_{i=1}^{n}M_i}
+  ,\qquad
+  \varphi(\varOmega)=\displaystyle\sum_{k=1}^{m}\psi_k-\displaystyle\sum_{l=1}^{n}\theta_{l}
+  \]
+
+  其中$N_j$为零点矢量长度，$\psi_j$为零点矢量与实轴正向的夹角，$M_i$为极点矢量长度，$\theta_i$为极点矢量与实轴正向的夹角。
+  
+\end{methodbox}
+
 \begin{methodbox}[【技巧】从微分方程推得频域冲激响应]
   做变换$\displaystyle \frac{\dd^n}{\dd t^n} \longrightarrow (\jj \varOmega)^n$，即可得到频域冲激响应。例：
 

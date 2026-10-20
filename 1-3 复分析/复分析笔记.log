@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  18 OCT 2026 23:43
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  20 OCT 2026 19:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1127,21 +1127,21 @@ Package fontspec Info:
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
 (fontspec)             <->"[FandolKai-Regular.otf]/OT:script=hani;language=dflt;"
 
- [4] [5] [6] (./复分析笔记.aux)
+ [4] [5] [6] [7] (./复分析笔记.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `复分析笔记.out' has not changed.
-(rerunfilecheck)             Checksum: EA4C626DDBD696746B1193932CA051A2;1061.
+(rerunfilecheck)             Checksum: D0815D8DD249C4474F4187362089B509;1440.
  ) 
 Here is how much of TeX's memory you used:
- 35045 strings out of 468168
- 795994 string characters out of 5436524
- 1256046 words of memory out of 5000000
- 63195 multiletter control sequences out of 15000+600000
+ 35046 strings out of 468168
+ 796005 string characters out of 5436524
+ 1256481 words of memory out of 5000000
+ 63196 multiletter control sequences out of 15000+600000
  634005 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 116i,11n,121p,487b,1071s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 116i,11n,121p,487b,1057s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 复分析笔记.xdv (6 pages, 89396 bytes).
+Output written on 复分析笔记.xdv (7 pages, 94944 bytes).

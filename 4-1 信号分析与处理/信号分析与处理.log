@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  19 OCT 2026 19:50
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  20 OCT 2026 19:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1209,12 +1209,12 @@ Package rerunfilecheck Info: File `信号分析与处理.out' has not changed.
 (rerunfilecheck)             Checksum: DD3F2159023FA528C59214B168FF27DB;2893.
  ) 
 Here is how much of TeX's memory you used:
- 35482 strings out of 468168
- 809365 string characters out of 5436524
+ 35484 strings out of 468168
+ 809397 string characters out of 5436524
  1256115 words of memory out of 5000000
- 63621 multiletter control sequences out of 15000+600000
+ 63623 multiletter control sequences out of 15000+600000
  633989 words of font info for 89 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  116i,18n,121p,493b,1176s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 信号分析与处理.xdv (12 pages, 220592 bytes).
+Output written on 信号分析与处理.xdv (12 pages, 227476 bytes).
