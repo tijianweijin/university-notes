@@ -172,6 +172,11 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
   \end{tabularx}
 \end{center}
 
+  \item 联合分布与边缘分布
+  \[
+  F_X(x)=F(x,\, \infty)=\int_{y_1(x)}^{y_2(x)} f_{X,Y}(x,y)\dd y
+  \]
+
 \end{enumerate}
 
 \subsection{常见分布}
@@ -181,14 +186,15 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
 \begin{center}
   \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.3cm}c c c c}
     \toprule
-    名称 & 分布律 & 期望$E(X)$ & 标准差$D(X)$ \\
+    \centering
+    名称 & 分布律 & 期望$E(X)$ & 方差$D(X)$ \\
     \midrule
-    两点分布（0-1分布） & $\displaystyle P(X=1)=p,\ P(X=0)=1-p$ & $E(X)=p$ & $\sqrt{p(1-p)}$ \\
-    二项分布 & $\displaystyle P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}$ & $E(X)=np$ & $\sqrt{np(1-p)}$ \\
-    Poisson分布 & $\displaystyle P(X=k)=\dfrac{\lambda^k e^{-\lambda}}{k!}$ & $E(X)=\lambda$ & $\sqrt{\lambda}$ \\
-    几何分布 & $\displaystyle P(X=k)=(1-p)^{k-1}p$ & $E(X)=\dfrac{1}{p}$ & $\sqrt{\dfrac{1-p}{p^2}}$ \\
-    Pascal分布 & $\displaystyle P(X=k)=\binom{k-1}{r-1}p^r(1-p)^{k-r}$ & $E(X)=\dfrac{r}{p}$ & $\sqrt{\dfrac{r(1-p)}{p^2}}$ \\
-    超几何分布 & $\displaystyle P(X=k)=\frac{\displaystyle \binom{M}{k} \displaystyle \binom{N-M}{n-k}}{\displaystyle \binom{N}{n}}$ & $E(X)=\dfrac{nM}{N}$ & $\sqrt{\dfrac{nM(N-M)(N-n)}{N^2(N-1)}}$ \\
+    两点分布（0-1分布） & $\displaystyle P(X=1)=p,\ P(X=0)=1-p$ & $p$ & $p(1-p)$ \\
+    二项分布 & $\displaystyle P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}$ & $np$ & $np(1-p)$ \\
+    Poisson分布 & $\displaystyle P(X=k)=\dfrac{\lambda^k e^{-\lambda}}{k!}$ & $\lambda$ & $\lambda$ \\
+    几何分布 & $\displaystyle P(X=k)=(1-p)^{k-1}p$ & $\dfrac{1}{p}$ & $1-p$ \\
+    Pascal分布 & $\displaystyle P(X=k)=\binom{k-1}{r-1}p^r(1-p)^{k-r}$ & $\dfrac{r}{p}$ & $\sqrt{\dfrac{r(1-p)}{p^2}}$ \\
+    超几何分布 & $\displaystyle P(X=k)=\frac{\displaystyle \binom{M}{k} \displaystyle \binom{N-M}{n-k}}{\displaystyle \binom{N}{n}}$ & $\dfrac{nM}{N}$ & $\dfrac{nM(N-M)(N-n)}{N^2(N-1)}$ \\
     \bottomrule
   \end{tabularx}
 \end{center}
@@ -196,14 +202,30 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
 \subsubsection{连续型分布}
 
 \begin{center}
-  \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{1.8cm}c c c c}
+  \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.3cm}c c c c}
     \toprule
-    名称 & 概率密度函数$f(x)$ & 累积概率函数$F(x)$ & 期望$E(X)$ & 标准差$D(X)$ \\
+    \centering
+    名称 & 概率密度函数$f(x)$ & 累积概率函数$F(x)$ & 期望$E(X)$ & 方差$D(X)$ \\
     \midrule
-    均匀分布 & $\displaystyle f(x)=\frac{1}{b-a},\ a<x<b$ & $F(X)=P(X\leq x)=\dfrac{x-a}{b-a}$ & $E(X)=\dfrac{a+b}{2}$ & $\sqrt{\dfrac{(b-a)^2}{12}}$ \\
-    指数分布 & $\displaystyle f(x)=\lambda \ee^{-\lambda x},\ x>0$ & $F(X)=P(X\leq x)=1-\ee^{-\lambda x}$ & $E(X)=\dfrac{1}{\lambda}$ & $\sqrt{\dfrac{1}{\lambda^2}}$ \\
-    正态分布 & $\displaystyle f(x)=\frac{1}{\sigma \sqrt{2 \uppi}} \ee^{-\dfrac{(x-\mu)^2}{2 \sigma^2}}$ & $\varPhi(X)=P(X\leq x)$ & $E(X)=\mu$ & $D(X)=\sigma$ \\
-    标准正态 & $\displaystyle \varphi(x)=\frac{1}{\sqrt{2 \uppi}} \ee^{-\dfrac{x^2}{2}}$ & $\varPhi(X)=P(X\leq x)$ & $E(X)=0$ & $D(X)=1$ \\
+    均匀分布 & $\displaystyle f(x)=\frac{1}{b-a},\ x\in\left[a,\,b\right]$ & $F(x)=\dfrac{x-a}{b-a}$ & $E(X)=\dfrac{a+b}{2}$ & $\dfrac{(b-a)^2}{12}$ \\
+    指数分布 & $\displaystyle f(x)=\lambda \ee^{-\lambda x},\ x>0$ & $F(x)=1-\ee^{-\lambda x}$ & $E(X)=\dfrac{1}{\lambda}$ & $\dfrac{1}{\lambda^2}$ \\
+    正态分布 \\ $X\sim N(\mu,\sigma^2)$ & $\displaystyle f(x)=\frac{1}{\sigma \sqrt{2 \uppi}} \ee^{-\dfrac{(x-\mu)^2}{2 \sigma^2}}$ & $F(x)=P(X\leq x)$ & $E(X)=\mu$ & $\sigma^2$ \\
+    标准正态 \\ $X\sim N(0,1)$ & $\displaystyle \varphi(x)=\frac{1}{\sqrt{2 \uppi}} \ee^{-\dfrac{x^2}{2}}$ & $\varPhi(x)=P(X\leq x)$ & $E(X)=0$ & $D(X)=1$ \\
+    \bottomrule
+  \end{tabularx}
+\end{center}
+
+\subsubsection{联合分布}
+
+\begin{center}
+  \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.3cm}c c c c}
+    \toprule
+    \centering
+    名称 & 概率密度函数$f(x)$ & 累积概率函数$F(x)$ & 期望$E(X)$ & 方差$D(X)$ \\
+    \midrule
+    n维均匀分布 & & & \\
+    n维正态分布 & & & \\
+    n维标准正态 & & & \\
     \bottomrule
   \end{tabularx}
 \end{center}

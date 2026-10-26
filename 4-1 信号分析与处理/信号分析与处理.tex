@@ -80,17 +80,20 @@
   before upper={\setlength{\parindent}{2em}}
 }
 
-\newcommand{\jj}{\mathrm{j}}
-\newcommand{\ee}{\mathrm{e}}
+\newcommand{\jj}{\,\mathrm{j}}
+\newcommand{\ee}{\,\mathrm{e}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\dd}{\mathrm{d}}
-\newcommand{\ppi}{\uppi}
+\newcommand{\ppi}{\,\uppi}
 \newcommand{\FF}{\mathcal{F}}
 \newcommand{\LL}{\mathcal{L}}
 \newcommand{\Sa}{\operatorname{Sa}}
 \newcommand{\RRe}{\operatorname{Re}}
 \newcommand{\IIm}{\operatorname{Im}}
+
+\newfontfamily\russianfont{Times New Roman}
 
 \begin{document}
 
@@ -1269,5 +1272,168 @@ $H(s)=H_0\frac{\displaystyle\prod_{j=1}^{m}(s-z_j)}{\displaystyle\prod_{i=1}^{n}
 \end{enumerate}
 
 \section{滤波器设计}
+
+\subsection{无失真传输}
+
+无失真传输要求幅频响应为常数，且相频响应为线性函数。
+
+\begin{enumerate}
+  \item 时域条件：
+  \[
+  h(t)=K\delta(t-t_0)
+  \]
+  \item 频域条件：
+  \[
+  \left|H(\jj\varOmega)\right|=K, \qquad \varphi(\varOmega)=\varOmega t_0
+  \]
+\end{enumerate}
+
+\subsection{理想模拟低通滤波器}
+
+\begin{enumerate}
+  \item 响应函数特征：
+
+  \begin{itemize}
+    \item 时域响应：$h(t)=K\Sa(t-t_0)$
+    \item 幅频响应：$\left|H(\jj\varOmega)\right|=K\left(u(\varOmega_c)-u(-\varOmega_c)\right)$
+    \item 相频响应：$\varphi(\varOmega)=\varOmega t_0$
+  \end{itemize}
+
+\begin{methodbox}[【理解】理想模拟低通滤波器不存在]
+  理想模拟低通滤波器是非因果系统（冲激响应为取样函数），现实中无法制造。
+\end{methodbox}
+
+  \item 系统函数特征
+
+  \begin{methodbox}[【题型】由平方响应函数求系统函数]
+    \begin{enumerate}[label=(\arabic*)]
+      \item 作代换$s=\jj\varOmega$
+      \item 求零点与极点
+      \item 取左半平面极点写出$H(s)$
+      
+      例：$\left|H(\jj\varOmega)\right|^2=\dfrac{4(\varOmega^4+64)}{\varOmega^4-10\varOmega^2+169}$
+      
+      解：
+      \[
+      H(s)H(-s)=\left.\frac{4(\varOmega^4+64)}{\varOmega^4-10\varOmega^2+169}\right|_{\varOmega=-\jj s}=\frac{4(s^4+64)}{s^4+10s^2+169}
+      \]
+      
+      解得零点$s_\text{z}=\pm2\pm\jj 2$，极点$s_\text{p}=\pm2\pm\jj 2$。
+      选取左半平面极点$s_\text{p}=-2\pm\jj 2$，则
+      \[
+      H(s)=H_0\frac{s^2+4s+8}{s^2+4s+13}
+      \]
+
+      又根据$\left.H(s)\right|_{s=0}=\left.H(\jj\varOmega)\right|_{\varOmega=0}$，
+      得$H_0=2$，则
+
+      \[
+      H(s)=2\frac{s^2+4s+8}{s^2+4s+13}
+      \]
+    \end{enumerate}
+  \end{methodbox}
+\end{enumerate}
+\subsection{现实模拟低通滤波器}
+
+\subsubsection{Butterworth滤波器}
+
+Butterworth逼近
+\[
+\left|H(\jj\varOmega)\right|^2=\dfrac{1}{1+\left(\dfrac{\varOmega}{\varOmega_c}\right)^{2N}}
+\]
+
+\begin{methodbox}[设计Butterworth滤波器]
+  
+  需要参数：$A_p$、$\varOmega_p$、
+  $A_s$、$\varOmega_s$、$\varOmega_c$
+  
+  有如下关系：
+  \[
+  A_p=10\lg\left(\frac{\varOmega_p}{\varOmega_c}\right)
+  \]
+  \[
+  A_s=10\lg\left(\frac{\varOmega_s}{\varOmega_c}\right)
+  \]
+
+  \begin{enumerate}
+    \item 确定滤波器阶数$N$
+    \[
+    N=\left\lceil\frac{\lg{\dfrac{10^{0.1A_p}-1}{10^{0.1A_s}-1}}}{\lg {\dfrac{\varOmega_p}{\varOmega_s}}}\right\rceil
+    \]
+
+    \item 求滤波器极点
+    \[
+    p_k=\exp\left[\displaystyle\jj\dfrac{\uppi}{2}+\displaystyle\jj\dfrac{(2k+1)\uppi}{2N}\right], \quad k=0,\,1,\,\ldots,\,2N-1
+    \]
+
+    \item 求滤波器传递函数
+    
+    取左半平面极点，即$k=0,\,1,\,\ldots,\,N-1$
+    \[
+    H(s)=\frac{\varOmega_c^N}{\displaystyle\prod_{k=0}^{N-1}(s-p_k\varOmega_c)}
+    \]
+
+    也可查表求传递函数分母，常见分母如下
+    \begin{itemize}
+      \item $N$=1：$p+1$
+      \item $N$=2：$p^2+\sqrt{2}p+1$
+      \item $N$=3：$(p^2+p+1)(p+1)$
+    \end{itemize}
+  \end{enumerate}
+\end{methodbox}
+
+\subsubsection{\russianfont Чебышёв滤波器（略）}
+
+\subsubsection{椭圆滤波器（略）}
+
+\subsection{模拟频率变换}
+
+\begin{table}[htbp]
+    \centering
+    \label{tab:filter-transform}
+    \renewcommand{\arraystretch}{2}
+    \setlength{\tabcolsep}{6pt}
+    \begin{tabular}{@{}clc@{}}
+        \toprule
+        滤波器类型 &
+        \shortstack{归一化低通滤波器 $H_{\mathrm{LP}}(p)$} &
+        \shortstack{需要变换 $p=q(s)$} \\
+        \midrule
+        \shortstack{低通$\leftrightarrow$低通\\
+        $H_{\mathrm{LP}}(s)\rightarrow H_{\mathrm{LP}}(p)$} &
+        $\begin{aligned}
+            \lambda_p &= \frac{1}{a},\quad
+            \lambda_s = \frac{\Omega_s}{a\Omega_p}
+        \end{aligned}$ &
+        $\displaystyle p=\frac{s}{a\Omega_p}$ \\
+        \addlinespace
+        \shortstack{低通$\leftrightarrow$高通\\
+        $H_{\mathrm{HP}}(s)\rightarrow H_{\mathrm{LP}}(p)$} &
+        $\begin{aligned}
+            \lambda_p &= \frac{1}{a},\quad
+            \lambda_s = \frac{\Omega_p}{a\Omega_s}
+        \end{aligned}$ &
+        $\displaystyle p=\frac{\Omega_p}{as}$ \\
+        \addlinespace
+        \shortstack{低通$\leftrightarrow$带通\\
+        $H_{\mathrm{LP}}(p)\rightarrow H_{\mathrm{BP}}(s)$} &
+        $\begin{aligned}
+            \lambda_p &= \frac{1}{a},\quad
+            \lambda_s = \frac{\Omega_{s2}-\Omega_{s1}}
+            {a(\Omega_{p2}-\Omega_{p1})}
+        \end{aligned}$ &
+        $\displaystyle p=\frac{s^2+\Omega_0^2}{aBs}$ \\
+        \addlinespace
+        \shortstack{低通$\leftrightarrow$带阻\\
+        $H_{\mathrm{LP}}(p)\rightarrow H_{\mathrm{BS}}(s)$} &
+        $\begin{aligned}
+            \lambda_p &= \frac{1}{a},\quad
+            \lambda_s = \frac{\Omega_{p2}-\Omega_{p1}}
+            {a(\Omega_{s2}-\Omega_{s1})}
+        \end{aligned}$ &
+        $\displaystyle p=\frac{Bs}{a(s^2+\Omega_0^2)}$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \end{document}

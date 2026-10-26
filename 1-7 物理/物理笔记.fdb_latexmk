@@ -1,11 +1,11 @@
 # Fdb version 4
-["xdvipdfmx"] 1792373657.15423 "物理笔记.xdv" "物理笔记.pdf" "物理笔记" 1792373658.45195 0
-  "物理笔记.xdv" 1792373656 181592 6fdde525f4103acc994c7f5ef59c1ea8 "xelatex"
+["xdvipdfmx"] 1793019307.53828 "物理笔记.xdv" "物理笔记.pdf" "物理笔记" 1793019309.31096 0
+  "物理笔记.xdv" 1793019306 181592 13a72e9872bb27611ece42fddc7420cd "xelatex"
   (generated)
   "物理笔记.pdf"
   (rewritten before read)
-["xelatex"] 1792373650.96236 "c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理/物理笔记.tex" "物理笔记.xdv" "物理笔记" 1792373658.41981 0
-  "c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理/物理笔记.tex" 1792373650 34064 a66391cc02fe0aac3c18b99b62ecda53 ""
+["xelatex"] 1793019297.61637 "c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理/物理笔记.tex" "物理笔记.xdv" "物理笔记" 1793019309.26628 0
+  "c:/Users/提剑遗金/Desktop/大学笔记/1-7 物理/物理笔记.tex" 1792395677 34037 d0401fb343ecf431ce4659309c77490f ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1778940926 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1778942685 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1778940319 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -237,9 +237,9 @@
   "c:/texlive/2026/texmf-dist/web2c/texmf.cnf" 1778940277 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt" 1778942812 5948911 ea8155f9c13d783de6fadab057f9449b ""
   "c:/texlive/2026/texmf.cnf" 1778942707 713 e69b156964470283e0530f5060668171 ""
-  "物理笔记.aux" 1792373656 8396 e0c1e9b4e187d1fca78cd66fa371524e "xelatex"
-  "物理笔记.out" 1792373656 6967 0572ef187acd92667d642e27edccce15 "xelatex"
-  "物理笔记.tex" 1792373650 34064 a66391cc02fe0aac3c18b99b62ecda53 ""
+  "物理笔记.aux" 1793019306 8396 e0c1e9b4e187d1fca78cd66fa371524e "xelatex"
+  "物理笔记.out" 1793019306 6967 0572ef187acd92667d642e27edccce15 "xelatex"
+  "物理笔记.tex" 1792395677 34037 d0401fb343ecf431ce4659309c77490f ""
   (generated)
   "物理笔记.aux"
   "物理笔记.log"
