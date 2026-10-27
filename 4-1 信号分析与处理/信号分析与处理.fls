@@ -323,6 +323,8 @@ INPUT c:/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT c:/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT c:/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/float/float.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/float/float.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/diagbox/diagbox.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/diagbox/diagbox.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/pict2e/pict2e.sty

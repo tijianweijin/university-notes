@@ -10,6 +10,7 @@
 \usepackage{enumitem}
 \usepackage{indentfirst}
 \usepackage{hyperref}
+\usepackage{float}
 
 \usepackage{tikz}
 \usepackage{diagbox}
@@ -1158,9 +1159,234 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
 
 \subsection{复频域分析}
 
-\subsubsection{Laplace级数}
+\subsubsection{Laurent级数}
+
+Laurent级数形式如下：
+\[
+\sum_{n=-\infty}^{\infty} a_n (z-z_0)^n
+\]
 
 \subsubsection{Laplace变换}
+
+\begin{enumerate}
+  \item 双边Laplace变换
+\[
+\LL\left\{x(t)\right\}=\int_{-\infty}^{\infty} x(t) e^{-s t} \dd t
+\]
+\[
+\LL^{-1}\left\{X(s)\right\}=\int_{\gamma-\jj\infty}^{\gamma+\jj\infty} X(s) e^{s t} \dd s
+\]
+
+  \item 单边Laplace变换
+\[
+\LL\left\{x(t)\right\}=\int_{0^-}^{\infty} x(t) e^{-s t} \dd t
+\]
+\[
+\LL^{-1}\left\{X(s)\right\}=\int_{\gamma-\jj\infty}^{\gamma+\jj\infty} X(s) e^{s t} \dd s
+\]
+
+  \item 收敛域（Region of Convergence，ROC）
+  
+  使Laplace变换收敛的$s$的取值范围称为收敛域。
+
+  不同信号的收敛域如下：
+  \begin{enumerate}[label=(\arabic*)]
+    \item 右边信号：$\RRe s>\sigma_0$
+    \item 左边信号：$\RRe s<\sigma_0$
+    \item 双边信号：$\sigma_1<\RRe s<\sigma_2$
+    \item 时限信号：$s \in \CC$
+  \end{enumerate}
+\end{enumerate}
+
+\subsubsection{基本信号的Laplace变换}
+
+\begin{center}
+\begin{table}[H]
+  \begin{tabularx}{\textwidth}{>{\bfseries}p{2.3cm} c c}
+    \toprule
+    信号 & 时域信号 & Laplace 变换 \\
+    \midrule
+    单位冲激信号 & $x(t)=\delta(t)$
+      & $X(s)=1,\quad s\in\CC$ \\
+
+    单位右边阶跃信号 & $x(t)=u(t)$
+      & $X(s)=\dfrac{1}{s},\quad \operatorname{Re}(s)>0$ \\
+
+    单位左边阶跃信号 & $x(t)=u(-t)$
+      & $X(s)=-\dfrac{1}{s},\quad \operatorname{Re}(s)<0$ \\
+
+    斜坡信号 & $x(t)=tu(t)$
+      & $X(s)=\dfrac{1}{s^2},\quad \operatorname{Re}(s)>0$ \\
+
+    右边余弦信号 & $x(t)=\cos(\varOmega_0t)u(t)$
+      & $X(s)=\dfrac{s}{s^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)>0$ \\
+
+    左边余弦信号 & $x(t)=\cos(\varOmega_0t)u(-t)$
+      & $X(s)=\dfrac{s}{s^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)<0$ \\
+
+    右边正弦信号 & $x(t)=\sin(\varOmega_0t)u(t)$
+      & $X(s)=\dfrac{\varOmega_0}{s^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)>0$ \\
+
+    左边正弦信号 & $x(t)=\sin(\varOmega_0t)u(-t)$
+      & $X(s)=-\dfrac{\varOmega_0}{s^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)<0$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\end{center}
+
+\subsubsection{其他常用Laplace变换}
+
+\begin{table}[H]
+  \begin{tabularx}{\textwidth}{>{\bfseries}p{3cm} c c}
+    \toprule
+    信号 & 时域信号 & Laplace 变换 \\
+    \midrule
+    右边指数信号 & $x(t)=\ee^{at}u(t)$
+      & $X(s)=\dfrac{1}{s-a},\quad \operatorname{Re}(s)>a$ \\
+
+    左边指数信号 & $x(t)=\ee^{at}u(-t)$
+      & $X(s)=-\dfrac{1}{s-a},\quad \operatorname{Re}(s)<a$ \\
+    
+    一般多次信号  & $x(t)=t^n u(t) \ee^{at}$
+      & $X(s)=\dfrac{n!}{s^{n+1}},\quad \RRe s > a$ \\
+
+    时移右边余弦信号 & $x(t)=\cos(\varOmega_0t)u(-t)\ee^{at}$
+      & $X(s)=\dfrac{s-a}{(s-a)^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)<a$ \\
+
+    时移右边正弦信号 & $x(t)=\sin(\varOmega_0t)u(t)\ee^{at}$
+      & $X(s)=\dfrac{\varOmega_0}{(s-a)^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)>a$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsubsection{Laplace变换性质}
+
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{
+    >{\bfseries}p{2cm}
+    >{\centering\arraybackslash}X
+    >{\centering\arraybackslash}p{3.2cm}
+  }
+    \toprule
+    性质 & 变化 & ROC 变化 \\
+    \midrule
+    线性
+    & $\LL\left\{a x_1(t)+b x_2(t)\right\}=aX_1(s)+bX_2(s)$
+    & $\text{ROC} \supseteq R_1\cap R_2$ \\
+
+    时移
+    & $\LL\left\{x(t-t_0)u(t-t_0)\right\}=\mathrm{e}^{-st_0}X(s)$
+    & 不变 \\
+
+    共轭
+    & $\LL\left\{x^*(t)\right\}=X^*(s^*)$
+    & 不变 \\
+
+    $s$ 域平移
+    & $\LL\left\{\mathrm{e}^{s_0t}x(t)\right\}=X(s-s_0)$
+    & $R_x+\operatorname{Re}(s_0)$ \\
+
+    尺度变换
+    & $\LL\left\{x(at)\right\}=\dfrac{1}{|a|}X\left(\dfrac{s}{a}\right)$
+    & 缩放为 $aR$ \\
+
+    时域微分
+    & $\LL\left\{\dfrac{\mathrm{d}x(t)}{\mathrm{d}t}\right\}=sX(s)$
+    & $\text{ROC} \supseteq R_x$ \\
+
+    时域积分
+    & $\LL\left\{\displaystyle\int_0^t x(\tau)\,\mathrm{d}\tau\right\}=\dfrac{X(s)}{s}$
+    & $R_x\cap\{\operatorname{Re}(s)>0\}$ \\
+
+    复频域微分
+    & $\LL\left\{t x(t)\right\}=-\dfrac{\mathrm{d}X(s)}{\mathrm{d}s}$
+    & 不变 \\
+
+    时域卷积
+    & $\LL\left\{x_1(t)*x_2(t)\right\}=X_1(s)X_2(s)$
+    & $\supseteq R_1\cap R_2$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\textwidth}{
+    @{}>{\bfseries}p{1.5cm}
+    >{\centering\arraybackslash}X
+    >{\centering\arraybackslash}X@{}
+  }
+    \toprule
+    运算 & Laplace 变换 & Laplace 逆变换 \\
+    \midrule
+
+    平移
+    & $\mathcal{L}\{x(t-t_0)u(t-t_0)\}
+        =X(s)\mathrm{e}^{-st_0}$
+    & $\mathcal{L}^{-1}\{X(s-s_0)\}
+        =x(t)u(t)\mathrm{e}^{s_0t}$ \\
+
+    共轭
+    & $\mathcal{L}\{x^*(t)\}=X^*(s^*)$
+    & $\mathcal{L}^{-1}\{X^*(s^*)\}=x^*(t)$ \\
+
+    尺度变换
+    & $\mathcal{L}\{x(at)\}
+        =\dfrac{1}{|a|}X\left(\dfrac{s}{a}\right)$
+    & $\mathcal{L}^{-1}\{X(as)\}
+        =\dfrac{1}{|a|}x\left(\dfrac{t}{a}\right)$ \\
+
+    微分
+    & $\mathcal{L}\left\{\dfrac{\mathrm{d}x(t)}{\mathrm{d}t}\right\}
+        =sX(s)$
+    & $\mathcal{L}^{-1}\{\dfrac{\dd X(s)}{\dd s}\}
+        =-tx(t)$ \\
+
+    积分
+    & $\mathcal{L}\left\{\displaystyle\int_0^t
+        x(\tau)\,\mathrm{d}\tau\right\}
+        =\dfrac{X(s)}{s}$
+    & $\mathcal{L}^{-1}\left\{\displaystyle\int_s^{+\infty}
+        x(\sigma)\,\mathrm{d}\sigma\right\}
+        =\dfrac{x(t)}{t}$ \\
+
+    卷积
+    & $\mathcal{L}\{x_1(t) \ast x_2(t)\}
+        =X_1(s)X_2(s)$
+    & $\mathcal{L}^{-1}\{X_1(s) \ast X_2(s)\}
+        =x_1(t)x_2(t)$ \\
+
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\boxed{\text{注：上述公式单双边变换较混乱，好在本科阶段不用分这么细，能熟记并运用即可。}}
+
+\begin{methodbox}[【技巧】Laplace反变换]
+  
+\end{methodbox}
+
+\begin{methodbox}[【题型】Laplace反变换]
+  \begin{itemize}
+    \item 部分分式展开法
+    对于多项式信号$X(s)=\dfrac{P(s)}{Q(s)}$，首先将其化为整式与真分式，
+    随后分别处理。
+    \begin{enumerate}[label=\arabic*.]
+      \item 整式：$X_0(s)=\sum_{i=0}^{n}c_i s^i \longleftrightarrow x_0(t)=\sum_{i=0}^{n}c_i \delta^{(i)}(t)$
+    \end{enumerate}
+    \item 留数定理法
+  \end{itemize}
+\end{methodbox}
+
+\subsubsection{Laplace变换和Fourier变换关系}
 
 \section{系统分析}
 
