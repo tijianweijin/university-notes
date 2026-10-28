@@ -52,14 +52,16 @@
 \setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
 \setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
 
+\newfontfamily\headingfont{TeX Gyre Heros}
+
 \ctexset{
-  section={format=\centering\heiti\zihao{3}\color{main},
+  section={format=\centering\heiti\headingfont\zihao{3}\color{main},
            name={第,章},number=\chinese{section},aftername=\quad,
            beforeskip=0.9em,afterskip=0.5em},
-  subsection={format=\heiti\zihao{5}\color{main},
+  subsection={format=\heiti\headingfont\zihao{5}\color{main},
               name={,、},number=\chinese{subsection},aftername=,
               beforeskip=0.6em,afterskip=0.22em},
-  subsubsection={format=\heiti\zihao{5}\color{main},
+  subsubsection={format=\heiti\headingfont\zihao{5}\color{main},
                  number={（\chinese{subsubsection}）},aftername=,
                  beforeskip=0.55em,afterskip=0.15em}
 }
@@ -94,7 +96,7 @@
 \begin{document}
 
 \begin{center}
-  {\heiti\zihao{1}\color{main} 解析几何笔记}
+  {\heiti\headingfont\zihao{1}\color{main} 解析几何笔记}
 \end{center}
 
 \subsection{平面}

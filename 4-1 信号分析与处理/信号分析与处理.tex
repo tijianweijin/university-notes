@@ -58,14 +58,16 @@
 \setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
 \setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
 
+\newfontfamily\headingfont{TeX Gyre Heros}
+
 \ctexset{
-  section={format=\centering\heiti\zihao{3}\color{main},
+  section={format=\centering\heiti\headingfont\zihao{3}\color{main},
             name={第,章},number=\chinese{section},aftername=\quad,
             beforeskip=0.9em,afterskip=0.5em},
-  subsection={format=\heiti\zihao{5}\color{main},
+  subsection={format=\heiti\headingfont\zihao{5}\color{main},
               name={,、},number=\chinese{subsection},aftername=,
               beforeskip=0.6em,afterskip=0.22em},
-  subsubsection={format=\heiti\zihao{5}\color{main},
+  subsubsection={format=\heiti\headingfont\zihao{5}\color{main},
                   number={（\chinese{subsubsection}）},aftername=,
                   beforeskip=0.55em,afterskip=0.15em}
 }
@@ -86,23 +88,23 @@
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
-\newcommand{\dd}{\mathrm{d}}
-\newcommand{\ppi}{\,\uppi}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ppi}{\,\uppi\,}
 \newcommand{\FF}{\mathcal{F}}
 \newcommand{\LL}{\mathcal{L}}
 \newcommand{\Sa}{\operatorname{Sa}}
 \newcommand{\RRe}{\operatorname{Re}}
 \newcommand{\IIm}{\operatorname{Im}}
 
-\newfontfamily\russianfont{Times New Roman}
+\newfontfamily\russianfont{DejaVu Sans}
 
 \begin{document}
 
 \begin{center}
-  {\heiti\zihao{1}\color{main} 信号分析与处理笔记}
+  {\heiti\headingfont\zihao{1}\color{main} 模拟信号分析笔记}
 \end{center}
 
-\section{信号与系统}
+\section{信号分析}
 
 \subsection{信号}
 
@@ -192,6 +194,8 @@
 功率受限信号$ \Leftrightarrow 0 < P < \infty, E = \infty $ 
 \end{enumerate}
 
+\subsection{时域分析}
+
 \subsubsection{经典信号}
 
 注：如未说明，默认$t \in \left ( -\infty, \infty \right )$。
@@ -253,9 +257,11 @@
       \int_{-\infty}^{\infty} \delta(t) \dd t = 1, \qquad \delta(t) = 0, \, \forall \, t \neq 0
       \]
 
-      \begin{methodbox}[【技巧】单位冲激信号用处]
+      \begin{methodbox}[【技巧】单位冲激信号性质]
         \begin{itemize}
-          \item 取样：$\displaystyle x(\tau) = \int_{-\infty}^{\infty} x(t) \delta(t-\tau) \dd t$
+          \item 取样：$\displaystyle \int_{-\infty}^{\infty} x(t) \delta(t-t_0) \dd t = x(t_0) $
+          \item 展缩：$\delta(at) = \dfrac{1}{|a|} \delta(t)$
+          \item 卷积：$\delta(\mathcal{T}(t)) \ast x(t) = x(\mathcal{T}(t)) = x(\mathcal{T}(t))$，其中$\mathcal{T}$为时移、微积分算子。
         \end{itemize}
       \end{methodbox}
 
@@ -271,8 +277,15 @@
 
       \begin{methodbox}[矩形信号]
         持续时间为$[\tau_1, \tau_2]$的矩形信号可表示为两阶跃信号的差，即
+        
         \[
-        x(t) = A \left [ u(t-\tau_1) - u(t-\tau_2) \right ]
+        x(t) = E \left [ u(t-\tau_1) - u(t-\tau_2) \right ]
+        \]
+
+        特殊地，记
+        
+        \[
+        R(t) = E \left [ u\left(t+\frac{\tau}{2}\right) - u\left(t-\frac{\tau}{2}\right) \right ]
         \]
       \end{methodbox}
 
@@ -299,7 +312,7 @@
       
       其Fourier变换为
       \[
-      \FF \left\{ x(t) \right\} = \dfrac{ET}{2} \Sa^2 \left( \frac{T}{4} \varOmega \right)
+      \FF \left\{ x(t) \right\} =\frac{2}{T} \left[\sqrt{E}R\left(\frac{2t}{T}\right)\right] \ast \left[\sqrt{E}R\left(\frac{2t}{T}\right)\right] = \dfrac{ET}{2} \Sa^2 \left( \frac{T}{4} \varOmega \right)
       \]
     \end{itemize}
 
@@ -340,11 +353,11 @@
       \begin{itemize}
         \item 面积解释： 当两个信号均为非负信号时，卷积值可理解为两信号乘积的重叠“面积”；若信号存在正负，则应理解为乘积的代数积分，而不能简单看成几何面积。
 
-        \item 系统意义： 卷积本质上就是 LTI 系统对各时刻输入所产生响应的叠加。
+        \item 系统意义： 卷积本质上就是线性时不变系统对各时刻输入所产生响应的叠加。
       \end{itemize}
     \end{methodbox}
     \begin{methodbox}[卷积性质]
-      \begin{enumerate}
+      \begin{enumerate}[label=\arabic*.]
 
       \item \textbf{代数性质}
 
@@ -504,109 +517,6 @@
   \]
 
 \end{enumerate}
-
-\subsection{系统}
-
-\subsubsection{表示}
-
-\begin{itemize}
-  \item 基本运算单元
-  \item 线性常系数微分方程
-\end{itemize}
-
-\subsubsection{基本概念}
-系统是对输入信号进行加工、变换、处理，并产生输出信号的物理装置。
-
-\subsubsection{冲激响应与阶跃响应}
-
-冲激响应是系统对单位冲激信号的响应，记为$h(t)$。冲激响应是系统的特征函数，能够完全描述系统的性质。
-
-阶跃响应是系统对单位阶跃信号的响应，记为$g(t)$。
-
-\begin{methodbox}[二者关系]
-  \[
-  g(t)=\int_{-\infty}^{t}h(\tau)\dd\tau=h(t) \ast u(t),\, h(t)=\frac{\dd g(t)}{\dd t}
-  \]
-\end{methodbox}
-
-任意输入信号$x(t)$的输出信号$y(t)$可以表示为冲激响应的卷积，即
-\[
-y(t) = x(t) \ast h(t)
-\]
-
-\subsubsection{典型冲激响应}
-
-\begin{center}
-\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X}
-\toprule
-系统类型 & 冲激响应 $h(t)$ \\
-\midrule
-        标量乘法器 & $h(t)=a\delta(t)$ \\
-        微分器 & $h(t)=\dfrac{\mathrm{d}\delta(t)}{\mathrm{d}t}=\delta'(t)$ \\
-        积分器 & $h(t)=\displaystyle\int_{-\infty}^{t}\delta(\tau)\,\mathrm{d}\tau=u(t)$ \\
-        延时器 & $h(t)=\delta(t-\tau)$ \\
-\bottomrule
-\end{tabularx}
-\end{center}
-
-\subsubsection{分类}
-
-\begin{enumerate}
-  
-  \item 线性系统与非线性系统
-  
-  线性系统满足齐次性和叠加性，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$是线性算子。
-  
-  \begin{methodbox}[线性系统的判定]
-  
-    \[\mathcal{T}\left\{ax_1(t) + bx_2(t)\right\} = a\mathcal{T}\left\{x_1(t)\right\} + b\mathcal{T}\left\{x_2(t)\right\}\]
-  
-  一般线性系统的响应可以写成各输入信号的线性组合。
-
-  加法、微分、积分等运算都是线性算子。
-  
-  注意：表达式带常数的系统一般不是线性系统，例如$y(t)=2x(t)+3$。
-  可用$\mathcal{T}\left\{x(0)\right\}=0$快速判断。
-  
-  \end{methodbox}
-
-  \item 时变系统与时不变系统
-  
-  时不变系统的运行规则不会随时间推移发生改变，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$不是$t$的函数。
-
-  \begin{methodbox}[时不变系统的判定]
-    \[\mathcal{T}\left\{x(t-t_0)\right\} = y(t-t_0)\]
-    
-    常见反例：$y(t)=x(2t)$，$y(t)=tx(t)$。
-  \end{methodbox}
-
-  \item 因果系统与非因果系统
-  
-  因果系统的输出仅由当前和过去的输入决定，亦即$y(t_0)$只依赖于$x(t), \, t \in \left ( -\infty, t_0 \right ]$。
-
-  \begin{methodbox}[因果系统的判定]
-    因果系统冲激响应满足$h(t)=0,\, t<0$的一般都是非因果系统。
-    
-    一般包含$x(t+a),\, a>0$的都是非因果系统，如$y(t)=x(t+1)$。
-  \end{methodbox}
-
-  \item 稳定系统与不稳定系统
-
-  稳定系统（BIBO稳定）在接入有限大小的输入信号时，能够产生有限范围的输出信号。
-
-  \begin{methodbox}[稳定系统的判定]
-    \[\int_{-\infty}^{+\infty} h(t) \dd t < \infty\]
-    
-    常见反例：$h(t)=sin(\omega_0 t)u(t)$。
-  \end{methodbox}
-
-  \begin{methodbox}[因果稳定系统的判定]
-    零极点图上的极点均位于左半平面。
-  \end{methodbox}
-
-\end{enumerate}
-
-\section{信号分析}
 
 \subsection{频域分析}
 
@@ -1171,18 +1081,18 @@ Laurent级数形式如下：
 \begin{enumerate}
   \item 双边Laplace变换
 \[
-\LL\left\{x(t)\right\}=\int_{-\infty}^{\infty} x(t) e^{-s t} \dd t
+\LL\left\{x(t)\right\}=\int_{-\infty}^{\infty} x(t) \ee^{-s t} \dd t
 \]
 \[
-\LL^{-1}\left\{X(s)\right\}=\int_{\gamma-\jj\infty}^{\gamma+\jj\infty} X(s) e^{s t} \dd s
+\LL^{-1}\left\{X(s)\right\}=\int_{\gamma-\jj\infty}^{\gamma+\jj\infty} X(s) \ee^{s t} \dd s
 \]
 
   \item 单边Laplace变换
 \[
-\LL\left\{x(t)\right\}=\int_{0^-}^{\infty} x(t) e^{-s t} \dd t
+\LL\left\{x(t)\right\}=\int_{0^-}^{\infty} x(t) \ee^{-s t} \dd t
 \]
 \[
-\LL^{-1}\left\{X(s)\right\}=\int_{\gamma-\jj\infty}^{\gamma+\jj\infty} X(s) e^{s t} \dd s
+\LL^{-1}\left\{X(s)\right\}=\int_{\gamma-\jj\infty}^{\gamma+\jj\infty} X(s) \ee^{s t} \dd s
 \]
 
   \item 收敛域（Region of Convergence，ROC）
@@ -1202,7 +1112,8 @@ Laurent级数形式如下：
 
 \begin{center}
 \begin{table}[H]
-  \begin{tabularx}{\textwidth}{>{\bfseries}p{2.3cm} c c}
+  \centering
+  \begin{tabularx}{\textwidth}{>{\bfseries}p{3cm} c c}
     \toprule
     信号 & 时域信号 & Laplace 变换 \\
     \midrule
@@ -1241,6 +1152,7 @@ Laurent级数形式如下：
 \subsubsection{其他常用Laplace变换}
 
 \begin{table}[H]
+  \centering
   \begin{tabularx}{\textwidth}{>{\bfseries}p{3cm} c c}
     \toprule
     信号 & 时域信号 & Laplace 变换 \\
@@ -1325,7 +1237,7 @@ Laurent级数形式如下：
     >{\centering\arraybackslash}X@{}
   }
     \toprule
-    运算 & Laplace 变换 & Laplace 逆变换 \\
+    运算 & Laplace 变换 & Laplace 反变换 \\
     \midrule
 
     平移
@@ -1377,13 +1289,92 @@ Laurent级数形式如下：
 \begin{methodbox}[【题型】Laplace反变换]
   \begin{itemize}
     \item 部分分式展开法
+    
     对于多项式信号$X(s)=\dfrac{P(s)}{Q(s)}$，首先将其化为整式与真分式，
     随后分别处理。
     \begin{enumerate}[label=\arabic*.]
       \item 整式：$X_0(s)=\sum_{i=0}^{n}c_i s^i \longleftrightarrow x_0(t)=\sum_{i=0}^{n}c_i \delta^{(i)}(t)$
+      \item 真分式：将真分式$X_1(s)$展开为部分分式$\displaystyle\sum_{i=1}^{n}\frac{K_i}{(s-p_i)^r}$，分别作Laplace反变换
+      
+      \[
+      \LL^{-1}\left\{\frac{K_i}{(s-p_i)^r}\right\} = K_i \frac{t^{r-1}}{(r-1)!} e^{p_i t} u(t),\, s.t.\, \RRe s > \RRe p_i
+      \]
+      \[
+      \LL^{-1}\left\{\frac{K_i}{(s-p_i)^r}\right\} = K_i \frac{t^{r-1}}{(r-1)!} e^{p_i t} [-u(-t)],\, s.t.\, \RRe s < \RRe p_i
+      \]
+      其中$K_i$可由留数法求得。
+      
+      \[
+      K_i=\left.X_1(s)(s-p_i)^r\right|_{s=p_i}
+      \]
+      
+      注意到左边信号只需要把右边信号的$u(t)$换为$-u(-t)$即可，故后续只以右边信号为例。
+
+      其中，特殊极点类型有特殊的方法来计算Laplace反变换。下列例中均以右边信号为例：
+      \begin{itemize}
+        \item $p_i$为单实数极点，分式形如$\dfrac{K_i}{s-p_i}$
+        
+        \[
+        \LL^{-1}\left\{X(s)\right\}=K_i u(t) e^{p_i t}
+        \]
+        
+        \item $p_i$为重极点，分式形如$\displaystyle\sum_{k=1}^{r}\dfrac{K_{i,k}}{(s-p_i)^k}$：
+        
+        \[
+        \LL^{-1}\left\{X(s)\right\}=K_{i,k} \dfrac{t^{k-1}}{(k-1)!} u(t) e^{p_i t}
+        \]
+        
+        \item $p_{1,\,2}=\alpha\pm\varOmega_0$为共轭复数极点，$K=C+\jj D$，分式形如$\dfrac{K}{s-p_1}+\dfrac{K^\ast}{s-p_2}$
+
+        \[
+        \LL^{-1}\left\{X(s)\right\}=2e^{\alpha t} \left[C\cos (\varOmega_0 t) - D\sin (\varOmega_0 t)\right]  u(t) 
+        \]
+
+      \end{itemize}
     \end{enumerate}
-    \item 留数定理法
+    \item 留数定理法（略）
   \end{itemize}
+\end{methodbox}
+
+\begin{methodbox}[【理解】复常微分方程与部分分式展开法]
+  将有理分式信号看作系统的响应函数，则有
+  
+  \[
+  H(s)=\frac{Y(s)}{X(s)}=\frac{P(s)}{Q(s)}
+  \]
+  \[
+  Q(s)Y(s)=P(s)X(s)
+  \]
+
+  考虑$\LL\left\{\dfrac{\dd}{\dd t}x(t)\right\}=sX(s)$，作Laplace反变换，得到
+  
+  \[
+  Q\left(\frac{\dd}{\dd t}\right)\left\{y(t)\right\}=P\left(\frac{\dd}{\dd t}\right)\left\{x(t)\right\}
+  \]
+
+  不难看出，Laplace所做变换$\dfrac{\dd}{\dd t} \longrightarrow s$
+  和常微分方程求特征方程变换$\dfrac{\dd}{\dd t}\longrightarrow r$是同构的。
+  这就解释了部分分式展开法所得函数与常微分方程解为什么形式相似了。
+  其他可以对应的概念如下表所示：
+
+  \begin{center}
+    \centering
+    \begin{tabularx}{\textwidth}{
+    @{}
+    >{\centering\arraybackslash}X
+    >{\centering\arraybackslash}X@{}
+    }
+      \toprule
+      Laplace 变换 & 常微分方程 \\
+      \midrule
+      分母多项式 $A(s)=0$ & 特征方程 $P(r)=0$ \\
+      系统函数的极点 $p_i$ & 特征根 $r_i$ \\
+      极点的重数 & 特征根的重数 \\
+      极点对应的时域函数 & 齐次方程的基本解 \\
+      具体响应系数$K_i$ & 待定常数$C_i$ \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
 \end{methodbox}
 
 \subsubsection{Laplace变换和Fourier变换关系}
@@ -1392,7 +1383,108 @@ Laurent级数形式如下：
 
 系统分析主要围绕冲激响应$h(t)$、$H(\jj \varOmega)$和$H(s)$进行。
 
-\subsection{频域分析}
+\subsection{系统}
+
+\subsubsection{表示}
+
+\begin{itemize}
+  \item 基本运算单元
+  \item 线性常系数微分方程
+\end{itemize}
+
+\subsubsection{基本概念}
+系统是对输入信号进行加工、变换、处理，并产生输出信号的物理装置。
+
+\subsubsection{冲激响应与阶跃响应}
+
+冲激响应是系统对单位冲激信号的响应，记为$h(t)$。冲激响应是系统的特征函数，能够完全描述系统的性质。
+
+阶跃响应是系统对单位阶跃信号的响应，记为$g(t)$。
+
+\begin{methodbox}[二者关系]
+  \[
+  g(t)=\int_{-\infty}^{t}h(\tau)\dd\tau=h(t) \ast u(t),\, h(t)=\frac{\dd g(t)}{\dd t}
+  \]
+\end{methodbox}
+
+任意输入信号$x(t)$的输出信号$y(t)$可以表示为冲激响应的卷积，即
+\[
+y(t) = x(t) \ast h(t)
+\]
+
+\subsubsection{典型冲激响应}
+
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X}
+\toprule
+系统类型 & 冲激响应 $h(t)$ \\
+\midrule
+        标量乘法器 & $h(t)=a\delta(t)$ \\
+        微分器 & $h(t)=\dfrac{\mathrm{d}\delta(t)}{\mathrm{d}t}=\delta'(t)$ \\
+        积分器 & $h(t)=\displaystyle\int_{-\infty}^{t}\delta(\tau)\,\mathrm{d}\tau=u(t)$ \\
+        延时器 & $h(t)=\delta(t-\tau)$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{分类}
+
+\begin{enumerate}
+  
+  \item 线性系统与非线性系统
+  
+  线性系统满足齐次性和叠加性，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$是线性算子。
+  
+  \begin{methodbox}[线性系统的判定]
+  
+    \[\mathcal{T}\left\{ax_1(t) + bx_2(t)\right\} = a\mathcal{T}\left\{x_1(t)\right\} + b\mathcal{T}\left\{x_2(t)\right\}\]
+  
+  一般线性系统的响应可以写成各输入信号的线性组合。
+
+  加法、微分、积分等运算都是线性算子。
+  
+  注意：表达式带常数的系统一般不是线性系统，例如$y(t)=2x(t)+3$。
+  可用$\mathcal{T}\left\{x(0)\right\}=0$快速判断。
+  
+  \end{methodbox}
+
+  \item 时变系统与时不变系统
+  
+  时不变系统的运行规则不会随时间推移发生改变，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$不是$t$的函数。
+
+  \begin{methodbox}[时不变系统的判定]
+    \[\mathcal{T}\left\{x(t-t_0)\right\} = y(t-t_0)\]
+    
+    常见反例：$y(t)=x(2t)$，$y(t)=tx(t)$。
+  \end{methodbox}
+
+  \item 因果系统与非因果系统
+  
+  因果系统的输出仅由当前和过去的输入决定，亦即$y(t_0)$只依赖于$x(t), \, t \in \left ( -\infty, t_0 \right ]$。
+
+  \begin{methodbox}[因果系统的判定]
+    因果系统冲激响应满足$h(t)=0,\, t<0$的一般都是非因果系统。
+    
+    一般包含$x(t+a),\, a>0$的都是非因果系统，如$y(t)=x(t+1)$。
+  \end{methodbox}
+
+  \item 稳定系统与不稳定系统
+
+  稳定系统（BIBO稳定）在接入有限大小的输入信号时，能够产生有限范围的输出信号。
+
+  \begin{methodbox}[稳定系统的判定]
+    \[\int_{-\infty}^{+\infty} h(t) \dd t < \infty\]
+    
+    常见反例：$h(t)=sin(\omega_0 t)u(t)$。
+  \end{methodbox}
+
+  \begin{methodbox}[因果稳定系统的判定]
+    零极点图上的极点均位于左半平面。
+  \end{methodbox}
+
+\end{enumerate}
+
+\subsection{频域与复频域分析}
 \begin{center}
 \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X X X}
 \toprule
@@ -1463,6 +1555,14 @@ $H(s)=H_0\frac{\displaystyle\prod_{j=1}^{m}(s-z_j)}{\displaystyle\prod_{i=1}^{n}
 从$X(s)$出发，将能够到达$Y(s)$的最简路径全部列出，路径内部相乘路径之间相加（后称写成线性形式）作为分子；
 从$X(s)$出发，将能够到达$X(s)$的最简路径（包括1）全部列出，写成线性形式作为分母；
 这样便得到了冲激响应$H(s)$。
+
+此外还有Mason公式
+
+\[
+H(s)=\frac{1}{\varDelta}\sum_{i=1}^{n}{P_i\varDelta_i}
+\]
+
+不多赘述。
 
 \subsubsection{从冲激响应求信号流图}
 

@@ -1,0 +1,1268 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,bm,esint}
+\usepackage{upgreek}
+\usepackage[nolimits]{cmupint}
+\usepackage{booktabs,tabularx,array,longtable}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\definecolor{main}{HTML}{C96A70}
+\definecolor{mainlight}{HTML}{FFFFFF}
+\definecolor{method}{HTML}{C99A9C}
+\definecolor{methodlight}{HTML}{FFF4F4}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\newfontfamily\headingfont{TeX Gyre Heros}
+
+\ctexset{
+  section={format=\centering\heiti\headingfont\zihao{3}\color{main},
+           name={第,章},number=\chinese{section},aftername=\quad,
+           beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\headingfont\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\headingfont\zihao{5}\color{main},
+                 number={（\chinese{subsubsection}）},aftername=,
+                 beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+\newtcolorbox{method}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\s}{def}
+
+\begin{document}
+\pagestyle{plain}
+
+\begin{center}
+  {\heiti\headingfont\zihao{1}\color{main} 物理笔记}
+\end{center}
+
+\vspace{0.45em}
+
+\begin{relationbox}
+\[
+  \boxed{\text{力学}}
+  \longrightarrow
+  \boxed{\text{电磁学}}
+  \longrightarrow
+  \boxed{\text{热学}}
+  \longrightarrow
+  \boxed{\text{现代物理基础}}
+\]
+\end{relationbox}
+
+\section{力学}
+
+\subsection{质点运动学}
+
+\subsubsection{平动运动参数与公式}
+
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X X}
+\toprule
+ & 自然坐标 & 直角坐标 & 极坐标 \\
+\midrule
+位置 & \(s=f(t)\) & \(\vect r=x\vect i+y\vect j+z\vect k\) & \(\vect r=r\vect e_r\) \\
+速度 & \(\vect v=\dot s\vect e_t\) & \(\vect v=\dot x\vect i+\dot y\vect j+\dot z\vect k\) & \(\vect v=\dot r\vect e_r+r\dot\theta\vect e_\theta\) \\
+加速度 & \(\displaystyle\vect a=\dot v\vect e_t+\frac{v^2}{\rho}\vect e_n\) & \(\vect a=\ddot x\vect i+\ddot y\vect j+\ddot z\vect k\) & \(\displaystyle\vect a=(\ddot r-r\dot\theta^2)\vect e_r+(r\ddot\theta+2\dot r\dot\theta)\vect e_\theta\) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+注：自然坐标的加速度可分解为切向加速度与法向加速度；极坐标的速度可分解为径向速度与角向速度，加速度可分解为径向加速度与角向加速度。
+
+自然坐标中的 \(\rho\) 是 \(s\) 的函数，有
+\[
+  \rho=\frac{1}{\kappa}=\frac{1}{\left\lVert\dfrac{\dif\vect e_t}{\dif s}\right\rVert}.
+\]
+故速度和加速度都是 \(s\) 的函数。
+
+\subsubsection{转动运动参数与公式}
+
+角速度
+\[
+  \omega=\frac{\dif\theta}{\dif t},
+  \qquad
+  \text{角加速度}\quad \alpha=\frac{\dif^2\theta}{\dif t^2}.
+\]
+
+\subsubsection{平动参考系变换}
+
+\[
+  \vect v_a=\vect v_r+\vect v_e,
+  \qquad
+  \vect a_a=\vect a_r+\vect a_e.
+\]
+
+其中带 \(a\) 者为绝对（加）速度，带 \(r\) 者为相对（加）速度，带 \(e\) 者为牵连（加）速度。
+
+\subsection{质点动力学}
+
+\subsubsection{Newton 三大定律}
+
+\begin{enumerate}
+  \item 惯性定律：处于平衡状态的物体满足 \(\sum\vect F=0\)。
+  \item 加速度定律：
+  \[
+    \sum\vect F=\frac{\dif(m\vect v)}{\dif t}=m\vect a.
+  \]
+  \item 作用与反作用定律：\(\vect F_{12}+\vect F_{21}=0\)。
+\end{enumerate}
+
+\subsubsection{常见力}
+
+\begin{enumerate}
+  \item 万有引力
+
+  性质：场力、主动力、保守力
+  \[
+    \vect F=-G\frac{m_1m_2}{r^2}\vect e_r.
+  \]
+
+  大小变化：
+  \[
+    F=
+    \begin{cases}
+      \displaystyle G\frac{m_1m_2}{R^3}x, & x<R,\\[4pt]
+      \displaystyle G\frac{m_1m_2}{x^2}, & x\ge R.
+    \end{cases}
+  \]
+
+  重量：
+  \[
+    P=G\frac{m_Em}{R^2}\overset{\mathrm{def}}{=}mg.
+  \]
+
+  \item 弹性力
+
+  性质：被动力（弹簧弹力：保守力）
+
+  Hooke 定律：\(\vect F=-k\vect x\)。
+
+  \item 摩擦力
+
+  性质：被动力、非保守力
+  \[
+    0\le f\le f_{\max}=\mu_0N,
+    \qquad
+    f=\mu N,
+    \qquad
+    \text{一般 }\mu\le\mu_0.
+  \]
+\end{enumerate}
+
+\subsubsection{平动惯性力}
+
+\[
+  \vect F_Q=-m\vect a_r,
+\]
+惯性力方向与相对运动方向相反。
+
+\subsection{功与能}
+
+\subsubsection{变力做功}
+
+\[
+  W=\int_a^b\vect F\cdot\dif\vect r.
+\]
+
+\begin{method}[【方法】求变力做功]
+求变力做功时要先求出 \(\vect F\) 关于 \(\vect r\) 的函数。
+
+功率为
+\[
+  P=\frac{\dif W}{\dif t}=\vect F\cdot\vect v.
+\]
+\end{method}
+
+\subsubsection{常见力的功/势能}
+
+\begin{enumerate}
+  \item 重力：\(E_{\mathrm p}=mgh,\quad W=-\Delta E_{\mathrm p}\)。
+  \item 万有引力：\(\displaystyle E_{\mathrm p}=-G\frac{m_1m_2}{r},\quad W=-\Delta E_{\mathrm p}\)。
+  \item 弹性力：\(\displaystyle E_{\mathrm p}=\frac12kx^2,\quad W=-\Delta E_{\mathrm p}\)。
+  \item 摩擦力：\(\displaystyle W=-\int_a^b\mu N\dif s\)。
+\end{enumerate}
+
+\subsubsection{保守力}
+
+\[
+  \vect F_{\mathrm c}=-\nabla E_{\mathrm p}.
+\]
+
+\begin{method}[【方法】判断保守力]
+积分表示：
+\[
+  \oint_{(C)}\vect F\cdot\dif\vect r=0.
+\]
+
+向量表示：
+\[
+  \nabla\times\vect F=0.
+\]
+
+分量表示：
+\[
+  \frac{\partial F_x}{\partial y}-\frac{\partial F_y}{\partial x}=0.
+\]
+\end{method}
+
+\subsubsection{功能定理}
+
+\begin{enumerate}
+  \item 质点动能定理：\(\sum W=\Delta E_{\mathrm k}\)。
+  \item 质点系动能定理：\(\sum W^{\mathrm e}+\sum W^{\mathrm i}=\Delta E_{\mathrm k}\)。
+  \item[] ※ 内力做功只与相对位移有关：
+  \[
+    W^{\mathrm i}=\int_a^b\vect F\cdot\dif\vect r_r.
+  \]
+  \item 机械能守恒定律：只有保守力做功，机械能不变。
+  \item 保守力功能关系：\(\sum W^{\text{保}}+\Delta E_{\mathrm p}=0\)。
+  \item 非保守力功能关系：\(\sum W^{\text{非}}=\Delta E\)。
+\end{enumerate}
+
+\subsection{冲量与动量}
+
+\subsubsection{冲量动量定理}
+
+\begin{enumerate}
+  \item 质点动量定理：\(\displaystyle\Delta\vect p=\int_a^b\vect F\cdot\dif t\)。
+  \item 质点系动量定理：\(\sum\vect I^{\mathrm e}=\Delta\vect p\)。
+  \item 质点动量守恒定律：作用在质点上的力矢量和恒为 0，则质点动量不变。
+  \item 质点系动量守恒定律：作用在质点系上的外力矢量和恒为 0，则质点系动量不变。
+\end{enumerate}
+
+\subsubsection{正碰}
+
+\begin{method}[【题型】正碰]
+\begin{enumerate}
+  \item 碰撞系数 \(e\)：由两物体材料决定，计算式
+  \[
+    e=\frac{v_2-v_1}{v_{10}-v_{20}}.
+  \]
+
+  \begin{center}
+  \begin{tabularx}{0.92\textwidth}{>{\centering\arraybackslash}p{2cm}X}
+  \toprule
+  \(e>1\) & 不可能发生（能量增加，违背能量守恒，除非内部爆炸否则不考虑）\\
+  \(e=1\) & 弹性碰撞（动能守恒）\\
+  \(0<e<1\) & 一般碰撞\\
+  \(e=0\) & 完全非弹性碰撞（共速）\\
+  \(e<0\) & 不可能发生（碰撞未完成）\\
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
+  \item 末速度
+  \[
+    \begin{cases}
+      \displaystyle v_1=v_{10}-\frac{m_2}{m_1+m_2}(1+e)(v_{10}-v_{20}),\\[6pt]
+      \displaystyle v_2=v_{20}+\frac{m_1}{m_1+m_2}(1+e)(v_{10}-v_{20}).
+    \end{cases}
+  \]
+
+  \item 能量损失
+  \[
+    \Delta E_{\mathrm k}=\frac12\frac{m_1m_2}{m_1+m_2}(1-e^2)(v_{10}-v_{20})^2.
+  \]
+
+  \item 斜碰可以按正交方向分解速度和力，在正交方向上可以按正碰处理。
+\end{enumerate}
+\end{method}
+
+\subsubsection{质心与质心运动定理}
+
+\begin{enumerate}
+  \item 质心：\(\displaystyle\vect r_C=\frac{\int\vect r\dif m}{m}\)。
+  \item 质心运动定理：\(m\vect a_C=\sum\vect F\)。
+  \item 质心运动定理（动量形式）：\(m\vect v_C=\sum m\vect v\)。
+\end{enumerate}
+
+\subsection{力矩与动量矩}
+
+\subsubsection{力矩}
+
+\begin{enumerate}
+  \item 定义：\(\vect M=\vect r\times\vect F\)。
+\end{enumerate}
+
+注：确定力矩必须先确定参考点！
+
+\begin{enumerate}[resume]
+  \item 常见力矩：重力矩 \(\vect M_g=\vect r_c\times m\vect g\)。
+\end{enumerate}
+
+\subsubsection{动量矩}
+
+\begin{enumerate}
+  \item 定义：\(\vect L=\vect r\times m\vect v\)。
+\end{enumerate}
+
+注：确定动量矩要先确定参考点！
+
+\begin{enumerate}[resume]
+  \item 常见动量矩：
+
+  直线运动：\(L=mvd\)，其中 \(d\) 是参考点到直线的距离。
+
+  圆周运动：\(L_O=m\omega r^2\)（以圆心为参考点）。
+\end{enumerate}
+
+\subsubsection{力矩动量矩定理}
+
+\begin{enumerate}
+  \item 质点动量矩定理：\(\displaystyle\vect M=\frac{\dif\vect L}{\dif t}\)。
+  \item 质点系动量矩定理：\(\displaystyle\sum\vect M^{\mathrm e}=\frac{\dif\sum\vect L}{\dif t}\)。
+  \item 质点动量矩守恒定律：当质点对某参考点的力矩为 0 时，则质点对该点的动量矩守恒。
+  \item 质点系动量矩守恒定律：当质点系对某参考点的外力矩为 0 时，则质点系对该点的动量矩守恒。
+\end{enumerate}
+
+特殊情况：匀速直线运动；有心力对力心动量矩守恒；\(\vect r\) 和 \(\vect F\) 平行。
+
+\subsection{刚体运动学}
+
+\subsubsection{刚体与自由度}
+
+\begin{enumerate}
+  \item 刚体：在力作用下大小和形状都保持不变的物体。
+  \item 自由度：确定物体位置需要的独立坐标数。
+\end{enumerate}
+
+常见自由度：沿曲线平动——1，在曲面上平动——2，自由平动——3，平动+绕定轴转动——4，平动+绕定点转动——6。
+
+刚体的位置可以由 6 个自由度确定。
+
+\subsubsection{刚体平动}
+
+任意时刻平动刚体上各点速度和加速度相同。
+
+\subsubsection{刚体转动}
+
+\begin{enumerate}
+  \item 任意时刻绕定轴转动刚提上各点速度和加速度大小与该点到转轴的距离成正比。
+  \item 任意时刻角位移、角速度、角加速度对刚体内各点相同。
+\end{enumerate}
+
+\subsubsection{角速度矢量和角加速度矢量}
+
+\begin{enumerate}
+  \item 角速度矢量：大小 \(\displaystyle\omega=\frac{\dif\theta}{\dif t}\)，方向由右手螺旋定则确定。
+  \item 角加速度矢量：\(\displaystyle\vect\alpha=\frac{\dif\vect\omega}{\dif t}\)。
+  \item 线量与角量关系：
+  \[
+    \vect v=\vect\omega\times\vect r,
+    \qquad
+    \vect a_t=\vect\alpha\times\vect r,
+    \qquad
+    \vect a_n=\vect\omega\times\vect v,
+  \]
+  其中 \(\vect r\) 由旋转中心指向质心。
+\end{enumerate}
+
+\subsection{刚体动力学}
+
+\subsubsection{转动定律}
+
+\begin{enumerate}
+  \item 转动惯量：
+  \[
+    J=\int_{(V)}r^2\dif m=\iiint_{(V)}\mu r^2\dif V.
+  \]
+
+  \item 常见的转动惯量（绕质心轴）：
+
+  \begin{center}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{0.98\linewidth}{X X X X X X}
+  \toprule
+  均质圆环 & \(mR^2\) & 均质圆盘/圆柱 & \(\frac12mR^2\) & 均质球体 & \(\frac25mR^2\)\\
+  均质球壳 & \(\frac23mR^2\) & 均质细杆 & \(\frac1{12}ml^2\) & 均质长方形板 & \(\frac1{12}m(l^2+b^2)\)\\
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
+  * 均质圆柱壳绕直径：\(\displaystyle\frac12mR^2+\frac1{12}mb^2\)；均质细杆绕端点轴：\(\displaystyle\frac13ml^2\)。
+
+  \item 平行轴定理：\(J=J_z+mh^2\)，其中 \(J_z\) 是质心轴。
+  \item 转动定律：\(\vect M^{\mathrm e}=J\vect\alpha\)。
+\end{enumerate}
+
+\subsubsection{定轴转动的功和能}
+
+\begin{enumerate}
+  \item 转动功：\(\displaystyle W=\int_a^b\vect M\cdot\vect e_t\dif\theta\)。
+  \item 转动动能：\(\displaystyle E_{\mathrm k}=\frac12J\omega^2\)。
+  \item 转动动能定理：\(\sum W=\Delta E_{\mathrm k}\)。
+\end{enumerate}
+
+\subsubsection{定轴转动的动量矩定理与动量矩守恒}
+
+\begin{enumerate}
+  \item 动量矩定理：
+  \[
+    \Delta L=\Delta(J\omega)=\int_{t_0}^{t}M\dif t.
+  \]
+  \item 动量矩守恒：作用在刚体上的外力矩为 0，则刚体对转动轴的动量矩保持不变。
+\end{enumerate}
+
+\subsubsection{进动}
+
+进动角速度大小：
+\[
+  \Omega=\frac{mgb}{J\omega},
+\]
+其中 \(b\) 为质心到转动点的距离，\(\omega\) 为转动角速度大小。
+
+\section{电磁学}
+
+\subsection{电磁场}
+
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{6pt}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.455\textwidth}|>{\raggedright\arraybackslash}p{0.455\textwidth}|}
+\hline
+\centering 静电场 & \centering\arraybackslash 恒定磁场\\ \hline
+\endfirsthead
+\hline
+\centering 静电场 & \centering\arraybackslash 恒定磁场\\ \hline
+\endhead
+
+\centering 电荷
+\begin{enumerate}
+  \item 分类：正电荷与负电荷。
+  \item 元电荷 \(e=1.6\times10^{-19}\,\mathrm C\)。
+  \item 电荷守恒定律：孤立系统总电荷代数和不变。
+\end{enumerate}
+& \centering\arraybackslash /（目前尚未发现磁单极子）\\ \hline
+
+\centering 电偶极子
+\begin{enumerate}
+  \item 电偶极矩 \(\vect p=q\vect l\)，方向由负电荷指向正电荷。
+  \item 中垂线上电场强度
+  \[
+    \vect E=-\frac{1}{4\pi\varepsilon_0}\frac{\vect p}{r^3}.
+  \]
+  \item 匀强电场中电势能 \(W=-\vect p\cdot\vect E\)。
+\end{enumerate}
+& \centering\arraybackslash 磁偶极子 \\
+磁偶极子做功$U=- \vect m \cdot \vect B$ \\
+\hline
+
+\centering 电场线
+\begin{enumerate}
+  \item 电场线切线方向指示电场强度方向；
+  \item 电场线密集程度指示电场强度大小。
+\end{enumerate}
+& \centering\arraybackslash 磁场线
+\begin{enumerate}
+  \item 电场线切线方向指示电场强度方向；
+  \item 电场线密集程度指示电场强度大小。
+\end{enumerate}
+\\ \hline
+
+\centering 电等势面
+\begin{enumerate}
+  \item 电等势面法向方向指示电场强度方向；
+  \item 电等势面密集程度指示电场强度大小。
+\end{enumerate}
+& \centering\arraybackslash /（磁场无源）\\ \hline
+
+\centering 电场强度 \(\vect E\)
+\begin{enumerate}
+  \item 定义式：\(\displaystyle\vect E=\frac{\vect F}{q}\)。
+  \item 电场强度加法具有矢量性，即电场强度叠加原理。
+\end{enumerate}
+& \centering\arraybackslash 磁感应强度 \(\vect B\)
+\begin{enumerate}
+  \item 定义式：\(\displaystyle\vect B=\frac{\dif \vect F}{I \dif \vect l}\)。
+  \item 磁感应强度加法具有矢量性，即磁感应强度叠加原理。
+  \item Ampère力公式: \(\dif \vect F = \vect B \cdot I \dif \vect l\)
+  \item Biot-Savart 定律：\(\displaystyle \dif \vect B = \frac{\mu_0}{4\pi} \frac{I \dif \vect l \times \vect r}{r^3}\)。
+\end{enumerate}
+\\ \hline
+
+\centering 电通量 \(\varPhi_{\mathrm e}\)
+\begin{enumerate}
+  \item 定义式：
+  \[
+    \varPhi_{\mathrm e}=\iint\dif\varPhi_{\mathrm e}=\iint\vect E\cdot\dif\vect S.
+  \]
+\end{enumerate}
+\vspace{0.45em}
+& \centering\arraybackslash 磁通量 \(\varPhi_{\mathrm b}\)\\ 
+\begin{enumerate}
+  \item 定义式：
+  \[
+    \varPhi_{\mathrm b}=\iint\dif\varPhi_{\mathrm b}=\iint\vect B\cdot\dif\vect S.
+  \]
+\end{enumerate}\\
+\hline
+
+\centering 电势 \(V\)
+\begin{enumerate}
+  \item 定义式：\(\displaystyle V=\frac{W}{q}\)。
+  \item 电势差：\(V_{ab}=V_a-V_b\)。
+  \item 电势加法具有标量性，即电势叠加原理。
+  \item 电场强度是电势的负梯度，即 \(\vect E=-\nabla V\)。
+\end{enumerate}
+& \centering\arraybackslash 磁矢势 \(\vect A\)\\ \hline
+
+\centering 电势能 \(W\)
+\begin{enumerate}
+  \item 定义式：\(\displaystyle W_a=\int_a^{\text{``0''}}q_a\vect E\cdot\dif\vect l\)。
+  \item 计算式：\(W=qV\)。
+  \item 常见零参考点：无穷远处或地球。
+\end{enumerate}
+& \centering\arraybackslash /（磁场无源）\\ \hline
+
+\centering 电场能量密度 \(w\)
+\begin{enumerate}
+  \item 定义式：\(\displaystyle w=\frac{W}{V}\)。
+  \item 决定式：\(\displaystyle w=\frac12\varepsilon_0E^2\)。
+\end{enumerate}
+& \\ \hline
+
+\centering Coulomb 定律
+\begin{enumerate}
+  \item 矢量形式：
+  \[
+    \vect F=\frac{1}{4\pi\varepsilon_0}\frac{q_1q_2}{r^2}\vect e.
+  \]
+\end{enumerate}
+\vspace{0.45em}
+& \\ \hline
+
+\centering 静电场环路定理
+\begin{enumerate}
+  \item 积分形式：\(\displaystyle\oint\vect E\cdot\dif\vect l=0\)。
+  \item 微分形式：\(\nabla\times\vect E=0\)。
+  \item 环路定理理解
+  \begin{enumerate}
+    \item 静电场是有势场（保守场），静电力是保守力；
+    \item 静电场是无旋场，电场线不能闭合；
+    \item 若静电场方向处处相同，则沿垂直于该方向的方向上电场强度大小不变。
+  \end{enumerate}
+\end{enumerate}
+& \centering\arraybackslash Ampère环路定理
+\begin{enumerate}
+  \item 积分形式：\(\displaystyle\oint\vect B\cdot\dif\vect l=\mu_0 \sum_L I_{i}\)。
+  \item 微分形式：\(\nabla\times\vect B=\mu_0\vect J\)。
+  \item 理解：恒定磁场是有旋场，故磁场线可以闭合；
+\end{enumerate}
+\\ \hline
+
+\centering 电Gauss定理
+\begin{enumerate}
+  \item 积分形式：
+  \[
+    \oiint\vect E\cdot\dif\vect S=\frac{1}{\varepsilon_0}\iiint\rho\dif V.
+  \]
+  \item 微分形式：\(\displaystyle\nabla\cdot\vect E=\frac{\rho}{\varepsilon_0}\)。
+  \item 正方向：闭合曲面一般取向外为正方向。
+  \item 根据对称性选 Gauss 面：圆柱面（线性）、球面。
+  \item Gauss 定理理解
+  \begin{enumerate}
+    \item 电场强度 \(\vect E\) 由全部电荷决定，闭合曲面电场强度通量由内部电荷量 \(\sum q_{\text{内}}\) 决定；
+    \item Gauss 定理+各向同性=Coulomb 定律。
+  \end{enumerate}
+\end{enumerate}
+& \centering\arraybackslash 磁Gauss定理
+\begin{enumerate}
+  \item 积分形式：
+  \[
+    \oiint\vect B\cdot\dif\vect S=0.
+  \]
+  \item 微分形式：\(\displaystyle\nabla\cdot\vect B=0\)。
+  \item 正方向：闭合曲面一般取向外为正方向。
+  \item 理解：磁场无源。
+\end{enumerate}
+\\ \hline
+
+\centering 完备性描述
+
+Coulomb 定律和叠加原理能完备描述静电场。
+
+Gauss定理和环路定理能完备描述静电场。
+
+& \centering\arraybackslash 完备性描述
+
+Biot-Savart定律和叠加原理能完备描述静电场。
+
+Gauss定理和Ampère环路定理能完备描述静电场。
+
+\\ \hline
+
+\centering 电容 \(C\)
+\begin{enumerate}
+  \item 定义式：\(\displaystyle C=\frac{Q}{V}\)。
+\end{enumerate}
+\vspace{0.8em}
+& \\ \hline
+
+\centering 静电场中的导体
+
+静电平衡
+\begin{enumerate}
+  \item 所带电荷只分布在带电体表面上的；
+  \item 电场强度与电荷密度成正比，\(\displaystyle\vect E=\frac{\sigma}{\varepsilon_0}\vect e_n\)；
+  \item 电荷密度与表面曲率正相关（尖端放电）。
+\end{enumerate}
+
+静电感应与静电屏蔽
+\begin{enumerate}
+  \item
+\end{enumerate}
+& \\ \hline
+
+\centering 电介质
+\begin{enumerate}
+  \item 极化：极性分子取向极化，非极性分子位移极化。
+  \item 电场强度：合电场强度小于原电场强度。
+  \item 电容：\(C=\varepsilon_rC_0\)。
+  \item 电位移矢量：\(\vect D=\varepsilon_0\varepsilon_r\vect E\)。
+  \item 电介质 Gauss 定理：
+  \[
+    \oiint\vect D\cdot\dif\vect S=\sum q_{0i}.
+  \]
+\end{enumerate}
+\par\vspace{1.2em}
+& \\ \hline
+
+\multicolumn{2}{|c|}{电磁场}\\ \hline
+\multicolumn{2}{|c|}{Maxwell 方程组}\\ \hline
+
+\centering 微分形式
+
+\[
+\left\{
+\begin{aligned}
+\nabla\cdot\vect{E} &= \frac{\rho}{\varepsilon_0}\\
+\nabla\cdot\vect{B} &= 0\\
+\nabla\times\vect{E} &= -\frac{\partial\vect{B}}{\partial t}\\
+\nabla\times\vect{B} &= \mu_0\vect{J}
++\mu_0\varepsilon_0\frac{\partial\vect{E}}{\partial t}
+\end{aligned}
+\right.
+\]
+
+& \centering\arraybackslash 积分形式
+
+\[
+\left\{
+\begin{aligned}
+\oiint_S \vect{E}\cdot\dif \vect{S}
+&= \frac{Q_{\mathrm{in}}}{\varepsilon_0}\\
+\oiint_S \vect{B}\cdot\dif \vect{S}
+&= 0\\
+\oint_C \vect{E}\cdot\dif \vect{l}
+&= -\frac{\dif}{\dif t}
+\iint_S \vect{B}\cdot\dif \vect{S}\\
+\oint_C \vect{B}\cdot\dif \vect{l}
+&= \mu_0 I_{\mathrm{in}}
++\mu_0\varepsilon_0\frac{\dif}{\dif t}
+\iint_S \vect{E}\cdot\dif \vect{S}
+\end{aligned}
+\right.
+\]
+
+\\ \hline
+
+\end{longtable}
+\endgroup
+
+\begin{method}[【注意】电磁场]
+\begin{enumerate}
+  \item 电磁场要注意正负电荷与电场线指向的方向；
+  \item 电场强度积分时要注意用第二型线积分。
+\end{enumerate}
+\end{method}
+
+\subsection{电生磁}
+微观形式：运动电荷产生磁场：$\vect B=\displaystyle\frac{\mu_0}{4\pi}\frac{q\vect v\times\vect e_r}{r^2}$
+
+宏观形式：Biot-Savart 定律：$\vect B=\displaystyle\frac{\mu_0}{4\pi}\int\frac{I\dif\vect l\times\vect e_r}{r^2}$
+
+运动电荷电磁场关系：$ \vect B = \mu_0 \epsilon_0 \vect v \times \vect E $
+
+\subsection{磁场对电流的作用}
+\begin{enumerate}
+  \item 微观表现：Lorentz力：$\vect F = q \vect v \times \vect B$
+  \\ 洛伦兹力不作功。
+  
+  \item 宏观表现：Ampère力：$ \dif \vect F = I \dif \vect l \times \vect B$
+  
+  做功：$ W = I \Delta \varPhi $
+  
+  \item 电磁场对运动电荷的力：$\vect F = q \left (\vect E + \vect v \times \vect B \right )$
+  
+  \item 匀强磁场对平面载流线圈：$\vect F = I \dif \vect l \times \vect B$
+  
+  磁矩$ \vect m = I S \vect \ee_\mathrm{n}$
+  
+  磁力矩 $ \vect M = \vect m \times \vect B$
+
+  磁力矩做功为$ W = I \Delta \varPhi $
+\end{enumerate}
+
+\subsection{常见电学理想模型}
+
+\begin{center}
+\small
+\begin{tabularx}{0.99\textwidth}{>{\raggedright\arraybackslash}p{3.2cm}X X}
+\toprule
+& 电场强度 \(\vect E\) & 电势 \(V\)\\
+\midrule
+无限长均匀带电直线 & \(\displaystyle\vect E=\frac{\lambda}{2\pi r\varepsilon_0}\vect \ee_r\) & \(\displaystyle V_P=-\frac{\lambda}{2\pi\varepsilon_0}\ln\frac r{r_0}\)（其中 \(r_0\) 为参考点半径）\\
+无限大均匀带电平面 & \(\displaystyle\vect E=\frac{\sigma}{2\varepsilon_0}\vect \ee_n\) & \\
+均匀带电细圆环（对称轴上） & \(\displaystyle E=\frac{1}{4\pi\varepsilon_0}\frac{qx}{(R^2+x^2)^{3/2}}\) & \\
+均匀带电圆平板（对称轴上） & \(\displaystyle\vect E=\frac{q}{2\pi\varepsilon_0R^2}\left[1-\frac{x}{(R^2+x^2)^{1/2}}\right]\vect \ee_i\) & \(\displaystyle V=\frac{1}{4\pi\varepsilon_0}\frac qx\)\\
+均匀带电球壳 & \(\displaystyle\vect E=\frac{q}{4\pi r^2\varepsilon_0}\vect \ee_r\) & \(\displaystyle V=\begin{cases}\frac{1}{4\pi\varepsilon_0}\frac qR,&0<r\le R,\\[2pt]\frac{1}{4\pi\varepsilon_0}\frac qr,&r>R.\end{cases}\)\\
+均匀带电球体 & \(\displaystyle\vect E=\begin{cases}\frac{\rho}{3\varepsilon_0}\vect r,&0<r\le R,\\[2pt]\frac{\rho}{3\varepsilon_0}\frac{R^3}{r^2}\vect \ee_r,&r>R.\end{cases}\) & \(\displaystyle V=\begin{cases}\frac{Q(3R^2-r^2)}{8\pi\varepsilon_0R^3},&0<r\le R,\\[2pt]\frac{1}{4\pi\varepsilon_0}\frac qr,&r>R.\end{cases}\)\\
+电偶极子 & \(\displaystyle E=\frac{p}{4\pi\varepsilon_0r^3}\sqrt{3\cos^2\theta+1}\) & \(\displaystyle V=\frac{1}{4\pi\varepsilon_0}\frac{p}{\sqrt{y^2+x^2}}\cos\theta\)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{常见电学理想电容器}
+
+\begin{center}
+\begin{tabularx}{0.96\textwidth}{>{\raggedright\arraybackslash}p{3.8cm}X X}
+\toprule
+ & 电容 \(C\) & 电场能 \(W\)\\
+\midrule
+带电金属球 & \(\displaystyle C=4\pi\varepsilon_0 R\) & \(\displaystyle W=\frac{Q^2}{8\pi\varepsilon_0R}\)\\
+平行板电容器 & \(\displaystyle C=\frac{\varepsilon_0S}{d}\) & \\
+同轴圆柱电容器 & \(\displaystyle C=\frac{2\pi\varepsilon_0L}{\ln(R_2/R_1)}\) & \(\displaystyle W=\frac{Q^2}{4\pi\varepsilon_0l}\ln\frac{R_2}{R_1}\)\\
+同心球电容器 & \(C=4\pi\varepsilon_0(R_1\parallel R_2)\) & \\
+两长直导线 & \(\displaystyle C=\frac{\pi\varepsilon_0}{\ln(d/a)}\) & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+\subsection{常见磁学理想模型}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{0.99\textwidth}{
+    >{\raggedright\arraybackslash}p{3.5cm}
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{模型} & \textbf{磁感应强度 $\vect B$} \\
+\midrule
+
+有限长均匀载流直导线 &
+$\displaystyle
+\vect B =
+\frac{\mu_0 I}{4\pi r}
+(\sin\theta_1+\sin\theta_2)
+\vect \ee_\varphi
+$ \\
+
+半无限长均匀载流直导线 &
+$\displaystyle
+\vect B =
+\frac{\mu_0 I}{4\pi r}
+\vect \ee_\varphi
+$ \\
+
+无限长均匀载流直导线 &
+$\displaystyle
+\vect B =
+\frac{\mu_0 I}{2\pi r}
+\vect \ee_\varphi
+$ \\
+
+载流圆线圈轴线上 &
+$\displaystyle
+\vect B =
+\frac{\mu_0 NIR^2}
+{2(R^2+x^2)^{3/2}}
+\vect \ee_z
+$ \\
+
+Helmholtz 线圈轴线上 &
+$\displaystyle
+\vect B =
+\frac{\mu_0 NIR^2}{2}
+\left[
+\frac{1}{(R^2+x^2)^{3/2}}
++
+\frac{1}{(R^2+(x-R)^2)^{3/2}}
+\right]\vect \ee_z
+$ \\
+
+有限长载流螺线管轴线上 &
+$\displaystyle
+\vect B =
+\frac{\mu_0 nI}{2}
+(\cos\theta_1-\cos\theta_2)
+\vect \ee_z
+$ \\
+
+无限长载流螺线管内部 &
+$\displaystyle
+\vect B = \mu_0 nI\vect \ee_z
+$ \\
+
+无限长载流螺线管外部 &
+$\displaystyle
+\vect B = \vect 0
+$ \\
+
+无限宽均匀载流平面 &
+$\displaystyle
+\vect B =
+\pm\frac{\mu_0 K}{2}\vect \ee_y
+$ \\
+
+\bottomrule
+\end{tabularx}
+\end{center}
+\section{热学}
+
+\subsection{气体动力学}
+
+\subsubsection{基础概念}
+
+\begin{enumerate}
+  \item 一切宏观物体都是由大量分子组成的，分子都在永不停息的做无序热运动，分子之间有相互作用的分子力。
+  \item 分子力经验公式：
+  \[
+    F=\frac{\lambda}{r^s}-\frac{\mu}{r^t},
+    \qquad s>t.
+  \]
+  \[
+    r_0=\left(\frac{\mu}{\lambda}\right)^{\frac{1}{t-s}}
+  \]
+  为气体分子的平衡位置。当 \(r<r_0\) 时，分子力表现为斥力；当 \(r>r_0\) 时，分子力表现为引力。
+  \item 分子势能
+\end{enumerate}
+
+\subsubsection{理想气体压强}
+
+\[
+  p=\frac13nm_0\overline{v_0^2}=\frac23n\overline\varepsilon.
+\]
+
+其中 \(\overline\varepsilon\) 为分子平均平动动能。
+
+\subsubsection{理想气体分子速率、动能与理想气体温度}
+
+\begin{enumerate}
+  \item Maxwell 速率分布定律
+  \[
+    f(v)=4\pi\left(\frac{m_0}{2\pi kT}\right)^{3/2}v^2\ee^{-\frac{m_0v^2}{2kT}}.
+  \]
+  其中 \(m_0\) 为分子质量，\(k\) 为 Boltzmann 常数。
+
+  \item 分子速率的三种统计平均值
+
+  平均速率
+  \[
+    \overline v=\sqrt{\frac{8kT}{\pi m_0}}=1.59\sqrt{\frac{RT}{M}},
+    \qquad
+    \text{平均速度 }\overline{\vect v}=0.
+  \]
+
+  方均根速率
+  \[
+    \sqrt{\overline{v^2}}=\sqrt{\frac{3kT}{m_0}}=1.73\sqrt{\frac{RT}{M}},
+  \]
+  单向方均根速率
+  \[
+    \sqrt{\overline{v_x^2}}=\sqrt{\frac{kT}{m_0}}=\sqrt{\frac{RT}{M}}.
+  \]
+
+  最概然速率
+  \[
+    v_{\mathrm p}=\sqrt{\frac{2kT}{m_0}}=1.41\sqrt{\frac{RT}{M}}.
+  \]
+
+  \item 气体分子平均平动动能
+  \[
+    \overline\varepsilon=\frac32kT.
+  \]
+
+  \item 能量按自由度均分定理
+
+  分子平均动能
+  \[
+    \overline\varepsilon=\frac i2kT,
+  \]
+  \(i\) 为自由度数量。
+
+  分子平均能量
+  \[
+    \overline\varepsilon=\frac{t+r+2s}{2}kT.
+  \]
+
+  \item 理想气体内能
+  \[
+    E=\nu\frac i2RT.
+  \]
+
+  \item 理想气体单位体积平动动能
+  \[
+    E=\frac32p.
+  \]
+\end{enumerate}
+
+\subsubsection{Boltzmann分布律}
+
+\[
+  n=n_0\ee^{-\frac{\varepsilon_{\mathrm p}}{kT}}.
+\]
+
+在重力场中表现为
+\[
+  n=n_0\ee^{-\frac{mgh}{kT}}.
+\]
+
+\subsubsection{理想气体自由程}
+
+理想气体分子平均碰撞频率
+\[
+  \overline Z=\sqrt2\pi d^2\overline v n.
+\]
+
+理想气体自由程
+\[
+  \overline\lambda=\frac{\overline v}{\overline Z}
+  =\frac{1}{\sqrt2\pi d^2n}
+  =\frac{kT}{\sqrt2\pi d^2p}.
+\]
+
+\subsection{热力学基础}
+
+\subsubsection{理想气体}
+
+\begin{enumerate}
+  \item 气体状态参量：体积（\(V\)），压强（也称压力，\(p\)）、温度（\(T\)）。
+  \item 平衡态：在没有外界环境的影响下，系统各部分的宏观性质长时间不发生变化。具体表现为力平衡、热平衡与物质平衡。
+  \[
+    \begin{cases}
+      \text{各点压强相等：}&p_1=p_2=\cdots,\\
+      \text{各点温度相等：}&T_1=T_2=\cdots,\\
+      \text{各点化学势相等：}&\mu_1=\mu_2=\cdots.
+    \end{cases}
+  \]
+\end{enumerate}
+
+\subsubsection{理想气体物态方程（Clapeyron 方程）}
+
+\begin{enumerate}
+  \item 理想气体物态方程（Clapeyron 方程）
+  \[
+    pV=\nu RT.
+  \]
+  其中 \(\nu=\dfrac mM\) 是气体物质的量，摩尔气体常量 \(R=8.134\,\mathrm{J\cdot mol^{-1}\cdot K^{-1}}\)。当温度一般、压强较低时，气体近似服从该方程。该方程也记作
+  \[
+    pV=NkT.
+  \]
+  其中 \(N\) 是粒子数，Boltzmann 常数 \(k=1.38\times10^{-23}\,\mathrm{J\cdot K^{-1}}\)，有 \(R=kN_A\)。
+
+  \item 全微分形式
+  \[
+    p\dif V+V\dif p=\nu R\dif T.
+  \]
+  在研究等压、等容、等温过程时较便利。
+
+  \item 两平衡态形式
+  \[
+    \frac{p_1V_1}{T_1}=\frac{p_2V_2}{T_2}.
+  \]
+  在研究两平衡态时较便利。
+
+  \item 混合气体物态方程
+  \[
+    pV=\frac mMRT.
+  \]
+  其中 \(m\) 为单种气体质量，\(M\) 为气体总质量。注意与 Clapeyron 方程中的 \(\nu=\dfrac mM\) 区分。
+\end{enumerate}
+
+\subsubsection{热力学第一定律}
+
+\begin{enumerate}
+  \item 宏观形式
+  \[
+    \Delta U=Q-W.
+  \]
+  \item 微分形式
+  \[
+    \dif U=\delta Q-\delta W.
+  \]
+\end{enumerate}
+
+由于 \(Q\) 与 \(W\) 不是状态函数，故无微分，用 \(\delta\) 表示小量。
+
+\subsubsection{理想气体平衡过程（准静态过程）}
+
+\begin{enumerate}
+  \item 平衡过程气体做功
+  \[
+    \dif W=p\dif V.
+  \]
+  故在 \(p\)-\(V\) 曲线图中，曲线下方所围面积即功的大小。
+
+  \item 平衡过程热力学第一定律
+  \[
+    \dif U=\delta Q-p\dif V.
+  \]
+
+  \item 热容与比热容比
+
+  Joule 定律：理想气体的内能是温度的函数，即 \(U=U(T)\)。
+
+  热容
+  \[
+    C_x=\left(\frac{\dif U}{\dif T}\right)_x.
+  \]
+  根据过程不同可分为：
+  \[
+    C_{V,\mathrm m}=\left(\frac{\dif U}{\dif T}\right)_V,
+    \qquad
+    C_{p,\mathrm m}=\left(\frac{\dif U}{\dif T}\right)_p,
+  \]
+  二者有 Meyer 公式
+  \[
+    C_{p,\mathrm m}=C_{V,\mathrm m}+R.
+  \]
+
+  定义
+  \[
+    \gamma=\frac{C_{p,\mathrm m}}{C_{V,\mathrm m}}
+  \]
+  为比热容比。
+
+  单原子理想气体分子可取 \(C_{V,\mathrm m}=\dfrac32R,\ \gamma=\dfrac53\)；双原子理想气体分子可取 \(C_{V,\mathrm m}=\dfrac52R,\ \gamma=\dfrac75\)。
+\end{enumerate}
+
+\subsubsection{各种准静态过程}
+
+\begin{enumerate}
+  \item 等容过程
+  \[
+    \begin{cases}
+      W=0,\\
+      Q=\nu C_{V,\mathrm m}\Delta T=\dfrac VR C_{V,\mathrm m}\Delta p,\\
+      U=Q.
+    \end{cases}
+  \]
+
+  \item 等压过程
+  \[
+    \begin{cases}
+      W=p\Delta V=\nu R\Delta T,\\
+      Q=\nu C_{p,\mathrm m}\Delta T,\\
+      U=Q-W=\nu C_{V,\mathrm m}\Delta T.
+    \end{cases}
+  \]
+
+  注意这里的 \(p\) 是外界压强。气体在真空中扩散不做功。
+
+  \item 等温过程
+  \[
+    \begin{cases}
+      U=0,\\
+      Q=\nu RT\ln\dfrac{V_2}{V_1}=\nu RT\ln\dfrac{p_1}{p_2},\\
+      W=Q.
+    \end{cases}
+  \]
+
+  ※ 注意压强 \(p\) 与体积 \(V\) 的上下关系相反。
+
+  \item 绝热过程
+
+  ※ 绝热过程比等温过程陡，即相同体积变化下压强变化更大。
+
+  绝热过程方程（Poisson 方程）
+  \[
+    pV^\gamma=C_1,
+    \qquad
+    TV^{\gamma-1}=C_2,
+    \qquad
+    p^{\gamma-1}T^\gamma=C_3.
+  \]
+  \[
+    \begin{cases}
+      Q=0,\\
+      \displaystyle W=-\nu C_{V,\mathrm m}\Delta T
+      =-\frac{1}{\gamma-1}(p_2V_2-p_1V_1)
+      =-\frac{\nu R}{\gamma-1}\Delta T,\\[4pt]
+      U=-W.
+    \end{cases}
+  \]
+\end{enumerate}
+
+\subsubsection{热机效率与制冷系数}
+
+\[
+  \eta=1-\frac{Q_2}{Q_1}.
+\]
+
+对任意准静态过程组成的过程，其热机效率均等于 Carnot 过程热机效率，即
+\[
+  \eta=1-\frac{T_2}{T_1}.
+\]
+
+对应地，有制冷系数
+\[
+  \omega=\frac{Q_2}{Q_1-Q_2}.
+\]
+
+\subsubsection{热力学第二定律（略）}
+
+\section{现代物理基础}
+
+\subsection{狭义相对论力学基础}
+
+\subsubsection{两个基本假设}
+
+\begin{enumerate}
+  \item 相对性原理：物理定律在所有惯性系中都具有相同的形式。
+  \item 光速不变原理：在所有惯性系中，光在真空中的传播速率具有相同的值 \(c\)。
+\end{enumerate}
+
+\subsubsection{Lorentz 变换}
+
+记
+\[
+  \gamma=\frac{1}{\sqrt{1-\left(\dfrac uc\right)^2}},
+\]
+有
+\[
+  x'=\gamma(x-ut),
+  \qquad
+  t'=\gamma\left(t-\frac{u}{c^2}x\right).
+\]
+
+注：此处的 \(t\) 不是时间间隔而是时刻。
+
+\subsubsection{狭义相对论时空观}
+
+\begin{enumerate}
+  \item 同时性的相对性
+
+  若两个事件在某一惯性系中为同时异地事件，则在其他惯性系中必定不是同时发生的，这就是同时性的相对性；在一个惯性系中同时同地发生的事件，即在其它惯性系也必同时同地发生，因此同时性的相对性只是对两个同时事件发生在不同地点而言，当两个同时事件发生于同一地点时，同时性是绝对的。
+  \[
+    t_2'-t_1'=\frac{\dfrac{u}{c^2}(x_2-x_1)}{\gamma}.
+  \]
+
+  \item 时间延缓效应（钟慢效应）
+  \[
+    \tau'=\gamma\tau.
+  \]
+  注：要求所测位置相同，即 \(x_1'=x_2'\)。
+
+  \item 长度收缩效应（尺缩效应）
+  \[
+    L'=\frac L\gamma.
+  \]
+  注：要求所测物体相对惯性系静止，即 \(t_1=t_2\)。
+\end{enumerate}
+
+\subsubsection{狭义相对论动力学}
+
+\begin{enumerate}
+  \item 三维坐标速度变换
+  \[
+    v_x'=\frac{v_x-u}{1-uv_x/c^2},
+    \qquad
+    v_y'=\frac{v_y}{\gamma(1-uv_x/c^2)},
+    \qquad
+    v_z'=\frac{v_z}{\gamma(1-uv_x/c^2)}.
+  \]
+
+  \item 相对论质量
+  \[
+    m'=\gamma m.
+  \]
+
+  \item 相对论动量
+  \[
+    \vect p'=\gamma\vect p=\gamma m\vect v.
+  \]
+
+  \item 相对论能量与相对论动能
+  \[
+    E=mc^2,
+    \qquad
+    E_{\mathrm k}=mc^2-m_0c^2.
+  \]
+
+  \item 相对论牛顿第二定律
+  \[
+    \vect F=\frac{\dif}{\dif t}(\gamma m\vect v).
+  \]
+
+  \item 相对论能量动量关系
+  \[
+    E^2=E_0^2+(pc)^2.
+  \]
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,135 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,bm,esint}
+\usepackage{upgreek}
+\usepackage[nolimits]{cmupint}
+\usepackage{booktabs,tabularx,array,longtable}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\definecolor{main}{HTML}{C96A70}
+\definecolor{mainlight}{HTML}{FFFFFF}
+\definecolor{method}{HTML}{C99A9C}
+\definecolor{methodlight}{HTML}{FFF4F4}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\newfontfamily\headingfont{TeX Gyre Heros}
+
+\ctexset{
+  section={format=\centering\heiti\headingfont\zihao{3}\color{main},
+           name={第,章},number=\chinese{section},aftername=\quad,
+           beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\headingfont\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\headingfont\zihao{5}\color{main},
+                 number={（\chinese{subsubsection}）},aftername=,
+                 beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+\newtcolorbox{method}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\s}{def}
+
+
+\begin{document}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{|p{0.455\textwidth}|p{0.455\textwidth}|}
+\hline
+\centering 微分形式
+
+\(\displaystyle
+\left\{
+\begin{aligned}
+\nabla\cdot\vect{E} &= \frac{\rho}{\varepsilon_0}\\
+\nabla\cdot\vect{B} &= 0\\
+\nabla\times\vect{E} &= -\frac{\partial\vect{B}}{\partial t}\\
+\nabla\times\vect{B} &= \mu_0\vect{J}
++\mu_0\varepsilon_0\frac{\partial\vect{E}}{\partial t}
+\end{aligned}
+\right.
+\)\par
+
+& \centering\arraybackslash 积分形式
+
+\(\displaystyle
+\left\{
+\begin{aligned}
+\oiint_S \vect{E}\cdot\dif \vect{S}
+&= \frac{Q_{\mathrm{in}}}{\varepsilon_0}\\
+\oiint_S \vect{B}\cdot\dif \vect{S}
+&= 0\\
+\oint_C \vect{E}\cdot\dif \vect{l}
+&= -\frac{\dif}{\dif t}
+\iint_S \vect{B}\cdot\dif \vect{S}\\
+\oint_C \vect{B}\cdot\dif \vect{l}
+&= \mu_0 I_{\mathrm{in}}
++\mu_0\varepsilon_0\frac{\dif}{\dif t}
+\iint_S \vect{E}\cdot\dif \vect{S}
+\end{aligned}
+\right.
+\)\par
+
+\\ \hline
+
+
+\end{longtable}
+\end{document}
