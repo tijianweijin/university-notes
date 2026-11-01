@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  31 OCT 2026 21:44
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  1 NOV 2026 21:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1191,21 +1191,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 1045--1047
 
  []
 
-[4] [5] [6] (./数字电路笔记.aux)
+[4] [5] [6] [7] (./数字电路笔记.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `数字电路笔记.out' has not changed.
-(rerunfilecheck)             Checksum: DDA9EAA4F88B8C7C8BF8538E019AB11D;1525.
+(rerunfilecheck)             Checksum: 5103460843CEADBF3BC18D0ED8161F9A;2258.
  ) 
 Here is how much of TeX's memory you used:
- 54025 strings out of 468168
- 1369945 string characters out of 5436524
- 2106176 words of memory out of 5000000
- 82105 multiletter control sequences out of 15000+600000
+ 54045 strings out of 468168
+ 1371421 string characters out of 5436524
+ 2106179 words of memory out of 5000000
+ 82125 multiletter control sequences out of 15000+600000
  634471 words of font info for 105 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  116i,15n,121p,489b,1178s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 数字电路笔记.xdv (6 pages, 118760 bytes).
+Output written on 数字电路笔记.xdv (7 pages, 127888 bytes).

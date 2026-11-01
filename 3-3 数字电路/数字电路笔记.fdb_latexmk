@@ -1,11 +1,11 @@
 # Fdb version 4
-["xdvipdfmx"] 1793454255.72853 "数字电路笔记.xdv" "数字电路笔记.pdf" "数字电路笔记" 1793454256.39633 0
-  "数字电路笔记.xdv" 1793454255 118760 6dbe1afc0158f44339a0e7f8b8da3157 "xelatex"
+["xdvipdfmx"] 1793541580.27093 "数字电路笔记.xdv" "数字电路笔记.pdf" "数字电路笔记" 1793541580.94643 0
+  "数字电路笔记.xdv" 1793541580 127888 a3b801b18ba8bd41305647f6a433eb8c "xelatex"
   (generated)
   "数字电路笔记.pdf"
   (rewritten before read)
-["xelatex"] 1793454251.03679 "c:/Users/提剑遗金/Desktop/大学笔记/3-3 数字电路/数字电路笔记.tex" "数字电路笔记.xdv" "数字电路笔记" 1793454256.37836 0
-  "c:/Users/提剑遗金/Desktop/大学笔记/3-3 数字电路/数字电路笔记.tex" 1793454072 29225 0767ee9e50251ea1dd91fcdc711bd925 ""
+["xelatex"] 1793541575.61981 "c:/Users/提剑遗金/Desktop/大学笔记/3-3 数字电路/数字电路笔记.tex" "数字电路笔记.xdv" "数字电路笔记" 1793541580.92447 0
+  "c:/Users/提剑遗金/Desktop/大学笔记/3-3 数字电路/数字电路笔记.tex" 1793541570 29896 a843dd8670bbbaa3bcf2af79a53aff76 ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1778940926 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1778942685 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1778940319 1004 54797486969f23fa377b128694d548df ""
@@ -227,9 +227,9 @@
   "c:/texlive/2026/texmf-dist/web2c/texmf.cnf" 1778940277 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt" 1778942812 5948911 ea8155f9c13d783de6fadab057f9449b ""
   "c:/texlive/2026/texmf.cnf" 1778942707 713 e69b156964470283e0530f5060668171 ""
-  "数字电路笔记.aux" 1793454255 2144 0536a2798fb3ecd96dd4de4f67f26eed "xelatex"
-  "数字电路笔记.out" 1793454255 1525 dda9eaa4f88b8c7c8bf8538e019ab11d "xelatex"
-  "数字电路笔记.tex" 1793454072 29225 0767ee9e50251ea1dd91fcdc711bd925 ""
+  "数字电路笔记.aux" 1793541580 2609 0250ade71a834a86e91845e5386ab7ee "xelatex"
+  "数字电路笔记.out" 1793541580 2258 5103460843ceadbf3bc18d0ed8161f9a "xelatex"
+  "数字电路笔记.tex" 1793541570 29896 a843dd8670bbbaa3bcf2af79a53aff76 ""
   (generated)
   "数字电路笔记.aux"
   "数字电路笔记.log"
