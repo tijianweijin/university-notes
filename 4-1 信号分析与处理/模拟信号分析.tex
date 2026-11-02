@@ -811,8 +811,33 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
   \]
   则有
   \[
-  \FF \{ X(t) \} = 2 \uppi x(\varOmega)
+  \FF \{ X(t) \} = 2 \uppi x(-\varOmega)
   \]
+
+  \begin{methodbox}[【拓展】归一化Fourier变换]
+
+    定义归一化Fourier变换算子为
+    \[
+    F=\frac{1}{\sqrt{2\uppi}}\FF
+    \]
+
+    则有
+
+    \[
+    F^4=1
+    \]
+
+    即经过4次归一化Fourier变换后，信号恢复原状。
+
+    归一化Fourier变换是Unitary变换，能保持信号的内积不变。
+    另一种归一化Fourier变换的做法是将频率$f$作为频域函数的变量，即
+
+    \[
+    \tilde{\FF} \left\{x(t)\right\} = X(f) 
+    \]
+
+    在此不多介绍。
+  \end{methodbox}
 
   \item 共轭对称性
   

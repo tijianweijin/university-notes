@@ -1263,6 +1263,38 @@ d_H=1 & \text{一条边}\\
   \item 中间电平变化（从0到1，从1到0）。
 \end{enumerate}
 
+\begin{methodbox}[冒险的判断与消除方法]
+  \begin{enumerate}[label=\arabic*.]
+    \item 代数式法
+    
+    只有同时存在正反变量（如$A$与$\overline{A}$）的逻辑函数才可能出现冒险现象。
+
+    将标准与或式/或与式中该正反变量以外的所有变量设为$0$或$1$，将逻辑函数化为
+    \[
+    F=A+\overline{A}
+    \]
+    的形式，此时存在偏0型冒险；或化为
+    \[
+    F=A\cdot\overline{A}
+    \]
+    的形式，此时存在偏1型冒险。
+
+    若要消除冒险现象，则在标准与或式/或与式中增加冗余项即可。荣誉项确定办法为
+    将存在冒险时的所有变量组合为与式或或式，作为冗余项加入原逻辑函数中。
+
+    例：$B=0,\,C=1$时存在偏0型冒险，冗余项为$+\overline{B}C$；
+    $B=0,\,C=1$时存在偏1型冒险，冗余项为$\cdot(\overline{B}C)$。
+
+
+    \item Karnaugh图法
+
+    判断Karnaugh图中是否存在相切圈，若存在则说明存在冒险现象。
+
+    画圈使相切圈相接，即可消除冒险现象。
+  \end{enumerate}
+
+\end{methodbox}
+
 \subsection{小规模组合电路（Small Scale Integrated circuites, SSI）}
 
 \subsection{中规模组合电路（Medium Scale Integrated circuites, MSI）}
