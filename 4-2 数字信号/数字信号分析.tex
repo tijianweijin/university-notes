@@ -1,0 +1,1792 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{upgreek}
+\usepackage[nolimits]{cmupint}
+\usepackage{booktabs,tabularx,array}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{float}
+
+\usepackage{tikz}
+\usepackage{diagbox}
+
+\newcolumntype{W}[1]{%
+  >{\hsize=#1\hsize\linewidth=\hsize
+    \centering\arraybackslash}X}
+
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+\definecolor{main}{HTML}{4C7FB3}
+\definecolor{mainlight}{HTML}{F0F6FF}
+\definecolor{method}{HTML}{8099B3}
+\definecolor{methodlight}{HTML}{f0f6ff}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\newfontfamily\headingfont{TeX Gyre Heros}
+
+\ctexset{
+  section={format=\centering\heiti\headingfont\zihao{3}\color{main},
+            name={第,章},number=\chinese{section},aftername=\quad,
+            beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\headingfont\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\headingfont\zihao{5}\color{main},
+                  number={（\chinese{subsubsection}）},aftername=,
+                  beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newcommand{\jj}{\,\mathrm{j}}
+\newcommand{\ee}{\,\mathrm{e}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ppi}{\,\uppi\,}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\Sa}{\operatorname{Sa}}
+\newcommand{\RRe}{\operatorname{Re}}
+\newcommand{\IIm}{\operatorname{Im}}
+
+\newfontfamily\russianfont{DejaVu Sans}
+
+\begin{document}
+
+\begin{center}
+  {\heiti\headingfont\zihao{1}\color{main} 数字信号分析笔记}
+\end{center}
+
+\section{}
+
+\section{信号分析}
+
+\subsection{信号}
+
+\subsubsection{基本概念}
+
+\begin{enumerate}
+  
+  \item 概念辨析
+  \begin{itemize}
+    \item 消息：信号承载的具体内容；
+    \item 信息：信息是消息中蕴含的有用内容；
+    \item 信号：消息（或信息）的物理表现形式。
+  \end{itemize}
+
+  \item 表示：类似函数，有解析式法、图像法、表格法等。
+
+  \item 特征
+  \begin{enumerate}[label=(\arabic*)]
+
+    \item 功率
+信号归一化瞬时功率可以表示为其Euclid内积的平方，即$p = \left | x(t) \right |^2$。
+故有归一化平均功率（即一般所说的功率）。
+    \item 能量：将瞬时归一化功率对时间积分即得到信号的能量。
+
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+\toprule
+信号 & 平均归一化功率 & 归一化能量 \\
+\midrule
+连续信号 & $P =\displaystyle \lim_{a \to \infty} \frac{1}{2a} \displaystyle\int_{-a}^{a} \left | x \left (t \right ) \right |^2 \dd t$ & $E = \displaystyle \lim_{a \to \infty} \displaystyle \int_{-a}^{a} \left | x \left (t \right ) \right |^2 \dd t$ \\
+离散信号 & $P =\displaystyle \lim_{N \to \infty} \frac{1}{2N} \displaystyle\sum_{k=-N}^{N} \left | x \left [ k \right ] \right |^2$ & $E = \displaystyle \lim_{N \to \infty} \displaystyle \sum_{k=-N}^{N} \left | x \left [ k \right ] \right |^2$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+  \end{enumerate}
+\end{enumerate}
+
+\subsubsection{分类}
+
+\begin{enumerate}
+  
+  \item 确定信号与随机信号
+
+能给出确定时间函数的信号称为确定信号，否则称为随机信号。
+
+  \item 连续时间信号与离散时间信号
+  
+连续时间信号对应带有有限个第一类间断点的连续函数，简称连续信号，一般用$x(t)$表示。
+连续信号的时间是连续的，但信号取值可以是连续的也可以是离散的。
+
+离散时间信号对应定义域离散的函数，简称离散信号，一般用$x[n]$表示。
+离散信号的时间是离散的，但信号取值可以是连续的也可以是离散的。
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \setlength{\arrayrulewidth}{0.5pt}
+    
+    \begin{tabular}{|>{\centering\arraybackslash}m{3cm}
+                    |>{\centering\arraybackslash}m{3cm}
+                    |>{\centering\arraybackslash}m{3cm}|}
+        \hline
+        \diagbox[width=3cm,height=1.2cm]{幅值}{时间}
+            & 连续 & 离散 \\
+        \hline
+        连续 & 模拟信号 & 抽样信号 \\
+        \hline
+        离散 &  & 数字信号 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{methodbox}[区分连续信号与离散信号]
+连续信号与离散信号的区别只在于时间是否连续，而不在于幅值是否连续。
+\end{methodbox}
+
+  \item 周期信号与非周期信号
+
+  连续周期信号可以写成$x(t)=x(t+nT)$，其中$T$是周期信号的周期。
+
+  离散周期信号有$x[n]=x[n+N]$，记$\min N$为其基本周期。
+
+  \item 能量受限信号与功率受限信号
+
+能量受限信号$ \Leftrightarrow 0 < E < \infty, P = 0 $ \\
+功率受限信号$ \Leftrightarrow 0 < P < \infty, E = \infty $ 
+\end{enumerate}
+
+\subsection{时域分析}
+
+\subsubsection{经典信号}
+
+注：如未说明，默认$t \in \left ( -\infty, \infty \right )$。
+
+\begin{enumerate}
+    \item 连续时间信号
+    \begin{itemize}
+      \item 正弦信号：$x(t)=A\sin\left ( \varOmega t + \varphi \right )$
+      
+      $A$为幅值，控制信号幅度；$\varOmega$为角频率，控制信号周期；$\varphi$为相位，控制信号相位。
+
+      \item 指数信号：$x(t)=Ae^{st}, \, s = \sigma + \jj \varOmega$
+    
+      $\sigma$控制指数增大/减小速率，$\varOmega$控制振荡周期。
+
+      \begin{methodbox}[正弦信号与指数信号关系]
+        \[
+        \sin \left ( \varOmega t \right ) = \frac{1}{\jj 2} \left ( e^{\jj \varOmega t} - e^{-\jj \varOmega t} \right ), \qquad
+        \cos \left ( \varOmega t \right ) = \frac{1}{2} \left ( e^{\jj \varOmega t} + e^{-\jj \varOmega t} \right )
+        \]
+      \end{methodbox}
+    
+      \item 取样信号（Sa信号）：$\operatorname{Sa}(t)=\dfrac{\sin t}{t}, \, \displaystyle x(t) = A \, \mathrm{Sa}(\varOmega t) = A \, \frac{\sin \varOmega t}{\varOmega t}$
+      
+      \begin{methodbox}[sinc函数]
+        当 $A=1, \, \varOmega = \ppi$ 时，$\mathrm{Sa}(\varOmega t)$ 称为 sinc 函数，
+        记为 $\mathrm{sinc}(t)$。
+        \[
+        \mathrm{sinc}(t)=
+        \begin{cases}
+        \dfrac{\sin(\ppi t)}{\ppi t}, & t\neq 0,\\[6pt]
+        1, & t=0.
+        \end{cases}
+        \]
+      \end{methodbox}
+    \end{itemize}
+
+    \item 奇异信号
+    
+    \begin{itemize}
+      \item 单位斜变信号
+      \[
+      r(t)=
+        \begin{cases}
+        0, & t < 0,\\
+        t, & t \geq 0.
+        \end{cases}
+      \]
+      \item 单位阶跃信号
+      \[
+      u(t)=
+        \begin{cases}
+        0, & t < 0,\\
+        1, & t \geq 0.
+        \end{cases}
+      \]
+      \item 单位冲激信号（Dirac定义）
+      \[
+      \int_{-\infty}^{\infty} \delta(t) \dd t = 1, \qquad \delta(t) = 0, \, \forall \, t \neq 0
+      \]
+
+      \begin{methodbox}[【技巧】单位冲激信号性质]
+        \begin{itemize}
+          \item 取样：$\displaystyle \int_{-\infty}^{\infty} x(t) \delta(t-t_0) \dd t = x(t_0) $
+          \item 展缩：$\delta(at) = \dfrac{1}{|a|} \delta(t)$
+          \item 卷积：$\delta(\mathcal{T}(t)) \ast x(t) = x(\mathcal{T}(t)) = x(\mathcal{T}(t))$，其中$\mathcal{T}$为时移、微积分算子。
+        \end{itemize}
+      \end{methodbox}
+
+      \begin{methodbox}[【技巧】三奇异信号关系]
+        后者是前者的导数，前者是后者的积分。
+        \[
+        r(t) \to u(t) \to \delta(t)
+        \]
+        \[
+        \dfrac{\dd r(t)}{\dd t} = u(t), \qquad \dfrac{\dd u(t)}{\dd t} = \delta(t)
+        \]
+      \end{methodbox}
+
+      \begin{methodbox}[矩形信号]
+        持续时间为$[\tau_1, \tau_2]$的矩形信号可表示为两阶跃信号的差，即
+        
+        \[
+        x(t) = E \left [ u(t-\tau_1) - u(t-\tau_2) \right ]
+        \]
+
+        特殊地，记
+        
+        \[
+        R(t) = E \left [ u\left(t+\frac{\tau}{2}\right) - u\left(t-\frac{\tau}{2}\right) \right ]
+        \]
+      \end{methodbox}
+
+      \begin{methodbox}[符号信号]
+        符号函数记为
+        \[
+          \operatorname{sgn}(t) =
+          \begin{cases}
+            1, & t > 0,\\
+            -1, & t < 0.
+          \end{cases}
+          =2 u(t)-1
+        \]
+      \end{methodbox}
+
+    \end{itemize}
+
+    \item 其他特殊信号
+
+    \begin{itemize}
+      \item 三角信号
+      
+      最大值为$E$，长度为$T$的三角信号可以视为两个值为$\sqrt{E}$，长度为$\dfrac{T}{2}$的矩形信号的差。
+      
+      其Fourier变换为
+      \[
+      \FF \left\{ x(t) \right\} =\frac{2}{T} \left[\sqrt{E}R\left(\frac{2t}{T}\right)\right] \ast \left[\sqrt{E}R\left(\frac{2t}{T}\right)\right] = \dfrac{ET}{2} \Sa^2 \left( \frac{T}{4} \varOmega \right)
+      \]
+    \end{itemize}
+
+  \end{enumerate}
+  \subsubsection{运算}
+
+\begin{enumerate}
+
+  \item 几何变换
+    
+  几何变换可以用通式$\displaystyle y(t)=x\left [ a\left ( t - \dfrac{b}{a} \right ) \right ]$表示。
+    
+    \begin{enumerate}[label=(\arabic*)]
+      \item 移位：$y(t)=x(t-\tau)$
+      \item 反褶：$y(t)=x(-t)$
+      \item 尺度变换：$y(t)=x(at)$
+    \end{enumerate}
+  
+    \begin{methodbox}[【技巧】几何变换顺序]
+      一般将信号函数整理为$\displaystyle y(t)=x\left [ a\left ( t - \dfrac{b}{a} \right ) \right ]$
+      的形式后再考虑如何变换，否则容易出现问题。
+    \end{methodbox}
+
+  \item 微积分
+  
+    \begin{enumerate}[label=(\arabic*)]
+      \item 微分：$y(t)=\dfrac{\dd x(t)}{\dd t}$
+      \item 积分：$y(t)=\displaystyle \int_{-\infty}^t x(\tau) \dd \tau$
+    \end{enumerate}
+
+  \item 复合运算
+    \begin{enumerate}[label=(\arabic*)]
+      \item 加法：$y(t)=x_1(t) + x_2(t)$
+      \item 乘法：$y(t)=x_1(t) \cdot x_2(t)$
+      \item 卷积：$y(t)=x(t) * h(t) = \displaystyle \int_{-\infty}^{\infty} x(\tau) h(t-\tau) \dd \tau$
+    \end{enumerate}
+    \begin{methodbox}[卷积意义]
+      \begin{itemize}
+        \item 面积解释： 当两个信号均为非负信号时，卷积值可理解为两信号乘积的重叠“面积”；若信号存在正负，则应理解为乘积的代数积分，而不能简单看成几何面积。
+
+        \item 系统意义： 卷积本质上就是线性时不变系统对各时刻输入所产生响应的叠加。
+      \end{itemize}
+    \end{methodbox}
+    \begin{methodbox}[卷积性质]
+      \begin{enumerate}[label=\arabic*.]
+
+      \item \textbf{代数性质}
+
+      \begin{itemize}
+        \item 交换律
+        \[
+        x_1(t)\ast x_2(t)
+        =
+        x_2(t)\ast x_1(t)
+        \]
+
+        \item 分配律
+        \[
+        x_1(t)\ast \left[x_2(t)+x_3(t)\right]
+        =
+        x_1(t)\ast x_2(t)
+        +
+        x_1(t)\ast x_3(t)
+        \]
+
+        \item 结合律
+        \[
+        \left[x_1(t)\ast x_2(t)\right]\ast x_3(t)
+        =
+        x_1(t)\ast\left[x_2(t)\ast x_3(t)\right]
+        \]
+
+      \end{itemize}
+
+      \item \textbf{与奇异信号的卷积}
+
+      \begin{itemize}
+        \item 与单位冲激卷积
+        \[
+        x(t)\ast\delta(t)=x(t)
+        \]
+
+        即 $\delta(t)$ 为卷积运算的恒等元。
+
+        \item 与移位冲激卷积
+        \[
+        x(t)\ast\delta(t-t_0)
+        =
+        x(t-t_0)
+        \]
+
+        即与移位冲激卷积可使信号整体时移 $t_0$。
+
+        \item 与冲激导数卷积
+        \[
+        x(t)\ast\delta'(t)
+        =
+        x'(t)
+        \]
+
+        即与 $\delta'(t)$ 卷积相当于对信号求导。
+      \end{itemize}
+
+      \item \textbf{微分与积分性质}
+
+      \begin{itemize}
+        \item 微分性质
+        \[
+        \left[x_1(t)\ast x_2(t)\right]'
+        =
+        x_1'(t)\ast x_2(t)
+        =
+        x_1(t)\ast x_2'(t)
+        \]
+
+        \item 积分性质
+        \[
+        x_1^{(-1)}(t)\ast x_2(t)
+        =
+        x_1(t)\ast x_2^{(-1)}(t)
+        \]
+
+        其中
+        \[
+        x^{(-1)}(t)
+        =
+        \int_{-\infty}^{t}x(\tau)\dd\tau.
+        \]
+
+  \end{itemize}
+  若卷积的某一函数求导完是单位冲激函数，常常一个求导一个积分，使计算简洁，如、
+  \[
+  y(t) = x(t) \ast u(t) = \int_{-\infty}^{t}x(\tau)\dd\tau \ast \delta(t) = \int_{-\infty}^{t}x(\tau)\dd\tau
+  \]
+\end{enumerate}
+    \end{methodbox}
+    \begin{methodbox}[【技巧】图解法]
+      \begin{enumerate}[label=(\arabic*)]
+        \item 反褶： 将 \(h(\tau)\) 关于纵轴反褶，得到\(h(-\tau)\)
+      
+        \item 平移： 将 \(h(-\tau)\) 沿 \(\tau\) 轴平移 \(t\)，得到\(h(t-\tau)\)
+        
+        \item 相乘： 将 \(x(\tau)\) 与 \(h(t-\tau)\) 相乘，得到 \(y(t)\)
+        
+        \item 积分： 对整个 \(\tau\) 轴积分
+        \[
+        y(t)
+        =
+        \int_{-\infty}^{+\infty}
+        x(\tau)h(t-\tau)\dd\tau.
+        \]
+      \end{enumerate}
+    \end{methodbox}
+    
+\end{enumerate}
+
+\subsubsection{分量与分解}
+
+  信号分解为正交分量时，各分量间不相互干扰，且各分量的能量之和等于原信号的能量。
+  若任意两信号的Euclid内积为零，则称这两个信号在时域中正交，即
+  \[
+  \left \langle  x_n, x_m \right \rangle  = \int_{-\infty}^{\infty} x_n(t) \cdot x_m(t) \dd t = 0, \, \forall \, t \in \left ( -\infty, \infty\right )
+  \]
+  若额外满足$\displaystyle \left \langle  x_n, x_n \right \rangle  = \left | x_n \right | ^2 = 1$
+  则称之为单位正交函数。
+
+  下面介绍几种常见的正交分量。
+
+\begin{enumerate}
+
+  \item 直流分量与交流分量
+  对于周期为$T$的周期信号$x(t)$，其交直流分量分别为
+  
+  \[
+  x_\mathrm{DC}(t) = \frac{1}{T} \int_{t_0}^{t_0+T} x(t) \dd t
+  \]
+  \[
+  x_\mathrm{AC}(t) = x(t) - x_\mathrm{DC}(t)
+  \]
+
+  直流分量平均量等于原信号平均量，交流分量平均量为零。二者有功率关系
+  \[
+  P=\left | x_\mathrm{DC}(t) \right |^2 + \frac{1}{T} \int_{t_0}^{t_0+T} \left | x_\mathrm{AC}(t) \right |^2 \dd t
+  \]
+
+  \item 奇分量与偶分量
+  
+  任意信号都可以分解为奇分量与偶分量，分解式如下
+  \[
+  x_\mathrm{e} = \frac{x(t) + x(-t)}{2}
+  ,\qquad
+  x_\mathrm{o} = \frac{x(t) - x(-t)}{2}
+  \]
+
+  \item 实分量与虚分量
+  
+  若信号为复信号，则可以分解为实分量与虚分量，分解式如下
+  \[
+  x_\mathrm{R}(t)=\dfrac{x(t)+x^\ast(t)}{2}
+  ,\qquad
+  x_\mathrm{I}(t)=\dfrac{x(t)-x^\ast(t)}{\jj 2}
+  \]
+
+\end{enumerate}
+
+\subsection{频域分析}
+
+\begin{methodbox}[时频不确定性原理]
+
+  $\Delta t$与$\Delta f$分别表示以能量分布定义的标准差宽度，则有
+  \[
+    \Delta t \cdot \Delta f \geq \frac{1}{4\ppi}
+  \]
+
+  或写成角频率版本则为
+  \[
+    \Delta t \cdot \Delta \varOmega \geq \frac12
+  \]
+
+  在时谱与频谱中的关系体现为时谱越宽，频谱越窄，反之亦然。
+  这是由Fourier变换性质决定的。比较常见的例子是
+  \[
+  x(t)=\delta (t) \leftrightarrow X(\varOmega)=1, \qquad x(t)=1 \leftrightarrow X(\varOmega)=2\ppi \delta (\varOmega)
+  \]
+  \[
+  x(t)=\operatorname{rect}(t) \leftrightarrow X(\varOmega)=\operatorname{Sa}\left (\dfrac{\varOmega}{2}\right ) , \qquad x(t)= \operatorname{Sa}(t) \leftrightarrow X(\varOmega)=\ppi \operatorname{rect}(\dfrac{\varOmega}{2})
+  \]
+
+\end{methodbox}
+
+\subsubsection{Fourier级数}
+
+Fourier级数有三角形式与指数形式两种表示方法，在数学分析中已学习过，此处不再赘述。
+二者的幅频谱不同。
+
+三角形式只有单边频谱，指数形式有对称的双边频谱，且双边频谱的幅值为三角形式的幅值的一半，且相位相同。
+
+\subsubsection{Fourier变换}
+
+可以通过Fourier级数的极限形式得到Fourier变换，即
+\[
+X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\varOmega t} \dd t
+\]
+
+非周期函数与周期函数的Fourier变换对比如下。
+
+\begin{methodbox}[周期信号与非周期信号的Fourier变换比较]
+
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X}
+  \toprule
+  特征 & Fourier级数频谱图 & Fourier变换频谱图 \\
+  \midrule
+
+  频谱性质
+  & 离散谱
+  & 连续谱 \\
+
+  展开形式
+  & 级数求和 $\displaystyle \sum$
+  & 积分变换 $\displaystyle \int$ \\
+
+  频率取值
+  & $n\varOmega_0$（间隔 $\varOmega_0$）
+  & $\varOmega$ 连续变化 \\
+
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+\end{methodbox}
+
+\begin{methodbox}[周期函数Fourier级数频谱图（FS）与Fourier变换频谱图（FT）比较]
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X}
+  \toprule
+  特征 & Fourier级数频谱图 & Fourier变换频谱图 \\
+  \midrule
+
+  y轴名称
+  &
+  $|F_n|$
+  &
+  $|X(\varOmega)|$
+  \\
+
+
+  表示
+  &
+  末端带圈线段
+  &
+  箭头
+  \\
+
+  代表内容
+  &
+  Fourier系数
+  &
+  冲激串
+  \\
+
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+\end{methodbox}
+
+\subsubsection{具体信号的Fourier变换}
+
+\begin{enumerate}
+
+
+  \item 非周期信号
+    \begin{center}
+    \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X X}
+    \toprule
+    信号 & 时域信号 & Fourier变换 \\
+    \midrule
+
+    直流信号
+    &
+    $\displaystyle
+    x(t)=A
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    2\uppi A\delta(\varOmega)
+    $
+    \\
+
+    单位冲激信号
+    &
+    $\displaystyle
+    x(t)=\delta(t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)=1
+    $
+    \\
+
+    单位阶跃信号
+    &
+    $\displaystyle
+    x(t)=u(t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \uppi\delta(\varOmega)
+    +
+    \frac{1}{\jj\varOmega}
+    $
+    \\
+
+    符号函数
+    &
+    $\displaystyle
+    x(t)=\operatorname{sgn}(t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \frac{2}{\jj\varOmega}
+    $
+    \\
+
+    矩形脉冲信号
+    &
+    $\displaystyle
+    x(t)
+    =
+    E\left[
+    u\left(t+\frac{\tau}{2}\right)
+    -
+    u\left(t-\frac{\tau}{2}\right)
+    \right]
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    E\tau
+    \operatorname{Sa}
+    \left(
+    \frac{\varOmega\tau}{2}
+    \right)
+    $
+    \\
+
+    单边指数信号
+    &
+    $\displaystyle
+    x(t)=e^{-at}u(t),
+    \quad a>0
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \frac{1}{a+\jj\varOmega}
+    $
+    \\
+
+    \bottomrule
+    \end{tabularx}
+    \end{center}
+  
+  \item 周期信号
+  
+    设$\displaystyle \varOmega_0=\frac{2\uppi}{T_0}$，则
+
+    \begin{center}
+    \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X}
+    \toprule
+    信号 & 时域信号 & Fourier变换 \\
+    \midrule
+
+    余弦信号
+    &
+    $\displaystyle
+    x(t)=\cos(\varOmega_0 t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \uppi
+    \left[
+    \delta(\varOmega-\varOmega_0)
+    +
+    \delta(\varOmega+\varOmega_0)
+    \right]
+    $
+    \\
+
+    正弦信号
+    &
+    $\displaystyle
+    x(t)=\sin(\varOmega_0 t)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \frac{\uppi}{\jj}
+    \left[
+    \delta(\varOmega-\varOmega_0)
+    -
+    \delta(\varOmega+\varOmega_0)
+    \right]
+    $
+    \\
+
+    周期冲激信号
+    &
+    $\displaystyle
+    x(t)
+    =
+    \sum_{n=-\infty}^{\infty}
+    \delta(t-nT_0)
+    $
+    &
+    $\displaystyle
+    X(\varOmega)
+    =
+    \frac{2\uppi}{T_0}
+    \sum_{k=-\infty}^{\infty}
+    \delta(\varOmega-k\varOmega_0)
+    $
+    \\
+
+    \bottomrule
+    \end{tabularx}
+    \end{center}
+  \end{enumerate}
+
+\subsubsection{Fourier变换性质}
+
+\begin{enumerate}
+  \item 线性
+  
+  \[
+  \FF \left\{ ax_1(t) + bx_2(t) \right\} = a \FF \left\{ x_1(t) \right\} + b \FF \left\{ x_2(t) \right\} 
+  \]     
+
+设$\displaystyle \FF \{ x(t) \} = X(\varOmega)$，则有
+
+  \item 时频对称性
+  
+  若
+  \[
+  \FF \{ x(t) \} = X(\varOmega)
+  \]
+  则有
+  \[
+  \FF \{ X(t) \} = 2 \uppi x(-\varOmega)
+  \]
+
+  \begin{methodbox}[【拓展】归一化Fourier变换]
+
+    定义归一化Fourier变换算子为
+    \[
+    F=\frac{1}{\sqrt{2\uppi}}\FF
+    \]
+
+    则有
+
+    \[
+    F^4=1
+    \]
+
+    即经过4次归一化Fourier变换后，信号恢复原状。
+
+    归一化Fourier变换是Unitary变换，能保持信号的内积不变。
+    另一种归一化Fourier变换的做法是将频率$f$作为频域函数的变量，即
+
+    \[
+    \tilde{\FF} \left\{x(t)\right\} = X(f) 
+    \]
+
+    在此不多介绍。
+  \end{methodbox}
+
+  \item 共轭对称性
+  
+  \[
+  \FF \left\{ x^\ast(t) \right\} = X^\ast(-\varOmega)
+  \]
+
+  当$x(t)$为实信号时，有$\displaystyle X(-\varOmega) = X^\ast(\varOmega)$。此时，$x(t)$额外有奇偶虚实性、
+
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|}
+    \hline
+    实偶：$\RRe X=\RRe X^\ast$
+    &
+    虚奇：$\IIm X=-\IIm X^\ast$
+    \\
+    \hline
+    幅偶：$|X|=|X^\ast|$
+    &
+    相奇：$\varphi(X)=-\varphi(X^\ast)$
+    \\
+    \hline
+    \end{tabular}
+    \end{center}
+
+  \item 运算性质
+    \begin{center}
+    \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+    \toprule
+    运算 & Fourier变换 & Fourier逆变换 \\
+    \midrule
+
+    尺度变换
+    &
+    $\displaystyle
+    \FF \{ x(at) \}
+    =
+    \frac{1}{|a|}
+    X\left(\frac{\varOmega}{a}\right)
+    $
+    &
+    $\displaystyle
+    \FF^{-1} \{ X(a\varOmega) \}
+    =
+    \frac{1}{|a|}
+    x\left(\frac{t}{a}\right)
+    $
+    \\
+
+    平移
+    &
+    $\displaystyle
+    \FF \{ x(t-t_0) \}
+    =
+    X(\varOmega)\ee^{-\jj \varOmega t_0}
+    $
+    &
+    $\displaystyle
+    \FF^{-1} \{ X(\varOmega-\varOmega_0) \}
+    =
+    x(t)\ee^{\jj t\varOmega_0}
+    $
+    \\
+
+    微分
+    &
+    $\displaystyle
+    \FF \{ x'(t) \}
+    =
+    \jj \varOmega X(\varOmega)
+    $
+
+
+    &
+    $\displaystyle
+    \FF^{-1} \{ X'(\varOmega) \}
+    =
+    -\jj t x(t)
+    $
+    \\
+
+    积分
+    &
+    $\displaystyle
+    \FF
+    \left\{
+    \int_{-\infty}^{t} x(\tau)\dd\tau
+    \right\}
+    =
+    X(\varOmega)
+    \left(
+    \frac{1}{\jj\varOmega}
+    +
+    \uppi\delta(\varOmega)
+    \right)
+    $
+    &
+    $\displaystyle
+    \FF^{-1}
+    \left\{
+    \int_{-\infty}^{\varOmega} X(\xi)\dd\xi
+    \right\}
+    =
+    -\frac{x(t)}{\jj t}
+    +
+    \uppi x(0)\delta(t)
+    $
+    \\
+
+    卷积
+    &
+    $\displaystyle
+    \FF \{ x(t)\ast y(t) \}
+    =
+    X(\varOmega)Y(\varOmega)
+    $
+    &
+    $\displaystyle
+    \FF^{-1}
+    \{ X(\varOmega)\ast Y(\varOmega) \}
+    =
+    2\uppi x(t)y(t)
+    $
+    \\
+
+    \bottomrule
+    \end{tabularx}
+    \end{center}
+
+\end{enumerate}
+
+\begin{methodbox}[【技巧】时移与尺度变换对应]
+  \[
+  \FF \{x(at-b)\}=\FF \left\{x\left[ a \left( x - \frac{b}{a} \right)  \right] \right\} = \frac{1}{|a|} X \left( \frac{\varOmega}{a} \right) \ee^{-\jj \varOmega \frac{b}{a}}
+  \]
+\end{methodbox}
+
+
+\begin{methodbox}[【理解】微分的实际意义]
+  由于乘了$\jj \varOmega$，所以幅谱高频增强，低频减弱；相谱正频率超前$\dfrac{\uppi}{2}$，负频率滞后$\dfrac{\uppi}{2}$。
+\end{methodbox}
+
+\begin{methodbox}[【技巧】用微分性质求Fourier变换]
+  【例】求$x(t)=\dfrac{1}{t^2}$的Fourier变换。
+  
+  【解】由微分性质有
+  \[
+  x(t)=-\frac{\dd}{\dd t}\left ( \frac{1}{t} \right )
+  \]
+  同时对两边做Fourier变换得
+  \[
+  X(\varOmega) = -\jj \varOmega \FF \left \{ \frac{1}{t} \right \} = -\jj \varOmega \left ( -\jj \uppi \operatorname{sgn}(\varOmega) \right ) = - \varOmega \uppi \operatorname{sgn} (\varOmega)
+  \]
+\end{methodbox}
+
+\begin{methodbox}[【理解】微分的实际意义]
+  观察时域积分Fourier变换，不难发现$\displaystyle \FF \left\{ \int_{-\infty}^{t} x(\tau)\dd\tau \right\} = \FF\left\{x(t) \ast u(t) \right\} = X(\varOmega) \cdot \left( \frac{1}{\jj\varOmega} + \uppi\delta(\varOmega) \right)$
+\end{methodbox}
+
+\begin{methodbox}[【技巧】时频变换对应]
+  设 $\FF\{x(t)\}=X(\varOmega)$，则有
+
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.4cm}X X}
+  \toprule
+  关系对 & Fourier变换 & Fourier逆变换 \\
+  \midrule
+
+  乘指数与平移
+  &
+  $\displaystyle
+  \FF\{x(t)\ee^{\jj\varOmega_0 t}\}
+  =
+  X(\varOmega-\varOmega_0)
+  $
+  &
+  $\displaystyle
+  \FF^{-1}
+  \{X(\varOmega)\ee^{-\jj\varOmega t_0}\}
+  =
+  x(t-t_0)
+  $
+  \\
+
+  乘变量与微分
+  &
+  $\displaystyle
+  \FF\{t x(t)\}
+  =
+  \jj X'(\varOmega)
+  $
+  &
+  $\displaystyle
+  \FF^{-1}\{\varOmega X(\varOmega)\}
+  =
+  -\jj x'(t)
+  $
+  \\
+
+  积分与除变量
+  &
+  $\displaystyle
+  \FF
+  \left\{
+    \int_{-\infty}^{t}x(\tau)\dd\tau
+  \right\}
+  =
+  X(\varOmega)
+  \left(
+    \frac{1}{\jj\varOmega}
+    +
+    \uppi\delta(\varOmega)
+  \right)
+  $
+  &
+  $\displaystyle
+  \FF^{-1}
+  \left\{
+    \int_{-\infty}^{\varOmega}X(\xi)\dd\xi
+  \right\}
+  =
+  -\frac{x(t)}{\jj t}
+  +
+  \uppi x(0)\delta(t)
+  $
+  \\
+
+  乘法与卷积
+  &
+  $\displaystyle
+  \FF\{x(t)y(t)\}
+  =
+  \frac{1}{2\uppi}
+  \left[
+    X(\varOmega)\ast Y(\varOmega)
+  \right]
+  $
+  &
+  $\displaystyle
+  \FF^{-1}
+  \{X(\varOmega)Y(\varOmega)\}
+  =
+  x(t)\ast y(t)
+  $
+  \\
+
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
+  看到熟悉的操作时，不妨反过来思考原函数是什么。
+\end{methodbox}
+
+\subsection{复频域分析}
+
+\subsubsection{Laurent级数}
+
+Laurent级数形式如下：
+\[
+\sum_{n=-\infty}^{\infty} a_n (z-z_0)^n
+\]
+
+\subsubsection{Laplace变换}
+
+\begin{enumerate}
+  \item 双边Laplace变换
+\[
+\LL\left\{x(t)\right\}=\int_{-\infty}^{\infty} x(t) \ee^{-s t} \dd t
+\]
+\[
+\LL^{-1}\left\{X(s)\right\}=\int_{\gamma-\jj\infty}^{\gamma+\jj\infty} X(s) \ee^{s t} \dd s
+\]
+
+  \item 单边Laplace变换
+\[
+\LL\left\{x(t)\right\}=\int_{0^-}^{\infty} x(t) \ee^{-s t} \dd t
+\]
+\[
+\LL^{-1}\left\{X(s)\right\}=\int_{\gamma-\jj\infty}^{\gamma+\jj\infty} X(s) \ee^{s t} \dd s
+\]
+
+  \item 收敛域（Region of Convergence，ROC）
+  
+  使Laplace变换收敛的$s$的取值范围称为收敛域。
+
+  不同信号的收敛域如下：
+  \begin{enumerate}[label=(\arabic*)]
+    \item 右边信号：$\RRe s>\sigma_0$
+    \item 左边信号：$\RRe s<\sigma_0$
+    \item 双边信号：$\sigma_1<\RRe s<\sigma_2$
+    \item 时限信号：$s \in \CC$
+  \end{enumerate}
+\end{enumerate}
+
+\subsubsection{基本信号的Laplace变换}
+
+\begin{center}
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{>{\bfseries}p{3cm} c c}
+    \toprule
+    信号 & 时域信号 & Laplace 变换 \\
+    \midrule
+    单位冲激信号 & $x(t)=\delta(t)$
+      & $X(s)=1,\quad s\in\CC$ \\
+
+    单位右边阶跃信号 & $x(t)=u(t)$
+      & $X(s)=\dfrac{1}{s},\quad \operatorname{Re}(s)>0$ \\
+
+    单位左边阶跃信号 & $x(t)=u(-t)$
+      & $X(s)=-\dfrac{1}{s},\quad \operatorname{Re}(s)<0$ \\
+
+    斜坡信号 & $x(t)=tu(t)$
+      & $X(s)=\dfrac{1}{s^2},\quad \operatorname{Re}(s)>0$ \\
+
+    右边余弦信号 & $x(t)=\cos(\varOmega_0t)u(t)$
+      & $X(s)=\dfrac{s}{s^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)>0$ \\
+
+    左边余弦信号 & $x(t)=\cos(\varOmega_0t)u(-t)$
+      & $X(s)=\dfrac{s}{s^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)<0$ \\
+
+    右边正弦信号 & $x(t)=\sin(\varOmega_0t)u(t)$
+      & $X(s)=\dfrac{\varOmega_0}{s^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)>0$ \\
+
+    左边正弦信号 & $x(t)=\sin(\varOmega_0t)u(-t)$
+      & $X(s)=-\dfrac{\varOmega_0}{s^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)<0$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\end{center}
+
+\subsubsection{其他常用Laplace变换}
+
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{>{\bfseries}p{3cm} c c}
+    \toprule
+    信号 & 时域信号 & Laplace 变换 \\
+    \midrule
+    右边指数信号 & $x(t)=\ee^{at}u(t)$
+      & $X(s)=\dfrac{1}{s-a},\quad \operatorname{Re}(s)>a$ \\
+
+    左边指数信号 & $x(t)=\ee^{at}u(-t)$
+      & $X(s)=-\dfrac{1}{s-a},\quad \operatorname{Re}(s)<a$ \\
+    
+    一般多次信号  & $x(t)=t^n u(t) \ee^{at}$
+      & $X(s)=\dfrac{n!}{s^{n+1}},\quad \RRe s > a$ \\
+
+    时移右边余弦信号 & $x(t)=\cos(\varOmega_0t)u(-t)\ee^{at}$
+      & $X(s)=\dfrac{s-a}{(s-a)^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)<a$ \\
+
+    时移右边正弦信号 & $x(t)=\sin(\varOmega_0t)u(t)\ee^{at}$
+      & $X(s)=\dfrac{\varOmega_0}{(s-a)^2+\varOmega_0^2},
+        \quad \operatorname{Re}(s)>a$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsubsection{Laplace变换性质}
+
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{
+    >{\bfseries}p{2cm}
+    >{\centering\arraybackslash}X
+    >{\centering\arraybackslash}p{3.2cm}
+  }
+    \toprule
+    性质 & 变化 & ROC 变化 \\
+    \midrule
+    线性
+    & $\LL\left\{a x_1(t)+b x_2(t)\right\}=aX_1(s)+bX_2(s)$
+    & $\text{ROC} \supseteq R_1\cap R_2$ \\
+
+    时移
+    & $\LL\left\{x(t-t_0)u(t-t_0)\right\}=\mathrm{e}^{-st_0}X(s)$
+    & 不变 \\
+
+    共轭
+    & $\LL\left\{x^*(t)\right\}=X^*(s^*)$
+    & 不变 \\
+
+    $s$ 域平移
+    & $\LL\left\{\mathrm{e}^{s_0t}x(t)\right\}=X(s-s_0)$
+    & $R_x+\operatorname{Re}(s_0)$ \\
+
+    尺度变换
+    & $\LL\left\{x(at)\right\}=\dfrac{1}{|a|}X\left(\dfrac{s}{a}\right)$
+    & 缩放为 $aR$ \\
+
+    时域微分
+    & $\LL\left\{\dfrac{\mathrm{d}x(t)}{\mathrm{d}t}\right\}=sX(s)$
+    & $\text{ROC} \supseteq R_x$ \\
+
+    时域积分
+    & $\LL\left\{\displaystyle\int_0^t x(\tau)\,\mathrm{d}\tau\right\}=\dfrac{X(s)}{s}$
+    & $R_x\cap\{\operatorname{Re}(s)>0\}$ \\
+
+    复频域微分
+    & $\LL\left\{t x(t)\right\}=-\dfrac{\mathrm{d}X(s)}{\mathrm{d}s}$
+    & 不变 \\
+
+    时域卷积
+    & $\LL\left\{x_1(t)*x_2(t)\right\}=X_1(s)X_2(s)$
+    & $\supseteq R_1\cap R_2$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\textwidth}{
+    @{}>{\bfseries}p{1.5cm}
+    >{\centering\arraybackslash}X
+    >{\centering\arraybackslash}X@{}
+  }
+    \toprule
+    运算 & Laplace 变换 & Laplace 反变换 \\
+    \midrule
+
+    平移
+    & $\mathcal{L}\{x(t-t_0)u(t-t_0)\}
+        =X(s)\mathrm{e}^{-st_0}$
+    & $\mathcal{L}^{-1}\{X(s-s_0)\}
+        =x(t)u(t)\mathrm{e}^{s_0t}$ \\
+
+    共轭
+    & $\mathcal{L}\{x^*(t)\}=X^*(s^*)$
+    & $\mathcal{L}^{-1}\{X^*(s^*)\}=x^*(t)$ \\
+
+    尺度变换
+    & $\mathcal{L}\{x(at)\}
+        =\dfrac{1}{|a|}X\left(\dfrac{s}{a}\right)$
+    & $\mathcal{L}^{-1}\{X(as)\}
+        =\dfrac{1}{|a|}x\left(\dfrac{t}{a}\right)$ \\
+
+    微分
+    & $\mathcal{L}\left\{\dfrac{\mathrm{d}x(t)}{\mathrm{d}t}\right\}
+        =sX(s)$
+    & $\mathcal{L}^{-1}\{\dfrac{\dd X(s)}{\dd s}\}
+        =-tx(t)$ \\
+
+    积分
+    & $\mathcal{L}\left\{\displaystyle\int_0^t
+        x(\tau)\,\mathrm{d}\tau\right\}
+        =\dfrac{X(s)}{s}$
+    & $\mathcal{L}^{-1}\left\{\displaystyle\int_s^{+\infty}
+        x(\sigma)\,\mathrm{d}\sigma\right\}
+        =\dfrac{x(t)}{t}$ \\
+
+    卷积
+    & $\mathcal{L}\{x_1(t) \ast x_2(t)\}
+        =X_1(s)X_2(s)$
+    & $\mathcal{L}^{-1}\{X_1(s) \ast X_2(s)\}
+        =x_1(t)x_2(t)$ \\
+
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\boxed{\text{注：上述公式单双边变换较混乱，好在本科阶段不用分这么细，能熟记并运用即可。}}
+
+\begin{methodbox}[【技巧】Laplace反变换]
+  
+\end{methodbox}
+
+\begin{methodbox}[【题型】Laplace反变换]
+  \begin{itemize}
+    \item 部分分式展开法
+    
+    对于多项式信号$X(s)=\dfrac{P(s)}{Q(s)}$，首先将其化为整式与真分式，
+    随后分别处理。
+    \begin{enumerate}[label=\arabic*.]
+      \item 整式：$X_0(s)=\sum_{i=0}^{n}c_i s^i \longleftrightarrow x_0(t)=\sum_{i=0}^{n}c_i \delta^{(i)}(t)$
+      \item 真分式：将真分式$X_1(s)$展开为部分分式$\displaystyle\sum_{i=1}^{n}\frac{K_i}{(s-p_i)^r}$，分别作Laplace反变换
+      
+      \[
+      \LL^{-1}\left\{\frac{K_i}{(s-p_i)^r}\right\} = K_i \frac{t^{r-1}}{(r-1)!} e^{p_i t} u(t),\, s.t.\, \RRe s > \RRe p_i
+      \]
+      \[
+      \LL^{-1}\left\{\frac{K_i}{(s-p_i)^r}\right\} = K_i \frac{t^{r-1}}{(r-1)!} e^{p_i t} [-u(-t)],\, s.t.\, \RRe s < \RRe p_i
+      \]
+      其中$K_i$可由留数法求得。
+      
+      \[
+      K_i=\left.X_1(s)(s-p_i)^r\right|_{s=p_i}
+      \]
+      
+      注意到左边信号只需要把右边信号的$u(t)$换为$-u(-t)$即可，故后续只以右边信号为例。
+
+      其中，特殊极点类型有特殊的方法来计算Laplace反变换。下列例中均以右边信号为例：
+      \begin{itemize}
+        \item $p_i$为单实数极点，分式形如$\dfrac{K_i}{s-p_i}$
+        
+        \[
+        \LL^{-1}\left\{X(s)\right\}=K_i u(t) e^{p_i t}
+        \]
+        
+        \item $p_i$为重极点，分式形如$\displaystyle\sum_{k=1}^{r}\dfrac{K_{i,k}}{(s-p_i)^k}$：
+        
+        \[
+        \LL^{-1}\left\{X(s)\right\}=K_{i,k} \dfrac{t^{k-1}}{(k-1)!} u(t) e^{p_i t}
+        \]
+        
+        \item $p_{1,\,2}=\alpha\pm\varOmega_0$为共轭复数极点，$K=C+\jj D$，分式形如$\dfrac{K}{s-p_1}+\dfrac{K^\ast}{s-p_2}$
+
+        \[
+        \LL^{-1}\left\{X(s)\right\}=2e^{\alpha t} \left[C\cos (\varOmega_0 t) - D\sin (\varOmega_0 t)\right]  u(t) 
+        \]
+
+      \end{itemize}
+    \end{enumerate}
+    \item 留数定理法（略）
+  \end{itemize}
+\end{methodbox}
+
+\begin{methodbox}[【理解】复常微分方程与部分分式展开法]
+  将有理分式信号看作系统的响应函数，则有
+  
+  \[
+  H(s)=\frac{Y(s)}{X(s)}=\frac{P(s)}{Q(s)}
+  \]
+  \[
+  Q(s)Y(s)=P(s)X(s)
+  \]
+
+  考虑$\LL\left\{\dfrac{\dd}{\dd t}x(t)\right\}=sX(s)$，作Laplace反变换，得到
+  
+  \[
+  Q\left(\frac{\dd}{\dd t}\right)\left\{y(t)\right\}=P\left(\frac{\dd}{\dd t}\right)\left\{x(t)\right\}
+  \]
+
+  不难看出，Laplace所做变换$\dfrac{\dd}{\dd t} \longrightarrow s$
+  和常微分方程求特征方程变换$\dfrac{\dd}{\dd t}\longrightarrow r$是同构的。
+  这就解释了部分分式展开法所得函数与常微分方程解为什么形式相似了。
+  其他可以对应的概念如下表所示：
+
+  \begin{center}
+    \centering
+    \begin{tabularx}{\textwidth}{
+    @{}
+    >{\centering\arraybackslash}X
+    >{\centering\arraybackslash}X@{}
+    }
+      \toprule
+      Laplace 变换 & 常微分方程 \\
+      \midrule
+      分母多项式 $A(s)=0$ & 特征方程 $P(r)=0$ \\
+      系统函数的极点 $p_i$ & 特征根 $r_i$ \\
+      极点的重数 & 特征根的重数 \\
+      极点对应的时域函数 & 齐次方程的基本解 \\
+      具体响应系数$K_i$ & 待定常数$C_i$ \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+\end{methodbox}
+
+\subsubsection{Laplace变换和Fourier变换关系}
+
+\section{系统分析}
+
+系统分析主要围绕冲激响应$h(t)$、$H(\jj \varOmega)$和$H(s)$进行。
+
+\subsection{系统}
+
+\subsubsection{表示}
+
+\begin{itemize}
+  \item 基本运算单元
+  \item 线性常系数微分方程
+\end{itemize}
+
+\subsubsection{基本概念}
+系统是对输入信号进行加工、变换、处理，并产生输出信号的物理装置。
+
+\subsubsection{冲激响应与阶跃响应}
+
+冲激响应是系统对单位冲激信号的响应，记为$h(t)$。冲激响应是系统的特征函数，能够完全描述系统的性质。
+
+阶跃响应是系统对单位阶跃信号的响应，记为$g(t)$。
+
+\begin{methodbox}[二者关系]
+  \[
+  g(t)=\int_{-\infty}^{t}h(\tau)\dd\tau=h(t) \ast u(t),\, h(t)=\frac{\dd g(t)}{\dd t}
+  \]
+\end{methodbox}
+
+任意输入信号$x(t)$的输出信号$y(t)$可以表示为冲激响应的卷积，即
+\[
+y(t) = x(t) \ast h(t)
+\]
+
+\subsubsection{典型冲激响应}
+
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X}
+\toprule
+系统类型 & 冲激响应 $h(t)$ \\
+\midrule
+        标量乘法器 & $h(t)=a\delta(t)$ \\
+        微分器 & $h(t)=\dfrac{\mathrm{d}\delta(t)}{\mathrm{d}t}=\delta'(t)$ \\
+        积分器 & $h(t)=\displaystyle\int_{-\infty}^{t}\delta(\tau)\,\mathrm{d}\tau=u(t)$ \\
+        延时器 & $h(t)=\delta(t-\tau)$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{分类}
+
+\begin{enumerate}
+  
+  \item 线性系统与非线性系统
+  
+  线性系统满足齐次性和叠加性，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$是线性算子。
+  
+  \begin{methodbox}[线性系统的判定]
+  
+    \[\mathcal{T}\left\{ax_1(t) + bx_2(t)\right\} = a\mathcal{T}\left\{x_1(t)\right\} + b\mathcal{T}\left\{x_2(t)\right\}\]
+  
+  一般线性系统的响应可以写成各输入信号的线性组合。
+
+  加法、微分、积分等运算都是线性算子。
+  
+  注意：表达式带常数的系统一般不是线性系统，例如$y(t)=2x(t)+3$。
+  可用$\mathcal{T}\left\{x(0)\right\}=0$快速判断。
+  
+  \end{methodbox}
+
+  \item 时变系统与时不变系统
+  
+  时不变系统的运行规则不会随时间推移发生改变，亦即映射$\mathcal{T} : x(t) \mapsto y(t)$不是$t$的函数。
+
+  \begin{methodbox}[时不变系统的判定]
+    \[\mathcal{T}\left\{x(t-t_0)\right\} = y(t-t_0)\]
+    
+    常见反例：$y(t)=x(2t)$，$y(t)=tx(t)$。
+  \end{methodbox}
+
+  \item 因果系统与非因果系统
+  
+  因果系统的输出仅由当前和过去的输入决定，亦即$y(t_0)$只依赖于$x(t), \, t \in \left ( -\infty, t_0 \right ]$。
+
+  \begin{methodbox}[因果系统的判定]
+    因果系统冲激响应满足$h(t)=0,\, t<0$的一般都是非因果系统。
+    
+    一般包含$x(t+a),\, a>0$的都是非因果系统，如$y(t)=x(t+1)$。
+  \end{methodbox}
+
+  \item 稳定系统与不稳定系统
+
+  稳定系统（BIBO稳定）在接入有限大小的输入信号时，能够产生有限范围的输出信号。
+
+  \begin{methodbox}[稳定系统的判定]
+    \[\int_{-\infty}^{+\infty} h(t) \dd t < \infty\]
+    
+    常见反例：$h(t)=sin(\omega_0 t)u(t)$。
+  \end{methodbox}
+
+  \begin{methodbox}[因果稳定系统的判定]
+    零极点图上的极点均位于左半平面。
+  \end{methodbox}
+
+\end{enumerate}
+
+\subsection{频域与复频域分析}
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2cm}X X X}
+\toprule
+分析方式 & 特性 & 微分方程形式 & 零极点形式 \\
+\midrule
+频域分析 & 
+$H(\jj \varOmega) = \dfrac{Y_\mathrm{ZS}(\varOmega)}{X(\varOmega)}$ & 
+$H(\jj \varOmega) = \dfrac{\displaystyle\sum_{j=0}^{m}b_j\left(\jj \varOmega\right)^j}{\displaystyle\sum_{i=0}^{n}a_i\left(\jj \varOmega\right)^i}$ &
+$H(\jj \varOmega)=H_0\frac{\displaystyle\prod_{j=1}^{m}(\jj \varOmega-z_j)}{\displaystyle\prod_{i=1}^{n}(\jj \varOmega-p_i)}$ \\
+复频域分析 & 
+$H(s) = \dfrac{Y_\mathrm{ZS}(s)}{X(s)}$ & 
+$H(s) = \dfrac{\displaystyle\sum_{j=0}^{m}b_j s^j}{\displaystyle\sum_{i=0}^{n}a_i s^i}$ &
+$H(s)=H_0\frac{\displaystyle\prod_{j=1}^{m}(s-z_j)}{\displaystyle\prod_{i=1}^{n}(s-p_i)}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{methodbox}[【注意】]
+  不要忘记零极点形式中的$H_0$！
+\end{methodbox}
+
+\begin{methodbox}[频域分析的其他零极点形式]
+  零点矢量可以写作$\jj\varOmega-z_j=N_j e^{\jj\psi_j}$，极点矢量可以写作$\jj\varOmega-p_i=M_i e^{\jj\theta_i}$。
+  
+  由两矢量的指数形式可得
+  
+  \[
+  H(\jj\varOmega) = \left|H(\jj\varOmega)\right|\ee^{-\jj\varOmega\varphi(\varOmega)} = H_0\frac{\displaystyle\prod_{j=1}^{m}N_j}{\displaystyle\prod_{i=1}^{n}M_i}\ee^{\displaystyle\jj\left(\displaystyle\sum_{k=1}^{m}\psi_k-\displaystyle\sum_{l=1}^{n}\theta_{l}\right)}
+  \]
+
+  其中$\left|H(\jj\varOmega)\right|= H_0\frac{\displaystyle\prod_{j=1}^{m}N_j}{\displaystyle\prod_{i=1}^{n}M_i}$称为幅频响应，
+  $\displaystyle\varphi(\varOmega)=\displaystyle\sum_{k=1}^{m}\psi_k-\displaystyle\sum_{l=1}^{n}\theta_{l}$称为相频响应。
+\end{methodbox}
+
+\begin{methodbox}[由零极点图求幅频响应与相频响应]
+  由零极点图可得
+  \[
+  \left|H(\jj\varOmega)\right|= H_0\frac{\displaystyle\prod_{j=1}^{m}N_j}{\displaystyle\prod_{i=1}^{n}M_i}
+  ,\qquad
+  \varphi(\varOmega)=\displaystyle\sum_{k=1}^{m}\psi_k-\displaystyle\sum_{l=1}^{n}\theta_{l}
+  \]
+
+  其中$N_j$为零点矢量长度，$\psi_j$为零点矢量与实轴正向的夹角，$M_i$为极点矢量长度，$\theta_i$为极点矢量与实轴正向的夹角。
+  
+\end{methodbox}
+
+\begin{methodbox}[【技巧】从微分方程推得频域冲激响应]
+  做变换$\displaystyle \frac{\dd^n}{\dd t^n} \longrightarrow (\jj \varOmega)^n$，即可得到频域冲激响应。例：
+
+  \[
+  \frac{\dd^2}{\dd t^2}y(t)+6\frac{\dd}{\dd t}y(t)+5y(t)=\frac{\dd}{\dd t}x(t)+2x(t)
+  \]
+  \[
+  \left[(\jj \varOmega)^2+6(\jj \varOmega)+5\right]Y(\varOmega)=(\jj \varOmega+2)X(\varOmega)
+  \]
+  \[
+  H(\jj\varOmega)=\frac{Y(\varOmega)}{X(\varOmega)}=\frac{(\jj \varOmega)^2+6(\jj \varOmega)+5}{\jj \varOmega+2}
+  \]
+
+\end{methodbox}
+
+\subsection{信号流图}
+
+\subsubsection{从信号流图求冲激响应}
+
+原理过于复杂不叙述，这里只介绍一般的做题方法。
+
+从$X(s)$出发，将能够到达$Y(s)$的最简路径全部列出，路径内部相乘路径之间相加（后称写成线性形式）作为分子；
+从$X(s)$出发，将能够到达$X(s)$的最简路径（包括1）全部列出，写成线性形式作为分母；
+这样便得到了冲激响应$H(s)$。
+
+此外还有Mason公式
+
+\[
+H(s)=\frac{1}{\varDelta}\sum_{i=1}^{n}{P_i\varDelta_i}
+\]
+
+不多赘述。
+
+\subsubsection{从冲激响应求信号流图}
+
+\begin{enumerate}
+  \item 直接法
+  \[
+  H(s)=H_1(s) \cdot H_2(s)
+  \]
+  \begin{methodbox}[用直接法做信号流图]
+    两类直接法的作图过程为求冲激响应的逆过程，具体不赘述。
+    \begin{itemize}
+      \item 直接法\uppercase\expandafter{\romannumeral1}：先画$b$，再画$a$。
+      
+      \item 直接法\uppercase\expandafter{\romannumeral2}：先画$a$，再画$b$。
+    \end{itemize}
+  \end{methodbox}
+  \item 级联法
+  \[
+  H(s)=\prod_{i=1}^{n}H_i(s)
+  \]
+  优点：方便调控零点与极点
+
+  缺点：误差累积较大
+  
+  \item 并联法
+  \[
+  H(s)=\sum_{i=1}^{n}H_i(s)
+  \]
+  
+  优点：方便调控极点，同时减小误差累积。
+
+  缺点：不方便调控零点。
+\end{enumerate}
+
+\section{滤波器设计}
+
+\subsection{无失真传输}
+
+无失真传输要求幅频响应为常数，且相频响应为线性函数。
+
+\begin{enumerate}
+  \item 时域条件：
+  \[
+  h(t)=K\delta(t-t_0)
+  \]
+  \item 频域条件：
+  \[
+  \left|H(\jj\varOmega)\right|=K, \qquad \varphi(\varOmega)=\varOmega t_0
+  \]
+\end{enumerate}
+
+\subsection{理想模拟低通滤波器}
+
+\begin{enumerate}
+  \item 响应函数特征：
+
+  \begin{itemize}
+    \item 时域响应：$h(t)=K\Sa(t-t_0)$
+    \item 幅频响应：$\left|H(\jj\varOmega)\right|=K\left(u(\varOmega_c)-u(-\varOmega_c)\right)$
+    \item 相频响应：$\varphi(\varOmega)=\varOmega t_0$
+  \end{itemize}
+
+\begin{methodbox}[【理解】理想模拟低通滤波器不存在]
+  理想模拟低通滤波器是非因果系统（冲激响应为取样函数），现实中无法制造。
+\end{methodbox}
+
+  \item 系统函数特征
+
+  \begin{methodbox}[【题型】由平方响应函数求系统函数]
+    \begin{enumerate}[label=(\arabic*)]
+      \item 作代换$s=\jj\varOmega$
+      \item 求零点与极点
+      \item 取左半平面极点写出$H(s)$
+      
+      例：$\left|H(\jj\varOmega)\right|^2=\dfrac{4(\varOmega^4+64)}{\varOmega^4-10\varOmega^2+169}$
+      
+      解：
+      \[
+      H(s)H(-s)=\left.\frac{4(\varOmega^4+64)}{\varOmega^4-10\varOmega^2+169}\right|_{\varOmega=-\jj s}=\frac{4(s^4+64)}{s^4+10s^2+169}
+      \]
+      
+      解得零点$s_\text{z}=\pm2\pm\jj 2$，极点$s_\text{p}=\pm2\pm\jj 2$。
+      选取左半平面极点$s_\text{p}=-2\pm\jj 2$，则
+      \[
+      H(s)=H_0\frac{s^2+4s+8}{s^2+4s+13}
+      \]
+
+      又根据$\left.H(s)\right|_{s=0}=\left.H(\jj\varOmega)\right|_{\varOmega=0}$，
+      得$H_0=2$，则
+
+      \[
+      H(s)=2\frac{s^2+4s+8}{s^2+4s+13}
+      \]
+    \end{enumerate}
+  \end{methodbox}
+\end{enumerate}
+\subsection{现实模拟低通滤波器}
+
+\subsubsection{Butterworth滤波器}
+
+Butterworth逼近
+\[
+\left|H(\jj\varOmega)\right|^2=\dfrac{1}{1+\left(\dfrac{\varOmega}{\varOmega_c}\right)^{2N}}
+\]
+
+\begin{methodbox}[设计Butterworth滤波器]
+  
+  需要参数：$A_p$、$\varOmega_p$、
+  $A_s$、$\varOmega_s$、$\varOmega_c$
+  
+  有如下关系：
+  \[
+  A_p=10\lg\left(\frac{\varOmega_p}{\varOmega_c}\right)
+  \]
+  \[
+  A_s=10\lg\left(\frac{\varOmega_s}{\varOmega_c}\right)
+  \]
+
+  \begin{enumerate}
+    \item 确定滤波器阶数$N$
+    \[
+    N=\left\lceil\frac{\lg{\dfrac{10^{0.1A_p}-1}{10^{0.1A_s}-1}}}{\lg {\dfrac{\varOmega_p}{\varOmega_s}}}\right\rceil
+    \]
+
+    \item 求滤波器极点
+    \[
+    p_k=\exp\left[\displaystyle\jj\dfrac{\uppi}{2}+\displaystyle\jj\dfrac{(2k+1)\uppi}{2N}\right], \quad k=0,\,1,\,\ldots,\,2N-1
+    \]
+
+    \item 求滤波器传递函数
+    
+    取左半平面极点，即$k=0,\,1,\,\ldots,\,N-1$
+    \[
+    H(s)=\frac{\varOmega_c^N}{\displaystyle\prod_{k=0}^{N-1}(s-p_k\varOmega_c)}
+    \]
+
+    也可查表求传递函数分母，常见分母如下
+    \begin{itemize}
+      \item $N$=1：$p+1$
+      \item $N$=2：$p^2+\sqrt{2}p+1$
+      \item $N$=3：$(p^2+p+1)(p+1)$
+    \end{itemize}
+  \end{enumerate}
+\end{methodbox}
+
+\subsubsection{\russianfont Чебышёв滤波器（略）}
+
+\subsubsection{椭圆滤波器（略）}
+
+\subsection{模拟频率变换}
+
+\begin{table}[htbp]
+    \centering
+    \label{tab:filter-transform}
+    \renewcommand{\arraystretch}{2}
+    \setlength{\tabcolsep}{6pt}
+    \begin{tabular}{@{}clc@{}}
+        \toprule
+        滤波器类型 &
+        \shortstack{归一化低通滤波器 $H_{\mathrm{LP}}(p)$} &
+        \shortstack{需要变换 $p=q(s)$} \\
+        \midrule
+        \shortstack{低通$\leftrightarrow$低通\\
+        $H_{\mathrm{LP}}(s)\rightarrow H_{\mathrm{LP}}(p)$} &
+        $\begin{aligned}
+            \lambda_p &= \frac{1}{a},\quad
+            \lambda_s = \frac{\Omega_s}{a\Omega_p}
+        \end{aligned}$ &
+        $\displaystyle p=\frac{s}{a\Omega_p}$ \\
+        \addlinespace
+        \shortstack{低通$\leftrightarrow$高通\\
+        $H_{\mathrm{HP}}(s)\rightarrow H_{\mathrm{LP}}(p)$} &
+        $\begin{aligned}
+            \lambda_p &= \frac{1}{a},\quad
+            \lambda_s = \frac{\Omega_p}{a\Omega_s}
+        \end{aligned}$ &
+        $\displaystyle p=\frac{\Omega_p}{as}$ \\
+        \addlinespace
+        \shortstack{低通$\leftrightarrow$带通\\
+        $H_{\mathrm{LP}}(p)\rightarrow H_{\mathrm{BP}}(s)$} &
+        $\begin{aligned}
+            \lambda_p &= \frac{1}{a},\quad
+            \lambda_s = \frac{\Omega_{s2}-\Omega_{s1}}
+            {a(\Omega_{p2}-\Omega_{p1})}
+        \end{aligned}$ &
+        $\displaystyle p=\frac{s^2+\Omega_0^2}{aBs}$ \\
+        \addlinespace
+        \shortstack{低通$\leftrightarrow$带阻\\
+        $H_{\mathrm{LP}}(p)\rightarrow H_{\mathrm{BS}}(s)$} &
+        $\begin{aligned}
+            \lambda_p &= \frac{1}{a},\quad
+            \lambda_s = \frac{\Omega_{p2}-\Omega_{p1}}
+            {a(\Omega_{s2}-\Omega_{s1})}
+        \end{aligned}$ &
+        $\displaystyle p=\frac{Bs}{a(s^2+\Omega_0^2)}$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\end{document}
