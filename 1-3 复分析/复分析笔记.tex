@@ -83,6 +83,7 @@
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\Res}{\operatorname{Res}}
 
 \begin{document}
 
@@ -524,5 +525,117 @@ $\operatorname{Arg}z$的多值性造就了$\ln z$的多值性。
   为Laurent级数，其在环域$R_1<|z-z_0|<R_2$内收敛，表示一个解析函数。
 
 \end{enumerate}
+
+\section{留数}
+
+\subsection{奇点}
+
+\begin{enumerate}
+  
+  \item 定义
+  
+  设$f(z)$在除去$z_0$外的$z_0$的某邻域内解析，称$z_0$为$f(z)$的孤立奇点。
+
+  \item 分类
+  
+  \begin{center}
+  \begin{tabularx}{0.88\textwidth}{>{\bfseries}p{2.2cm}X X}
+  \toprule
+  奇点 & Laurent级数特征 & 极限 \\
+  \midrule
+  可去奇点 & Laurent级数无负幂项 & $\displaystyle\lim_{z\to z_0} f(z)=C,\,C\in\CC$ \\
+  极点 & Laurent级数有有限负幂项 & $\displaystyle\lim_{z\to z_0} f(z)=\infty$ \\
+  本性奇点 & Laurent级数有无限负幂项 & 不存在 \\
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
+  \item 无穷奇点
+  
+  若$f(z)$在$\mathring{U}(\infty)$，即$\exists R>0,\, R<|z|<\infty$，使得
+  $f(z)$在该区域内解析，则$f(z)$存在无穷奇点。
+
+  \begin{methodbox}[【技巧】判断无穷奇点类型]
+    作变换$\omega=\dfrac{1}{z}$，将函数$f(z)$转换为$\varphi(\omega)$，从而将判断无穷奇点
+  转化为判断零点处奇点类型。
+    
+    例：$f(z)=\dfrac{z+1}{z-1}$
+
+    解：
+
+    \[
+    \varphi(\omega)=\frac{\dfrac{1}{\omega}+1}{\dfrac{1}{\omega}-1},\qquad\lim_{\omega\to0}\varphi(\omega)=1
+    \]
+
+    故无穷奇点为可去奇点。
+  \end{methodbox}
+
+\end{enumerate}
+
+\subsection{留数}
+
+\begin{enumerate}
+  \item 定义：$f(z)$在$\mathring{U}(z_0)$内Laurent展开式中$-1$次项的系数。
+  
+  \item 记法：$\displaystyle\Res(f,z_0)=c_{-1}=\dfrac{1}{2\uppi\ii}\oint_{C}f(z)\dd z$。
+
+  \item 留数定理：$f(z)$在区域$D$内有$n$个孤立奇点，则
+  
+  \[
+  \oint_{\partial D}f(z)\dd z=2\uppi\ii\sum_{k=1}^{n}\Res(f(z),\,z_k)
+  \]
+
+  \item 扩充复平面留数定理：
+  
+  \[
+  \sum_{k=1}^{n}\Res(f(z),\,z_k) + \Res(f(z),\,\infty) = 0
+  \]
+  
+\end{enumerate}
+
+\begin{methodbox}[【技巧】计算留数]
+  按类型分：
+  
+  \begin{enumerate}
+    \item 可去奇点：$\Res(f,z_0)=0$。
+    
+    \item 极点：设$z_0$为$m$阶极点，则
+    
+    \[
+      \Res(f,z_0)=\frac{1}{(m-1)!}\lim_{z\to z_0}\frac{\dd^{m-1}}{\dd z^{m-1}}\left[(z-z_0)^mf(z)\right].
+    \]
+    
+    \item 本性奇点：可通过Laurent展开式直接求出$-1$次项系数。
+    
+    \item 无穷奇点：$\Res (f(z),\infty)=\Res\left(-\dfrac{1}{z^2}f\left(\dfrac{1}{z}\right),\,0\right)$
+  \end{enumerate}
+
+  按函数形式分：
+  \begin{enumerate}
+    \item 有理函数：$\displaystyle f(z)=\frac{P(z)}{Q(z)}$。
+    
+    若$P(z_0)\ne0,\,Q(z_0)=0,\,Q'(z_0)\ne0$，则$f(z)$在$z_0$为一级极点，
+    留数$\displaystyle\Res(f(z),\,z_0)=\frac{P(z_0)}{Q'(z_0)}$
+
+  \end{enumerate}
+
+\end{methodbox}
+
+\begin{methodbox}[【技巧】用扩充复平面留数定理计算多奇点定积分]
+  当原函数奇点过多时，可通过扩充复平面留数定理将无穷奇点的留数计算出来，从而将原积分转化为只与无穷奇点留数有关的简单积分。
+
+  例：计算$\displaystyle I=\oint_{\partial D}\frac{1}{1+z^{10}}\dd z$
+
+  解：
+  
+  \[
+  I=\sum_{k=0}^{9}\Res(f(z),\,z_k)=-\Res(f(z),\,\infty)
+  \]
+  \[
+  \Res(f(z),\,\infty)=\Res\left(-\dfrac{z^8}{1+z^{10}},\,0\right)=0
+  \]
+
+  所以$I=0$。
+\end{methodbox}
 
 \end{document}

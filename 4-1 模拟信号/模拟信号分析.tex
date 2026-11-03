@@ -449,6 +449,17 @@
   \]
 \end{enumerate}
     \end{methodbox}
+    \begin{methodbox}[【技巧】计算卷积方法选择]
+      \begin{enumerate}
+        \item 定义法：直接利用定义式计算
+        
+        注意：计算式繁琐，后项的\textbf{每个$t$都要换成$t-\tau$}；$\int_{0}^{t}e^{-\tau}\dd \tau$等积分\textbf{不要忘记常数项}。
+        
+        \item 图解法：方法参照下文。
+        \item 公式法：$\displaystyle\left[e^{-at}u(t)\right]\ast\left[e^{-bt}u(t)\right]=\dfrac{1}{b-a}[e^{-at}u(t)-e^{-bt}u(t)]u(t)$
+        \item 频域变换法：现将时域信号变换为复频域信号，计算后再反变换为时域信号。
+      \end{enumerate}
+    \end{methodbox}
     \begin{methodbox}[【技巧】图解法]
       \begin{enumerate}[label=(\arabic*)]
         \item 反褶： 将 \(h(\tau)\) 关于纵轴反褶，得到\(h(-\tau)\)
@@ -466,7 +477,6 @@
         \]
       \end{enumerate}
     \end{methodbox}
-    
 \end{enumerate}
 
 \subsubsection{分量与分解}

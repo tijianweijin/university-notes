@@ -1,8 +1,8 @@
-PWD c:/Users/提剑遗金/Desktop/大学笔记/4-1 信号分析与处理
+PWD c:/Users/提剑遗金/Desktop/大学笔记/4-1 模拟信号
 INPUT c:/texlive/2026/texmf.cnf
 INPUT c:/texlive/2026/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt
-INPUT c:/Users/提剑遗金/Desktop/大学笔记/4-1 信号分析与处理/模拟信号分析.tex
+INPUT c:/Users/提剑遗金/Desktop/大学笔记/4-1 模拟信号/模拟信号分析.tex
 OUTPUT 模拟信号分析.log
 INPUT c:/texlive/2026/texmf-dist/tex/latex/ctex/ctexart.cls
 INPUT c:/texlive/2026/texmf-dist/tex/latex/ctex/ctexart.cls

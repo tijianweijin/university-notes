@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  2 NOV 2026 10:57
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  3 NOV 2026 21:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/提剑遗金/Desktop/大学笔记/4-1 信号分析与处理/模拟信号分析.tex"
-(c:/Users/提剑遗金/Desktop/大学笔记/4-1 信号分析与处理/模拟信号分析.tex
+**"c:/Users/提剑遗金/Desktop/大学笔记/4-1 模拟信号/模拟信号分析.tex"
+(c:/Users/提剑遗金/Desktop/大学笔记/4-1 模拟信号/模拟信号分析.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (c:/texlive/2026/texmf-dist/tex/latex/ctex/ctexart.cls (c:/texlive/2026/texmf-dist/tex/latex/ctex/config/ctexbackend.cfg
@@ -1217,52 +1217,52 @@ LaTeX Font Info:    Font shape `TU/FandolSong-Regular(0)/m/sl' in size <10.53937
 [1
 
 ] [2] [3] [4] [5] [6]
-Overfull \hbox (14.56456pt too wide) in paragraph at lines 723--724
+Overfull \hbox (14.56456pt too wide) in paragraph at lines 733--734
  [] 
  []
 
 
-Overfull \hbox (14.56456pt too wide) in paragraph at lines 791--792
+Overfull \hbox (14.56456pt too wide) in paragraph at lines 801--802
  [] 
  []
 
-[7]
-Overfull \hbox (14.56456pt too wide) in paragraph at lines 968--969
+[7] [8]
+Overfull \hbox (14.56456pt too wide) in paragraph at lines 978--979
  [] 
  []
 
-[8]
-Underfull \hbox (badness 1448) in paragraph at lines 998--999
+
+Underfull \hbox (badness 1448) in paragraph at lines 1008--1009
 []\TU/FandolSong-Regular(0)/m/it/10.53937 观 察 时 域 积 分 \TU/lmr/m/n/10.53937 Fourier \TU/FandolSong-Regular(0)/m/it/10.53937 变 换，|  不 难 发 现 $\OMS/cmsy/m/n/10.53937 F [] \OT1/cmr/m/n/10.53937 = \OMS/cmsy/m/n/10.53937 F [] \OT1/cmr/m/n/10.53937 = \OML/cmm/m/it/10.53937 X\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 
 \OT1/cmr/m/n/10.53937 ) \OMS/cmsy/m/n/10.53937 ^^A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1089--1089
+Underfull \hbox (badness 10000) in paragraph at lines 1099--1099
 []|$\OMS/cmsy/m/n/10.53937 F [] \OT1/cmr/m/n/10.53937 =
  []
 
 
-Underfull \hbox (badness 6608) in paragraph at lines 1089--1089
+Underfull \hbox (badness 6608) in paragraph at lines 1099--1099
 []|$\OMS/cmsy/m/n/10.53937 F[] [] \OT1/cmr/m/n/10.53937 = \OMS/cmsy/m/n/10.53937 ^^@[] \OT1/cmr/m/n/10.53937 +
  []
 
 [9]
-Underfull \hbox (badness 10000) in alignment at lines 1173--1173
+Underfull \hbox (badness 10000) in alignment at lines 1183--1183
 [][][] 
  []
 
-
-Underfull \hbox (badness 10000) in alignment at lines 1202--1202
+[10]
+Underfull \hbox (badness 10000) in alignment at lines 1212--1212
 [][][] 
  []
 
-[10] [11] [12] [13] [14] [15] [16] [17]
+[11] [12] [13] [14] [15] [16] [17]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\russianfont' on input line 1736.
+(hyperref)                removing `\russianfont' on input line 1746.
 
-[18] (./模拟信号分析.aux)
+[18] [19] (./模拟信号分析.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
@@ -1275,12 +1275,12 @@ Package rerunfilecheck Info: File `模拟信号分析.out' has not changed.
 (rerunfilecheck)             Checksum: 2CA43B03772BBD9C6823BB58FF7B58F0;4485.
  ) 
 Here is how much of TeX's memory you used:
- 35745 strings out of 468168
- 819725 string characters out of 5436524
+ 35747 strings out of 468168
+ 819748 string characters out of 5436524
  1258726 words of memory out of 5000000
- 63846 multiletter control sequences out of 15000+600000
+ 63848 multiletter control sequences out of 15000+600000
  634466 words of font info for 113 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 116i,18n,121p,492b,1176s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 116i,18n,121p,489b,1176s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 模拟信号分析.xdv (18 pages, 303072 bytes).
+Output written on 模拟信号分析.xdv (19 pages, 311664 bytes).
