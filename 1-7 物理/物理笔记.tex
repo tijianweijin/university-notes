@@ -22,6 +22,8 @@
 
 \DeclareTextFontCommand{\textbf}{\heiti\color{main}}
 
+
+
 % relationbox 中知识关系图的统一样式
 \tikzset{
   relnode/.style={
@@ -87,6 +89,7 @@
 \newcommand{\vect}[1]{\bm{#1}}
 \newcommand{\dif}{\mathop{}\!\mathrm{d}}
 \newcommand{\s}{def}
+\newcommand{\EE}{\mathcal{E}}
 
 \begin{document}
 \pagestyle{plain}
@@ -490,9 +493,9 @@
 
 \centering 电荷
 \begin{enumerate}
-  \item 分类：正电荷与负电荷。
-  \item 元电荷 \(e=1.6\times10^{-19}\,\mathrm C\)。
-  \item 电荷守恒定律：孤立系统总电荷代数和不变。
+  \item 正负性：正电荷与负电荷。
+  \item 量子性： \(e=1.6\times10^{-19}\,\mathrm C\)。
+  \item 守恒性：孤立系统总电荷代数和不变。
 \end{enumerate}
 & \centering\arraybackslash /（目前尚未发现磁单极子）\\ \hline
 
@@ -546,7 +549,7 @@
 \begin{enumerate}
   \item 定义式：
   \[
-    \varPhi_{\mathrm e}=\iint\dif\varPhi_{\mathrm e}=\iint\vect E\cdot\dif\vect S.
+    \varPhi_{\mathrm e}=\int\dif\varPhi_{\mathrm e}=\iint\vect E\cdot\dif\vect S.
   \]
 \end{enumerate}
 \vspace{0.45em}
@@ -554,7 +557,7 @@
 \begin{enumerate}
   \item 定义式：
   \[
-    \varPhi_{\mathrm b}=\iint\dif\varPhi_{\mathrm b}=\iint\vect B\cdot\dif\vect S.
+    \varPhi_{\mathrm m}=\int\dif\varPhi_{\mathrm m}=\iint\vect B\cdot\dif\vect S.
   \]
 \end{enumerate}\\
 \hline
@@ -654,9 +657,9 @@ Gauss定理和环路定理能完备描述静电场。
 
 & \centering\arraybackslash 完备性描述
 
-Biot-Savart定律和叠加原理能完备描述静电场。
+Biot-Savart定律和叠加原理能完备描述稳恒磁场。
 
-Gauss定理和Ampère环路定理能完备描述静电场。
+Gauss定理和Ampère环路定理能完备描述稳恒磁场。
 
 \\ \hline
 
@@ -685,9 +688,12 @@ Gauss定理和Ampère环路定理能完备描述静电场。
 \centering 电介质
 \begin{enumerate}
   \item 极化：极性分子取向极化，非极性分子位移极化。
-  \item 电场强度：合电场强度小于原电场强度。
+  \item 电场强度：合电场强度小于原电场强度$E$。
   \item 电容：\(C=\varepsilon_\mathrm{r}C_0\)
-  \item 电位移矢量：\(\vect D=\varepsilon_0\varepsilon_\mathrm{r}\vect E\)
+  \item 电位移矢量
+  \[
+  \vect D=\varepsilon_0\vect{E}+\vect{P}=\varepsilon_0\vect{E}+\varepsilon_0\varepsilon_{\mathrm{r}}\chi_{\mathrm{e}}\vect{E}=\varepsilon_0\varepsilon_\mathrm{r}\vect E
+  \]
   \item 电介质 Gauss 定理：
   \[
     \oiint\vect D\cdot\dif\vect S=\sum q_{0i}
@@ -700,7 +706,7 @@ Gauss定理和Ampère环路定理能完备描述静电场。
   \item 极化：极性分子取向极化，非极性分子位移极化。
   \item 电场强度：合电场强度小于原电场强度。
   \item 电容：\(C=\varepsilon_rC_0\)
-  \item 电位移矢量：\(\vect H = \dfrac{\vect{B}}{\mu_0\mu_\mathrm{r}}= \dfrac{\vect{B}}{\mu_0\left(1+\chi_\mathrm{m}\right)}\)
+  \item 磁位移矢量：\(\vect H = \dfrac{\vect{B}}{\mu_0\mu_\mathrm{r}}= \dfrac{\vect{B}}{\mu_0\left(1+\chi_\mathrm{m}\right)}\)
   \item 磁介质Ampère环路定理：
   \[
     \oint\vect H\cdot\dif\vect l=\sum_L I_{0i}
@@ -777,6 +783,64 @@ Gauss定理和Ampère环路定理能完备描述静电场。
 \end{enumerate}
 \end{method}
 
+\subsection{稳恒电场}
+
+\subsubsection{电动势}
+
+\begin{enumerate}
+  \item 定义式：$\EE = \dfrac{W}{q}$
+  \item 计算式：$\EE = \int_L E_{\mathrm{k}}\dif l$
+\end{enumerate}
+
+\subsubsection{稳恒电流}
+
+\begin{enumerate}
+  \item 电流密度矢量$\vect J$
+  \begin{enumerate}
+    \item 定义式：$\vect J=\dfrac{\dif I}{\dif S_{\perp}} \hat{\vect u}$。
+    \item 决定式：$\vect J=q_0 n \vect u$。
+  \end{enumerate}
+  
+  \item 连续性方程
+  
+  \[
+  \oiint_S \vect J\cdot\dif\vect S=-\frac{\dif q_\text{内}}{\dif t}
+  \]
+
+  \item 电流与电流密度矢量$\vect J$的关系
+  
+  大小：$I=\displaystyle\oiint_S\vect J\cdot\dif\vect S$
+  方向：$\vect J$的方向与电流切线方向相同。
+
+\end{enumerate}
+
+\subsubsection{稳恒电场}
+
+\begin{enumerate}
+  \item 稳恒条件
+  \[
+  \oiint_S \vect J\cdot\dif\vect S=0
+  \]
+  
+  \item Kirchhoff电流定律：
+  
+  \[
+  \sum I_{\text{入}}=\sum I_{\text{出}}
+  \]
+  
+  \item Ohm定律：
+  
+  宏观形式：$ I = \dfrac{U}{R} = GU$
+
+  微观形式：$\vect J = \dfrac{\vect E}{\rho} = \gamma\vect E$
+
+  \item Joule定律
+  
+  宏观形式：$ P =  I^2 R$
+  
+  微观形式：$ w =  \rho J^2 = \gamma E^2$
+\end{enumerate}
+
 \subsection{电生磁}
 微观形式：运动电荷产生磁场：$\vect B=\displaystyle\frac{\mu_0}{4\pi}\frac{q\vect v\times\vect e_r}{r^2}$
 
@@ -804,21 +868,67 @@ Gauss定理和Ampère环路定理能完备描述静电场。
   磁力矩做功为$ W = I \Delta \varPhi $
 \end{enumerate}
 
+\subsection{电磁感应}
+
+Faraday电磁感应定律
+\[
+\EE = -\frac{\dif \varPhi_{\mathrm{m}}}{\dif t}
+\]
+
+\begin{methodbox}[载流螺线管Faraday电磁感应定律]
+  记磁通链$\varPsi_{\mathrm{m}}=N\varPhi_{\mathrm{m}}$
+  \[
+  \EE = -\frac{\dif \varPsi_{\mathrm{m}}}{\dif t}
+  \]
+\end{methodbox}
+
+\subsubsection{动生电动势}
+
+\[
+\EE = \int_{a}^{b} (\vect v \times \vect B) \cdot \dif \vect l
+\]
+
+\begin{methodbox}[【题型】动生电动势计算]
+  \begin{enumerate}[label=\arabic*.]
+    \item 直接用计算式积分；
+    \item 构造闭合回路，利用两部分电动势相等计算。
+  \end{enumerate}
+\end{methodbox}
+
+\subsubsection{感生电动势}
+
+\begin{enumerate}
+  \item 产生原因：感生电场力
+
+  \item 计算式
+  \[
+  \EE = - \oiint_S \frac{\partial \vect B}{\partial t} \cdot \dif \vect S
+  \]
+\end{enumerate}
+
+\begin{methodbox}[【题型】感生电动势计算]
+  感生电场径向电动势为零，故可以作辅助半径构建完整闭合回路，从而得出感生电动势。
+\end{methodbox}
+
+\begin{methodbox}
+  注：当构建闭合回路时，要注意\textbf{算整个回路的感生电动势}！
+\end{methodbox}
+
 \subsection{常见电学理想模型}
 
 \begin{center}
 \small
-\begin{tabularx}{0.99\textwidth}{>{\raggedright\arraybackslash}p{3.2cm}X X}
+\begin{tabularx}{0.99\textwidth}{>{\raggedright\arraybackslash}p{4cm}X X}
 \toprule
 & 电场强度 \(\vect E\) & 电势 \(V\)\\
 \midrule
-无限长均匀带电直线 & \(\displaystyle\vect E=\frac{\lambda}{2\pi r\varepsilon_0}\vect \ee_r\) & \(\displaystyle V_P=-\frac{\lambda}{2\pi\varepsilon_0}\ln\frac r{r_0}\)（其中 \(r_0\) 为参考点半径）\\
-无限大均匀带电平面 & \(\displaystyle\vect E=\frac{\sigma}{2\varepsilon_0}\vect \ee_n\) & \\
-均匀带电细圆环（对称轴上） & \(\displaystyle E=\frac{1}{4\pi\varepsilon_0}\frac{qx}{(R^2+x^2)^{3/2}}\) & \\
-均匀带电圆平板（对称轴上） & \(\displaystyle\vect E=\frac{q}{2\pi\varepsilon_0R^2}\left[1-\frac{x}{(R^2+x^2)^{1/2}}\right]\vect \ee_i\) & \(\displaystyle V=\frac{1}{4\pi\varepsilon_0}\frac qx\)\\
-均匀带电球壳 & \(\displaystyle\vect E=\frac{q}{4\pi r^2\varepsilon_0}\vect \ee_r\) & \(\displaystyle V=\begin{cases}\frac{1}{4\pi\varepsilon_0}\frac qR,&0<r\le R,\\[2pt]\frac{1}{4\pi\varepsilon_0}\frac qr,&r>R.\end{cases}\)\\
-均匀带电球体 & \(\displaystyle\vect E=\begin{cases}\frac{\rho}{3\varepsilon_0}\vect r,&0<r\le R,\\[2pt]\frac{\rho}{3\varepsilon_0}\frac{R^3}{r^2}\vect \ee_r,&r>R.\end{cases}\) & \(\displaystyle V=\begin{cases}\frac{Q(3R^2-r^2)}{8\pi\varepsilon_0R^3},&0<r\le R,\\[2pt]\frac{1}{4\pi\varepsilon_0}\frac qr,&r>R.\end{cases}\)\\
-电偶极子 & \(\displaystyle E=\frac{p}{4\pi\varepsilon_0r^3}\sqrt{3\cos^2\theta+1}\) & \(\displaystyle V=\frac{1}{4\pi\varepsilon_0}\frac{p}{\sqrt{y^2+x^2}}\cos\theta\)\\
+无限长均匀带电直线 & \(\displaystyle\vect E=\dfrac{\lambda}{2\pi r\varepsilon_0}\vect \ee_r\) & \(\displaystyle V_P=-\dfrac{\lambda}{2\pi\varepsilon_0}\ln\dfrac r{r_0}\)（其中 \(r_0\) 为参考点半径）\\
+无限大均匀带电平面 & \(\displaystyle\vect E=\dfrac{\sigma}{2\varepsilon_0}\vect \ee_n\) & $ V = \dfrac{q}{4\uppi\varepsilon_0\sqrt{R^2+x^2}} $\\
+均匀带电细圆环（对称轴上） & \(\displaystyle E=\dfrac{1}{4\pi\varepsilon_0}\frac{qx}{(R^2+x^2)^{3/2}}\) & \\
+均匀带电圆平板（对称轴上） & \(\displaystyle\vect E=\dfrac{q}{2\pi\varepsilon_0R^2}\left[1-\frac{x}{(R^2+x^2)^{1/2}}\right]\vect \ee_i\) & \(\displaystyle V=\dfrac{1}{4\pi\varepsilon_0}\dfrac qx\)\\
+均匀带电球壳 & \(\displaystyle\vect E=\begin{cases}0,&0<r\le R,\\[2pt]\dfrac{q}{4\pi r^2\varepsilon_0}\vect \ee_r,&r>R.\end{cases}\) & \(\displaystyle V=\begin{cases}\dfrac{1}{4\pi\varepsilon_0}\dfrac qR,&0<r\le R,\\[2pt]\dfrac{1}{4\pi\varepsilon_0}\dfrac qr,&r>R.\end{cases}\)\\
+均匀带电球体 & \(\displaystyle\vect E=\begin{cases}\dfrac{\rho}{3\varepsilon_0}\vect r,&0<r\le R,\\[2pt]\dfrac{\rho}{3\varepsilon_0}\dfrac{R^3}{r^2}\vect \ee_r,&r>R.\end{cases}\) & \(\displaystyle V=\begin{cases}\dfrac{Q(3R^2-r^2)}{8\pi\varepsilon_0R^3},&0<r\le R,\\[2pt]\dfrac{1}{4\pi\varepsilon_0}\dfrac qr,&r>R.\end{cases}\)\\
+电偶极子 & \(\displaystyle E=\dfrac{p}{4\pi\varepsilon_0r^3}\sqrt{3\cos^2\theta+1}\) & \(\displaystyle V=\dfrac{1}{4\pi\varepsilon_0}\dfrac{p}{\sqrt{y^2+x^2}}\cos\theta\)\\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -828,7 +938,7 @@ Gauss定理和Ampère环路定理能完备描述静电场。
 \begin{center}
 \begin{tabularx}{0.96\textwidth}{>{\raggedright\arraybackslash}p{3.8cm}X X}
 \toprule
- & 电容 \(C\) & 电场能 \(W\)\\
+  & 电容 \(C\) & 电场能 \(W\)\\
 \midrule
 带电金属球 & \(\displaystyle C=4\pi\varepsilon_0 R\) & \(\displaystyle W=\frac{Q^2}{8\pi\varepsilon_0R}\)\\
 平行板电容器 & \(\displaystyle C=\frac{\varepsilon_0S}{d}\) & \\
@@ -843,7 +953,6 @@ Gauss定理和Ampère环路定理能完备描述静电场。
 \subsection{常见磁学理想模型}
 
 \begin{center}
-\small
 \renewcommand{\arraystretch}{1.8}
 \begin{tabularx}{0.99\textwidth}{
     >{\raggedright\arraybackslash}p{3.5cm}
@@ -875,6 +984,21 @@ $\displaystyle
 \vect \ee_\varphi
 $ \\
 
+无限长均匀载流圆柱体 &
+$\displaystyle
+\vect B =
+\begin{cases}
+  \dfrac{\mu_0 Ir}{2\uppi R^2}{\ee_\mathrm{t}},&0<r\le R,\\[2pt]
+  \dfrac{\mu_0 I}{2\uppi r}\vect {\ee_\mathrm{t}},&r>R.
+\end{cases}
+$ \\
+
+无限宽均匀载流平面 &
+$\displaystyle
+\vect B =
+\pm\frac{\mu_0 K}{2}\vect \ee_y
+$ \\
+
 载流圆线圈轴线上 &
 $\displaystyle
 \vect B =
@@ -902,20 +1026,13 @@ $\displaystyle
 \vect \ee_z
 $ \\
 
-无限长载流螺线管内部 &
-$\displaystyle
-\vect B = \mu_0 nI\vect \ee_z
-$ \\
-
-无限长载流螺线管外部 &
-$\displaystyle
-\vect B = \vect 0
-$ \\
-
-无限宽均匀载流平面 &
+无限长载流螺线管 &
 $\displaystyle
 \vect B =
-\pm\frac{\mu_0 K}{2}\vect \ee_y
+\begin{cases}
+  \mu_0 nI\vect \ee_z,&0<r\le R,\\[2pt]
+  \vect 0,&r>R.
+\end{cases}
 $ \\
 
 \bottomrule

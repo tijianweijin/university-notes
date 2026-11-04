@@ -47,6 +47,7 @@
 \definecolor{mainlight}{HTML}{F0F6FF}
 \definecolor{method}{HTML}{6E869E}
 \definecolor{methodlight}{HTML}{f0f6ff}
+\definecolor{black}{HTML}{000000}
 
 \hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
 \setlength{\parindent}{2em}
@@ -98,10 +99,15 @@
 
 \newfontfamily\russianfont{DejaVu Sans}
 
+
 \begin{document}
 
 \begin{center}
   {\heiti\headingfont\zihao{1}\color{main} 模拟信号分析笔记}
+\end{center}
+
+\begin{center}
+  {\kaishu\zihao{4}\color{black} 榆枋下}
 \end{center}
 
 \section{信号分析}
@@ -982,7 +988,7 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
 
 \begin{methodbox}[【技巧】时移与尺度变换对应]
   \[
-  \FF \{x(at-b)\}=\FF \left\{x\left[ a \left( x - \frac{b}{a} \right)  \right] \right\} = \frac{1}{|a|} X \left( \frac{\varOmega}{a} \right) \ee^{-\jj \varOmega \frac{b}{a}}
+  \FF \{x(at-b)\}=\FF \left\{a \left( x - \frac{b}{a} \right)\right\} = \frac{1}{|a|} X \left( \frac{\varOmega}{a} \right) \ee^{-\jj \varOmega \frac{b}{a}}
   \]
 \end{methodbox}
 
@@ -1719,7 +1725,7 @@ Butterworth逼近
   \begin{enumerate}
     \item 确定滤波器阶数$N$
     \[
-    N=\left\lceil\frac{\lg{\dfrac{10^{0.1A_p}-1}{10^{0.1A_s}-1}}}{\lg {\dfrac{\varOmega_p}{\varOmega_s}}}\right\rceil
+    N=\left\lceil\frac{\lg{\dfrac{10^{0.1A_p}-1}{10^{0.1A_s}-1}}}{2\lg {\dfrac{\varOmega_p}{\varOmega_s}}}\right\rceil
     \]
 
     \item 求滤波器极点
