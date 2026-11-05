@@ -103,7 +103,7 @@
 \begin{document}
 
 \begin{center}
-  {\heiti\headingfont\zihao{1}\color{main} 模拟信号分析笔记}
+  {\heiti\headingfont\zihao{1}\color{main} 模拟信号与系统笔记}
 \end{center}
 
 \begin{center}
@@ -909,13 +909,13 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
     $\displaystyle
     \FF \{ x(t-t_0) \}
     =
-    X(\varOmega)\ee^{-\jj \varOmega t_0}
+    X(\varOmega)\ee^{-\jj t_0 \varOmega }
     $
     &
     $\displaystyle
     \FF^{-1} \{ X(\varOmega-\varOmega_0) \}
     =
-    x(t)\ee^{\jj t\varOmega_0}
+    x(t)\ee^{\jj \varOmega_0 t}
     $
     \\
 
@@ -1033,7 +1033,7 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
   &
   $\displaystyle
   \FF^{-1}
-  \{X(\varOmega)\ee^{-\jj\varOmega t_0}\}
+  \{X(\varOmega)\ee^{-\jj t_0 \varOmega}\}
   =
   x(t-t_0)
   $
@@ -1283,7 +1283,7 @@ Laurent级数形式如下：
 
     平移
     & $\mathcal{L}\{x(t-t_0)u(t-t_0)\}
-        =X(s)\mathrm{e}^{-st_0}$
+        =X(s)\mathrm{e}^{-t_0s}$
     & $\mathcal{L}^{-1}\{X(s-s_0)\}
         =x(t)u(t)\mathrm{e}^{s_0t}$ \\
 

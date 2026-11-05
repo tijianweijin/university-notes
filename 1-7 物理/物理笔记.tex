@@ -477,7 +477,81 @@
 
 \section{电磁学}
 
-\subsection{电磁场}
+\subsection{微观结构基础}
+
+\subsubsection{电荷与电流}
+
+\subsubsection{电磁极化}
+
+\subsection{电磁力学}
+
+\subsubsection{电磁力}
+
+Lorentz力
+\[
+  \vect F=q(\vect E+\vect B\times\vect v)
+\]
+
+\subsubsection{电磁能}
+
+\begin{enumerate}
+  \item 电磁场做功
+  \item 电容与电感
+  \item 自感与互感
+  \item 电磁场能量密度
+  \item 电磁场能量守恒
+\end{enumerate}
+
+\subsubsection{电磁动量}
+
+\subsection{电磁场论}
+
+\subsubsection{数学描述}
+
+\begin{enumerate}
+  \item 旋度与散度
+  \item 环量与通量
+  \item 介质中的电磁场
+  \item Maxwell方程组
+\end{enumerate}
+
+\subsubsection{电磁激发}
+
+\begin{enumerate}
+  \item 电生磁
+  
+  \begin{itemize}
+    \item 传输电流
+    
+    Biot-Savart定律
+    \[
+    \dif B = \frac{\mu_0}{4\pi}\frac{I\dif \vect l\times\vect{\ee}_r}{r^2}
+    \]
+
+    \item 位移电流
+  \end{itemize}
+
+  \item 磁生电（电磁感应）
+  
+  Faraday电磁感应定律
+  \[
+  \EE = - \frac{\dif\varPhi}{\dif t}
+  \]
+
+\end{enumerate}
+
+\subsubsection{特殊电磁场}
+
+\begin{enumerate}
+  \item 静电场
+  
+  \[
+  \nabla\times\vect{E}=\vect{0}
+  \]
+
+  \item 恒定磁场
+  \item 涡旋电场
+\end{enumerate}
 
 \begingroup
 \small
@@ -665,10 +739,16 @@ Gauss定理和Ampère环路定理能完备描述稳恒磁场。
 
 \centering 电容 \(C\)
 \begin{enumerate}
-  \item 定义式：\(\displaystyle C=\frac{Q}{V}\)。
+  \item 定义式：\(\displaystyle C=\frac{Q}{V}\)
+  \item 单位：Farad, F
 \end{enumerate}
 \vspace{0.8em}
-& \\ \hline
+& \centering\arraybackslash 电感$L$
+\begin{enumerate}
+  \item 定义式：\(\displaystyle L=\frac{\varPsi}{I}\)
+  \item 单位：Henry, H
+\end{enumerate}
+\\ \hline
 
 \centering 静电场中的导体
 
@@ -723,7 +803,6 @@ Gauss定理和Ampère环路定理能完备描述稳恒磁场。
 \begin{tabular}{|>{\raggedright\arraybackslash}p{0.455\textwidth}|>{\raggedright\arraybackslash}p{0.455\textwidth}|}
 \hline
 \multicolumn{2}{|c|}{电磁场}\\ \hline
-\multicolumn{2}{|c|}{Maxwell 方程组}\\ \hline
 
 \multicolumn{2}{|p{\dimexpr0.91\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{%
   {\centering 常用关系\par}
@@ -735,6 +814,8 @@ Gauss定理和Ampère环路定理能完备描述稳恒磁场。
         =\mu_0\varepsilon_0\vect v\times\vect E\)。
   \end{enumerate}
 }\\ \hline
+
+\multicolumn{2}{|c|}{Maxwell 方程组}\\ \hline
 
 \centering 微分形式
 
@@ -756,25 +837,61 @@ Gauss定理和Ampère环路定理能完备描述稳恒磁场。
 \left\{
 \begin{aligned}
 \oiint_S \vect{E}\cdot\dif \vect{S}
-&= \frac{Q_{\mathrm{in}}}{\varepsilon_0}\\
+&= \frac{1}{\varepsilon_0}\iint_V \rho \dif {V}\\
 \oiint_S \vect{B}\cdot\dif \vect{S}
 &= 0\\
 \oint_C \vect{E}\cdot\dif \vect{l}
-&= -\frac{\dif}{\dif t}
-\iint_S \vect{B}\cdot\dif \vect{S}\\
+&= -\iint_S \frac{\partial\vect{B}}{\partial t} \cdot\dif \vect{S}\\
 \oint_C \vect{B}\cdot\dif \vect{l}
 &= \mu_0 I_{\mathrm{in}}
-+\mu_0\varepsilon_0\frac{\dif}{\dif t}
-\iint_S \vect{E}\cdot\dif \vect{S}
++\mu_0\varepsilon_0
+\iint_S \frac{\partial\vect{E}}{\partial t} \cdot\dif \vect{S}
 \end{aligned}
 \right.
 \]\par\strut
 
 \\ \hline
+
+\multicolumn{2}{|c|}{电介质Maxwell 方程组}\\ \hline
+
+\centering 微分形式
+
+\[
+\left\{
+\begin{aligned}
+\nabla\cdot\vect{D} &= \rho \\
+\nabla\cdot\vect{B} &= 0\\
+\nabla\times\vect{E} &= -\frac{\partial\vect{B}}{\partial t}\\
+\nabla\times\vect{H} &= \vect{J}+\frac{\partial\vect{D}}{\partial t}
+\end{aligned}
+\right.
+\]\par\strut
+
+& \centering\arraybackslash 积分形式
+
+\[
+\left\{
+\begin{aligned}
+\oiint_S \vect{D}\cdot\dif \vect{S}
+&= \iiint_V \rho \dif {V}\\
+\oiint_S \vect{B}\cdot\dif \vect{S}
+&= 0\\
+\oint_C \vect{E}\cdot\dif \vect{l}
+&= -\iint_S \frac{\partial\vect{B}}{\partial t} \cdot\dif \vect{S}\\
+\oint_C \vect{H}\cdot\dif \vect{l}
+&= \oiint_S \left(\vect{J}+\frac{\partial\vect{D}}{\partial t}\right) \cdot \dif \vect S
+\end{aligned}
+\right.
+\]\par\strut
+
+\\ \hline
+
 \end{tabular}
 \end{minipage}\par
 
 \endgroup
+
+其中$\rho$是电荷体密度。
 
 \begin{method}[【注意】电磁场]
 \begin{enumerate}
@@ -914,6 +1031,26 @@ Faraday电磁感应定律
   注：当构建闭合回路时，要注意\textbf{算整个回路的感生电动势}！
 \end{methodbox}
 
+\subsubsection{自感与互感}
+
+\begin{enumerate}
+  \item 自感
+  
+  \[
+  \EE = -\frac{\dif\varPsi}{\dif I} = - L \frac{\dif I}{\dif t}
+  \]
+
+  \item 互感
+\end{enumerate}
+
+\subsection{位移电流}
+
+\begin{enumerate}
+  \item 位移电流密度矢量：$\vect J_{\mathrm{d}} = \dfrac{\dif \vect D}{\dif t} = \varepsilon_0\dfrac{\dif \vect E}{\dif t} + \dfrac{\dif \vect P}{\dif t}$
+  \item 位移电流：$\displaystyle I_{\mathrm{d}} =  \iint_S \vect J_{\mathrm{d}} \cdot \dif \vect S = \dfrac{\dif \varPhi_D}{\dif t}$
+  \item 全电流：$I_{\mathrm{s}} = I + I_{\mathrm{d}}$、$\vect J_{\mathrm{s}} = \vect J_{\mathrm{d}} + \vect J_{\mathrm{m}}$
+\end{enumerate}
+
 \subsection{常见电学理想模型}
 
 \begin{center}
@@ -933,7 +1070,7 @@ Faraday电磁感应定律
 \end{tabularx}
 \end{center}
 
-\subsection{常见电学理想电容器}
+\subsection{常见理想电容器}
 
 \begin{center}
 \begin{tabularx}{0.96\textwidth}{>{\raggedright\arraybackslash}p{3.8cm}X X}
@@ -961,7 +1098,6 @@ Faraday电磁感应定律
 \toprule
 \textbf{模型} & \textbf{磁感应强度 $\vect B$} \\
 \midrule
-
 有限长均匀载流直导线 &
 $\displaystyle
 \vect B =
@@ -1038,6 +1174,22 @@ $ \\
 \bottomrule
 \end{tabularx}
 \end{center}
+
+\subsection{常见理想自感互感系数}
+
+\begin{center}
+\begin{tabularx}{0.96\textwidth}{>{\raggedright\arraybackslash}p{3.8cm}X X}
+\toprule
+  & 电感 \(L\) & 磁场能 \(W\)\\
+\midrule
+无限长载流螺线管 & \(\displaystyle L=\mu_0 n^2 V\) & \(\displaystyle W=\frac{B^2 V}{2\mu_0}\)\\
+无限长同轴传输线（单位长度） & \(\displaystyle L=\frac{\mu_0}{2\pi}\ln\frac{R_2}{R_1}\) & \\
+环形螺线管 & \(\displaystyle L=\frac{\mu_0 N^2 h}{2\pi}\ln\frac{R_2}{R_1}\) & \\
+互感直长螺线管 & \(M=\mu_0 n_1 n_2 V=\sqrt{L_1 L_2}\) & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
 \section{热学}
 
 \subsection{气体动力学}
