@@ -43,11 +43,10 @@
 
 \DeclareTextFontCommand{\textbf}{\heiti\color{main}}
 
-\definecolor{main}{HTML}{3E6F9E}
+\definecolor{main}{HTML}{4C7FB3}
 \definecolor{mainlight}{HTML}{F0F6FF}
-\definecolor{method}{HTML}{6E869E}
+\definecolor{method}{HTML}{8099B3}
 \definecolor{methodlight}{HTML}{f0f6ff}
-\definecolor{black}{HTML}{000000}
 
 \hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
 \setlength{\parindent}{2em}
@@ -89,6 +88,7 @@
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\dd}{\,\mathrm{d}}
 \newcommand{\ppi}{\,\uppi\,}
 \newcommand{\FF}{\mathcal{F}}
@@ -99,390 +99,209 @@
 
 \newfontfamily\russianfont{DejaVu Sans}
 
-
 \begin{document}
 
 \begin{center}
-  {\heiti\headingfont\zihao{1}\color{main} 模拟信号分析笔记}
+  {\heiti\headingfont\zihao{1}\color{main} 数字信号与系统笔记}
 \end{center}
 
-\begin{center}
-  {\kaishu\zihao{4}\color{black} 榆枋下}
-\end{center}
+\section{模数转换}
 
-\section{信号分析}
-
-\subsection{信号}
-
-\subsubsection{基本概念}
+\subsection{取样}
 
 \begin{enumerate}
+  \item 时域分析
   
-  \item 概念辨析
-  \begin{itemize}
-    \item 消息：信号承载的具体内容；
-    \item 信息：信息是消息中蕴含的有用内容；
-    \item 信号：消息（或信息）的物理表现形式。
-  \end{itemize}
+  设取样间隔为$T_{\mathrm{s}}$，则取样信号为：
 
-  \item 表示：类似函数，有解析式法、图像法、表格法等。
+  \[
+  \hat{x}(t)=x(t)\delta_T(t)=\sum_{k=-\infty}^{+\infty} x(kT_{\mathrm{s}})\delta_T(t-kT_{\mathrm{s}})
+  \]
 
-  \item 特征
-  \begin{enumerate}[label=(\arabic*)]
+  \item 频域分析
+  
+  设取样角频率为$\varOmega_{\mathrm{s}}=\dfrac{2\uppi}{T_{\mathrm{s}}}$，
+  由乘法的Fourier变换性质可知，取样信号的频域表示为：
 
-    \item 功率
-信号归一化瞬时功率可以表示为其Euclid内积的平方，即$p = \left | x(t) \right |^2$。
-故有归一化平均功率（即一般所说的功率）。
-    \item 能量：将瞬时归一化功率对时间积分即得到信号的能量。
+  \[
+  \hat{X}(\varOmega)=\dfrac{1}{T_{\mathrm{s}}}X(\varOmega)\ast P_T(\varOmega)=\dfrac{1}{T_{\mathrm{s}}}\sum_{k=-\infty}^{+\infty} X(\varOmega-k\varOmega_{\mathrm{s}})
+  \]
 
-\begin{center}
-\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
-\toprule
-信号 & 平均归一化功率 & 归一化能量 \\
-\midrule
-连续信号 & $P =\displaystyle \lim_{a \to \infty} \frac{1}{2a} \displaystyle\int_{-a}^{a} \left | x \left (t \right ) \right |^2 \dd t$ & $E = \displaystyle \lim_{a \to \infty} \displaystyle \int_{-a}^{a} \left | x \left (t \right ) \right |^2 \dd t$ \\
-离散信号 & $P =\displaystyle \lim_{N \to \infty} \frac{1}{2N} \displaystyle\sum_{k=-N}^{N} \left | x \left [ k \right ] \right |^2$ & $E = \displaystyle \lim_{N \to \infty} \displaystyle \sum_{k=-N}^{N} \left | x \left [ k \right ] \right |^2$ \\
-\bottomrule
-\end{tabularx}
-\end{center}
+  \item Nyquist采样定理
+  
+  取样后频谱副本之间不重叠的条件为：
 
-  \end{enumerate}
+  \[
+  f_{\mathrm{s}} \leq 2f_{\max}
+  \]
+
 \end{enumerate}
 
-\subsubsection{分类}
-
-\begin{enumerate}
+\begin{methodbox}[【题型】求运算后信号的取样频率]
   
-  \item 确定信号与随机信号
-
-能给出确定时间函数的信号称为确定信号，否则称为随机信号。
-
-  \item 连续时间信号与离散时间信号
+  将时域信号转换到频域后再判断$\varOmega_{\max}$的变化，如
   
-连续时间信号对应带有有限个第一类间断点的连续函数，简称连续信号，一般用$x(t)$表示。
-连续信号的时间是连续的，但信号取值可以是连续的也可以是离散的。
-
-离散时间信号对应定义域离散的函数，简称离散信号，一般用$x[n]$表示。
-离散信号的时间是离散的，但信号取值可以是连续的也可以是离散的。
-
-\begin{table}[htbp]
-    \centering
-    \renewcommand{\arraystretch}{1.5}
-    \setlength{\arrayrulewidth}{0.5pt}
-    
-    \begin{tabular}{|>{\centering\arraybackslash}m{3cm}
-                    |>{\centering\arraybackslash}m{3cm}
-                    |>{\centering\arraybackslash}m{3cm}|}
-        \hline
-        \diagbox[width=3cm,height=1.2cm]{幅值}{时间}
-            & 连续 & 离散 \\
-        \hline
-        连续 & 模拟信号 & 抽样信号 \\
-        \hline
-        离散 &  & 数字信号 \\
-        \hline
-    \end{tabular}
-\end{table}
-
-\begin{methodbox}[区分连续信号与离散信号]
-连续信号与离散信号的区别只在于时间是否连续，而不在于幅值是否连续。
+  \begin{itemize}
+    \item $f(at) \longrightarrow \dfrac{1}{|a|}F(\dfrac{\varOmega}{a})$，$a\varOmega_{\max}$
+    \item $f_1(t) \ast f_2(t) \longrightarrow F_1(\varOmega)F_2(\varOmega)$，$\max\left\{\varOmega_{1\max},\,\varOmega_{2\max}\right\}$
+    \item $f_1(t)f_2(t) \longrightarrow \dfrac{1}{2\uppi} F_1(\varOmega) \ast F_2(\varOmega)$，$\varOmega_{1\max} + \varOmega_{2\max}$
+  \end{itemize}
+  
 \end{methodbox}
 
-  \item 周期信号与非周期信号
+\begin{methodbox}
+  注意：$\hat{x}(t)$是离散时间信号，仍然在时域$t-x(t)$上；而$x[n]$才是数字信号，在$n-x[n]$上。
+\end{methodbox}
 
-  连续周期信号可以写成$x(t)=x(t+nT)$，其中$T$是周期信号的周期。
+\subsection{内插}
 
-  离散周期信号有$x[n]=x[n+N]$，记$\min N$为其基本周期。
+\begin{enumerate}
+  
+  \item 内插公式
+  
+  \[
+  x(t) = T\hat{x}(t) \ast 2f_{\mathrm{c}}\Sa(2\uppi f_{\mathrm{c}} t) = 2f_{\mathrm{c}}T\sum_{k=-\infty}^{+\infty} x(kT_{\mathrm{s}}) \Sa \left [ 2\uppi f_{\mathrm{c}}(t-kT_{\mathrm{s}}) \right ]
+  \]
 
-  \item 能量受限信号与功率受限信号
+  \item 内插频率
+  
+  \[
+  f_{\max} \leq f_{\mathrm{s}} \leq f_{\mathrm{s}}-f_{\max}
+  \]
 
-能量受限信号$ \Leftrightarrow 0 < E < \infty, P = 0 $ \\
-功率受限信号$ \Leftrightarrow 0 < P < \infty, E = \infty $ 
 \end{enumerate}
+
+\section{信号分析}
 
 \subsection{时域分析}
 
 \subsubsection{经典信号}
 
-注：如未说明，默认$t \in \left ( -\infty, \infty \right )$。
+离散时间信号序列的角频率称为数字角频率，记为$\omega$，单位为rad，与角频率有关系$\omega=\varOmega T_{\mathrm{s}}$。
+
+信号的常见表示法包括指针法、函数法、图像法等。
 
 \begin{enumerate}
-    \item 连续时间信号
-    \begin{itemize}
-      \item 正弦信号：$x(t)=A\sin\left ( \varOmega t + \varphi \right )$
-      
-      $A$为幅值，控制信号幅度；$\varOmega$为角频率，控制信号周期；$\varphi$为相位，控制信号相位。
 
-      \item 指数信号：$x(t)=Ae^{st}, \, s = \sigma + \jj \varOmega$
-    
-      $\sigma$控制指数增大/减小速率，$\varOmega$控制振荡周期。
+  \item 单位取样序列
+  
+  \[
+  \delta[n]=
+    \begin{cases}
+    1, & n=0,\\
+    0, & n\neq 0.
+    \end{cases}
+  \]
 
-      \begin{methodbox}[正弦信号与指数信号关系]
-        \[
-        \sin \left ( \varOmega t \right ) = \frac{1}{\jj 2} \left ( e^{\jj \varOmega t} - e^{-\jj \varOmega t} \right ), \qquad
-        \cos \left ( \varOmega t \right ) = \frac{1}{2} \left ( e^{\jj \varOmega t} + e^{-\jj \varOmega t} \right )
-        \]
-      \end{methodbox}
-    
-      \item 取样信号（Sa信号）：$\operatorname{Sa}(t)=\dfrac{\sin t}{t}, \, \displaystyle x(t) = A \, \mathrm{Sa}(\varOmega t) = A \, \frac{\sin \varOmega t}{\varOmega t}$
-      
-      \begin{methodbox}[sinc函数]
-        当 $A=1, \, \varOmega = \ppi$ 时，$\mathrm{Sa}(\varOmega t)$ 称为 sinc 函数，
-        记为 $\mathrm{sinc}(t)$。
-        \[
-        \mathrm{sinc}(t)=
-        \begin{cases}
-        \dfrac{\sin(\ppi t)}{\ppi t}, & t\neq 0,\\[6pt]
-        1, & t=0.
-        \end{cases}
-        \]
-      \end{methodbox}
-    \end{itemize}
+  \item 单位阶跃序列
+  
+  \[
+  u[n]=
+    \begin{cases}
+    1, & n\geq 0,\\
+    0, & n<0.
+    \end{cases}
+  \]
 
-    \item 奇异信号
-    
-    \begin{itemize}
-      \item 单位斜变信号
-      \[
-      r(t)=
-        \begin{cases}
-        0, & t < 0,\\
-        t, & t \geq 0.
-        \end{cases}
-      \]
-      \item 单位阶跃信号
-      \[
-      u(t)=
-        \begin{cases}
-        0, & t < 0,\\
-        1, & t \geq 0.
-        \end{cases}
-      \]
-      \item 单位冲激信号（Dirac定义）
-      \[
-      \int_{-\infty}^{\infty} \delta(t) \dd t = 1, \qquad \delta(t) = 0, \, \forall \, t \neq 0
-      \]
+  \item 单位矩形序列
+  
+  \[
+  R_N[n]=u[n]-u[n-N]=
+    \begin{cases}
+    1, & 0 \leq n \leq N-1,\\
+    0, & n<0\;\text{或}\;n\geq N.
+    \end{cases}
+  =\sum_{k=0}^{N-1} \delta[n-k]
+  \]
 
-      \begin{methodbox}[【技巧】单位冲激信号性质]
-        \begin{itemize}
-          \item 取样：$\displaystyle \int_{-\infty}^{\infty} x(t) \delta(t-t_0) \dd t = x(t_0) $
-          \item 展缩：$\delta(at) = \dfrac{1}{|a|} \delta(t)$
-          \item 卷积：$\delta(\mathcal{T}(t)) \ast x(t) = x(\mathcal{T}(t)) = x(\mathcal{T}(t))$，其中$\mathcal{T}$为时移、微积分算子。
-        \end{itemize}
-      \end{methodbox}
+  \item 单位斜变序列
+  
+  \[
+  r[n]=nu[n]=
+    \begin{cases}
+    n, & n\geq 0,\\
+    0, & n<0.
+    \end{cases}
+  \]
 
-      \begin{methodbox}[【技巧】三奇异信号关系]
-        后者是前者的导数，前者是后者的积分。
-        \[
-        r(t) \to u(t) \to \delta(t)
-        \]
-        \[
-        \dfrac{\dd r(t)}{\dd t} = u(t), \qquad \dfrac{\dd u(t)}{\dd t} = \delta(t)
-        \]
-      \end{methodbox}
+  \item 实指数序列
+  
+  \[
+  x[n]=a^n u[n], \quad a \in \mathbb{R}\; \text{且} \; a \ne 0
+  \]
+  
+  \item 复指数序列
+  
+  \[
+  x[n]=A \ee^{\jj (\omega_0 n + \varphi)}=A\cos(\omega_0 n + \varphi) + \jj A\sin(\omega_0 n + \varphi)
+  \]
+  
+  \item 正弦序列
+  
+  \[
+  x[n] = cos(\omega n) \text{或} x[n] = sin (\omega n)
+  \]
 
-      \begin{methodbox}[矩形信号]
-        持续时间为$[\tau_1, \tau_2]$的矩形信号可表示为两阶跃信号的差，即
-        
-        \[
-        x(t) = E \left [ u(t-\tau_1) - u(t-\tau_2) \right ]
-        \]
+  \begin{methodbox}[离散时间信号序列的周期性]
+    若$x[n+N]=x[n]$，则称$x[n]$为周期序列，周期为$N$。
 
-        特殊地，记
-        
-        \[
-        R(t) = E \left [ u\left(t+\frac{\tau}{2}\right) - u\left(t-\frac{\tau}{2}\right) \right ]
-        \]
-      \end{methodbox}
+    若$x[n]$为正弦信号，则$x[n]$为周期信号当且仅当$\dfrac{2\uppi}{\omega}\in \QQ$，即$\omega = \dfrac{N}{m}\uppi, N,\,m \in \ZZ $。
 
-      \begin{methodbox}[符号信号]
-        符号函数记为
-        \[
-          \operatorname{sgn}(t) =
-          \begin{cases}
-            1, & t > 0,\\
-            -1, & t < 0.
-          \end{cases}
-          =2 u(t)-1
-        \]
-      \end{methodbox}
+    周期计算方式为$N=m\dfrac{2\uppi}{\omega},\,m \in \ZZ$。
+  \end{methodbox}
 
-    \end{itemize}
+\end{enumerate}
 
-    \item 其他特殊信号
-
-    \begin{itemize}
-      \item 三角信号
-      
-      最大值为$E$，长度为$T$的三角信号可以视为两个值为$\sqrt{E}$，长度为$\dfrac{T}{2}$的矩形信号的差。
-      
-      其Fourier变换为
-      \[
-      \FF \left\{ x(t) \right\} =\frac{2}{T} \left[\sqrt{E}R\left(\frac{2t}{T}\right)\right] \ast \left[\sqrt{E}R\left(\frac{2t}{T}\right)\right] = \dfrac{ET}{2} \Sa^2 \left( \frac{T}{4} \varOmega \right)
-      \]
-    \end{itemize}
-
-  \end{enumerate}
-  \subsubsection{运算}
+\subsubsection{运算}
 
 \begin{enumerate}
 
   \item 几何变换
     
-  几何变换可以用通式$\displaystyle y(t)=x\left [ a\left ( t - \dfrac{b}{a} \right ) \right ]$表示。
+  几何变换可以用通式$\displaystyle y[n]=x\left [ a\left ( n - \dfrac{b}{a} \right ) \right ]$表示。
     
     \begin{enumerate}[label=(\arabic*)]
-      \item 移位：$y(t)=x(t-\tau)$
-      \item 反褶：$y(t)=x(-t)$
-      \item 尺度变换：$y(t)=x(at)$
-    \end{enumerate}
-  
-    \begin{methodbox}[【技巧】几何变换顺序]
-      一般将信号函数整理为$\displaystyle y(t)=x\left [ a\left ( t - \dfrac{b}{a} \right ) \right ]$
-      的形式后再考虑如何变换，否则容易出现问题。
-    \end{methodbox}
-
-  \item 微积分
-  
-    \begin{enumerate}[label=(\arabic*)]
-      \item 微分：$y(t)=\dfrac{\dd x(t)}{\dd t}$
-      \item 积分：$y(t)=\displaystyle \int_{-\infty}^t x(\tau) \dd \tau$
+      \item 移位：$y[n]=x[n-k]$
+      \item 反褶：$y[n]=x[-n]$
+      \item 尺度变换：$y[n]=x[an]$
     \end{enumerate}
 
+  \item 序列累加 $\displaystyle y[n]=\sum_{k=-\infty}^{n} x[k]$
+  
   \item 复合运算
     \begin{enumerate}[label=(\arabic*)]
-      \item 加法：$y(t)=x_1(t) + x_2(t)$
-      \item 乘法：$y(t)=x_1(t) \cdot x_2(t)$
-      \item 卷积：$y(t)=x(t) * h(t) = \displaystyle \int_{-\infty}^{\infty} x(\tau) h(t-\tau) \dd \tau$
+      \item 加法：$y[n]=x_1[n] + x_2[n]$
+      \item 乘法：$y[n]=x_1[n] \cdot x_2[n]$
+      \item 卷积：$y[n]=x[n] * h[n] = \displaystyle \sum_{k=-\infty}^{\infty} x[k] h[n-k]$
     \end{enumerate}
-    \begin{methodbox}[卷积意义]
-      \begin{itemize}
-        \item 面积解释： 当两个信号均为非负信号时，卷积值可理解为两信号乘积的重叠“面积”；若信号存在正负，则应理解为乘积的代数积分，而不能简单看成几何面积。
-
-        \item 系统意义： 卷积本质上就是线性时不变系统对各时刻输入所产生响应的叠加。
-      \end{itemize}
-    \end{methodbox}
-    \begin{methodbox}[卷积性质]
-      \begin{enumerate}[label=\arabic*.]
-
-      \item \textbf{代数性质}
-
-      \begin{itemize}
-        \item 交换律
-        \[
-        x_1(t)\ast x_2(t)
-        =
-        x_2(t)\ast x_1(t)
-        \]
-
-        \item 分配律
-        \[
-        x_1(t)\ast \left[x_2(t)+x_3(t)\right]
-        =
-        x_1(t)\ast x_2(t)
-        +
-        x_1(t)\ast x_3(t)
-        \]
-
-        \item 结合律
-        \[
-        \left[x_1(t)\ast x_2(t)\right]\ast x_3(t)
-        =
-        x_1(t)\ast\left[x_2(t)\ast x_3(t)\right]
-        \]
-
-      \end{itemize}
-
-      \item \textbf{与奇异信号的卷积}
-
-      \begin{itemize}
-        \item 与单位冲激卷积
-        \[
-        x(t)\ast\delta(t)=x(t)
-        \]
-
-        即 $\delta(t)$ 为卷积运算的恒等元。
-
-        \item 与移位冲激卷积
-        \[
-        x(t)\ast\delta(t-t_0)
-        =
-        x(t-t_0)
-        \]
-
-        即与移位冲激卷积可使信号整体时移 $t_0$。
-
-        \item 与冲激导数卷积
-        \[
-        x(t)\ast\delta'(t)
-        =
-        x'(t)
-        \]
-
-        即与 $\delta'(t)$ 卷积相当于对信号求导。
-      \end{itemize}
-
-      \item \textbf{微分与积分性质}
-
-      \begin{itemize}
-        \item 微分性质
-        \[
-        \left[x_1(t)\ast x_2(t)\right]'
-        =
-        x_1'(t)\ast x_2(t)
-        =
-        x_1(t)\ast x_2'(t)
-        \]
-
-        \item 积分性质
-        \[
-        x_1^{(-1)}(t)\ast x_2(t)
-        =
-        x_1(t)\ast x_2^{(-1)}(t)
-        \]
-
-        其中
-        \[
-        x^{(-1)}(t)
-        =
-        \int_{-\infty}^{t}x(\tau)\dd\tau.
-        \]
-
-  \end{itemize}
-  若卷积的某一函数求导完是单位冲激函数，常常一个求导一个积分，使计算简洁，如、
-  \[
-  y(t) = x(t) \ast u(t) = \int_{-\infty}^{t}x(\tau)\dd\tau \ast \delta(t) = \int_{-\infty}^{t}x(\tau)\dd\tau
-  \]
-\end{enumerate}
-    \end{methodbox}
-    \begin{methodbox}[【技巧】计算卷积方法选择]
-      \begin{enumerate}
-        \item 定义法：直接利用定义式计算
-        
-        注意：计算式繁琐，后项的\textbf{每个$t$都要换成$t-\tau$}；$\int_{0}^{t}e^{-\tau}\dd \tau$等积分\textbf{不要忘记常数项}。
-        
-        \item 图解法：方法参照下文。
-        \item 公式法：$\displaystyle\left[e^{-at}u(t)\right]\ast\left[e^{-bt}u(t)\right]=\dfrac{1}{b-a}[e^{-at}u(t)-e^{-bt}u(t)]u(t)$
-        \item 频域变换法：现将时域信号变换为复频域信号，计算后再反变换为时域信号。
-      \end{enumerate}
-    \end{methodbox}
-    \begin{methodbox}[【技巧】图解法]
-      \begin{enumerate}[label=(\arabic*)]
-        \item 反褶： 将 \(h(\tau)\) 关于纵轴反褶，得到\(h(-\tau)\)
+  
+  \begin{methodbox}[【技巧】卷积计算]
+    \begin{enumerate}[label=\arabic*.]
+      \item 解析式法
       
-        \item 平移： 将 \(h(-\tau)\) 沿 \(\tau\) 轴平移 \(t\)，得到\(h(t-\tau)\)
-        
-        \item 相乘： 将 \(x(\tau)\) 与 \(h(t-\tau)\) 相乘，得到 \(y(t)\)
-        
-        \item 积分： 对整个 \(\tau\) 轴积分
-        \[
-        y(t)
-        =
-        \int_{-\infty}^{+\infty}
-        x(\tau)h(t-\tau)\dd\tau.
-        \]
-      \end{enumerate}
-    \end{methodbox}
+      常用公式：
+      
+      \[
+      \sum_{n=0}^{N-1} a^n = \frac{1-a^N}{1-a}, \qquad
+      \sum_{n=0}^{\infty} a^n = \frac{1}{1-a}, \qquad |a|<1
+      \]
+
+      \[
+      \sum_{n=0}^{N-1} n a^n = \frac{(N-1)a^{N+1}-Na^N+a}{(1-a)^2}, \qquad
+      \sum_{n=0}^{\infty} n a^n = \frac{a}{(1-a)^2}, \qquad |a|<1
+      \]
+
+      \[
+      \sum_{n=0}^{N-1} n = \frac{1}{2}N(N-1),\qquad
+      \sum_{n=0}^{N-1} n^2 = \frac{1}{6}N(N-1)(2N-1)
+      \]
+
+      \item 图像法：反褶移位相乘求和，与连续时间卷积类似，不赘述。
+
+      \item 排序法：将两列信号尾部对齐，对应位样值逐个相乘，按位相加，即得到结果。
+    \end{enumerate}
+  \end{methodbox}
+  
 \end{enumerate}
 
 \subsubsection{分量与分解}
@@ -988,7 +807,7 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
 
 \begin{methodbox}[【技巧】时移与尺度变换对应]
   \[
-  \FF \{x(at-b)\}=\FF \left\{a \left( x - \frac{b}{a} \right)\right\} = \frac{1}{|a|} X \left( \frac{\varOmega}{a} \right) \ee^{-\jj \varOmega \frac{b}{a}}
+  \FF \{x(at-b)\}=\FF \left\{x\left[ a \left( x - \frac{b}{a} \right)  \right] \right\} = \frac{1}{|a|} X \left( \frac{\varOmega}{a} \right) \ee^{-\jj \varOmega \frac{b}{a}}
   \]
 \end{methodbox}
 
@@ -1725,7 +1544,7 @@ Butterworth逼近
   \begin{enumerate}
     \item 确定滤波器阶数$N$
     \[
-    N=\left\lceil\frac{\lg{\dfrac{10^{0.1A_p}-1}{10^{0.1A_s}-1}}}{2\lg {\dfrac{\varOmega_p}{\varOmega_s}}}\right\rceil
+    N=\left\lceil\frac{\lg{\dfrac{10^{0.1A_p}-1}{10^{0.1A_s}-1}}}{\lg {\dfrac{\varOmega_p}{\varOmega_s}}}\right\rceil
     \]
 
     \item 求滤波器极点
