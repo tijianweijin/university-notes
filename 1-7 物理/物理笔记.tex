@@ -140,22 +140,17 @@
 
 \subsubsection{转动运动参数与公式}
 
-角速度
-\[
-  \omega=\frac{\dif\theta}{\dif t},
-  \qquad
-  \text{角加速度}\quad \alpha=\frac{\dif^2\theta}{\dif t^2}.
-\]
+角速度$\omega=\frac{\dif\theta}{\dif t}$，角加速度$\alpha=\frac{\dif^2\theta}{\dif t^2}$
 
 \subsubsection{平动参考系变换}
 
 \[
-  \vect v_a=\vect v_r+\vect v_e,
+  \vect v_{\mathrm a}=\vect v_{\mathrm r}+\vect v_{\mathrm e},
   \qquad
-  \vect a_a=\vect a_r+\vect a_e.
+  \vect a_{\mathrm a}=\vect a_{\mathrm r}+\vect a_{\mathrm e}.
 \]
 
-其中带 \(a\) 者为绝对（加）速度，带 \(r\) 者为相对（加）速度，带 \(e\) 者为牵连（加）速度。
+其中带 \(\mathrm a\) 者为绝对（加）速度，带 \(\mathrm r\) 者为相对（加）速度，带 \(\mathrm e\) 者为牵连（加）速度。
 
 \subsection{质点动力学}
 
@@ -479,41 +474,70 @@
 
 \subsection{微观结构基础}
 
-\subsubsection{电荷与电流}
+\subsubsection{电荷}
 
-\subsubsection{电磁极化}
+\begin{enumerate}
+  \item 正负性：正电荷与负电荷
+  \item 量子性： \(e=1.6\times10^{-19}\,\mathrm C\)
+  \item 守恒性：孤立系统总电荷代数和不变
+\end{enumerate}
 
-\subsection{电磁力学}
+\subsubsection{电磁偶极子}
 
-\subsubsection{电磁力}
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+\toprule
+概念 & 电偶极子 & 磁偶极子 \\
+\midrule
+定义 & \(\vect p=q\vect l\) & \(\vect m=I\vect S\) \\
+力矩 & \(\vect M=\vect p\times\vect E\) & \(\vect M=\vect m\times\vect B\) \\
+匀强场中势能 & \(E_{\mathrm p}=-\vect p\cdot\vect E\) & \(E_{\mathrm p}=-\vect m\cdot\vect B\) \\
+\bottomrule
+\end{tabularx}
+\end{center}
 
-Lorentz力
+\subsubsection{电流}
+
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+\toprule
+概念 & 电流密度矢量 & 电流强度 \\
+\midrule
+传导电流 & $\vect J=\dfrac{\dif I}{\dif S_{\perp}} \hat{\vect u}=q_0 n \vect u$ & $ \displaystyle I = \iint \vect J \cdot \dif \vect S $ \\[6pt]
+位移电流 & $\vect J_{\mathrm d} = \dfrac{\partial \vect D}{\partial t}$ & $ \displaystyle I_{\mathrm d} = \dfrac{\dif \varPhi_{\vect D}}{\dif t} =  \iint \vect J_{\mathrm d} \cdot \dif \vect S $ \\[6pt]
+全电流 & $\vect J_{\mathrm s} = \vect J + \vect J_{\mathrm d} $ & $ I_{\mathrm s} = I + I_{\mathrm d} $ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{enumerate}
+  \item 传导电流与位移电流的守恒关系
+  
+  \[
+  \nabla\cdot\left(\vect J + \dfrac{\partial \vect D}{\partial t}\right) = 0 \Leftrightarrow \oiint \left(\vect J + \dfrac{\partial \vect D}{\partial t}\right) \cdot \dif \vect S = 0
+  \]
+  
+  \item 电流连续性方程
+  
+  \[
+  \nabla\cdot\vect J = -\frac{\partial \rho}{\partial t}\Leftrightarrow \oiint \vect J\cdot\dif\vect S=-\frac{\dif q_\text{内}}{\dif t}
+  \]
+\end{enumerate}
+
+
+\subsubsection{极化与磁化}
+
+\noindent\begin{methodbox}[真空介电常数与真空磁导率关系]
+  \[\varepsilon_0\mu_0 c^2=1\]
+\end{methodbox}
+
+\subsection{电磁场产生与激发}
+
+\subsubsection{点电荷产生电场}
+
 \[
-  \vect F=q(\vect E+\vect B\times\vect v)
+\vect{E} = \frac{1}{4\uppi\varepsilon_0}\frac{q}{r^2} \vect \ee_r
 \]
-
-\subsubsection{电磁能}
-
-\begin{enumerate}
-  \item 电磁场做功
-  \item 电容与电感
-  \item 自感与互感
-  \item 电磁场能量密度
-  \item 电磁场能量守恒
-\end{enumerate}
-
-\subsubsection{电磁动量}
-
-\subsection{电磁场论}
-
-\subsubsection{数学描述}
-
-\begin{enumerate}
-  \item 旋度与散度
-  \item 环量与通量
-  \item 介质中的电磁场
-  \item Maxwell方程组
-\end{enumerate}
 
 \subsubsection{电磁激发}
 
@@ -521,14 +545,34 @@ Lorentz力
   \item 电生磁
   
   \begin{itemize}
+    \item 运动点电荷
+    \[
+    B = \frac{\mu_0}{4\uppi}\frac{q\vect v\times\vect \ee_r}{r^2}
+    \]
+
+\noindent\begin{methodbox}[运动电荷产生的电磁场关系]
+\[
+\vect B=\mu_0\varepsilon_0\vect v\times\vect E
+\]
+\end{methodbox}
+
     \item 传输电流
     
     Biot-Savart定律
     \[
-    \dif B = \frac{\mu_0}{4\pi}\frac{I\dif \vect l\times\vect{\ee}_r}{r^2}
+    \dif B = \frac{\mu_0}{4\uppi}\frac{I\dif \vect l\times\vect{\ee}_r}{r^2}
     \]
 
     \item 位移电流
+
+    \[
+    \nabla\times\vect{B} = \mu_0\varepsilon_0\frac{\partial\vect{E}}{\partial t}
+    \Leftrightarrow \oint \vect{B}\cdot\dif \vect{l}
+    = \mu_0 I_{\mathrm{in}}
+    +\mu_0\varepsilon_0
+    \iint \frac{\partial\vect{E}}{\partial t} \cdot\dif \vect{S}
+    \]
+
   \end{itemize}
 
   \item 磁生电（电磁感应）
@@ -538,20 +582,307 @@ Lorentz力
   \EE = - \frac{\dif\varPhi}{\dif t}
   \]
 
+  \begin{methodbox}[载流螺线管Faraday电磁感应定律]
+  记磁通链$\varPsi_{\mathrm{m}}=N\varPhi_{\mathrm{m}}$
+  \[
+  \EE = -\frac{\dif \varPsi_{\mathrm{m}}}{\dif t}
+  \]
+  \end{methodbox}
+  
+  \begin{enumerate}[label=(\arabic*)]
+    \item 动生电动势
+
+    产生原因为Lorentz力分力，计算式为：
+
+    \[
+    \EE = \int_{a}^{b} (\vect v \times \vect B) \cdot \dif \vect l
+    \]
+
+    \begin{methodbox}[【题型】动生电动势计算]
+      \begin{enumerate}[label=\arabic*.]
+        \item 直接用计算式积分；
+        \item 构造闭合回路，利用两部分电动势相等计算。
+      \end{enumerate}
+    \end{methodbox}
+
+    \item 感生电动势
+    
+    产生原因为感生电场力，计算式为：
+
+      \[
+      \EE = - \oiint_S \frac{\partial \vect B}{\partial t} \cdot \dif \vect S
+      \]
+
+  \begin{methodbox}[【题型】感生电动势计算]
+    感生电场径向电动势为零，故可以作辅助半径构建完整闭合回路，从而得出感生电动势。
+  \end{methodbox}
+
+  \begin{methodbox}
+    注：当构建闭合回路时，要注意\textbf{算整个回路的感生电动势}！
+  \end{methodbox}
+
+  \end{enumerate}
+
+  \item 自感与互感 
+
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+  \toprule
+  概念 & 自感 & 互感 \\
+  \midrule
+  系数 & $L=\dfrac{\varPsi}{I}$ & $M_{12} = M_{21} = \dfrac{\varPsi_{12}}{I_2} = \dfrac{\varPsi_{21}}{I_1} $ \\[6pt]
+  电动势 & $\EE = - \left(L\dfrac{\dif I}{\dif t} + I\dfrac{\dif L}{\dif t}\right) $ & $ \EE = - \left(M\dfrac{\dif I}{\dif t} + I\dfrac{\dif M}{\dif t} \right) $ \\
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
 \end{enumerate}
 
-\subsubsection{特殊电磁场}
+\subsection{电磁场几何描述}
+
+\subsubsection{场线}
+
+\subsubsection{等势面}
+
+\begin{methodbox}[等势面与场线关系]
+  等势面与场线垂直。
+\end{methodbox}
+
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+\toprule
+概念 & 电场线 & 磁场线 \\
+\midrule
+定义 & \(\vect E\) & \(\vect B\) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{电磁动力学}
+
+\subsubsection{电磁力}
+
+广义Lorentz力
+\[
+\vect F=q(\vect E+\vect v\times\vect B)
+\]
 
 \begin{enumerate}
-  \item 静电场
+  \item Coulomb力
   
   \[
-  \nabla\times\vect{E}=\vect{0}
+  \vect F = \frac{1}{4\uppi\varepsilon_0}\frac{q_1q_2}{r^2}\vect \ee_r
+  \]
+  
+  \item Lorentz力
+  
+  \[
+  \vect F = q\vect v\times\vect B
   \]
 
-  \item 恒定磁场
-  \item 涡旋电场
+  \item Ampère力
+  
+  \[
+  \dif \vect F = I \dif \vect l \times \vect B
+  \]
+
 \end{enumerate}
+
+\subsubsection{电磁能}
+
+\begin{enumerate}
+  \item 电容与电感
+
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+  \toprule
+  & 电容 & 电感 \\
+  \midrule
+  定义 & $C=\dfrac{Q}{U}$  & $L=\dfrac{\varPsi}{I}$ \\
+  单位 & Farad, F & Henry, H \\
+  电介质中 & $C=\varepsilon_r C_0$ & $L=\dfrac{L_0}{\mu_r}$ \\
+  能量 & $W_{\mathrm e} = \dfrac{1}{2}CU^2$ & $W_{\mathrm m} = \dfrac{1}{2}LI^2$ \\
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
+  \item 电磁场能量密度
+
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X}
+  \toprule
+  & 电场 & 磁场 \\
+  \midrule
+  能量密度 & $w_{\mathrm e}=\frac{1}{2}\varepsilon_0E^2$  & $w_{\mathrm m}=\dfrac{B^2}{2\mu_0}$ \\
+  \bottomrule
+  \end{tabularx}
+\end{center}
+
+  \item Poynting矢量与电磁能流
+  \item 电磁场能量守恒
+\end{enumerate}
+
+\subsubsection{电磁动量（略）}
+\subsubsection{电磁角动量（略）}
+
+\subsection{电磁场论}
+
+\subsubsection{数学描述}
+
+场论给出我们两种完备描述电磁场的方式。
+
+\begin{enumerate}[label=\arabic*.]
+  \item 微分描述：
+  旋度$\nabla\times\vect{E}$、$\nabla\times\vect{B}$+
+  散度$\nabla\cdot\vect{E}$、$\nabla\cdot\vect{B}$+
+  边值条件
+  
+  \item 积分描述：
+  环量$\displaystyle \oint \vect E \cdot \dif \vect l$、$\displaystyle \oint \vect B \cdot \dif \vect l$+
+  通量$\displaystyle \varPhi_{\mathrm e} = \oiint \vect E \cdot \dif \vect S$、$\displaystyle \varPhi_{\mathrm m} = \oiint \vect B \cdot \dif \vect S$+
+  边值条件
+  
+\end{enumerate}
+
+Maxwell方程组给出了所有电磁场的微分描述和积分描述，形式如下：
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\begin{tabular}{|>{\raggedright\arraybackslash}p{0.455\textwidth}|>{\raggedright\arraybackslash}p{0.455\textwidth}|}
+\hline
+
+\centering 微分形式
+
+\[
+\left\{
+\begin{aligned}
+\nabla\cdot\vect{E} &= \frac{\rho}{\varepsilon_0}\\
+\nabla\cdot\vect{B} &= 0\\
+\nabla\times\vect{E} &= -\frac{\partial\vect{B}}{\partial t}\\
+\nabla\times\vect{B} &= \mu_0\vect{J}
++\mu_0\varepsilon_0\frac{\partial\vect{E}}{\partial t}
+\end{aligned}
+\right.
+\]\par\strut
+
+& \centering\arraybackslash 积分形式
+
+\[
+\left\{
+\begin{aligned}
+\oiint \vect{E}\cdot\dif \vect{S}
+&= \frac{1}{\varepsilon_0}\iiint \rho \dif {V}\\
+\oiint \vect{B}\cdot\dif \vect{S}
+&= 0\\
+\oint \vect{E}\cdot\dif \vect{l}
+&= -\iint \frac{\partial\vect{B}}{\partial t} \cdot\dif \vect{S}\\
+\oint \vect{B}\cdot\dif \vect{l}
+&= \mu_0 I+\mu_0\varepsilon_0
+\iint \frac{\partial\vect{E}}{\partial t} \cdot\dif \vect{S}
+\end{aligned}
+\right.
+\]\par\strut
+
+\\ \hline
+
+\end{tabular}
+\end{minipage}\par
+
+电介质中，Maxwell方程组形式如下：
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\begin{tabular}{|>{\raggedright\arraybackslash}p{0.455\textwidth}|>{\raggedright\arraybackslash}p{0.455\textwidth}|}
+\hline
+
+\centering 微分形式
+
+\[
+\left\{
+\begin{aligned}
+\nabla\cdot\vect{D} &= \rho \\
+\nabla\cdot\vect{B} &= 0\\
+\nabla\times\vect{E} &= -\frac{\partial\vect{B}}{\partial t}\\
+\nabla\times\vect{H} &= \vect{J}+\frac{\partial\vect{D}}{\partial t}
+\end{aligned}
+\right.
+\]\par\strut
+
+& \centering\arraybackslash 积分形式
+
+\[
+\left\{
+\begin{aligned}
+\oiint \vect{D}\cdot\dif \vect{S}
+&= \iiint \rho \dif {V}\\
+\oiint \vect{B}\cdot\dif \vect{S}
+&= 0\\
+\oint \vect{E}\cdot\dif \vect{l}
+&= -\iint \frac{\partial\vect{B}}{\partial t} \cdot\dif \vect{S}\\
+\oint \vect{H}\cdot\dif \vect{l}
+&= \iint \left(\vect{J}+\frac{\partial\vect{D}}{\partial t}\right) \cdot \dif \vect S
+\end{aligned}
+\right.
+\]\par\strut
+
+\\ \hline
+
+\end{tabular}
+\end{minipage}\par
+
+\subsection{特殊电磁场}
+
+\subsubsection{场论描述}
+
+  \begin{center}
+  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{1.5cm}X X X}
+  \toprule
+  概念& 静电场 & 恒定磁场 & 涡旋电场 \\
+  \midrule
+  特殊成因 & $\dfrac{\partial \vect B}{\partial t} = \vect 0$ & $\dfrac{\partial \vect D}{\partial t} = \vect 0$ & $\rho = 0$ \\[12pt]
+
+  微分性质 & 
+  $\left\{\begin{aligned}
+  \nabla\times\vect{E}&=\vect{0} \\
+  \nabla\cdot\vect{E}&=\dfrac{\rho}{\varepsilon_0}
+  \end{aligned}\right.$ &  
+  $\left\{\begin{aligned}
+  \nabla\times\vect{B}&=\mu_0 \vect{J} \\
+  \nabla\cdot\vect{B}&=0
+  \end{aligned}\right.$ &
+  $\left\{\begin{aligned}
+  \nabla\times\vect{E}&=-\dfrac{\partial\vect{B}}{\partial t} \\
+  \nabla\cdot\vect{E}&=0
+  \end{aligned}\right.$ \\[24pt]
+  
+  积分性质 & 
+  $\left\{\begin{aligned}
+  \oint\vect{E}\cdot\mathrm{d}\vect{l}&=0\\
+  \oiint\vect{E}\cdot\mathrm{d}\vect{S}&=\dfrac{1}{\varepsilon_0}\iiint\rho\dif V
+  \end{aligned}\right.$ &
+  $\left\{\begin{aligned}
+  \oint\vect{B}\cdot\mathrm{d}\vect{l}&=\mu_0 I\\
+  \oiint\vect{B}\cdot\mathrm{d}\vect{S}&=0
+  \end{aligned}\right.$ &
+  $\left\{\begin{aligned}
+  \oint\vect{E}\cdot\mathrm{d}\vect{l}&=-\frac{\partial\varPhi_B}{\partial t}\\
+  \oiint\vect{E}\cdot\mathrm{d}\vect{S}&=0
+  \end{aligned}\right.$ \\
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
+静电场的通量定理也称为Gauss定理；
+
+恒定磁场的环量定理也称为Ampère定理，通量定理也称为Gauss定理；
+
+涡旋电场的环量定理也称为Faraday电磁感应定律。
+
+\subsubsection{电势与电势能}
+
+静电场为无旋场，故存在电势函数 \(V\) 使得 \(\vect E=-\nabla V\)，对应有电势能 \(W=qV\)。
+
+\subsection{旧笔记}
 
 \begingroup
 \small
@@ -566,11 +897,7 @@ Lorentz力
 \endhead
 
 \centering 电荷
-\begin{enumerate}
-  \item 正负性：正电荷与负电荷。
-  \item 量子性： \(e=1.6\times10^{-19}\,\mathrm C\)。
-  \item 守恒性：孤立系统总电荷代数和不变。
-\end{enumerate}
+
 & \centering\arraybackslash /（目前尚未发现磁单极子）\\ \hline
 
 \centering 电偶极子
@@ -992,44 +1319,7 @@ Faraday电磁感应定律
 \EE = -\frac{\dif \varPhi_{\mathrm{m}}}{\dif t}
 \]
 
-\begin{methodbox}[载流螺线管Faraday电磁感应定律]
-  记磁通链$\varPsi_{\mathrm{m}}=N\varPhi_{\mathrm{m}}$
-  \[
-  \EE = -\frac{\dif \varPsi_{\mathrm{m}}}{\dif t}
-  \]
-\end{methodbox}
 
-\subsubsection{动生电动势}
-
-\[
-\EE = \int_{a}^{b} (\vect v \times \vect B) \cdot \dif \vect l
-\]
-
-\begin{methodbox}[【题型】动生电动势计算]
-  \begin{enumerate}[label=\arabic*.]
-    \item 直接用计算式积分；
-    \item 构造闭合回路，利用两部分电动势相等计算。
-  \end{enumerate}
-\end{methodbox}
-
-\subsubsection{感生电动势}
-
-\begin{enumerate}
-  \item 产生原因：感生电场力
-
-  \item 计算式
-  \[
-  \EE = - \oiint_S \frac{\partial \vect B}{\partial t} \cdot \dif \vect S
-  \]
-\end{enumerate}
-
-\begin{methodbox}[【题型】感生电动势计算]
-  感生电场径向电动势为零，故可以作辅助半径构建完整闭合回路，从而得出感生电动势。
-\end{methodbox}
-
-\begin{methodbox}
-  注：当构建闭合回路时，要注意\textbf{算整个回路的感生电动势}！
-\end{methodbox}
 
 \subsubsection{自感与互感}
 
@@ -1051,7 +1341,9 @@ Faraday电磁感应定律
   \item 全电流：$I_{\mathrm{s}} = I + I_{\mathrm{d}}$、$\vect J_{\mathrm{s}} = \vect J_{\mathrm{d}} + \vect J_{\mathrm{m}}$
 \end{enumerate}
 
-\subsection{常见电学理想模型}
+\subsection{常见电磁学模型}
+
+\subsubsection{常见电学理想模型}
 
 \begin{center}
 \small
@@ -1059,6 +1351,7 @@ Faraday电磁感应定律
 \toprule
 & 电场强度 \(\vect E\) & 电势 \(V\)\\
 \midrule
+点电荷 & \(\displaystyle\vect E=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q}{r^2}\vect \ee_r\) & \(\displaystyle V=\dfrac{1}{4\pi\varepsilon_0}\dfrac qr\)\\
 无限长均匀带电直线 & \(\displaystyle\vect E=\dfrac{\lambda}{2\pi r\varepsilon_0}\vect \ee_r\) & \(\displaystyle V_P=-\dfrac{\lambda}{2\pi\varepsilon_0}\ln\dfrac r{r_0}\)（其中 \(r_0\) 为参考点半径）\\
 无限大均匀带电平面 & \(\displaystyle\vect E=\dfrac{\sigma}{2\varepsilon_0}\vect \ee_n\) & $ V = \dfrac{q}{4\uppi\varepsilon_0\sqrt{R^2+x^2}} $\\
 均匀带电细圆环（对称轴上） & \(\displaystyle E=\dfrac{1}{4\pi\varepsilon_0}\frac{qx}{(R^2+x^2)^{3/2}}\) & \\
@@ -1070,7 +1363,7 @@ Faraday电磁感应定律
 \end{tabularx}
 \end{center}
 
-\subsection{常见理想电容器}
+\subsubsection{常见理想电容器}
 
 \begin{center}
 \begin{tabularx}{0.96\textwidth}{>{\raggedright\arraybackslash}p{3.8cm}X X}
@@ -1087,7 +1380,7 @@ Faraday电磁感应定律
 \end{center}
 
 
-\subsection{常见磁学理想模型}
+\subsubsection{常见磁学理想模型}
 
 \begin{center}
 \renewcommand{\arraystretch}{1.8}
@@ -1175,7 +1468,7 @@ $ \\
 \end{tabularx}
 \end{center}
 
-\subsection{常见理想自感互感系数}
+\subsubsection{常见理想自感互感系数}
 
 \begin{center}
 \begin{tabularx}{0.96\textwidth}{>{\raggedright\arraybackslash}p{3.8cm}X X}

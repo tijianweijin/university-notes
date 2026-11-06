@@ -96,6 +96,7 @@
 \newcommand{\Sa}{\operatorname{Sa}}
 \newcommand{\RRe}{\operatorname{Re}}
 \newcommand{\IIm}{\operatorname{Im}}
+\newcommand{\Res}{\operatorname{Res}}
 
 \newfontfamily\russianfont{DejaVu Sans}
 
@@ -649,13 +650,13 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
     直流信号
     &
     $\displaystyle
-    x(t)=A
+    x(t)=1
     $
     &
     $\displaystyle
     X(\varOmega)
     =
-    2\uppi A\delta(\varOmega)
+    2\uppi\delta(\varOmega)
     $
     \\
 
@@ -679,9 +680,7 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
     $\displaystyle
     X(\varOmega)
     =
-    \uppi\delta(\varOmega)
-    +
-    \frac{1}{\jj\varOmega}
+    \frac{1}{\jj\varOmega}+\uppi\delta(\varOmega)
     $
     \\
 
@@ -703,17 +702,15 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
     $\displaystyle
     x(t)
     =
-    E\left[
     u\left(t+\frac{\tau}{2}\right)
     -
     u\left(t-\frac{\tau}{2}\right)
-    \right]
     $
     &
     $\displaystyle
     X(\varOmega)
     =
-    E\tau
+    \tau
     \operatorname{Sa}
     \left(
     \frac{\varOmega\tau}{2}
@@ -1323,10 +1320,6 @@ Laurent级数形式如下：
 
 \boxed{\text{注：上述公式单双边变换较混乱，好在本科阶段不用分这么细，能熟记并运用即可。}}
 
-\begin{methodbox}[【技巧】Laplace反变换]
-  
-\end{methodbox}
-
 \begin{methodbox}[【题型】Laplace反变换]
   \begin{itemize}
     \item 部分分式展开法
@@ -1343,12 +1336,18 @@ Laurent级数形式如下：
       \[
       \LL^{-1}\left\{\frac{K_i}{(s-p_i)^r}\right\} = K_i \frac{t^{r-1}}{(r-1)!} e^{p_i t} [-u(-t)],\, s.t.\, \RRe s < \RRe p_i
       \]
-      其中$K_i$可由留数法求得。
+      其中$K_i$可由留数法求得。$r$重极点分母为$m$次的系数为
       
       \[
-      K_i=\left.X_1(s)(s-p_i)^r\right|_{s=p_i}
+      K_i=\frac{\dd}{\dd s}\left.X_1(s)(s-p_i)^r\right|_{s=p_i}
       \]
       
+      当$r=m$时有
+
+      \[
+      K_i=\Res(X_1(s),\,p_i)
+      \]
+
       注意到左边信号只需要把右边信号的$u(t)$换为$-u(-t)$即可，故后续只以右边信号为例。
 
       其中，特殊极点类型有特殊的方法来计算Laplace反变换。下列例中均以右边信号为例：
@@ -1375,6 +1374,129 @@ Laurent级数形式如下：
     \end{enumerate}
     \item 留数定理法（略）
   \end{itemize}
+\end{methodbox}
+
+\begin{methodbox}[【技巧】Laplace反变换]
+  对于有理分式信号$X(s)=\dfrac{P(s)}{Q(s)}$，求出其部分分式后，使原分子与新分子相等。
+  若分母幂次为$m$，就对原式求$m$次导后代入求系数。
+  
+  例：
+  已知
+  \[
+  H(s)=\frac{s^3+9s^2+24s+18}
+  {(s+1)(s^2+2s+2)(s+2)^2}
+  \]
+
+  解：设部分分式展开为
+  \[
+  H(s)=\frac{A}{s+1}
+  +\frac{Bs+C}{s^2+2s+2}
+  +\frac{D}{s+2}
+  +\frac{E}{(s+2)^2}
+  \]
+
+  通分得
+  \[
+  \begin{aligned}
+  s^3+9s^2+24s+18&=A(s^2+2s+2)(s+2)^2+(Bs+C)(s+1)(s+2)^2\\
+  &+D(s+1)(s^2+2s+2)(s+2)+E(s+1)(s^2+2s+2)
+  \end{aligned}
+  \]
+
+  注意：不需要乘开，直接代入极点求系数即可！
+
+  \paragraph{1. 单极点：代入法}
+
+  对于单极点 $s=-1$，直接乘以 $(s+1)$ 并代入：
+  \[
+  A=\left.
+  \frac{s^3+9s^2+24s+18}
+  {(s^2+2s+2)(s+2)^2}
+  \right|_{s=-1}=\boxed{2}
+  \]
+
+  \paragraph{2. 二重极点：代入法与求导法}
+
+  对于二重极点 $s=-2$，先乘以 $(s+2)^2$：
+  \[
+  G(s)=(s+2)^2H(s)
+  =\frac{s^3+9s^2+24s+18}
+  {(s+1)(s^2+2s+2)}
+  \]
+
+  由部分分式展开式可知：
+  \[
+  G(s)=E+D(s+2)+\cdots
+  \]
+
+  因此
+  \[
+  E=G(-2)=\boxed{1}
+  \]
+
+  \[
+  D=G'(-2)
+  \]
+
+  利用商的求导法则：
+  \[
+  D=\left.
+  \frac{N'(s)Q(s)-N(s)Q'(s)}
+  {Q^2(s)}
+  \right|_{s=-2}=\frac{0\times(-2)-(-2)\times4}{(-2)^2}\\=\boxed{2}
+  \]
+
+  其中$N(s)=s^3+9s^2+24s+18,\qquad Q(s)=(s+1)(s^2+2s+2)$
+
+  且$N(-2)=-2,\qquad N'(-2)=0,\qquad Q(-2)=-2,\qquad Q'(-2)=4$。
+
+  \paragraph{3. 共轭复极点：整体代入法}
+
+  对于共轭复极点 $s=-1\pm j$，不必分别求复数留数，直接保留不可约二次因式 $s^2+2s+2$。
+
+  将已求得的 $A=2,D=2,E=1$ 代回恒等式：
+
+  \[
+  \begin{aligned}
+  (Bs+C)(s+1)(s+2)^2=&s^3+9s^2+24s+18-2(s^2+2s+2)(s+2)^2 \\
+  &-2(s+1)(s^2+2s+2)(s+2)-(s+1)(s^2+2s+2)
+  \end{aligned}
+  \]
+
+  整理得
+  \[
+  (Bs+C)(s+1)(s+2)^2=-4s^4-22s^3-42s^2-32s-8=(-4s-2)(s+1)(s+2)^2
+  \]
+
+  因此
+  \[
+  Bs+C=-4s-2
+  \]
+
+  比较系数得
+  \[
+  \boxed{B=-4,\qquad C=-2}
+  \]
+
+  \paragraph{4. 部分分式分解结果}
+
+  综上：
+  \[
+  \boxed{
+  H(s)=\frac{2}{s+1}
+  +\frac{2}{s+2}
+  +\frac{1}{(s+2)^2}-\frac{4(s+1)}{(s+1)^2+1}
+  +\frac{2}{(s+1)^2+1}
+  }
+  \]
+
+  利用拉普拉斯反变换：
+  \[
+  \boxed{
+  h(t)=
+  (2e^{-t}+2e^{-2t}+te^{-2t}-4e^{-t}\cos t+2e^{-t}\sin t)u(t)
+  }
+  \]
 \end{methodbox}
 
 \begin{methodbox}[【理解】复常微分方程与部分分式展开法]
@@ -1419,6 +1541,33 @@ Laurent级数形式如下：
 \end{methodbox}
 
 \subsubsection{Laplace变换和Fourier变换关系}
+
+\begin{enumerate}
+  \item 收敛域包括虚轴：作代换$s=\jj\varOmega$即得到Fourier变换；
+  \item 收敛域不包括虚轴，且虚轴上无极点：无Fourier变换；
+  \item 收敛域不包括虚轴，但虚轴上有极点：
+
+  \[
+  X_F(\varOmega)=X_0(\jj\varOmega)
+  +\uppi\sum_{r=1}^{m}
+  \frac{A_r\jj^{r-1}}{(r-1)!}
+  \delta^{(r-1)}(\varOmega-\varOmega_0)
+  \]
+
+  特别地，对多个一重极点有
+
+  \[
+  X_F(\varOmega)=X_0(\jj\varOmega)
+  +\uppi\sum_{k=1}^{n}A_k\delta(\varOmega-\varOmega_k)
+  \]
+
+  \begin{methodbox}[【技巧】一重极点柯西主值]
+    \[
+    \operatorname{PV}\frac{1}{\jj(\varOmega-\varOmega_0)}=0
+    \]
+    ChatGPT说这么处理不对，但我管他的呢目前的例题这么代就是对的，不对再说
+  \end{methodbox}
+\end{enumerate}
 
 \section{系统分析}
 

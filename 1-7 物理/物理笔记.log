@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  5 NOV 2026 21:56
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  6 NOV 2026 16:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1185,23 +1185,38 @@ Package fontspec Info:
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
 (fontspec)             <->"[FandolKai-Regular.otf]/OT:script=hani;language=dflt;"
 
- [2] [3] [4] [5] [6]
-ignored: Infinite glue shrinkage found in box being split [7]
-ignored: Infinite glue shrinkage found in box being split [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] (./物理笔记.aux)
+ [2] [3] [4] [5] [6] [7]
+Overfull \hbox (14.56456pt too wide) in paragraph at lines 636--637
+ [] 
+ []
+
+[8]
+Overfull \hbox (14.56456pt too wide) in paragraph at lines 706--707
+ [] 
+ []
+
+
+Overfull \hbox (14.56456pt too wide) in paragraph at lines 718--719
+ [] 
+ []
+
+[9] [10]
+ignored: Infinite glue shrinkage found in box being split [11]
+ignored: Infinite glue shrinkage found in box being split [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] (./物理笔记.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `物理笔记.out' has not changed.
-(rerunfilecheck)             Checksum: 688243A02850A9EEC291266793DF74BF;8982.
+(rerunfilecheck)             Checksum: DD6B0607A2E939394333F7CA3CD12782;10095.
  ) 
 Here is how much of TeX's memory you used:
- 35708 strings out of 468168
- 822288 string characters out of 5436524
- 1296872 words of memory out of 5000000
- 63799 multiletter control sequences out of 15000+600000
+ 35715 strings out of 468168
+ 822402 string characters out of 5436524
+ 1308058 words of memory out of 5000000
+ 63806 multiletter control sequences out of 15000+600000
  644386 words of font info for 151 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 116i,21n,121p,441b,1032s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 116i,22n,121p,441b,1204s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 物理笔记.pdf (20 pages).
+Output written on 物理笔记.pdf (23 pages).
