@@ -1681,11 +1681,11 @@ y(t) = x(t) \ast h(t)
 分析方式 & 特性 & 微分方程形式 & 零极点形式 \\
 \midrule
 频域分析 & 
-$H(\jj \varOmega) = \dfrac{Y_\mathrm{ZS}(\varOmega)}{X(\varOmega)}$ & 
+$H(\jj \varOmega) = \dfrac{Y_{\mathrm{zs}}(\varOmega)}{X(\varOmega)}$ & 
 $H(\jj \varOmega) = \dfrac{\displaystyle\sum_{j=0}^{m}b_j\left(\jj \varOmega\right)^j}{\displaystyle\sum_{i=0}^{n}a_i\left(\jj \varOmega\right)^i}$ &
 $H(\jj \varOmega)=H_0\frac{\displaystyle\prod_{j=1}^{m}(\jj \varOmega-z_j)}{\displaystyle\prod_{i=1}^{n}(\jj \varOmega-p_i)}$ \\
 复频域分析 & 
-$H(s) = \dfrac{Y_\mathrm{ZS}(s)}{X(s)}$ & 
+$H(s) = \dfrac{Y_{\mathrm{zs}}(s)}{X(s)}$ & 
 $H(s) = \dfrac{\displaystyle\sum_{j=0}^{m}b_j s^j}{\displaystyle\sum_{i=0}^{n}a_i s^i}$ &
 $H(s)=H_0\frac{\displaystyle\prod_{j=1}^{m}(s-z_j)}{\displaystyle\prod_{i=1}^{n}(s-p_i)}$ \\
 \bottomrule
@@ -1731,7 +1731,7 @@ $H(s)=H_0\frac{\displaystyle\prod_{j=1}^{m}(s-z_j)}{\displaystyle\prod_{i=1}^{n}
   \left[(\jj \varOmega)^2+6(\jj \varOmega)+5\right]Y(\varOmega)=(\jj \varOmega+2)X(\varOmega)
   \]
   \[
-  H(\jj\varOmega)=\frac{Y(\varOmega)}{X(\varOmega)}=\frac{(\jj \varOmega)^2+6(\jj \varOmega)+5}{\jj \varOmega+2}
+  H(\jj\varOmega)=\frac{Y(\varOmega)}{X(\varOmega)}=\frac{\jj \varOmega+2}{(\jj \varOmega)^2+6(\jj \varOmega)+5}
   \]
 
 \end{methodbox}

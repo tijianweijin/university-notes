@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  6 NOV 2026 21:31
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  7 NOV 2026 10:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1035,7 +1035,8 @@ Package fontspec Info:
 (fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"DejaVu
 (fontspec)             Sans/BI/OT:script=latn;language=dflt;"
 
- (./模拟信号与系统笔记.aux)
+
+No file 模拟信号与系统笔记.aux.
 \openout1 = `模拟信号与系统笔记.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
@@ -1115,7 +1116,6 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 104.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 104.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1152,9 +1152,11 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 
 \c@lstlisting=\count393
 Package hyperref Info: Link coloring ON on input line 104.
-(./模拟信号与系统笔记.out) (./模拟信号与系统笔记.out)
 \@outlinefile=\write4
 \openout4 = `模拟信号与系统笔记.out'.
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
 
 
 Package fontspec Info: 
@@ -1197,7 +1199,7 @@ Package fontspec Info:
 (fontspec)             <->"[FandolKai-Regular.otf]/OT:script=hani;language=dflt;"
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 135.
- (c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
+(c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 135.
@@ -1271,14 +1273,23 @@ L3 programming layer <2022/08/05>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: File `模拟信号与系统笔记.out' has not changed.
-(rerunfilecheck)             Checksum: 2CA43B03772BBD9C6823BB58FF7B58F0;4485.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `模拟信号与系统笔记.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `模拟信号与系统笔记.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  2CA43B03772BBD9C6823BB58FF7B58F0;4485.
  ) 
 Here is how much of TeX's memory you used:
- 35767 strings out of 468168
- 820908 string characters out of 5436524
- 1262780 words of memory out of 5000000
- 63866 multiletter control sequences out of 15000+600000
+ 35748 strings out of 468168
+ 820625 string characters out of 5436524
+ 1257803 words of memory out of 5000000
+ 63853 multiletter control sequences out of 15000+600000
  634482 words of font info for 115 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  116i,18n,121p,450b,1176s stack positions out of 10000i,1000n,20000p,200000b,200000s
