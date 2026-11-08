@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  1 NOV 2026 22:13
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  8 NOV 2026 19:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/提剑遗金/Desktop/大学笔记/3-3 数字电路/数字电路笔记.tex"
-(c:/Users/提剑遗金/Desktop/大学笔记/3-3 数字电路/数字电路笔记.tex
+**数字电路笔记
+(./数字电路笔记.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (c:/texlive/2026/texmf-dist/tex/latex/ctex/ctexart.cls (c:/texlive/2026/texmf-dist/tex/latex/ctex/config/ctexbackend.cfg
@@ -1008,7 +1008,8 @@ Package fontspec Info:
 (fontspec)             <->"TeX Gyre
 (fontspec)             Heros/BI/OT:script=latn;language=dflt;+smcp;"
 
- (./数字电路笔记.aux)
+
+No file 数字电路笔记.aux.
 \openout1 = `数字电路笔记.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 823.
@@ -1088,7 +1089,6 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 823.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 823.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1130,6 +1130,10 @@ Package hyperref Info: Link coloring ON on input line 823.
 \openout4 = `数字电路笔记.out'.
 
 
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
+
 Package fontspec Info: 
 (fontspec)             Script 'CJK' not explicitly supported within font
 (fontspec)             'FandolHei-Regular'. Check the typeset output, and if
@@ -1151,7 +1155,7 @@ Package fontspec Info:
 (fontspec)             <->"[FandolHei-Bold.otf]/OT:script=hani;language=dflt;"
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 832.
- (c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
+(c:/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 832.
@@ -1191,21 +1195,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 1045--1047
 
  []
 
-[4] [5] [6] [7] (./数字电路笔记.aux)
+[4] [5] [6] [7] [8] [9] (./数字电路笔记.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `数字电路笔记.out' has not changed.
-(rerunfilecheck)             Checksum: 5103460843CEADBF3BC18D0ED8161F9A;2258.
+(rerunfilecheck)             Checksum: 0FEDFCE81F6E1AB2CA6B9C6C619A8CC8;3212.
  ) 
 Here is how much of TeX's memory you used:
- 54070 strings out of 468168
- 1373295 string characters out of 5436524
- 2106179 words of memory out of 5000000
- 82150 multiletter control sequences out of 15000+600000
+ 54102 strings out of 468168
+ 1375793 string characters out of 5436524
+ 2106183 words of memory out of 5000000
+ 82185 multiletter control sequences out of 15000+600000
  634471 words of font info for 105 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 116i,15n,121p,489b,1178s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 116i,15n,121p,447b,1178s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 数字电路笔记.xdv (7 pages, 136504 bytes).
+Output written on 数字电路笔记.pdf (9 pages).

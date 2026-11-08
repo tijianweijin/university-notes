@@ -1253,21 +1253,50 @@ d_H=1 & \text{一条边}\\
 
 \section{组合逻辑电路}
 
-\subsection{冒险}
+\subsection{小规模组合电路（Small Scale Integrated Circuites, SSI）}
 
-由状态A到状态B的过程中，若首尾电平一致，中间出现不一样的电平，则称为冒险现象。
-冒险现象的决定因素如下：
-\begin{enumerate}[label=(\arabic*)]
-  \item 变量变化两个及以上；
-  \item 首尾电平状态一致（从0到0，从1到1）；
-  \item 中间电平变化（从0到1，从1到0）。
+小规模组合电路是指集成电路中逻辑门的数量不超过10个的组合逻辑电路。
+
+小规模组合电路的表达式可以整理为与非·与非式或或非·或或式，从而实现为双轨输入电路。
+
+\begin{enumerate}
+  \item 双轨输入电路
+
+
+\begin{itemize}
+  \item 与非·与非式
+
+可以运用反演律将最简与或式化为与非·与非式，用两级与非门实现。
+
+例：$F=A\overline{B}+AC=\overline{(\overline{A\overline{B}})\cdot(\overline{AC})}$
+
+  \item 或非·或非式
+
+可以运用反演律将最简或与式化为或非·或非式，用两级或非门实现。
+
+例：$F=(A+\overline{B})(A+C)=\overline{(\overline{A+\overline{B}})+(\overline{A+C})}$
+
+
+\end{itemize}
+
+与非·与非式和或非·或非式各有优势，不存在绝对的优劣。
+判断哪种方式能最大程度简化时，应根据具体逻辑函数设计比较。
+
+  \item 单轨输入电路
+
+单轨输入电路可以通过给每个输入加非门实现为双轨输入电路，不多叙述。
+
 \end{enumerate}
 
-\begin{methodbox}[冒险的判断与消除方法]
+\subsection{冒险}
+
+\subsubsection{逻辑冒险}
+
+\begin{methodbox}[逻辑冒险的判断与消除方法]
   \begin{enumerate}[label=\arabic*.]
     \item 代数式法
     
-    只有同时存在正反变量（如$A$与$\overline{A}$）的逻辑函数才可能出现冒险现象。
+    只有同时存在正反变量（如$A$与$\overline{A}$）的逻辑函数才可能出现逻辑冒险。
 
     将标准与或式/或与式中该正反变量以外的所有变量设为$0$或$1$，将逻辑函数化为
     \[
@@ -1279,31 +1308,95 @@ d_H=1 & \text{一条边}\\
     \]
     的形式，此时存在偏1型冒险。
 
-    若要消除冒险现象，则在标准与或式/或与式中增加冗余项即可。荣誉项确定办法为
-    将存在冒险时的所有变量组合为与式或或式，作为冗余项加入原逻辑函数中。
+    若要消除逻辑冒险，则在标准与或式/或与式中增加冗余项即可。荣誉项确定办法为
+    将存在逻辑冒险时的所有变量组合为与式或或式，作为冗余项加入原逻辑函数中。
 
     例：$B=0,\,C=1$时存在偏0型冒险，冗余项为$+\overline{B}C$；
     $B=0,\,C=1$时存在偏1型冒险，冗余项为$\cdot(\overline{B}+C)$。
 
-
     \item Karnaugh图法
 
-    判断Karnaugh图中是否存在相切圈，若存在则说明存在冒险现象。
+    判断Karnaugh图中是否存在相切圈，若存在则说明存在逻辑冒险现象。
 
-    画圈使相切圈相接，即可消除冒险现象。
+    画圈使相切圈相接，即可消除逻辑冒险现象。
   \end{enumerate}
 
 \end{methodbox}
 
-\subsection{小规模组合电路（Small Scale Integrated circuites, SSI）}
+\subsubsection{功能冒险}
 
-\subsection{双轨输入电路}
+在组合电路中，当有\textbf{两个或两个以上输入变量同时}发生变化，变化前后电路的输出相同，而在
+输入变量发生变化时可能出现瞬时错误输出，这种现象称为静态功能冒险
 
-\subsubsection{}
+由状态A到状态B的过程中，若首尾电平一致，中间出现不一样的电平，则称为功能冒险。
+功能冒险的决定因素如下：
+\begin{enumerate}[label=(\arabic*)]
+  \item 变量变化两个及以上；
+  \item 首尾电平状态一致（从0到0，从1到1）；
+  \item 中间电平变化（从0到1，从1到0）。
+\end{enumerate}
 
-\subsection{单轨输入电路}
+消除功能冒险的方法包括：
+\begin{itemize}
+  \item 添加滤波电容，但会破坏输出波形；
+  \item 加选通脉冲，对\textbf{逻辑冒险和功能冒险都有效}。
+\end{itemize}
 
-\subsection{中规模组合电路（Medium Scale Integrated circuites, MSI）}
+\begin{methodbox}
+  \textbf{注意}：添加冗余项只能消除逻辑冒险而非功能冒险！
+\end{methodbox}
+
+逻辑冒险与功能冒险合称静态冒险。
+
+\subsubsection{动态冒险}
+
+在输入变化前、后函数值不同；且在输入信号变化瞬间，输出将变化三次或更高的奇数次。此处不讨论。
+
+\subsection{多输出函数}
+\begin{enumerate}
+  \item 用卡诺图分别对每个函数进行化简，并用箭头连线表示出所有的公用圈；
+  
+  \item 从各个函数\textbf{相同最小项}出发，试图改变原来圈法，以求得更多的公用圈。
+
+  \textbf{原则：}
+
+  \begin{itemize}
+    \item 若改圈法后能使总圈数减少（指不同圈），则改；
+    \item 若使总圈数增加，则不改；
+    \item 若总圈数不变，则取最大的合并圈，使变量输入端减少；
+    \item 这一工作可重复进行多次。\textbf{注意：单个变量的圈不用修改}
+  \end{itemize}
+
+  \item 写出多输出函数的表达式，并绘出逻辑图。
+\end{enumerate}
+
+\subsection{中规模组合电路（Medium Scale Integrated Circuites, MSI）}
+
+\subsubsection{数码比较器}
+
+\begin{enumerate}
+  \item TTL中规模集成4位数码比较器74LS85
+\end{enumerate}
+
+\subsubsection{编码器与优先编码器}
+
+\begin{enumerate}
+  \item 二-十位编码器C304
+  \item 优先编码器74148
+\end{enumerate}
+
+\subsubsection{译码器}
+
+\begin{enumerate}
+  \item 2线至4线译码器
+  \item 三线至八线译码器74LS138
+  \item 二－十进制译码器（4线-10线译码器）
+  \item 七段荧光数码管显示器
+\end{enumerate}
+
+\subsubsection{数据选择器}
+
+\subsubsection{数据分配器}
 
 \section{Karnaugh图与其数学结构}
 
