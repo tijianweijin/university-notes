@@ -18,6 +18,7 @@
 }
 
 \usepackage{circuitikz}
+\usepackage{fontspec}
 
 
 % relationbox 中知识关系图的统一样式
@@ -81,7 +82,7 @@
 \newcommand{\ee}{\mathrm{e}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
-
+\let\tt\texttt
 % ============================================================
 % IEC / GB 逻辑门符号完整封装
 %
@@ -870,24 +871,26 @@
 \begin{methodbox}[非十进制转十进制]
 按权展开即可。例：
 \[
-\left ( 101.01 \right )_2 = 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0 + 0 \times 2^{-1} + 1 \times 2^{-2} = 5.25
+\left ( 101.01 \right )_2 = 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0 + 0 \times 2^{-1} + 1 \times 2^{-2} = (5.25)_{10}
 \]
 \[
-\left ( 73.4 \right )_8 = 7 \times 8^1 + 3 \times 8^0 + 4 \times 8^0 + 4 \times 8^{-1} = 59.5
+\left ( 73.4 \right )_8 = 7 \times 8^1 + 3 \times 8^0 + 4 \times 8^0 + 4 \times 8^{-1} = (59.5)_{10}
 \]
 \[
-\left ( 3\mathrm{D}.\mathrm{C} \right )_{16} = 3 \times 16^1 + 13 \times 16^0 + 12 \times 16^{-1} = 61.75
+\left ( 3\mathrm{D}.\mathrm{C} \right )_{16} = 3 \times 16^1 + 13 \times 16^0 + 12 \times 16^{-1} = (61.75)_{10}
 \]
 \end{methodbox}
 
 \begin{methodbox}[十进制转非十进制]
-整数部分除基取余，从低到高；小数部分乘基取整，从高到低。例：13.25
+整数部分除基取余，从低到高；小数部分乘基取整，从高到低。
+
+例：13.25
 
 13除以2余1，6除以2余0，3除以2余1，1除以2余1，整数部分为1101；
 
 0.25乘以2得0.5，取整为0，0.5乘以2得1.0，取整为1，小数部分为01；
 
-故$13.25 = \left ( 1101.01 \right )_2$
+故$(13.25)_{10} = \left ( 1101.01 \right )_2$
 \end{methodbox}
 \end{enumerate}
 
@@ -896,7 +899,7 @@
 \begin{enumerate}
   \item 原码、反码与补码
   \begin{center}
-    \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.5cm}X X}
+    \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{1.5cm} >{}p{9.5cm} X}
       \toprule
       编码类型 & 描述 & 缺点 \\
       \midrule
@@ -907,6 +910,15 @@
     \end{tabularx}
   \end{center}
 
+  \begin{methodbox}[补码取负]
+    对补码取负数的方法：对补码再取一次补码。
+  \end{methodbox}
+
+  \item 二进制编码
+  \textbf{二进制数码不一定表示二进制数}。
+
+  最常见的二进制编码是自然二进制码，即将其他数制的数转为二进制后的结果，不赘述。
+
   \item 二-十进制编码（BCD码）
   \begin{center}
     \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.5cm}X X}
@@ -915,12 +927,18 @@
       \midrule
       8421码 & 8, 4, 2, 1 & 简便直观 \\
       2421码 & 2, 4, 2, 1 & 对9自补码 \\
-      余3码 & 无 & 对9自补码 \\
+      余3码 & 无（由8421码+3得到） & 对9自补码 \\
       5421码 & 5, 4, 2, 1 & 可以产生对称方波输出 \\
       Gray码 & 无 & 相邻两数码只有一位二进制数不同 \\
       \bottomrule
     \end{tabularx}
   \end{center}
+
+  \begin{methodbox}[二-十六进制自然编码与8421BCD码区别]
+    二-十六进制自然编码是将十进制数直接转换为十六进制数，而8421BCD码是将十进制数的每一位分别转换为4位二进制数。
+    例：
+    $(53)_{10} = (101011)_{2} = (01010011)_{8421\text{BCD}}$
+  \end{methodbox}
 
   \item 可靠性编码
 \begin{enumerate}[label=(\arabic*)]
@@ -945,12 +963,14 @@ Gray码的主要优点是减少了在数字电路中由于信号变化引起的�
     \end{tabular}
 \end{table}
 
+将9的Gray码换为1000，即得到Gray BCD码。
   \item 奇偶校验码
 
 在要传输的数据中增加一个校验位，使得数据中1的个数为奇数或偶数，从而实现对数据传输错误的检测。
 
 最常用的是奇校验码，因其使得全0成为非法码，便于检测。
 
+由于异或门奇1偶0的特性，往往用异或门实现奇偶校验码的生成。
   \item 其他可靠性编码：Hamming码等
 
 \end{enumerate}
@@ -1062,7 +1082,7 @@ Gray码的主要优点是减少了在数字电路中由于信号变化引起的�
         \item $ A \leftrightarrow \overline{A} $
       \end{itemize}
 
-      即得到反函数$\overline{F}$。
+      即得到反函数$\overline{F}$。反函数输出的值\textbf{与原函数相反}。
 
       \item 对偶规则
 
@@ -1073,7 +1093,9 @@ Gray码的主要优点是减少了在数字电路中由于信号变化引起的�
         \item $ 1 \leftrightarrow 0 $
       \end{itemize}
 
-      即得到对偶函数$F'$。
+      即得到对偶函数$F'$。对偶函数\textbf{不需要代换反变量}。
+
+      若$F$与$G$相等，则$F'$与$G'$也相等。
 
     \end{enumerate}
 
@@ -1090,13 +1112,49 @@ Gray码的主要优点是减少了在数字电路中由于信号变化引起的�
 
 \subsubsection{逻辑函数}
 
+\begin{enumerate}
+  \item 表示方法
+  
+  \begin{itemize}
+    \item 真值表
+    \item 逻辑表达式
+    \item 逻辑电路图
+    \item Karnaugh图
+    \item 波形图
+    \item 硬件描述语言
+  \end{itemize}
+  
+  \item 标准表达式
+  
+  \begin{itemize}
+    \item 最简与或式
+    
+    性质：所有最小项中只有一项可能是1；$m_i \cdot m_j = 0,\quad i\ne j$；$\displaystyle \sum_{i=0}^{2^n-1} m_i= 1 $
+    
+    \item 最简或与式
+
+    性质：所有最大项中只有一项可能是0；$M_i + M_j = 1,\quad i\ne j$；$\displaystyle \prod_{i=0}^{2^n-1} M_i= 0 $
+
+  \end{itemize}
+
+\end{enumerate}
+
 \subsubsection{逻辑函数的化简}
 
 \begin{enumerate}
 
   \item 代数法
+    根据逻辑代数公式，对逻辑函数进行化简。常见方法有：
     \begin{itemize}
-      \item 代数化简：根据逻辑代数公式，对逻辑函数进行化简。
+      \item 并项法：$AB+A\overline{B}=A$
+      \item 吸收法：$A+AB=A$、$AB+\overline{A}C+BC=AB+\overline{A}C$
+      
+      还可推广为
+
+      \[
+      AB+\overline{A}C+BC[f(D,\,E,\,\cdots)]=AB+\overline{A}C
+      \]
+      \item 消元法：$A+\overline{A}B=A+B$
     \end{itemize}
 
   \item Karnaugh图法
@@ -1129,7 +1187,7 @@ Gray码的主要优点是减少了在数字电路中由于信号变化引起的�
     \]
     图的上下、左右边界同样相邻，因此Karnaugh图具有周期边界。
 
-    \item \textbf{笛卡尔积分解：}
+    \item \textbf{Descartes积分解：}
     将 $n$ 个变量分为两组，分别作为行、列坐标，则
     \[
         Q_n \cong Q_p \square Q_q,
@@ -1238,6 +1296,8 @@ d_H=1 & \text{一条边}\\
 \end{enumerate}
 
 \section{门电路}
+
+\subsubsection{二极管电路}
 
 \subsection{CMOS门}
 
@@ -1397,6 +1457,25 @@ d_H=1 & \text{一条边}\\
 \subsubsection{数据选择器}
 
 \subsubsection{数据分配器}
+
+\section{Verilog硬件描述语言（Verilog HDL）}
+
+Verilog HDL既是一种行为描述语言也是一种结构描述语言，即既可以\textbf{用电路的功能描述}，
+也可以\textbf{用元器件及其之间的连接}来建立Verilog HDL模型。
+
+\begin{methodbox}[Verilog HDL的数据类型]
+  \begin{enumerate}
+    \item 表示：位数+\tt{'}+数制+数值。
+    例：\tt{4'b1010}表示4位二进制数1010，\tt{8'hFF}表示8位十六进制数FF。
+    \item 数制：\tt{b}表示二进制，\tt{o}表示八进制，\tt{d}表示十进制，\tt{h}表示十六进制。
+  \end{enumerate}
+\end{methodbox}
+
+\begin{methodbox}[\tt{wire}变量和\tt{reg}变量]
+  \tt{wire}常用于\,\textbf{\tt{assign}语句}的左值，表示连续赋值；
+  
+  \tt{reg}常用于\,\textbf{\tt{always}块中\tt{=}或\tt{<=}语句}的左值。
+\end{methodbox}
 
 \section{Karnaugh图与其数学结构}
 

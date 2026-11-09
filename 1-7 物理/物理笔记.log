@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  6 NOV 2026 16:03
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  9 NOV 2026 21:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1186,37 +1186,35 @@ Package fontspec Info:
 (fontspec)             <->"[FandolKai-Regular.otf]/OT:script=hani;language=dflt;"
 
  [2] [3] [4] [5] [6] [7]
-Overfull \hbox (14.56456pt too wide) in paragraph at lines 636--637
+Overfull \hbox (14.56456pt too wide) in paragraph at lines 651--652
  [] 
  []
 
 [8]
-Overfull \hbox (14.56456pt too wide) in paragraph at lines 706--707
+Overfull \hbox (14.56456pt too wide) in paragraph at lines 721--722
  [] 
  []
 
 
-Overfull \hbox (14.56456pt too wide) in paragraph at lines 718--719
+Overfull \hbox (14.56456pt too wide) in paragraph at lines 733--734
  [] 
  []
 
-[9] [10]
-ignored: Infinite glue shrinkage found in box being split [11]
-ignored: Infinite glue shrinkage found in box being split [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] (./物理笔记.aux)
+[9] [10] [11] [12] [13] [14] [15] [16] [17] [18] (./物理笔记.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `物理笔记.out' has not changed.
-(rerunfilecheck)             Checksum: DD6B0607A2E939394333F7CA3CD12782;10095.
+(rerunfilecheck)             Checksum: EDE9568A00619E31F2D746F9161D941C;9125.
  ) 
 Here is how much of TeX's memory you used:
- 35715 strings out of 468168
- 822402 string characters out of 5436524
- 1308058 words of memory out of 5000000
- 63806 multiletter control sequences out of 15000+600000
- 644386 words of font info for 151 fonts, out of 8000000 for 9000
+ 35626 strings out of 468168
+ 815605 string characters out of 5436524
+ 1264959 words of memory out of 5000000
+ 63716 multiletter control sequences out of 15000+600000
+ 644394 words of font info for 152 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 116i,22n,121p,441b,1204s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 116i,22n,121p,441b,1190s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 物理笔记.pdf (23 pages).
+Output written on 物理笔记.pdf (18 pages).

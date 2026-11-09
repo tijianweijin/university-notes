@@ -283,12 +283,12 @@
       
       \[
       \sum_{n=0}^{N-1} a^n = \frac{1-a^N}{1-a}, \qquad
-      \sum_{n=0}^{\infty} a^n = \frac{1}{1-a}, \qquad |a|<1
+      \sum_{n=0}^{\infty} a^n = \frac{1}{1-a}, \; |a|<1
       \]
 
       \[
       \sum_{n=0}^{N-1} n a^n = \frac{(N-1)a^{N+1}-Na^N+a}{(1-a)^2}, \qquad
-      \sum_{n=0}^{\infty} n a^n = \frac{a}{(1-a)^2}, \qquad |a|<1
+      \sum_{n=0}^{\infty} n a^n = \frac{a}{(1-a)^2}, \; |a|<1
       \]
 
       \[
@@ -304,380 +304,37 @@
   
 \end{enumerate}
 
-\subsubsection{分量与分解}
-
-  信号分解为正交分量时，各分量间不相互干扰，且各分量的能量之和等于原信号的能量。
-  若任意两信号的Euclid内积为零，则称这两个信号在时域中正交，即
-  \[
-  \left \langle  x_n, x_m \right \rangle  = \int_{-\infty}^{\infty} x_n(t) \cdot x_m(t) \dd t = 0, \, \forall \, t \in \left ( -\infty, \infty\right )
-  \]
-  若额外满足$\displaystyle \left \langle  x_n, x_n \right \rangle  = \left | x_n \right | ^2 = 1$
-  则称之为单位正交函数。
-
-  下面介绍几种常见的正交分量。
-
-\begin{enumerate}
-
-  \item 直流分量与交流分量
-  对于周期为$T$的周期信号$x(t)$，其交直流分量分别为
-  
-  \[
-  x_\mathrm{DC}(t) = \frac{1}{T} \int_{t_0}^{t_0+T} x(t) \dd t
-  \]
-  \[
-  x_\mathrm{AC}(t) = x(t) - x_\mathrm{DC}(t)
-  \]
-
-  直流分量平均量等于原信号平均量，交流分量平均量为零。二者有功率关系
-  \[
-  P=\left | x_\mathrm{DC}(t) \right |^2 + \frac{1}{T} \int_{t_0}^{t_0+T} \left | x_\mathrm{AC}(t) \right |^2 \dd t
-  \]
-
-  \item 奇分量与偶分量
-  
-  任意信号都可以分解为奇分量与偶分量，分解式如下
-  \[
-  x_\mathrm{e} = \frac{x(t) + x(-t)}{2}
-  ,\qquad
-  x_\mathrm{o} = \frac{x(t) - x(-t)}{2}
-  \]
-
-  \item 实分量与虚分量
-  
-  若信号为复信号，则可以分解为实分量与虚分量，分解式如下
-  \[
-  x_\mathrm{R}(t)=\dfrac{x(t)+x^\ast(t)}{2}
-  ,\qquad
-  x_\mathrm{I}(t)=\dfrac{x(t)-x^\ast(t)}{\jj 2}
-  \]
-
-\end{enumerate}
-
 \subsection{频域分析}
 
-\begin{methodbox}[时频不确定性原理]
+\subsubsection{离散时间Fourier变换，DTFT}
 
-  $\Delta t$与$\Delta f$分别表示以能量分布定义的标准差宽度，则有
-  \[
-    \Delta t \cdot \Delta f \geq \frac{1}{4\ppi}
-  \]
-
-  或写成角频率版本则为
-  \[
-    \Delta t \cdot \Delta \varOmega \geq \frac12
-  \]
-
-  在时谱与频谱中的关系体现为时谱越宽，频谱越窄，反之亦然。
-  这是由Fourier变换性质决定的。比较常见的例子是
-  \[
-  x(t)=\delta (t) \leftrightarrow X(\varOmega)=1, \qquad x(t)=1 \leftrightarrow X(\varOmega)=2\ppi \delta (\varOmega)
-  \]
-  \[
-  x(t)=\operatorname{rect}(t) \leftrightarrow X(\varOmega)=\operatorname{Sa}\left (\dfrac{\varOmega}{2}\right ) , \qquad x(t)= \operatorname{Sa}(t) \leftrightarrow X(\varOmega)=\ppi \operatorname{rect}(\dfrac{\varOmega}{2})
-  \]
-
-\end{methodbox}
-
-\subsubsection{Fourier级数}
-
-Fourier级数有三角形式与指数形式两种表示方法，在数学分析中已学习过，此处不再赘述。
-二者的幅频谱不同。
-
-三角形式只有单边频谱，指数形式有对称的双边频谱，且双边频谱的幅值为三角形式的幅值的一半，且相位相同。
-
-\subsubsection{Fourier变换}
-
-可以通过Fourier级数的极限形式得到Fourier变换，即
 \[
-X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\varOmega t} \dd t
+X(e^{\jj\omega}) = \FF \left\{ x[n] \right\} = \sum_{n=-\infty}^{\infty} x[n] e^{-\jj\omega n}
 \]
 
-非周期函数与周期函数的Fourier变换对比如下。
+特殊地，冲激信号$\delta[n]$的离散时间Fourier变换为$X(e^{\jj\omega})=1$。
 
-\begin{methodbox}[周期信号与非周期信号的Fourier变换比较]
+其反变换为
 
-  \begin{center}
-  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X}
-  \toprule
-  特征 & Fourier级数频谱图 & Fourier变换频谱图 \\
-  \midrule
+\[
+x[n] = \FF^{-1} \left\{ X(e^{\jj\omega}) \right\} = \int_{-\uppi}^{\uppi} X(e^{\jj\omega}) \ee^{\jj n\omega}\dd\omega
+\]
 
-  频谱性质
-  & 离散谱
-  & 连续谱 \\
-
-  展开形式
-  & 级数求和 $\displaystyle \sum$
-  & 积分变换 $\displaystyle \int$ \\
-
-  频率取值
-  & $n\varOmega_0$（间隔 $\varOmega_0$）
-  & $\varOmega$ 连续变化 \\
-
-  \bottomrule
-  \end{tabularx}
-  \end{center}
-\end{methodbox}
-
-\begin{methodbox}[周期函数Fourier级数频谱图（FS）与Fourier变换频谱图（FT）比较]
-  \begin{center}
-  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X}
-  \toprule
-  特征 & Fourier级数频谱图 & Fourier变换频谱图 \\
-  \midrule
-
-  y轴名称
-  &
-  $|F_n|$
-  &
-  $|X(\varOmega)|$
-  \\
-
-
-  表示
-  &
-  末端带圈线段
-  &
-  箭头
-  \\
-
-  代表内容
-  &
-  Fourier系数
-  &
-  冲激串
-  \\
-
-  \bottomrule
-  \end{tabularx}
-  \end{center}
-\end{methodbox}
-
-\subsubsection{具体信号的Fourier变换}
-
-\begin{enumerate}
-
-
-  \item 非周期信号
-    \begin{center}
-    \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X X}
-    \toprule
-    信号 & 时域信号 & Fourier变换 \\
-    \midrule
-
-    直流信号
-    &
-    $\displaystyle
-    x(t)=A
-    $
-    &
-    $\displaystyle
-    X(\varOmega)
-    =
-    2\uppi A\delta(\varOmega)
-    $
-    \\
-
-    单位冲激信号
-    &
-    $\displaystyle
-    x(t)=\delta(t)
-    $
-    &
-    $\displaystyle
-    X(\varOmega)=1
-    $
-    \\
-
-    单位阶跃信号
-    &
-    $\displaystyle
-    x(t)=u(t)
-    $
-    &
-    $\displaystyle
-    X(\varOmega)
-    =
-    \uppi\delta(\varOmega)
-    +
-    \frac{1}{\jj\varOmega}
-    $
-    \\
-
-    符号函数
-    &
-    $\displaystyle
-    x(t)=\operatorname{sgn}(t)
-    $
-    &
-    $\displaystyle
-    X(\varOmega)
-    =
-    \frac{2}{\jj\varOmega}
-    $
-    \\
-
-    矩形脉冲信号
-    &
-    $\displaystyle
-    x(t)
-    =
-    E\left[
-    u\left(t+\frac{\tau}{2}\right)
-    -
-    u\left(t-\frac{\tau}{2}\right)
-    \right]
-    $
-    &
-    $\displaystyle
-    X(\varOmega)
-    =
-    E\tau
-    \operatorname{Sa}
-    \left(
-    \frac{\varOmega\tau}{2}
-    \right)
-    $
-    \\
-
-    单边指数信号
-    &
-    $\displaystyle
-    x(t)=e^{-at}u(t),
-    \quad a>0
-    $
-    &
-    $\displaystyle
-    X(\varOmega)
-    =
-    \frac{1}{a+\jj\varOmega}
-    $
-    \\
-
-    \bottomrule
-    \end{tabularx}
-    \end{center}
-  
-  \item 周期信号
-  
-    设$\displaystyle \varOmega_0=\frac{2\uppi}{T_0}$，则
-
-    \begin{center}
-    \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.3cm}X X}
-    \toprule
-    信号 & 时域信号 & Fourier变换 \\
-    \midrule
-
-    余弦信号
-    &
-    $\displaystyle
-    x(t)=\cos(\varOmega_0 t)
-    $
-    &
-    $\displaystyle
-    X(\varOmega)
-    =
-    \uppi
-    \left[
-    \delta(\varOmega-\varOmega_0)
-    +
-    \delta(\varOmega+\varOmega_0)
-    \right]
-    $
-    \\
-
-    正弦信号
-    &
-    $\displaystyle
-    x(t)=\sin(\varOmega_0 t)
-    $
-    &
-    $\displaystyle
-    X(\varOmega)
-    =
-    \frac{\uppi}{\jj}
-    \left[
-    \delta(\varOmega-\varOmega_0)
-    -
-    \delta(\varOmega+\varOmega_0)
-    \right]
-    $
-    \\
-
-    周期冲激信号
-    &
-    $\displaystyle
-    x(t)
-    =
-    \sum_{n=-\infty}^{\infty}
-    \delta(t-nT_0)
-    $
-    &
-    $\displaystyle
-    X(\varOmega)
-    =
-    \frac{2\uppi}{T_0}
-    \sum_{k=-\infty}^{\infty}
-    \delta(\varOmega-k\varOmega_0)
-    $
-    \\
-
-    \bottomrule
-    \end{tabularx}
-    \end{center}
-  \end{enumerate}
-
-\subsubsection{Fourier变换性质}
+\subsubsection{离散时间Fourier变换性质}
 
 \begin{enumerate}
   \item 线性
   
   \[
-  \FF \left\{ ax_1(t) + bx_2(t) \right\} = a \FF \left\{ x_1(t) \right\} + b \FF \left\{ x_2(t) \right\} 
+  \FF \left\{ ax_1[n] + bx_2[n] \right\} = a \FF \left\{ x_1[n] \right\} + b \FF \left\{ x_2[n] \right\} 
   \]     
 
-设$\displaystyle \FF \{ x(t) \} = X(\varOmega)$，则有
-
-  \item 时频对称性
-  
-  若
-  \[
-  \FF \{ x(t) \} = X(\varOmega)
-  \]
-  则有
-  \[
-  \FF \{ X(t) \} = 2 \uppi x(-\varOmega)
-  \]
-
-  \begin{methodbox}[【拓展】归一化Fourier变换]
-
-    定义归一化Fourier变换算子为
-    \[
-    F=\frac{1}{\sqrt{2\uppi}}\FF
-    \]
-
-    则有
-
-    \[
-    F^4=1
-    \]
-
-    即经过4次归一化Fourier变换后，信号恢复原状。
-
-    归一化Fourier变换是Unitary变换，能保持信号的内积不变。
-    另一种归一化Fourier变换的做法是将频率$f$作为频域函数的变量，即
-
-    \[
-    \tilde{\FF} \left\{x(t)\right\} = X(f) 
-    \]
-
-    在此不多介绍。
-  \end{methodbox}
+设$\displaystyle \FF \{ x[n] \} = X(\omega)$，则有
 
   \item 共轭对称性
   
   \[
-  \FF \left\{ x^\ast(t) \right\} = X^\ast(-\varOmega)
+  \FF \left\{ x^\ast(t) \right\} = X^\ast(-\omega)
   \]
 
   当$x(t)$为实信号时，有$\displaystyle X(-\varOmega) = X^\ast(\varOmega)$。此时，$x(t)$额外有奇偶虚实性、
@@ -706,96 +363,33 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
     运算 & Fourier变换 & Fourier逆变换 \\
     \midrule
 
-    尺度变换
-    &
-    $\displaystyle
-    \FF \{ x(at) \}
-    =
-    \frac{1}{|a|}
-    X\left(\frac{\varOmega}{a}\right)
-    $
-    &
-    $\displaystyle
-    \FF^{-1} \{ X(a\varOmega) \}
-    =
-    \frac{1}{|a|}
-    x\left(\frac{t}{a}\right)
-    $
-    \\
-
     平移
     &
     $\displaystyle
-    \FF \{ x(t-t_0) \}
+    \FF \{ x[n-n_0] \}
     =
-    X(\varOmega)\ee^{-\jj \varOmega t_0}
+    X(\ee^{\jj\omega})\ee^{-\jj n_0 \omega}
     $
     &
     $\displaystyle
-    \FF^{-1} \{ X(\varOmega-\varOmega_0) \}
+    \FF^{-1} \{ X(\ee^{\jj(\omega-\omega_0)}) \}
     =
-    x(t)\ee^{\jj t\varOmega_0}
-    $
-    \\
-
-    微分
-    &
-    $\displaystyle
-    \FF \{ x'(t) \}
-    =
-    \jj \varOmega X(\varOmega)
-    $
-
-
-    &
-    $\displaystyle
-    \FF^{-1} \{ X'(\varOmega) \}
-    =
-    -\jj t x(t)
-    $
-    \\
-
-    积分
-    &
-    $\displaystyle
-    \FF
-    \left\{
-    \int_{-\infty}^{t} x(\tau)\dd\tau
-    \right\}
-    =
-    X(\varOmega)
-    \left(
-    \frac{1}{\jj\varOmega}
-    +
-    \uppi\delta(\varOmega)
-    \right)
-    $
-    &
-    $\displaystyle
-    \FF^{-1}
-    \left\{
-    \int_{-\infty}^{\varOmega} X(\xi)\dd\xi
-    \right\}
-    =
-    -\frac{x(t)}{\jj t}
-    +
-    \uppi x(0)\delta(t)
+    x[n]\ee^{\jj \omega_0 n}
     $
     \\
 
     卷积
     &
     $\displaystyle
-    \FF \{ x(t)\ast y(t) \}
+    \FF \{ x[n]\ast y[n] \}
     =
-    X(\varOmega)Y(\varOmega)
+    X(\ee^{\jj\omega})Y(\ee^{\jj\omega})
     $
     &
     $\displaystyle
     \FF^{-1}
-    \{ X(\varOmega)\ast Y(\varOmega) \}
-    =
-    2\uppi x(t)y(t)
+    \{ X(\ee^{\jj\omega})\ast Y(\ee^{\jj\omega}) \}
+    =x[n]y[n]
     $
     \\
 
@@ -803,140 +397,17 @@ X(\varOmega) = \FF \left\{ x(t) \right\} = \int_{-\infty}^{\infty} x(t) e^{-\jj\
     \end{tabularx}
     \end{center}
 
-\end{enumerate}
-
-\begin{methodbox}[【技巧】时移与尺度变换对应]
-  \[
-  \FF \{x(at-b)\}=\FF \left\{x\left[ a \left( x - \frac{b}{a} \right)  \right] \right\} = \frac{1}{|a|} X \left( \frac{\varOmega}{a} \right) \ee^{-\jj \varOmega \frac{b}{a}}
-  \]
-\end{methodbox}
-
-
-\begin{methodbox}[【理解】微分的实际意义]
-  由于乘了$\jj \varOmega$，所以幅谱高频增强，低频减弱；相谱正频率超前$\dfrac{\uppi}{2}$，负频率滞后$\dfrac{\uppi}{2}$。
-\end{methodbox}
-
-\begin{methodbox}[【技巧】用微分性质求Fourier变换]
-  【例】求$x(t)=\dfrac{1}{t^2}$的Fourier变换。
+  \item Parseval定理
   
-  【解】由微分性质有
   \[
-  x(t)=-\frac{\dd}{\dd t}\left ( \frac{1}{t} \right )
+  \sum_{-\infty}^{+\infty} |x[n]|^2 = \frac{1}{2\uppi} \int_{-\uppi}^{\uppi} |X(\ee^{\jj\omega})|^2 \dd \omega
   \]
-  同时对两边做Fourier变换得
-  \[
-  X(\varOmega) = -\jj \varOmega \FF \left \{ \frac{1}{t} \right \} = -\jj \varOmega \left ( -\jj \uppi \operatorname{sgn}(\varOmega) \right ) = - \varOmega \uppi \operatorname{sgn} (\varOmega)
-  \]
-\end{methodbox}
 
-\begin{methodbox}[【理解】微分的实际意义]
-  观察时域积分Fourier变换，不难发现$\displaystyle \FF \left\{ \int_{-\infty}^{t} x(\tau)\dd\tau \right\} = \FF\left\{x(t) \ast u(t) \right\} = X(\varOmega) \cdot \left( \frac{1}{\jj\varOmega} + \uppi\delta(\varOmega) \right)$
-\end{methodbox}
-
-\begin{methodbox}[【技巧】时频变换对应]
-  设 $\FF\{x(t)\}=X(\varOmega)$，则有
-
-  \begin{center}
-  \begin{tabularx}{0.98\textwidth}{>{\bfseries}p{2.4cm}X X}
-  \toprule
-  关系对 & Fourier变换 & Fourier逆变换 \\
-  \midrule
-
-  乘指数与平移
-  &
-  $\displaystyle
-  \FF\{x(t)\ee^{\jj\varOmega_0 t}\}
-  =
-  X(\varOmega-\varOmega_0)
-  $
-  &
-  $\displaystyle
-  \FF^{-1}
-  \{X(\varOmega)\ee^{-\jj\varOmega t_0}\}
-  =
-  x(t-t_0)
-  $
-  \\
-
-  乘变量与微分
-  &
-  $\displaystyle
-  \FF\{t x(t)\}
-  =
-  \jj X'(\varOmega)
-  $
-  &
-  $\displaystyle
-  \FF^{-1}\{\varOmega X(\varOmega)\}
-  =
-  -\jj x'(t)
-  $
-  \\
-
-  积分与除变量
-  &
-  $\displaystyle
-  \FF
-  \left\{
-    \int_{-\infty}^{t}x(\tau)\dd\tau
-  \right\}
-  =
-  X(\varOmega)
-  \left(
-    \frac{1}{\jj\varOmega}
-    +
-    \uppi\delta(\varOmega)
-  \right)
-  $
-  &
-  $\displaystyle
-  \FF^{-1}
-  \left\{
-    \int_{-\infty}^{\varOmega}X(\xi)\dd\xi
-  \right\}
-  =
-  -\frac{x(t)}{\jj t}
-  +
-  \uppi x(0)\delta(t)
-  $
-  \\
-
-  乘法与卷积
-  &
-  $\displaystyle
-  \FF\{x(t)y(t)\}
-  =
-  \frac{1}{2\uppi}
-  \left[
-    X(\varOmega)\ast Y(\varOmega)
-  \right]
-  $
-  &
-  $\displaystyle
-  \FF^{-1}
-  \{X(\varOmega)Y(\varOmega)\}
-  =
-  x(t)\ast y(t)
-  $
-  \\
-
-  \bottomrule
-  \end{tabularx}
-  \end{center}
-
-  看到熟悉的操作时，不妨反过来思考原函数是什么。
-\end{methodbox}
+\end{enumerate}
 
 \subsection{复频域分析}
 
-\subsubsection{Laurent级数}
-
-Laurent级数形式如下：
-\[
-\sum_{n=-\infty}^{\infty} a_n (z-z_0)^n
-\]
-
-\subsubsection{Laplace变换}
+\subsubsection{Z变换}
 
 \begin{enumerate}
   \item 双边Laplace变换
