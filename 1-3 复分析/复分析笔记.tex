@@ -638,4 +638,59 @@ $\operatorname{Arg}z$的多值性造就了$\ln z$的多值性。
   所以$I=0$。
 \end{methodbox}
 
+\subsubsection{用留数法求定积分}
+
+\begin{enumerate}
+  \item 求三角有理定积分
+  
+  作代换$z=\ee^{\ii\theta}$，
+  则$\cos\theta=\dfrac{1}{2}(z+z^{-1})$，
+  $\sin\theta=\dfrac{1}{2}(z-z^{-1})$，
+  $d\theta=\dfrac{1}{\ii z}\dd z$，
+  则有
+
+  \[
+  \int_{0}^{2\uppi} f(\cos\theta,\sin\theta)\dd\theta = \oint_{|z|=1} f\left(\frac{z+z^{-1}}{2},\frac{z-z^{-1}}{2\ii}\right)\frac{\dd z}{\ii z}
+  \]
+  
+  注意\textbf{积分限}，只取\textbf{单位圆内奇点}。
+
+  \item 求无穷区间有理定积分
+  
+  \[
+  \int_{-\infty}^{+\infty} \frac{P(x)}{Q(x)}\dd x = \oint_{C_R} \frac{P(z)}{Q(z)}\dd z = 2\uppi\ii\sum_{j=1}^{n}\Res(f(z),\,z_j)
+  \]
+
+  其中
+  \begin{itemize}
+    \item $Q(x)$的次数大于$P(x)$的次数；
+    \item $Q(z)$在实轴上无极点；
+    \item $Q(z)$在上半平面有$n$个极点$z_j$。
+  \end{itemize}
+
+  \item 求无穷区间指数定积分
+
+  \[
+  \int_{-\infty}^{+\infty} \frac{P(x)}{Q(x)}\ee^{\ii mx}\dd x = \oint_{C_R} \frac{P(z)}{Q(z)}\dd z = 2\uppi\ii\sum_{j=1}^{n}\Res(f(z),\,z_j)
+  \]
+
+  其中
+  \begin{itemize}
+    \item $Q(x)$的次数大于$P(x)$的次数；
+    \item $Q(z)$在实轴上无极点；
+    \item $Q(z)$在上半平面有$n$个极点$z_j$；
+    \item $m>0$。
+  \end{itemize}
+
+  有理分式乘三角分式同样可以转化为指数定积分。
+
+  \[
+  \int_{-\infty}^{+\infty} \frac{P(x)}{Q(x)}\cos{mx}\dd x = \operatorname{Re} \left(\int_{-\infty}^{+\infty} \frac{P(x)}{Q(x)}\ee^{\ii mx}\dd x\right)
+  \]
+  \[
+  \int_{-\infty}^{+\infty} \frac{P(x)}{Q(x)}\sin{mx}\dd x = \operatorname{Im} \left(\int_{-\infty}^{+\infty} \frac{P(x)}{Q(x)}\ee^{\ii mx}\dd x\right)
+  \]
+
+\end{enumerate}
+
 \end{document}

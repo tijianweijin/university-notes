@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  4 NOV 2026 21:31
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  10 NOV 2026 10:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1154,21 +1154,21 @@ Package fontspec Info:
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
 (fontspec)             <->"[FandolKai-Regular.otf]/OT:script=hani;language=dflt;"
 
- [4] [5] [6] [7] [8] (./复分析笔记.aux)
+ [4] [5] [6] [7] [8] [9] (./复分析笔记.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `复分析笔记.out' has not changed.
-(rerunfilecheck)             Checksum: 6FC2FC14428AD2057BD627D8A74DBC2F;1648.
+(rerunfilecheck)             Checksum: FB990639A73C34F96F73E1BF773E2BEB;1780.
  ) 
 Here is how much of TeX's memory you used:
- 35103 strings out of 468168
- 797731 string characters out of 5436524
- 1258392 words of memory out of 5000000
- 63238 multiletter control sequences out of 15000+600000
+ 35128 strings out of 468168
+ 799605 string characters out of 5436524
+ 1258538 words of memory out of 5000000
+ 63263 multiletter control sequences out of 15000+600000
  634093 words of font info for 102 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  116i,11n,121p,446b,1057s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 复分析笔记.pdf (8 pages).
+Output written on 复分析笔记.pdf (9 pages).

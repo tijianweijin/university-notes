@@ -1,0 +1,387 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{upgreek}
+\usepackage[nolimits]{cmupint}
+\usepackage{booktabs,tabularx,array}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{float}
+
+\usepackage{tikz}
+\usepackage{diagbox}
+
+\newcolumntype{W}[1]{%
+		>{\hsize=#1\hsize\linewidth=\hsize
+		\centering\arraybackslash}X}
+
+\usetikzlibrary{
+		positioning,
+		calc,
+		decorations.pathreplacing,
+		arrows.meta
+}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+		relnode/.style={
+		font=\small,
+		align=center
+		},
+		relline/.style={
+		thick
+		},
+		relarrow/.style={
+		-{Stealth},
+		thick
+		}
+}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+\definecolor{main}{HTML}{D0645A}
+\definecolor{mainlight}{HTML}{F0F6FF}
+\definecolor{method}{HTML}{D09A95}
+\definecolor{methodlight}{HTML}{f0f6ff}
+\definecolor{black}{HTML}{000000}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\newfontfamily\headingfont{TeX Gyre Heros}
+
+\ctexset{
+		section={format=\centering\heiti\headingfont\zihao{3}\color{main},
+				name={第,章},number=\chinese{section},aftername=\quad,
+				beforeskip=0.9em,afterskip=0.5em},
+		subsection={format=\heiti\headingfont\zihao{5}\color{main},
+				name={,、},number=\chinese{subsection},aftername=,
+				beforeskip=0.6em,afterskip=0.22em},
+		subsubsection={format=\heiti\headingfont\zihao{5}\color{main},
+				number={（\chinese{subsubsection}）},aftername=,
+				beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+	enhanced,breakable,colback=mainlight,colframe=main,
+	boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+	enhanced,breakable,colback=methodlight,colframe=method,
+	boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+	title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+	before upper={\setlength{\parindent}{2em}}
+}
+
+\newcommand{\jj}{\,\mathrm{j}}
+\newcommand{\ee}{\,\mathrm{e}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ppi}{\,\uppi\,}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\Sa}{\operatorname{Sa}}
+\newcommand{\RRe}{\operatorname{Re}}
+\newcommand{\IIm}{\operatorname{Im}}
+\newcommand{\Res}{\operatorname{Res}}
+
+\newfontfamily\russianfont{DejaVu Sans}
+
+\begin{document}
+
+\begin{center}
+	{\heiti\headingfont\zihao{1}\color{main} 矢量分析与场论笔记}
+\end{center}
+
+\subsection{概念}
+
+定义 Nabla 算子
+\[
+\nabla=\left(\frac{\partial}{\partial x_1},
+\frac{\partial}{\partial x_2},\ldots,
+\frac{\partial}{\partial x_n}\right),
+\]
+Laplace 算子
+\[
+\Delta=\nabla^2=\sum_{i=1}^{n}\frac{\partial^2}{\partial x_i^2}.
+\]
+
+\textbf{1. 环量与通量}
+
+\textbf{（1）环量}
+
+作闭合曲线 $C$，定义环量
+\[
+\Gamma=\oint_C\bm A\cdot\dd\bm s.
+\]
+保证法向量方向不变的前提下，曲线 $C$ 以任意方式缩小为点 $M$ 时，若极限
+\[
+\lim_{\Delta S\to0}\frac{\Delta\Gamma}{\Delta S}
+\]
+存在，则定义环量密度
+\[
+\frac{\dd\Gamma}{\dd S}\bm n.
+\]
+
+\textbf{（2）通量}
+
+作闭合曲面 $S$，定义通量
+\[
+\Phi=\oiint_S\bm A\cdot\dd\bm S.
+\]
+若 $\Phi=0$，说明曲面内部无源或汇，否则有源或汇。
+
+曲面 $S$ 以任意方式缩小为点 $M$ 时，若极限
+\[
+\lim_{\Delta V\to0}\frac{\Delta\Phi}{\Delta V}
+\]
+存在，则定义通量密度（即散度）
+\[
+\operatorname{div}\bm A=\nabla\cdot\bm A
+=\frac{\dd\Phi}{\dd V}.
+\]
+
+\textbf{2. 梯度、旋度与散度}
+
+\textbf{（1）梯度}
+
+梯度是向量值，指示数量场在某点上升最快的速度和方向，用 $\nabla f$ 表示。
+
+线性：
+\[
+\nabla(C_1u+C_2v)=C_1\nabla u+C_2\nabla v.
+\]
+运算性质：
+\[
+\nabla(uv)=u\nabla v+v\nabla u,
+\qquad
+\nabla\left(\frac uv\right)=\frac{v\nabla u-u\nabla v}{v^2}.
+\]
+复合法则：
+\[
+\nabla f(u)=f'(u)\nabla u.
+\]
+
+\textbf{（2）旋度}
+
+旋度是向量值，指示向量场在某点的旋转强度与方向，用 $\nabla\times\bm A$ 表示。数量上等于该点环量密度的最大值，方向即环量密度最大方向。
+
+线性：
+\[
+\nabla\times(C_1\bm A\pm C_2\bm B)
+=C_1\nabla\times\bm A\pm C_2\nabla\times\bm B.
+\]
+运算性质：
+\[
+\nabla\times(u\bm A)=u\nabla\times\bm A+\nabla u\times\bm A.
+\]
+
+\textbf{（3）散度}
+
+散度是数量值，指示向量场在某点发散或汇聚的强度，用 $\nabla\cdot\bm A$ 表示。散度即通量密度。
+
+线性：
+\[
+\nabla\cdot(C_1\bm A\pm C_2\bm B)
+=C_1\nabla\cdot\bm A\pm C_2\nabla\cdot\bm B.
+\]
+运算性质：
+\[
+\nabla\cdot(u\bm A)=u\nabla\cdot\bm A+\nabla u\cdot\bm A.
+\]
+
+\textbf{（4）其他计算公式}
+
+梯度场无旋：
+\[
+\nabla\times(\nabla u)=\bm0.
+\]
+旋度场无源：
+\[
+\nabla\cdot(\nabla\times\bm A)=0.
+\]
+向量积散度公式：
+\[
+\nabla\cdot(\bm A\times\bm B)
+=\bm B\cdot(\nabla\times\bm A)-\bm A\cdot(\nabla\times\bm B).
+\]
+梯度场散度公式：
+\[
+\nabla\cdot(\nabla u)=\nabla^2u.
+\]
+旋度场旋度公式：
+\[
+\nabla\times(\nabla\times\bm A)
+=\nabla(\nabla\cdot\bm A)-\nabla^2\bm A.
+\]
+
+\textbf{3. 特殊向量场}
+
+\textbf{（1）无旋场}
+
+单连通区域内，无旋场、有势场、保守场等价。设 $\bm A\in C^1(G)$，$G\subset\R^3$：
+\[
+\begin{array}{ll}
+\text{无旋场：}&\nabla\times\bm A=\bm0,\\
+\text{有势场：}&\exists u,\ \text{s.t. }\bm A=\nabla u,\\
+\text{保守场：}&\displaystyle\oint_C\bm A\cdot\dd\bm s=0.
+\end{array}
+\]
+
+积分与路径无关等价于保守场、旋度为 $0$，即等价于 $\nabla\times\bm A=\bm0$。
+
+\textbf{（2）无源场}
+
+单连通区域内，无源场、向量有势场、保守场等价：
+\[
+\begin{array}{ll}
+\text{无源场：}&\nabla\cdot\bm A=0,\\
+\text{向量有势场：}&\exists\bm B,\ \text{s.t. }\bm A=\nabla\times\bm B,\\
+\text{保守场：}&\displaystyle\oiint_S\bm A\cdot\dd\bm S=0.
+\end{array}
+\]
+
+\textbf{（3）调和场}
+
+调和场势函数满足 Laplace 方程
+\[
+\nabla^2u=0,
+\]
+即
+\[
+\frac{\partial^2u}{\partial x^2}
++\frac{\partial^2u}{\partial y^2}
++\frac{\partial^2u}{\partial z^2}=0.
+\]
+
+\subsection{定理}
+
+\textbf{0. Newton--Leibniz 公式}
+\[
+\int_a^b f'(x)\dd x=f(b)-f(a).
+\]
+
+\textbf{1. Green 公式}
+
+设平面有界闭域 $\sigma$ 由分段光滑的简单闭曲线围成，$\sigma$ 的边界曲线记为 $C$，函数 $P,Q\in C^1(\sigma)$，则
+\[
+\iint_{\sigma}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\dd x\dd y
+=\oint_{C^+}P\dd x+Q\dd y.
+\]
+
+\textbf{2. Stokes 公式}
+\[
+\iint_S\left(\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}\right)\dd y\wedge\dd z
++\left(\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}\right)\dd z\wedge\dd x
++\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\dd x\wedge\dd y
+=\oint_{C^+}P\dd x+Q\dd y+R\dd z.
+\]
+
+几何意义为旋度对面积的积分等于原函数在外曲线上的积分，即向量形式
+\[
+\iint_S(\nabla\times\bm A)\cdot\dd\bm S
+=\oint_{C^+}\bm A\cdot\dd\bm s.
+\]
+
+\textbf{3. Gauss 公式}
+
+设空间有界闭域 $V$ 由分段光滑的简单闭曲面 $S$ 围成，向量函数 $\bm A=(P,Q,R)\in C^1(V)$，则
+\[
+\iiint_V\left(\frac{\partial P}{\partial x}
++\frac{\partial Q}{\partial y}
++\frac{\partial R}{\partial z}\right)\dd V
+=\oiint_{S^+}P\dd y\wedge\dd z
++Q\dd z\wedge\dd x
++R\dd x\wedge\dd y.
+\]
+
+几何意义为散度对体积的积分等于原函数在外表面上的积分，即向量形式
+\[
+\iiint_V\nabla\cdot\bm A\dd V
+=\oiint_{S^+}\bm A\cdot\dd\bm S.
+\]
+
+上三式可以统一于如下公式，受限于知识水平不作进一步介绍。
+
+\textbf{4. 广义 Stokes 公式}
+\[
+\int_{\Omega}\dd\omega=\int_{\partial\Omega}\omega.
+\]
+
+\begin{method}[广义 Stokes 公式求第二型曲线曲面积分]
+广义 Stokes 公式是解题一把好手。使用广义 Stokes 公式解题时应注意以下三点：
+
+\begin{enumerate}
+	\item 原函数处处有定义，尤其是原点；
+	\item 路径为正；
+	\item 原函数可导。
+\end{enumerate}
+
+此外，还要注意正负与方向：曲线左侧为积分区域时为正，否则为负；曲面外侧为正，内侧为负。常用方法为右手定则。
+
+常用方法有二：
+
+\textbf{填补法}：将不完整的曲线或曲面补为闭合曲线或曲面，通过
+\[
+\int_{\Omega}\bm A\cdot\dd\bm\omega
+=\int_{\Sigma^+}\bm A\cdot\dd\bm\omega
++\int_{\Sigma^-}\bm A\cdot\dd\bm\omega,
+\]
+即用闭合曲线或曲面积分减去添加曲线或曲面积分，得到原始路径积分。该方法通常有两种特征：
+
+\begin{enumerate}
+	\item 图形便于填补，如半圆、扇形弧，柱体侧面、锥体侧面、各种旋转体侧面；
+	\item 图形补充后闭合部分散度为 $0$，即 $\nabla\cdot\bm A=0$。
+\end{enumerate}
+
+\textbf{挖空法}：用于定义域内存在间断点的情况，以原点居多。此时需用到路径变形定理。
+
+二维表述：在无旋场中，内部包含奇点的同伦同向闭合曲线积分值相同。为将原函数表达式中形如
+\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}
+\]
+的分母部分消掉，作小椭圆
+\[
+\begin{cases}
+x=a\varepsilon\cos\theta,\\
+y=b\varepsilon\sin\theta,
+\end{cases}
+\]
+$\varepsilon\to0$ 时，同向椭圆路径上的积分值即原积分值。常见函数如
+\[
+\bm A=\left(-\frac{y}{x^2+y^2},\frac{x}{x^2+y^2}\right).
+\]
+
+三维表述：在无源场内，内部包含奇点的同伦同向闭合曲面积分值相同。为将原函数表达式中形如
+\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}
+\]
+的分母部分消掉，作小椭球体
+\[
+\begin{cases}
+x=a\varepsilon\sin\varphi\cos\theta,\\
+y=b\varepsilon\sin\varphi\sin\theta,\\
+z=c\varepsilon\cos\varphi,
+\end{cases}
+\]
+$\varepsilon\to0$ 时，同向椭球闭合曲面上的积分值即原积分值。
+\end{method}
+
+\begin{method}[由向量函数求势函数]
+主要用偏积分法。即分别对 $x$、对 $y$ 积分，将二者合并得到势函数。注意要将不定积分中的 $C$ 改为 $C(x)$、$C(y)$。
+\end{method}
+
+\end{document}
