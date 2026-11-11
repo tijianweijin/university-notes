@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  9 NOV 2026 20:37
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  11 NOV 2026 21:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1191,12 +1191,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1065--1067
 
  []
 
-[4] [5] [6]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1300.
-
-[7] [8] [9]
+[4] [5] [6] [7] [8] [9] [10] [11]
 
 Package fontspec Info: 
 (fontspec)             Script 'CJK' not explicitly supported within font
@@ -1216,21 +1211,21 @@ Package fontspec Info:
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
 (fontspec)             <->"[FandolFang-Regular.otf]/OT:script=hani;language=dflt;"
 
- [10] (./数字电路笔记.aux)
+ [12] [13] (./数字电路笔记.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `数字电路笔记.out' has not changed.
-(rerunfilecheck)             Checksum: 802DBE63C2FBB952B22F70299B049A24;3516.
+(rerunfilecheck)             Checksum: FBDD4FD87725FD9F2170378D7063F273;4820.
  ) 
 Here is how much of TeX's memory you used:
- 54171 strings out of 468168
- 1380011 string characters out of 5436524
- 2104723 words of memory out of 5000000
- 82246 multiletter control sequences out of 15000+600000
+ 54199 strings out of 468168
+ 1381928 string characters out of 5436524
+ 2105735 words of memory out of 5000000
+ 82274 multiletter control sequences out of 15000+600000
  634503 words of font info for 109 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  116i,15n,121p,447b,1178s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 数字电路笔记.pdf (10 pages).
+Output written on 数字电路笔记.pdf (13 pages).

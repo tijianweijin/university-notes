@@ -44,9 +44,9 @@
 \DeclareTextFontCommand{\textbf}{\heiti\color{main}}
 
 \definecolor{main}{HTML}{D0645A}
-\definecolor{mainlight}{HTML}{F0F6FF}
+\definecolor{mainlight}{HTML}{FFF0F0}
 \definecolor{method}{HTML}{D09A95}
-\definecolor{methodlight}{HTML}{f0f6ff}
+\definecolor{methodlight}{HTML}{fff0f0}
 \definecolor{black}{HTML}{000000}
 
 \hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
@@ -97,6 +97,7 @@
 \newcommand{\RRe}{\operatorname{Re}}
 \newcommand{\IIm}{\operatorname{Im}}
 \newcommand{\Res}{\operatorname{Res}}
+\let\bm\boldsymbol
 
 \newfontfamily\russianfont{DejaVu Sans}
 
@@ -106,20 +107,43 @@
 	{\heiti\headingfont\zihao{1}\color{main} 矢量分析与场论笔记}
 \end{center}
 
-\subsection{概念}
+\section{场量}
 
-定义 Nabla 算子
+\subsection{矢量微分算子}
+
+\subsubsection{梯度$\nabla \varphi$}
+
+\subsubsection{旋度$\nabla\times\bm A$}
+
+\subsubsection{散度$\nabla\cdot\bm A$}
+
+\subsubsection{Laplace算子$\nabla^2\bm A$}
+
+\subsection{矢量积分特征}
+
+\subsubsection{环量$\displaystyle\varGamma=\oint_C \bm A\cdot\dd\bm l$}
+
+\subsubsection{通量$\displaystyle\varPhi=\oiint_S\bm A\cdot\dd\bm S$}
+
+\section{场论定理}
+
+\subsection{广义Stokes定理}
+
+\subsection{Holmholtz定理}
+
+定义Hamilton算子（Nabla算子）
 \[
 \nabla=\left(\frac{\partial}{\partial x_1},
 \frac{\partial}{\partial x_2},\ldots,
 \frac{\partial}{\partial x_n}\right),
 \]
+
 Laplace 算子
 \[
 \Delta=\nabla^2=\sum_{i=1}^{n}\frac{\partial^2}{\partial x_i^2}.
 \]
 
-\textbf{1. 环量与通量}
+\subsection{环量与通量}
 
 \textbf{（1）环量}
 
@@ -232,7 +256,7 @@ Laplace 算子
 
 \textbf{（1）无旋场}
 
-单连通区域内，无旋场、有势场、保守场等价。设 $\bm A\in C^1(G)$，$G\subset\R^3$：
+单连通区域内，无旋场、有势场、保守场等价。设 $\bm A\in C^1(G)$，$G\subset\RR^3$：
 \[
 \begin{array}{ll}
 \text{无旋场：}&\nabla\times\bm A=\bm0,\\
@@ -321,7 +345,7 @@ Laplace 算子
 \int_{\Omega}\dd\omega=\int_{\partial\Omega}\omega.
 \]
 
-\begin{method}[广义 Stokes 公式求第二型曲线曲面积分]
+\begin{methodbox}[广义 Stokes 公式求第二型曲线曲面积分]
 广义 Stokes 公式是解题一把好手。使用广义 Stokes 公式解题时应注意以下三点：
 
 \begin{enumerate}
@@ -378,10 +402,10 @@ z=c\varepsilon\cos\varphi,
 \end{cases}
 \]
 $\varepsilon\to0$ 时，同向椭球闭合曲面上的积分值即原积分值。
-\end{method}
+\end{methodbox}
 
-\begin{method}[由向量函数求势函数]
+\begin{methodbox}[由向量函数求势函数]
 主要用偏积分法。即分别对 $x$、对 $y$ 积分，将二者合并得到势函数。注意要将不定积分中的 $C$ 改为 $C(x)$、$C(y)$。
-\end{method}
+\end{methodbox}
 
 \end{document}

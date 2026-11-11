@@ -1297,19 +1297,147 @@ d_H=1 & \text{一条边}\\
 
 \section{门电路}
 
-\subsubsection{二极管电路}
+特殊名词：
+\begin{itemize}
+  \item 灌电流：流入输出端的电流。
+  \item 拉电流：流出输出端的电流。
+  \item 扇出系数：门电路能驱动同类门的个数。
+\end{itemize}
+
+\subsection{二极管电路}
 
 \subsection{CMOS门}
 
+\textbf{MOS管的数字电路特性}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{cccc}
+    \toprule
+    MOS管类型 & 栅极（G） & 源极（S） & 漏极（D） \\
+    \midrule
+    NMOS & 输入 & 低电平（GND） & 输出 \\
+    PMOS & 输入 & 高电平（$V_{\mathrm{DD}}$） & 输出 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+NMOS低通高断，PMOS高通低断。
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{cccc}
+    \toprule
+    输入电平 & NMOS & PMOS & 输出电平 \\
+    \midrule
+    低电平（0） & 截止 & 导通 & 高电平（1） \\
+    高电平（1） & 导通 & 截止 & 低电平（0） \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{CMOS反相器（非门）}
+
+\begin{enumerate}
+  \item 电路结构：PMOS+NMOS，栅极（G）作为输入，漏极（D）作为输出。
+  \item 特性：\textbf{静态功耗极小}，只有在输入电平变化时才有功耗。
+  \item 输入为下拉电阻时为低电平，输入为上拉电阻时为高电平，不可悬空。
+\end{enumerate}
+
+\subsubsection{CMOS与非门和或非门}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{cc}
+    \toprule
+    与非门 & 或非门 \\
+    \midrule
+    两PMOS并联，两NMOS串联 & 两PMOS串联，两NMOS并联 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{CMOS与或非门}
+
+由两个与非门线与得到。
+
+\subsubsection{CMOS 漏极开路门（OD门）}
+
+\begin{enumerate}
+  \item 电路结构：必须有上拉电阻，才能输出高电平。
+  \item 特性：能够实现线与。
+\end{enumerate}
+
+\begin{methodbox}[如何计算上拉电阻范围]
+  两个边界条件：
+  \begin{enumerate}
+    \item 上一级门电路均输出高电平；
+    \item 上一级门电路只有一路输出低电平。
+  \end{enumerate}
+\end{methodbox}
+
+故有如下公式
+
+\[
+\frac{V'_{\mathrm{DD}}-V_{\mathrm{OL}\max}}{I_{\mathrm{OL}\max}-mI_{\mathrm{IL}}}
+\leq R_{\mathrm{L}} \leq
+\frac{V'_{\mathrm{DD}}-V_{\mathrm{OH}\min}}{nI_{\mathrm{OH}}+mI_{\mathrm{IH}}}
+\]
+
+\subsubsection{CMOS 模拟开关}
+
+1通0断。
+
+
+
 \subsection{TTL门}
+
+\textbf{晶体管的数字电路特性}
+
+\subsubsection{TTL与非门}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{ccccccc}
+    \toprule
+    $A$ & $B$ & $T_1$ & $T_2$ & $T_3$ & $T_4$ & $F$ \\
+    \midrule
+    L & L & 饱和 & 截止 & 放大 & 截止 & H \\
+    L & H & 饱和 & 截止 & 放大 & 截止 & H \\
+    H & L & 饱和 & 截止 & 放大 & 截止 & H \\
+    H & H & 倒置 & 饱和 & 截止 & 饱和 & L \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+特性：输入悬空为1；上拉电阻可以为0或$10\text{k}\Omega$，下拉电阻$R_{\mathrm{I}}\leq300\Omega$。
+
+\begin{methodbox}[【技巧】快速判断TTL门电路的逻辑功能]
+  对于晶体管来说，从基极（B）输入的信号，从集电极（C）输出的信号反相，从发射极（E）输出的信号同相。
+\end{methodbox}
+
+TTL或非门、与或非门和异或门都能用这种技巧判断逻辑功能。
 
 \subsection{ECL门}
 
-\begin{methodbox}[如何计算所求电阻范围]
-  核心约束是$V_{OH}-(m)$
+ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\textbf{线或}功能。
 
-  $V_{OL}$
+\begin{methodbox}[三种门的性质比较]
+  \begin{itemize}
+    \item 平均传输延迟时间$t_{\text{pd}}$：
+    $t_{\text{pd}}(\text{ECL})<t_{\text{pd}}(\text{TTL})<t_{\text{pd}}(\text{CMOS})$
+  \end{itemize}
 \end{methodbox}
+
+\subsection{三态门}
+
+三态门除输出高电平1、低电平0外，还能输出高阻态z。
+
+特性：电平类型与使能端正反一致，即：$EN$对应高电平有效，$\overline{EN}$对应低电平有效，否则为高阻态z。
+
+应用：
+\begin{itemize}
+  \item 分时复用：将两个使能端类型相反的三态门输出端相连，从而用使能信号控制输出端的信号类型。
+  \item 双向传输：将两个使能端类型相反的三态门输出端相连，从而用使能信号控制输出端信号的传输方向。
+\end{itemize}
 
 \section{组合逻辑电路}
 
@@ -1463,19 +1591,94 @@ d_H=1 & \text{一条边}\\
 Verilog HDL既是一种行为描述语言也是一种结构描述语言，即既可以\textbf{用电路的功能描述}，
 也可以\textbf{用元器件及其之间的连接}来建立Verilog HDL模型。
 
-\begin{methodbox}[Verilog HDL的数据类型]
-  \begin{enumerate}
-    \item 表示：位数+\tt{'}+数制+数值。
-    例：\tt{4'b1010}表示4位二进制数1010，\tt{8'hFF}表示8位十六进制数FF。
-    \item 数制：\tt{b}表示二进制，\tt{o}表示八进制，\tt{d}表示十进制，\tt{h}表示十六进制。
-  \end{enumerate}
-\end{methodbox}
+Verilog HDL可以描述系统级、算法级、寄存器传输级（RTL）、门级和开关级五种级别的电路。
+其中前三种称为行为描述，后两种称为结构描述。
 
-\begin{methodbox}[\tt{wire}变量和\tt{reg}变量]
-  \tt{wire}常用于\,\textbf{\tt{assign}语句}的左值，表示连续赋值；
+\subsection{数据类型}
+
+\subsubsection{数值}
+
+\begin{enumerate}
+  \item 数字
+  
+  表示：位数+\tt{'}+数制+数值。
+  例：\tt{4'b1010}表示4位二进制数1010，\tt{8'hFF}表示8位十六进制数FF。
+
+  数制：\tt{b}表示二进制，\tt{o}表示八进制，\tt{d}表示十进制，\tt{h}表示十六进制。
+
+  特殊：
+  \begin{itemize}
+    \item 负号要放在最前面，如\tt{-4'b1010}；
+    \item 不写位数默认为最长值，不写数制默认为十进制；
+    \item \tt{'1}表示全1，\tt{'0}表示全0。
+  \end{itemize}
+  
+  \item 字符串
+  
+  可以看作特殊的长度为8 bit的二进制数，\tt{"A"}表示8位二进制数01000001。
+  字符串的长度为$8\times\text{字符个数}$bit。
+
+  \item 参数\tt{parameter}
+\end{enumerate}
+
+\subsubsection{变量}
+
+  \tt{wire}常用于\,\textbf{\tt{assign}语句}的左值；
   
   \tt{reg}常用于\,\textbf{\tt{always}块中\tt{=}或\tt{<=}语句}的左值。
-\end{methodbox}
+
+  此外还有\tt{memory}等类型，不多介绍。
+
+\subsection{运算符}
+
+大部分运算符与C语言相同。下面介绍几种不一样的：
+
+\begin{enumerate}
+  \item 拼接运算符\tt{\{\}}
+  
+  直接把所有表达式的值按序拼接。
+  
+  \item 阻塞赋值和非阻塞赋值
+  
+  阻塞赋值的符号是\tt{=}，\textbf{只用于组合逻辑电路中}，即\tt{assign}语句或\tt{always @ *}；
+  
+  非阻塞赋值的符号是\tt{<=}，\textbf{只用于时序逻辑电路中}，即\tt{always @ (posedge clk)}或类似语句。
+\end{enumerate}
+  
+\subsection{语句}
+
+\begin{enumerate}
+  \item 赋值
+
+\begin{itemize}
+  \item 连续赋值\tt{assign}
+  
+  用于组合逻辑电路的连续赋值，\textbf{左值必须是\tt{wire}}。
+  
+  \item \tt{always}块
+  
+  用于组合逻辑电路或时序逻辑电路的过程赋值，\textbf{左值必须是\tt{reg}}。
+  
+  \item \tt{initial}块
+  
+  用于仿真初始化，\textbf{左值必须是\tt{reg}}。
+\end{itemize}
+
+  \item 条件
+
+\tt{0}、\tt{x}、\tt{z}均为逻辑0，\tt{1}为逻辑1。
+
+  \item 循环
+  
+  除\tt{while}、\tt{for}外，还有\tt{repeat}、\tt{forever}。
+
+  \begin{itemize}
+    \item \tt{repeat}语句：重复执行指定次数的循环体；
+
+    \item \tt{forever}语句：重复执行循环体，直到仿真结束。
+  \end{itemize}
+
+\end{enumerate}
 
 \section{Karnaugh图与其数学结构}
 
