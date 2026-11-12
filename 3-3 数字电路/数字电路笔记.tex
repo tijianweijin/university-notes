@@ -18,8 +18,23 @@
 }
 
 \usepackage{circuitikz}
-\usepackage{fontspec}
+% \usepackage{inconsolata}
+\usepackage{listings}
 
+\lstset{
+    language=Verilog,
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    numbers=left,
+    numberstyle=\tiny,
+    frame=shadowbox,
+    rulesepcolor=\color{gray},
+    breaklines=true,
+    keepspaces=true,
+    columns=fullflexible,
+    showstringspaces=false
+}
 
 % relationbox 中知识关系图的统一样式
 \tikzset{
@@ -52,6 +67,7 @@
 \setlength{\belowdisplayshortskip}{3pt}
 \setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
 \setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
 
 \newfontfamily\headingfont{TeX Gyre Heros}
 
@@ -1564,27 +1580,186 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
 
 \begin{enumerate}
   \item TTL中规模集成4位数码比较器74LS85
+  
+  直观理解即可，比较两个4位二进制数的大小关系，输出$A>B$、$A=B$、$A<B$；
+  额外设$G'$（大于）、$E'$（等于）、$S'$（小于）输入端，表示两数相等时的输出。
+  
+  Verilog HDL实现代码如下：
+
+  \begin{lstlisting}[language=Verilog]
+  module compare_4(Y, A, B);
+      input [3:0] A, B;
+      output [2:0] Y;
+      reg [2:0] Y;
+
+      always @(A or B)
+      begin
+          if (A > B)
+              Y = 3'b100;
+          else if (A == B)
+              Y = 3'b010;
+          else
+              Y = 3'b001;
+      end
+  endmodule
+  \end{lstlisting}
+
+  功能扩展：
+
+  \begin{itemize}
+    \item 5位比较器
+    
+    使用一片元件，将两个5位二进制数的高4位输入到比较器中，低1位输入到比较器的$A>B$、$A<B$端口中；
+    不可以比较相等数值。
+
+    \item 串行级联比较器
+    
+    将多片比较器的输出端口与$G'$、$E'$、$S'$端口连接起来，即可实现串行级联比较器。
+
+    注意：前后顺序为\textbf{先低后高}，即第一级电路比较最低4位；
+    第一级电路应将$G'$、$S'$接地而$E'$接高电平，保证第一级电路正确输出相等结果。
+    
+    \item 并行级联比较器
+    
+    基于5位比较器修改得来。使用5片4位比较器并联作为一级电路，1片4位比较器作为二级电路。
+
+    除最低4位接$E'=1$保证相等输出外，一级电路比较器输入方法如5位比较器，最多可以比较24位二进制数；
+    二级电路输入法也同5位比较器，一级电路的$A>B$端口接到二级电路的$a_i$端口，$A<B$端口接到二级电路的$b_i$端口，
+    最低四位输出接到$G'$、$E'$、$S'$端口。
+  \end{itemize}
 \end{enumerate}
 
 \subsubsection{编码器与优先编码器}
 
 \begin{enumerate}
   \item 二-十位编码器C304
+  
+  真值表即8421BCD码。
+  \[
+  \begin{aligned}
+  D &= 8+9\\
+  C &= 4+5+6+7\\
+  B &= 2+3+6+7\\
+  A &= 1+3+5+7+9
+  \end{aligned}
+  \]
+
+  \item 8线-3线编码器（略）
   \item 优先编码器74148
+  
+  功能描述：
+  
+  输入端口$I_0\sim I_7$，使能端$\overline{ST}$；
+  输出端口$Y_0\sim Y_2$，使能输出端$Y_{\mathrm{S}}$，
+  扩展输出端$\overline{Y_{\mathrm{EX}}}$。
+
+  若使能端为1，全部输出1，代表停止输出；
+  
+  若使能端为0，输入端全为1，输出端除$Y_{\mathrm{S}}$是0外，其余均为1，
+  代表没有输出信号；
+
+  若使能端为0，输入端有信号，则输出端$Y_{\mathrm{S}}$为1，
+  输出端$Y_0\sim Y_2$为输入端中最高位的二进制编码。
+
+  简记为：非编码状态时$\overline{Y_{\mathrm{EX}}}$为1；
+  编码状态且无输入信号时$Y_{\mathrm{S}}$为0；
+  其他状态编码最高位。
+
+  功能扩展：
+  \begin{itemize}
+    \item 16线至4线的优先编码器
+    
+    2片74148串联，第一片编码8~15，第二片编码0~7；第一片的输出端接到第二片的使能端。
+
+    输出端为\textbf{反码}$F_0\sim F_3$，扩展端$F_{\mathrm{EX}}$。
+
+    片1的$\overline{Y_{\mathrm{EX}}}$作为4位码最高位$F_3$输出，
+    两片对应位$Y_2\sim Y_0$相与作为低3位$F_2\sim F_0$输出，
+    两片扩展段$\overline{Y_{\mathrm{EX}}}$相与作为低3位$F_{\mathrm{EX}}$输出，
+
+    \item 8421BCD码优先编码器
+    
+    10输入4输出。
+
+    $I_0\sim I_7$正常通过非门后从$F_0\sim F_2$输出，
+    $I_8$、$I_9$与非后从$F_3$输出，$I_9$和$Y_0$与非后从$F_0$输出。
+  \end{itemize}
 \end{enumerate}
 
 \subsubsection{译码器}
 
 \begin{enumerate}
   \item 2线至4线译码器
+  \begin{lstlisting}[language=Verilog]
+  module decode24(a, led);
+    input [1:0] a;
+    output [3:0] led;
+    reg [3:0] led;
+
+    always @(a)
+    begin
+        case (a)
+            2'b00: led = 4'b0001;
+            2'b01: led = 4'b0010;
+            2'b10: led = 4'b0100;
+            2'b11: led = 4'b1000;
+        endcase
+    end
+  endmodule
+  \end{lstlisting}
   \item 三线至八线译码器74LS138
-  \item 二－十进制译码器（4线-10线译码器）
+  
+  $S_\mathrm{A}$为1，$S_\mathrm{B}$、$S_\mathrm{C}$为0时，能正常译码，
+  否则输出端全为1，表示无输出。
+
+  \begin{lstlisting}[language=Verilog]
+  module decoder3to8(out, in);
+
+      output [7:0] out;
+      input [2:0] in;
+
+      assign out = 1'b1 << in;  // 根据输入进行左移，输出'1'有效
+  endmodule
+  \end{lstlisting}
+  \begin{lstlisting}[language=Verilog]
+  module decoder3to8(sw, led);
+      input [2:0] sw;             // 开关输入信号，作为3-8译码器的输入信号控制LED
+      output [7:0] led;
+      reg [7:0] led;              // 在always过程中只能对reg型变量赋值
+
+      always @(sw)                // always过程块，括号中sw为敏感变量
+                                  // 当sw变化一次，执行一次always中所有语句
+                                  // 否则保持不变
+      begin
+          case(sw)                // case语句
+              3'b000: led = 8'b0111_1111;
+              3'b001: led = 8'b1011_1111;
+              3'b010: led = 8'b1101_1111;
+              3'b011: led = 8'b1110_1111;
+              3'b100: led = 8'b1111_0111;
+              3'b101: led = 8'b1111_1011;
+              3'b110: led = 8'b1111_1101;
+              3'b111: led = 8'b1111_1110;
+          endcase
+      end
+  endmodule
+  \end{lstlisting}
+  \item 二——十进制译码器（4线-10线译码器）
   \item 七段荧光数码管显示器
 \end{enumerate}
 
 \subsubsection{数据选择器}
 
+\begin{enumerate}
+  \item TTL 8选1数据选择器74LS151
+  \item 双4选1数据选择器74LS153
+\end{enumerate}
+
 \subsubsection{数据分配器}
+
+\begin{enumerate}
+  \item TTL 双1线至4线数据分配器74LS155
+\end{enumerate}
 
 \section{Verilog硬件描述语言（Verilog HDL）}
 
