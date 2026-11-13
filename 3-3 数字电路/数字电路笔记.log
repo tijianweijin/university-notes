@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  12 NOV 2026 21:59
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  13 NOV 2026 16:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1224,7 +1224,12 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <9.03374> not available
 LaTeX Font Warning: Font shape `TU/FandolFang-Regular(0)/m/it' undefined
 (Font)              using `TU/FandolFang-Regular(0)/m/n' instead on input line 1721.
 
-[13] [14] [15] (./数字电路笔记.aux)
+[13]
+Missing character: There is no Ⅰ (U+2160) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no Ⅱ (U+2161) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no Ⅰ (U+2160) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no Ⅱ (U+2161) in font [lmroman10-regular]:mapping=tex-text;!
+[14] [15] [16] [17] [18] (./数字电路笔记.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
@@ -1237,12 +1242,12 @@ Package rerunfilecheck Info: File `数字电路笔记.out' has not changed.
 (rerunfilecheck)             Checksum: FBDD4FD87725FD9F2170378D7063F273;4820.
  ) 
 Here is how much of TeX's memory you used:
- 54528 strings out of 468168
- 1388770 string characters out of 5436524
- 2544562 words of memory out of 5000000
- 82583 multiletter control sequences out of 15000+600000
+ 54567 strings out of 468168
+ 1390640 string characters out of 5436524
+ 2539562 words of memory out of 5000000
+ 82622 multiletter control sequences out of 15000+600000
  634551 words of font info for 115 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  116i,15n,121p,447b,2014s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 数字电路笔记.pdf (15 pages).
+Output written on 数字电路笔记.pdf (18 pages).

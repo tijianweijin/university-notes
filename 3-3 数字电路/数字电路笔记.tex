@@ -1727,9 +1727,8 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
       output [7:0] led;
       reg [7:0] led;              // 在always过程中只能对reg型变量赋值
 
-      always @(sw)                // always过程块，括号中sw为敏感变量
-                                  // 当sw变化一次，执行一次always中所有语句
-                                  // 否则保持不变
+      always @(sw)                // always过程块，括号中sw为敏感变量；
+                                  //当sw变化一次，执行一次always中所有语句；否则保持不变
       begin
           case(sw)                // case语句
               3'b000: led = 8'b0111_1111;
@@ -1744,21 +1743,186 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
       end
   endmodule
   \end{lstlisting}
+
+  功能扩展
+  \begin{itemize}
+    \item 4线至16线译码器（串行拓展）
+    
+    片Ⅰ的$S_\mathrm{B}$与片Ⅱ的$S_\mathrm{A}$并接在一起作为最高位$D$的输入端。
+    片Ⅰ的$S_\mathrm{C}$与片Ⅱ的$S_\mathrm{B}$连在一起作为使能端。
+
+    \item 6线至64线译码器（并行拓展）
+    
+    在8片74LS138的基础上添加1片74LS138作为高3位译码器，
+    将其输出结果输入到8片74LS138的$S_\mathrm{B}$、$S_\mathrm{C}$端口。
+
+    \item 地址译码器
+    
+    将地址低3位输入到$A_2\sim A_0$端，
+    其他位输入到$S_\mathrm{A}$、$S_\mathrm{B}$、$S_\mathrm{C}$端口，
+    保证始终正常工作。
+
+    可以将所有1通过与门，所有0通过或门，接入使能端，即可实现地址译码器。
+
+    \item 数据分配器
+    
+    将数据$D$输入到$S_\mathrm{B}$、$S_\mathrm{C}$端口。
+    
+    当$D=1$时，译码器所有端口输出1，数据分配器分配的数据必定是1；
+    当$D=0$时，译码器对应端口输出0。
+
+    \item 函数发生器
+    
+    可以将译码器的输出端看作$2^n$个最小项，可以通过基本逻辑门组合实现任意逻辑函数。
+    
+    注意：译码器为\textbf{负逻辑输出}！
+
+    \begin{methodbox}[【技巧】最小项间转换]
+        $m_0 + m_1 + m_2 = \overline{m_3}$
+        
+        运用此式可以化简逻辑函数，减少逻辑门数量。
+    \end{methodbox}
+  \end{itemize}
+
   \item 二——十进制译码器（4线-10线译码器）
-  \item 七段荧光数码管显示器
+  
+  功能扩展
+  \begin{itemize}
+    \item 3线至8线译码器
+    
+    $f_8$、$f_9$不用即可。
+  \end{itemize}
+
+  \item 七段荧光数码管显示器74LS48
+  
+  \begin{methodbox}
+    共阴极：统一接低电平，输出端口为正逻辑，即1亮0灭；
+
+    共阳极：统一接高电平，输出端口为负逻辑，即0亮1灭；
+  \end{methodbox}
+
+  译码器将8421BCD码映射为七段荧光数码管的七个段的点亮情况。
+
+  除去4输入7输出端口外，有如下特殊端口：
+  
+  \begin{itemize}
+    \item $\overline{BI}$：强制灭灯，当$\overline{BI}=1$时，强制全灭，优先级最高；
+    \item $\overline{LT}$：试灯，当$\overline{LT}=1$时，强制全亮；
+    \item $\overline{RBI}$：灭0输入信号，当$\overline{RBI}=1$时灭0；
+    \item $\overline{RBO}$：灭0输入信号，当本数码管显示0时输出0；
+  \end{itemize}
+
+  只需在整数部分把高位的$\overline{RBO}$与低位的$\overline{RBI}$相连，
+  在小数部分将低位的$\overline{RBO}$与高位的$\overline{RBI}$相连，
+  就可以熄灭前后多余的0。
 \end{enumerate}
 
 \subsubsection{数据选择器}
 
 \begin{enumerate}
   \item TTL 8选1数据选择器74LS151
+  
+  地址端$A_2,A_1,A_0$，数据端$D_7\sim D_0$，
+  使能端$\overline{ST}$输出端$Y$和$\overline{W}$。
+  
   \item 双4选1数据选择器74LS153
+  
+  地址端$A_1$和$A_0$，数据端$D_3\sim D_0$，
+  使能端$\overline{1ST}$和$\overline{2ST}$，输出端$1Y$和$2Y$。
+
+  \begin{lstlisting}[language=Verilog]
+  module mux4_to_1(out, i0, i1, i2, i3, s0, s1);
+
+      output out;
+      input i0, i1, i2, i3, s0, s1;
+      reg out;
+
+      always @(s1 or s0 or i0 or i1 or i2 or i3)
+                                  // 用always块建立组合逻辑模型时，要用阻塞赋值
+      begin
+          case({s1, s0})
+              2'b00: out = i0;
+              2'b01: out = i1;
+              2'b10: out = i2;
+              2'b11: out = i3;
+              default: out = 1'bx; // 其他情况下输出1位任意值
+          endcase
+      end
+
+  endmodule
+  \end{lstlisting}
+
+  功能扩展
+
+  \begin{itemize}
+    \item 8选1数据选择器
+    
+    将$A_2$与其反变量输入$\overline{1ST}$与$\overline{2ST}$，对输出求或。
+
+    \item 16选1数据选择器
+    
+    将$A_0$和$A_1$输入第一级电路，16中选4，然后再将结果输入2级电路，用$A_2$和$A_3$进行选择，从4个输出中选1。
+  
+    \item 并串转换电路
+    
+    在地址端输入$00\to01\to10\to11\to00\to\cdots$，即可输出$D_0D_1D_2D_3\cdots$。
+
+    \item 函数发生器
+    
+    若$m\leq n$，则将$2^m$个最小项输入到地址端。
+
+    若$m>n$，则将$2^n$个最小项输入到地址端，剩余的最小项通过逻辑门组合后输入到数据端。
+    一般选择$2^n$个最小项中最多的作为数据端输入，剩余的作为地址端输入。
+
+    \begin{methodbox}[Karnaugh图法]
+      根据地址端的最小项圈出Karnaugh图中的子Karnaugh图，
+      再在子Karnaugh图中圈出最小项，
+      最后将圈出的最小项通过逻辑门组合后输入到数据端。
+    \end{methodbox}
+  \end{itemize}
 \end{enumerate}
 
 \subsubsection{数据分配器}
 
 \begin{enumerate}
   \item TTL 双1线至4线数据分配器74LS155
+  
+  可以视为2到4线译码器添加了使能端与数据输入端的$\overline{D}$与门。
+
+  注意：上下使能端的\textbf{正负逻辑相反}。
+
+  \begin{lstlisting}[language=Verilog]
+  module demux4(y0, y1, y2, y3, din, a);
+
+      input din;
+      input [1:0] a;
+      output reg y0, y1, y2, y3;
+
+      always @(din, a)
+      begin
+          y0 = 0; y1 = 0; y2 = 0; y3 = 0;
+                                  // 用always块建立组合逻辑模型时，要用阻塞赋值
+          case(a)
+              2'b00: y0 = din;
+              2'b01: y1 = din;
+              2'b10: y2 = din;
+              2'b11: y3 = din;
+          endcase
+      end
+
+  endmodule
+  \end{lstlisting}
+
+  功能扩展
+  \begin{itemize}
+    \item 8选1数据分配器
+    
+    将$A_2$与其反变量输入$\overline{1ST}$与$\overline{2ST}$，对输出求或。
+
+    \item 译码器
+    
+    令$\overline{D}=0$，即可实现译码器功能。
+  \end{itemize}
 \end{enumerate}
 
 \section{Verilog硬件描述语言（Verilog HDL）}
