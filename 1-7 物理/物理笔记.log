@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  12 NOV 2026 15:36
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  14 NOV 2026 21:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1212,14 +1212,14 @@ Package rerunfilecheck Warning: File `物理笔记.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `物理笔记.out':
-(rerunfilecheck)             Before: EDE9568A00619E31F2D746F9161D941C;9125
-(rerunfilecheck)             After:  B1729CBB638A1406E316A4A00657D252;9357.
+(rerunfilecheck)             Before: B1729CBB638A1406E316A4A00657D252;9357
+(rerunfilecheck)             After:  ECF00A1B661CE62AE55D645148574421;9333.
  ) 
 Here is how much of TeX's memory you used:
- 35626 strings out of 468168
- 815605 string characters out of 5436524
- 1264959 words of memory out of 5000000
- 63716 multiletter control sequences out of 15000+600000
+ 35627 strings out of 468168
+ 815616 string characters out of 5436524
+ 1265236 words of memory out of 5000000
+ 63717 multiletter control sequences out of 15000+600000
  644394 words of font info for 152 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  116i,22n,121p,441b,1190s stack positions out of 10000i,1000n,20000p,200000b,200000s

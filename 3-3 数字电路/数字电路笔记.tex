@@ -1402,8 +1402,6 @@ NMOS低通高断，PMOS高通低断。
 
 1通0断。
 
-
-
 \subsection{TTL门}
 
 \textbf{晶体管的数字电路特性}
@@ -1426,6 +1424,8 @@ NMOS低通高断，PMOS高通低断。
 
 特性：输入悬空为1；上拉电阻可以为0或$10\text{k}\Omega$，下拉电阻$R_{\mathrm{I}}\leq300\Omega$。
 
+饱和深度$S=\dfrac{I_B}{I_BS}$饱和越深，导通越充分，压降越小；但存储电荷越多，关断越慢。
+
 \begin{methodbox}[【技巧】快速判断TTL门电路的逻辑功能]
   对于晶体管来说，从基极（B）输入的信号，从集电极（C）输出的信号反相，从发射极（E）输出的信号同相。
 \end{methodbox}
@@ -1436,10 +1436,20 @@ TTL或非门、与或非门和异或门都能用这种技巧判断逻辑功能�
 
 ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\textbf{线或}功能。
 
+门内部共射实现线或，共集实现线与。
+
 \begin{methodbox}[三种门的性质比较]
   \begin{itemize}
     \item 平均传输延迟时间$t_{\text{pd}}$：
     $t_{\text{pd}}(\text{ECL})<t_{\text{pd}}(\text{TTL})<t_{\text{pd}}(\text{CMOS})$
+
+    工作速度取反
+    \item 噪声容限：ECL$<$MOS$<$TTL
+
+    抗干扰能力相同。
+    \item 静态能耗
+    
+    MOS$<$TTL$<$ECL
   \end{itemize}
 \end{methodbox}
 
