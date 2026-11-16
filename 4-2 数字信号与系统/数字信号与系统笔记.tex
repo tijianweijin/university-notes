@@ -98,6 +98,11 @@
 \newcommand{\IIm}{\operatorname{Im}}
 \newcommand{\dtft}{\operatorname{DTFT}}
 \newcommand{\zf}{\mathcal{Z}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\dfs}{\operatorname{DFS}}
+\newcommand{\dft}{\operatorname{DFT}}
+\newcommand{\idfs}{\operatorname{IDFS}}
+\newcommand{\idft}{\operatorname{IDFT}}
 
 \newfontfamily\russianfont{DejaVu Sans}
 
@@ -306,7 +311,7 @@
   
 \end{enumerate}
 
-\subsection{频域分析}
+\subsection{连续频域分析}
 
 \subsubsection{离散时间Fourier变换，DTFT}
 
@@ -407,7 +412,7 @@ x[n] = \FF^{-1} \left\{ X(e^{\jj\omega}) \right\} = \int_{-\uppi}^{\uppi} X(e^{\
 
 \end{enumerate}
 
-\subsection{复频域分析}
+\subsection{连续复频域分析}
 
 \subsubsection{Z变换}
 
@@ -489,7 +494,7 @@ x[n] = \FF^{-1} \left\{ X(e^{\jj\omega}) \right\} = \int_{-\uppi}^{\uppi} X(e^{\
     & 不变 \\
 
     尺度变换
-    & $\zf\left\{x[a^n n]\right\}=X\left(\dfrac{z}{a}\right)$
+    & $\zf\left\{a^n x[n]\right\}=X\left(\dfrac{z}{a}\right)$
     & 缩放为 $|a||z|$ \\
 
     时移
@@ -523,55 +528,101 @@ x[n] = \FF^{-1} \left\{ X(e^{\jj\omega}) \right\} = \int_{-\uppi}^{\uppi} X(e^{\
 \begin{methodbox}[【题型】求Z反变换]
   \begin{itemize}
     \item 幂级数展开法（长除法）
-    \item 部分分式展开法
     
-    对于多项式信号$X(s)=\dfrac{P(s)}{Q(s)}$，首先将其化为整式与真分式，
-    随后分别处理。
-    \begin{enumerate}[label=\arabic*.]
-      \item 整式：$X_0(s)=\sum_{i=0}^{n}c_i s^i \longleftrightarrow x_0(t)=\sum_{i=0}^{n}c_i \delta^{(i)}(t)$
-      \item 真分式：将真分式$X_1(s)$展开为部分分式$\displaystyle\sum_{i=1}^{n}\frac{K_i}{(s-p_i)^r}$，分别作Laplace反变换
-      
-      \[
-      \LL^{-1}\left\{\frac{K_i}{(s-p_i)^r}\right\} = K_i \frac{t^{r-1}}{(r-1)!} e^{p_i t} u(t),\, s.t.\, \RRe s > \RRe p_i
-      \]
-      \[
-      \LL^{-1}\left\{\frac{K_i}{(s-p_i)^r}\right\} = K_i \frac{t^{r-1}}{(r-1)!} e^{p_i t} [-u(-t)],\, s.t.\, \RRe s < \RRe p_i
-      \]
-      其中$K_i$可由留数法求得。
-      
-      \[
-      K_i=\left.X_1(s)(s-p_i)^r\right|_{s=p_i}
-      \]
-      
-      注意到左边信号只需要把右边信号的$u(t)$换为$-u(-t)$即可，故后续只以右边信号为例。
+    将分母作为除数，分子作为被除数，进行长除法展开，得到幂级数形式的Z变换。
+    此法一般不能得到完整展开式。
+    
+    \item 部分分式展开法
 
-      其中，特殊极点类型有特殊的方法来计算Laplace反变换。下列例中均以右边信号为例：
-      \begin{itemize}
-        \item $p_i$为单实数极点，分式形如$\dfrac{K_i}{s-p_i}$
-        
-        \[
-        \LL^{-1}\left\{X(s)\right\}=K_i u(t) e^{p_i t}
-        \]
-        
-        \item $p_i$为重极点，分式形如$\displaystyle\sum_{k=1}^{r}\dfrac{K_{i,k}}{(s-p_i)^k}$：
-        
-        \[
-        \LL^{-1}\left\{X(s)\right\}=K_{i,k} \dfrac{t^{k-1}}{(k-1)!} u(t) e^{p_i t}
-        \]
-        
-        \item $p_{1,\,2}=\alpha\pm\varOmega_0$为共轭复数极点，$K=C+\jj D$，分式形如$\dfrac{K}{s-p_1}+\dfrac{K^\ast}{s-p_2}$
+    多项式信号$X(z)=\dfrac{P(z)}{Q(z)}$，将其展开为部分分式后逐项变换，
+    即得到$x[n]$。常用公式为
+    \[
+    \zf^{-1}\left\{\frac{1}{1-az^{-1}}\right\}=a^n x[n]
+    \]
 
-        \[
-        \LL^{-1}\left\{X(s)\right\}=2e^{\alpha t} \left[C\cos (\varOmega_0 t) - D\sin (\varOmega_0 t)\right]  u(t) 
-        \]
-
-      \end{itemize}
-    \end{enumerate}
     \item 留数法
+    
+    \[
+    x[n]=\Res\left[X(z)z^{n-1}\right]
+    \]
+
+    当$n\geq 0$时，$x[n]$为右边序列；当$n<0$时，$x[n]$为左边序列。
+    需分类讨论得出反变换序列。
+
   \end{itemize}
 \end{methodbox}
 
 \subsubsection{Z变换和离散Fourier变换、Laplace变换关系}
+
+\subsection{离散频域分析}
+
+\subsubsection{预备知识}
+
+\begin{enumerate}
+  \item 四种Fourier变换对比
+  
+  \begin{methodbox}[Fourier变换连续性与周期性关系]
+    一域连续则另一域无周期，一域无周期则另一域连续；
+
+    一域离散则另一域有周期，一域有周期则另一域离散。
+  \end{methodbox}
+  
+  \item 复指数序列正交性
+  
+  \[
+  \sum_{k=0}^{N-1}\ee^{\jj\frac{2\uppi}{N}k(r-m)}=
+  \left\{\begin{aligned}
+    N, \quad &r = m \\
+    0, \quad &r \neq m
+  \end{aligned}\right.
+  \]
+
+  记$\ee^{\jj\frac{2\uppi}{N}}$为$W_N$，有
+  \[
+  \sum_{k=0}^{N-1}W_N^{kr}\times W_N^{-km}=
+  \left\{\begin{aligned}
+    N, \quad &r = m \\
+    0, \quad &r \neq m
+  \end{aligned}\right.
+  \]
+\end{enumerate}
+
+\subsubsection{离散Fourier级数，DFS}
+
+\begin{enumerate}
+  \item 定义
+  
+  \[
+  \dfs\left\{x[n]\right\} = \sum_{n=0}^{N-1} x[n] \ee^{-\jj\frac{2\uppi}{N}kn}
+  = \sum_{n=0}^{N-1} x[n] W_N^{kn}
+  \]
+  \[
+  \idfs\left\{X[k]\right\} = \frac{1}{N} \sum_{k=0}^{N-1} X[k] \ee^{\jj\frac{2\uppi}{N}kn}
+  = \frac{1}{N} \sum_{k=0}^{N-1} X[k] W_N^{-kn}
+  \]
+  
+  \item 取样约束
+  
+  \begin{enumerate}[label=(\arabic*)]
+    \item 时域信号为时限信号，即
+    
+    \[
+    x[n]=
+    \left\{\begin{aligned}
+      x(n), \quad &n \in [0, N-1] \\
+      0, \quad &\text{其他}
+    \end{aligned}\right.
+    \]
+
+    \item 取样频率满足$\omega_0 < \dfrac{2\uppi}{N}$，
+    即$\varOmega_0 < \dfrac{2\uppi}{NT}$。
+  \end{enumerate}
+
+\end{enumerate}
+
+\subsubsection{离散Fourier变换，DFT}
+
+\subsubsection{快速Fourier变换，FFT}
 
 \section{系统分析}
 

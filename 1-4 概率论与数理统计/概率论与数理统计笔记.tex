@@ -274,7 +274,7 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
     \shortstack[c]{Poisson分布\\$\pi(\lambda)$}
     & $\displaystyle P(X=k)=\dfrac{\lambda^k e^{-\lambda}}{k!}$ & $\lambda$ & $\lambda$ \\
 
-    \shortstack[c]{几何分布\\$G(p)$}
+    \shortstack[c]{几何分布\\$\operatorname{Ge}(p)$}
     & $\displaystyle P(X=k)=(1-p)^{k-1}p$ & $\dfrac{1}{p}$ & $\dfrac{1-p}{p^2}$ \\
 
     \shortstack[c]{Pascal分布\\$\mathrm{NB}(r,p)$}
@@ -297,9 +297,9 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
     名称 & 概率密度函数$f(x)$ & 累积概率函数$F(x)$ & 期望$E(X)$ & 方差$D(X)$ \\
     \midrule
     \shortstack[c]{均匀分布\\$U(a,b)$} & $\displaystyle f(x)=\frac{1}{b-a},\ x\in\left[a,\,b\right]$ & $F(x)=\dfrac{x-a}{b-a}$ & $E(X)=\dfrac{a+b}{2}$ & $\dfrac{(b-a)^2}{12}$ \\
-    \shortstack[c]{指数分布\\$E(\lambda)$} & $\displaystyle f(x)=\lambda \ee^{-\lambda x},\ x>0$ & $F(x)=1-\ee^{-\lambda x}$ & $E(X)=\dfrac{1}{\lambda}$ & $\dfrac{1}{\lambda^2}$ \\
-    \shortstack[c]{正态分布\\$N(\mu,\sigma^2)$} & $\displaystyle f(x)=\frac{1}{\sigma \sqrt{2 \uppi}} \ee^{-\dfrac{(x-\mu)^2}{2 \sigma^2}}$ & $F(x)=P(X\leq x)$ & $E(X)=\mu$ & $\sigma^2$ \\
-    \shortstack[c]{标准正态\\$N(0,1)$} & $\displaystyle \varphi(x)=\frac{1}{\sqrt{2 \uppi}} \ee^{-\dfrac{x^2}{2}}$ & $\varPhi(x)=P(X\leq x)$ & $E(X)=0$ & $D(X)=1$ \\
+    \shortstack[c]{指数分布\\$\operatorname{Exp}(\theta)$} & $\displaystyle f(x)=\dfrac{1}{\theta} \ee^{-\frac{1}{\theta} x},\ x>0$ & $F(x)=1-\ee^{-\frac{1}{\theta} x}$ & $E(X)=\theta$ & $\theta^2$ \\
+    \shortstack[c]{正态分布\\$N(\mu,\sigma^2)$} & $\displaystyle f(x)=\frac{1}{\sigma \sqrt{2 \uppi}} \ee^{-\frac{(x-\mu)^2}{2 \sigma^2}}$ & $F(x)=P(X\leq x)$ & $E(X)=\mu$ & $\sigma^2$ \\
+    \shortstack[c]{标准正态\\$N(0,1)$} & $\displaystyle \varphi(x)=\frac{1}{\sqrt{2 \uppi}} \ee^{-\frac{x^2}{2}}$ & $\varPhi(x)=P(X\leq x)$ & $E(X)=0$ & $D(X)=1$ \\
     \bottomrule
   \end{tabularx}
 \end{center}
@@ -322,14 +322,14 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
   \begin{tabularx}{0.92\textwidth}{>{\bfseries}p{2.3cm}c c c c}
     \toprule
     \centering
-    名称 & 概率密度函数$f(\vect x)$ & 期望$E(\vect X)$ & 协方差矩阵$D(\vect X)$ \\
+    名称 & 概率密度函数$f(\vect x)$ & 期望$E(\vect X)$ & 协方差矩阵$\vect C(\vect X)$ \\
     \midrule
     \shortstack[c]{2维均匀分布\\$U_G$} & & &\\
     \shortstack[c]{$n$维正态分布\\$N_n(\vect\mu,\vect\varSigma)$} 
-    & $ \displaystyle f(\vect x)=(2\uppi)^{-\frac{n}{2}}|\vect \varSigma|^{-\frac{1}{2}} \operatorname{exp}\left[-\frac{1}{2}(\vect x- \vect \mu)^T\vect \varSigma^{-1}(\vect x-\vect\mu)\right] $ 
+    & $ \displaystyle f(\vect x)=(2\uppi)^{-\frac{n}{2}}|\vect \varSigma|^{-\frac{1}{2}} \operatorname{exp}\left[-\frac{1}{2}(\vect x- \vect \mu)^{\top}\vect \varSigma^{-1}(\vect x-\vect\mu)\right] $ 
     & $\vect\mu$ & $\vect\varSigma$ \\
     \shortstack[c]{$n$维标准正态\\$N_n(\vect 0,\vect I_n)$} 
-    & $ \displaystyle \varphi(\vect x)=(2\uppi)^{-\frac{n}{2}}\operatorname{exp}\left(-\frac{1}{2}\vect x^T\vect x\right) $ 
+    & $ \displaystyle \varphi(\vect x)=(2\uppi)^{-\frac{n}{2}}\operatorname{exp}\left(-\frac{1}{2}\vect x^{\top}\vect x\right) $ 
     & $\vect 0$ & $\vect I_n$ \\
     \bottomrule
   \end{tabularx}
@@ -337,7 +337,137 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
 
 其中$\vect\mu\in\RR^n$，$\vect\varSigma\in\RR^{n\times n}$为正定矩阵。
 
-\section{概率统计}
+注：二维均匀分布的边缘分布\textbf{不一定是均匀分布}，但二维正态分布的边缘分布仍然是正态分布。
+
+\subsection{数字特征}
+
+\subsubsection{期望$E(X)$}
+
+\begin{enumerate}
+  \item 计算
+  
+  离散型
+
+  \[
+  E(X) = \sum x_k p_k
+  \]
+
+  连续型
+
+  \[
+  E(X) = \int_{-\infty}^{+\infty} x f(x)\dd x
+  \]
+
+  \item 函数$Y=g(\vect{X})$
+  
+  离散型
+
+  \[
+  E(Y) = \sum g(\vect x_k) p_k  
+  \]
+
+  连续型
+
+  \[
+  E(Y) = \int_{-\infty}^{+\infty} g(\vect x) f(\vect x)\dd \vect x
+  \]
+
+  \begin{methodbox}
+  两正交Gauss函数之和的包络服从Rayleigh分布，满足$E(X)=\sigma\sqrt{\dfrac{\uppi}{2}}$。
+  \end{methodbox}
+
+  \item 性质
+  \begin{enumerate}[label=(\arabic*)]
+    \item $E(C)=C$
+    
+    \item 线性
+    
+    \[
+    E\left(\sum_{i=1}^{n}a_i X_i\right)=\sum_{i=1}^{n}a_i E(X_i)
+    \]
+    
+    注：其线性\textbf{不依赖}于$X_1,\,X_2,\,\cdots,\,X_n$间的独立性。
+
+    \item 乘法性质
+    
+    若$X_1,\,X_2,\,\cdots,\,X_n$之间是独立的，则有
+
+    \[
+    E\left(\prod_{i=1}^{n}X_i\right)=\prod_{i=1}^{n}E(X_i)
+    \]
+
+    注：其\textbf{逆命题不成立}，即$E(XY)=E(X)E(Y)$不一定意味着$X$与$Y$独立。
+
+    \item Cauchy-Schwartz不等式
+    
+    \[
+    E[(XY)^2] \leq E(X^2)E(Y^2)
+    \]
+  \end{enumerate}
+\end{enumerate}
+
+\subsubsection{方差$D(X)$}
+
+\begin{enumerate}
+  \item 定义
+  
+  \[
+  D(X) = E\left[(X-E(X))^2\right]
+  \]
+
+  \begin{methodbox}[标准差$\sigma(X)$]
+    为使度量单位相同，定义标准差（协方差）为
+    
+    \[
+    \sigma(X) = \sqrt{D(X)}
+    \]
+  \end{methodbox}
+
+  对于离散型，有
+  \[
+  D(X) = \sum \left[x_k - E(X)\right]^2 p_k
+  \]
+
+  对于连续型，有
+  \[
+  D(X) = \int_{-\infty}^{+\infty} [x - E(X)]^2 f(x)\dd x
+  \]
+
+  \item 计算公式
+  
+  \[
+  D(X) = E(X^2) - [E(X)]^2
+  \]
+
+  \begin{methodbox}[引申公式]
+    \[
+    E(X^2) \geq [E(X)]^2
+    \]
+
+    故，若$E(X^2)=0$，则$E(X)=0$。
+  \end{methodbox}
+
+  \item 性质
+  \begin{enumerate}[label=(\arabic*)]
+    \item $D(C)=0$
+  
+    这是充要条件。
+
+    \item $D(CX)=C^2 D(X)$
+    
+    \item $D(X \pm Y)$ = $D(X) + D(Y)$
+    
+    \[
+    D\left(\sum_{i=1}^{n}a_i X_i\right)=\sum_{i=1}^{n}a_i^2 D(X_i)
+    \]
+
+    注：$X+Y$与$X-Y$的\textbf{方差相同}。
+    \item 若$C \ne E(X)$，则$D(X) < E[(X - C)^2]$
+  \end{enumerate}
+\end{enumerate}
+
+
+\section{数理统计}
 
 \subsection{频率}
 

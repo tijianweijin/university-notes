@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  9 NOV 2026 18:44
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  16 NOV 2026 15:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1236,30 +1236,47 @@ LaTeX Font Info:    Font shape `TU/FandolSong-Regular(0)/m/sl' in size <10.53937
 [1
 
 ] [2]
-Overfull \hbox (2.191pt too wide) in alignment at lines 304--304
+Underfull \hbox (badness 10000) in alignment at lines 304--304
 [][][][][] 
  []
 
 [3]
-Overfull \hbox (46.39978pt too wide) in alignment at lines 335--335
+Overfull \hbox (47.17726pt too wide) in alignment at lines 335--335
 [][][][][]
  []
 
-[4] (./概率论与数理统计笔记.aux)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 344.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 344.
+
+[4]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 409.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 409.
+
+[5] [6] (./概率论与数理统计笔记.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `概率论与数理统计笔记.out' has not changed.
-(rerunfilecheck)             Checksum: 6559A1F48B74F7D333E5727F04CCB606;1588.
+(rerunfilecheck)             Checksum: 2D062EE3A849742F4DF6D1D391027320;1898.
  ) 
 Here is how much of TeX's memory you used:
- 35294 strings out of 468168
- 799268 string characters out of 5436524
- 1246258 words of memory out of 5000000
- 63382 multiletter control sequences out of 15000+600000
+ 35324 strings out of 468168
+ 801234 string characters out of 5436524
+ 1246594 words of memory out of 5000000
+ 63412 multiletter control sequences out of 15000+600000
  638097 words of font info for 130 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  116i,19n,121p,451b,1056s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 概率论与数理统计笔记.pdf (4 pages).
+Output written on 概率论与数理统计笔记.pdf (6 pages).
