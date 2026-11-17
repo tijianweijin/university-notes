@@ -1,0 +1,9 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{module}\PYG{+w}{ }\PYG{n}{decoder3to8}\PYG{p}{(}\PYG{n}{out}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{in}\PYG{p}{);}
+
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mh}{7}\PYG{o}{:}\PYG{l+m+mh}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{input}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mh}{2}\PYG{o}{:}\PYG{l+m+mh}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{in}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{assign}\PYG{+w}{ }\PYG{n}{out}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mh}{1}\PYG{l+m+mb}{\PYGZsq{}b1}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{in}\PYG{p}{;}\PYG{+w}{  }\PYG{c+c1}{// 根据输入进行左移，输出\PYGZsq{}1\PYGZsq{}有效}
+\PYG{k}{endmodule}
+\end{MintedVerbatim}

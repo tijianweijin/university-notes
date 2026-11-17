@@ -1,0 +1,21 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{module}\PYG{+w}{ }\PYG{n}{mux4\PYGZus{}to\PYGZus{}1}\PYG{p}{(}\PYG{n}{out}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i3}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{s0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{s1}\PYG{p}{);}
+
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{input}\PYG{+w}{ }\PYG{n}{i0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i3}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{s0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{s1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k+kt}{reg}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{always}\PYG{+w}{ }\PYG{p}{@(}\PYG{n}{s1}\PYG{+w}{ }\PYG{k}{or}\PYG{+w}{ }\PYG{n}{s0}\PYG{+w}{ }\PYG{k}{or}\PYG{+w}{ }\PYG{n}{i0}\PYG{+w}{ }\PYG{k}{or}\PYG{+w}{ }\PYG{n}{i1}\PYG{+w}{ }\PYG{k}{or}\PYG{+w}{ }\PYG{n}{i2}\PYG{+w}{ }\PYG{k}{or}\PYG{+w}{ }\PYG{n}{i3}\PYG{p}{)}
+\PYG{+w}{                                }\PYG{c+c1}{// 用always块建立组合逻辑模型时，要用阻塞赋值}
+\PYG{+w}{    }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{k}{case}\PYG{p}{(\PYGZob{}}\PYG{n}{s1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{s0}\PYG{p}{\PYGZcb{})}
+\PYG{+w}{            }\PYG{l+m+mh}{2}\PYG{l+m+mb}{\PYGZsq{}b00}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{out}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{l+m+mh}{2}\PYG{l+m+mb}{\PYGZsq{}b01}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{out}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i1}\PYG{p}{;}
+\PYG{+w}{            }\PYG{l+m+mh}{2}\PYG{l+m+mb}{\PYGZsq{}b10}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{out}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i2}\PYG{p}{;}
+\PYG{+w}{            }\PYG{l+m+mh}{2}\PYG{l+m+mb}{\PYGZsq{}b11}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{out}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i3}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{default}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{out}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mh}{1}\PYG{p}{\PYGZsq{}}\PYG{n}{bx}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 其他情况下输出1位任意值}
+\PYG{+w}{        }\PYG{k}{endcase}
+\PYG{+w}{    }\PYG{k}{end}
+
+\PYG{k}{endmodule}
+\end{MintedVerbatim}

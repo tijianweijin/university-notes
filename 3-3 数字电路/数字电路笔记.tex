@@ -19,22 +19,18 @@
 
 \usepackage{circuitikz}
 % \usepackage{inconsolata}
-\usepackage{listings}
+\usepackage[highlightmode=immediate]{minted}
 
-\lstset{
-    language=Verilog,
-    basicstyle=\small\ttfamily,
-    keywordstyle=\color{blue}\bfseries,
-    commentstyle=\color{gray}\itshape,
-    numbers=left,
-    numberstyle=\tiny,
-    frame=shadowbox,
-    rulesepcolor=\color{gray},
-    breaklines=true,
-    keepspaces=true,
-    columns=fullflexible,
-    showstringspaces=false
+\setminted[verilog]{
+    style=vs,
+    fontsize=\small,
+    baselinestretch=1.1,
+    linenos,
+    frame=single,
+    breaklines,
+    autogobble
 }
+\renewcommand{\theFancyVerbLine}{\tiny\arabic{FancyVerbLine}}
 
 % relationbox 中知识关系图的统一样式
 \tikzset{
@@ -1596,7 +1592,7 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
   
   Verilog HDL实现代码如下：
 
-  \begin{lstlisting}[language=Verilog]
+  \begin{minted}{verilog}
   module compare_4(Y, A, B);
       input [3:0] A, B;
       output [2:0] Y;
@@ -1612,7 +1608,7 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
               Y = 3'b001;
       end
   endmodule
-  \end{lstlisting}
+  \end{minted}
 
   功能扩展：
 
@@ -1700,7 +1696,7 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
 
 \begin{enumerate}
   \item 2线至4线译码器
-  \begin{lstlisting}[language=Verilog]
+  \begin{minted}{verilog}
   module decode24(a, led);
     input [1:0] a;
     output [3:0] led;
@@ -1716,13 +1712,13 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
         endcase
     end
   endmodule
-  \end{lstlisting}
+  \end{minted}
   \item 三线至八线译码器74LS138
   
   $S_\mathrm{A}$为1，$S_\mathrm{B}$、$S_\mathrm{C}$为0时，能正常译码，
   否则输出端全为1，表示无输出。
 
-  \begin{lstlisting}[language=Verilog]
+  \begin{minted}{verilog}
   module decoder3to8(out, in);
 
       output [7:0] out;
@@ -1730,8 +1726,8 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
 
       assign out = 1'b1 << in;  // 根据输入进行左移，输出'1'有效
   endmodule
-  \end{lstlisting}
-  \begin{lstlisting}[language=Verilog]
+  \end{minted}
+  \begin{minted}{verilog}
   module decoder3to8(sw, led);
       input [2:0] sw;             // 开关输入信号，作为3-8译码器的输入信号控制LED
       output [7:0] led;
@@ -1752,7 +1748,7 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
           endcase
       end
   endmodule
-  \end{lstlisting}
+  \end{minted}
 
   功能扩展
   \begin{itemize}
@@ -1840,7 +1836,7 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
   地址端$A_1$和$A_0$，数据端$D_3\sim D_0$，
   使能端$\overline{1ST}$和$\overline{2ST}$，输出端$1Y$和$2Y$。
 
-  \begin{lstlisting}[language=Verilog]
+  \begin{minted}{verilog}
   module mux4_to_1(out, i0, i1, i2, i3, s0, s1);
 
       output out;
@@ -1860,7 +1856,7 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
       end
 
   endmodule
-  \end{lstlisting}
+  \end{minted}
 
   功能扩展
 
@@ -1901,7 +1897,7 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
 
   注意：上下使能端的\textbf{正负逻辑相反}。
 
-  \begin{lstlisting}[language=Verilog]
+  \begin{minted}{verilog}
   module demux4(y0, y1, y2, y3, din, a);
 
       input din;
@@ -1921,7 +1917,7 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
       end
 
   endmodule
-  \end{lstlisting}
+  \end{minted}
 
   功能扩展
   \begin{itemize}
