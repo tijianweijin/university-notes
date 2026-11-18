@@ -103,6 +103,7 @@
 \newcommand{\dft}{\operatorname{DFT}}
 \newcommand{\idfs}{\operatorname{IDFS}}
 \newcommand{\idft}{\operatorname{IDFT}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
 
 \newfontfamily\russianfont{DejaVu Sans}
 
@@ -149,7 +150,7 @@
   将时域信号转换到频域后再判断$\varOmega_{\max}$的变化，如
   
   \begin{itemize}
-    \item $f(at) \longrightarrow \dfrac{1}{|a|}F(\dfrac{\varOmega}{a})$，$a\varOmega_{\max}$
+    \item $f(at) \longrightarrow \dfrac{1}{|a|}F\left(\dfrac{\varOmega}{a}\right)$，$a\varOmega_{\max}$
     \item $f_1(t) \ast f_2(t) \longrightarrow F_1(\varOmega)F_2(\varOmega)$，$\max\left\{\varOmega_{1\max},\,\varOmega_{2\max}\right\}$
     \item $f_1(t)f_2(t) \longrightarrow \dfrac{1}{2\uppi} F_1(\varOmega) \ast F_2(\varOmega)$，$\varOmega_{1\max} + \varOmega_{2\max}$
   \end{itemize}
@@ -616,8 +617,58 @@ x[n] = \FF^{-1} \left\{ X(e^{\jj\omega}) \right\} = \int_{-\uppi}^{\uppi} X(e^{\
 
     \item 取样频率满足$\omega_0 < \dfrac{2\uppi}{N}$，
     即$\varOmega_0 < \dfrac{2\uppi}{NT}$。
+
+    \item 分辨率
+    
+    分辨率为$\dfrac{f_s}{N}$，计算$k$处模拟频率为$f=\dfrac{k}{N}f_s$
   \end{enumerate}
 
+  \item 矩阵形式$\vect X[k] = \vect W_N \vect x[n]$
+  
+  展开为
+
+  \[
+  \begin{bmatrix}
+  \tilde{X}[0]\\
+  \tilde{X}[1]\\
+  \tilde{X}[2]\\
+  \vdots\\
+  \tilde{X}[N-1]
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+  W_N^0 & W_N^0 & W_N^0 & \cdots & W_N^0\\
+  W_N^0 & W_N^1 & W_N^2 & \cdots & W_N^{N-1}\\
+  W_N^0 & W_N^2 & W_N^4 & \cdots & W_N^{2(N-1)}\\
+  \vdots & \vdots & \vdots & \ddots & \vdots\\
+  W_N^0 & W_N^{N-1} & W_N^{2(N-1)} & \cdots & W_N^{(N-1)^2}
+  \end{bmatrix}
+  \begin{bmatrix}
+  \tilde{x}[0]\\
+  \tilde{x}[1]\\
+  \tilde{x}[2]\\
+  \vdots\\
+  \tilde{x}[N-1]
+  \end{bmatrix}
+  \]
+
+  \item 性质
+  \begin{center}
+  \begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{>{\bfseries}p{3cm} c c}
+      \toprule
+      性质 & 正变换 & 反变换 \\
+      \midrule
+      平移 & $x[n-n_0]=X[k]W_N^{n_0k}$
+        & $X[k-k_0]=x[n]W_N^{-k_0n}$ \\[6pt]
+
+      卷积 & $x_1[n] \ast x_2[n] = X_1[k]X_2[k]$
+        & $X_1[k] \ast X_2[k] = \dfrac{1}{N} x_1[n]x_2[n]$ \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+  \end{center}
 \end{enumerate}
 
 \subsubsection{离散Fourier变换，DFT}
