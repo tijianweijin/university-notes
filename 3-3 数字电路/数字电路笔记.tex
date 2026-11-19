@@ -1931,6 +1931,98 @@ ECL门的特点是\textbf{速度快}，但功耗大，输出端可以实现\text
   \end{itemize}
 \end{enumerate}
 
+\section{时序逻辑电路}
+
+\subsection{触发器}
+
+描述方法
+  
+\begin{itemize}
+  \item 状态方程/特征方程：$Q^{n+1}=f(Q^n, X)$
+  \item 状态表（Karnaugh图）：输入变量包括$Q^n$
+  \item 功能表：输入变量不包括$Q^n$
+  \item 波形图（时序图）
+  \item 状态图（状态转移图）
+  \item 激励表
+\end{itemize}
+
+\subsubsection{基本RS触发器}
+
+由两个与非门或两个或非门交叉形成。
+
+\begin{enumerate}
+  
+  \item 特征方程：
+  $
+  \left\{\begin{aligned}
+    &Q^{n+1}=S+\overline{R}Q^n \\
+    &RS=0
+  \end{aligned}\right.
+  $
+
+  \item 特性：
+  \begin{itemize}
+    \item 互补输出：有两个互补输出$Q$和$\overline{Q}$；
+    \item 两稳态：$Q=1$称为1状态，$Q=0$称为0状态；
+    \item 记忆性：输入变化时可以改变输出状态，输入不变时保持输出状态不变
+  \end{itemize}
+
+  \item 功能表
+  \begin{table}[htbp]
+      \centering
+      \begin{tabular}{ccccc}
+          \toprule
+          $R$ & $S$ & $Q^{n+1}$ & $\overline{Q^{n+1}}$ & 功能 \\
+          \midrule
+          1 & 0 & 0 & 1 & 复位 \\
+          0 & 1 & 1 & 0 & 置位 \\
+          0 & 0 & $Q^n$ & $\overline{Q^n}$ & 保持 \\
+          1 & 1 & -- & -- & 禁止 \\
+          \bottomrule
+      \end{tabular}
+  \end{table}
+
+  \begin{methodbox}
+    如果$R$和$S$同时为1，由于延时可能会有$Q^{n+1}=1$或$Q^{n+1}=0$两种状态，
+    故禁止输出该信号。
+  \end{methodbox}
+\end{enumerate}
+
+考虑到门延时影响，RS触发器输入信号持续时间应大于$2t_{pd}$。
+
+\subsubsection{钟控触发器}
+
+钟控RS触发器是在基本RS触发器的基础上增加了时钟信号控制的触发器。
+
+\begin{enumerate}
+  \item 特征方程：
+  $
+  \left\{\begin{aligned}
+    &Q^{n+1}=CP(S+\overline{R}Q^n)+\overline{CP}Q^n \\
+    &RS=0
+  \end{aligned}\right.
+  $
+
+  因为$CP=0$时状态保持，所以也可简写为$Q^{n+1}=S+\overline{R}Q^n$。
+\end{enumerate}
+
+\textbf{钟控D触发器}
+
+\textbf{钟控JK触发器}
+
+\textbf{钟控T触发器}
+
+\textbf{钟控T'触发器}
+
+\begin{methodbox}[钟控电位触发器缺陷]
+  \begin{itemize}
+    \item $CP=1$时输出信号不变
+    \item $CP=1$时，始终脉冲信号的宽度要求窄
+  \end{itemize}
+\end{methodbox}
+
+\subsubsection{TTL主从触发器}
+
 \section{Verilog硬件描述语言（Verilog HDL）}
 
 Verilog HDL既是一种行为描述语言也是一种结构描述语言，即既可以\textbf{用电路的功能描述}，

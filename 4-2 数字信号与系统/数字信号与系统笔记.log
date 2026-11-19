@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  18 NOV 2026 10:51
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.16)  19 NOV 2026 15:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1222,12 +1222,7 @@ Underfull \hbox (badness 10000) in alignment at lines 473--473
 [][][] 
  []
 
-[5] [6]
-Underfull \hbox (badness 10000) in alignment at lines 669--669
-[][][] 
- []
-
-[7] [8] [9] [10] [11]
+[5] [6] [7] [8] [9] [10] [11]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\russianfont' on input line 1007.
@@ -1237,10 +1232,6 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `数字信号与系统笔记.out' has not changed.
 (rerunfilecheck)             Checksum: 83EE46D6CAF85138C967D68218AE421A;4554.
  ) 
