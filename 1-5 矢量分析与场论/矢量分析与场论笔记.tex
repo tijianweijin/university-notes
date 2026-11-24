@@ -108,30 +108,6 @@
 	{\heiti\headingfont\zihao{1}\color{main} 矢量分析与场论笔记}
 \end{center}
 
-\section{场量}
-
-\subsection{矢量微分算子}
-
-\subsubsection{梯度$\nabla \varphi$}
-
-\subsubsection{旋度$\nabla\times\bm A$}
-
-\subsubsection{散度$\nabla\cdot\bm A$}
-
-\subsubsection{Laplace算子$\nabla^2\bm A$}
-
-\subsection{矢量积分特征}
-
-\subsubsection{环量$\displaystyle\varGamma=\oint_C \bm A\cdot\dd\bm l$}
-
-\subsubsection{通量$\displaystyle\varPhi=\oiint_S\bm A\cdot\dd\bm S$}
-
-\section{场论定理}
-
-\subsection{广义Stokes定理}
-
-\subsection{Holmholtz定理}
-
 定义Hamilton算子（Nabla算子）
 \[
 \nabla=\left(\frac{\partial}{\partial x_1},
@@ -144,44 +120,26 @@ Laplace 算子
 \Delta=\nabla^2=\sum_{i=1}^{n}\frac{\partial^2}{\partial x_i^2}.
 \]
 
-\subsection{环量与通量}
+\section{场量}
 
-\textbf{（1）环量}
+\subsection{矢量积分特征}
 
-作闭合曲线 $C$，定义环量
-\[
-\Gamma=\oint_C\bm A\cdot\dd\bm s.
-\]
-保证法向量方向不变的前提下，曲线 $C$ 以任意方式缩小为点 $M$ 时，若极限
-\[
-\lim_{\Delta S\to0}\frac{\Delta\Gamma}{\Delta S}
-\]
-存在，则定义环量密度
-\[
-\frac{\dd\Gamma}{\dd S}\bm n.
-\]
+\subsubsection{环量$\displaystyle\varGamma=\oint_C \bm A\cdot\dd\bm l$}
 
-\textbf{（2）通量}
-
-作闭合曲面 $S$，定义通量
+由环量定义环量密度即旋度
 \[
-\Phi=\oiint_S\bm A\cdot\dd\bm S.
+\operatorname{curl} \bm A = \frac{\dd \varGamma}{\dd S}\mathbf{t}
 \]
-若 $\Phi=0$，说明曲面内部无源或汇，否则有源或汇。
+\subsubsection{通量$\displaystyle\varPhi=\oiint_S\bm A\cdot\dd\bm S$}
 
-曲面 $S$ 以任意方式缩小为点 $M$ 时，若极限
+由通量定义通量密度即散度
 \[
-\lim_{\Delta V\to0}\frac{\Delta\Phi}{\Delta V}
-\]
-存在，则定义通量密度（即散度）
-\[
-\operatorname{div}\bm A=\nabla\cdot\bm A
-=\frac{\dd\Phi}{\dd V}.
+\operatorname{div} \bm A = \frac{\dd \varPhi}{\dd V}
 \]
 
-\textbf{2. 梯度、旋度与散度}
+\subsection{矢量微分算子}
 
-\textbf{（1）梯度}
+\subsubsection{梯度$\nabla f$}
 
 梯度是向量值，指示数量场在某点上升最快的速度和方向，用 $\nabla f$ 表示。
 
@@ -200,7 +158,7 @@ Laplace 算子
 \nabla f(u)=f'(u)\nabla u.
 \]
 
-\textbf{（2）旋度}
+\subsubsection{旋度$\nabla\times\bm A$}
 
 旋度是向量值，指示向量场在某点的旋转强度与方向，用 $\nabla\times\bm A$ 表示。数量上等于该点环量密度的最大值，方向即环量密度最大方向。
 
@@ -214,7 +172,7 @@ Laplace 算子
 \nabla\times(u\bm A)=u\nabla\times\bm A+\nabla u\times\bm A.
 \]
 
-\textbf{（3）散度}
+\subsubsection{散度$\nabla\cdot\bm A$}
 
 散度是数量值，指示向量场在某点发散或汇聚的强度，用 $\nabla\cdot\bm A$ 表示。散度即通量密度。
 
@@ -228,34 +186,110 @@ Laplace 算子
 \nabla\cdot(u\bm A)=u\nabla\cdot\bm A+\nabla u\cdot\bm A.
 \]
 
-\textbf{（4）其他计算公式}
+\subsubsection{Laplace算子$\nabla^2\bm A$}
 
-梯度场无旋：
+\begin{methodbox}[常用公式]
+	梯度场无旋：
+	\[
+	\nabla\times(\nabla u)=\bm0.
+	\]
+	旋度场无源：
+	\[
+	\nabla\cdot(\nabla\times\bm A)=0.
+	\]
+	向量积散度公式：
+	\[
+	\nabla\cdot(\bm A\times\bm B)
+	=\bm B\cdot(\nabla\times\bm A)-\bm A\cdot(\nabla\times\bm B).
+	\]
+	梯度场散度公式：
+	\[
+	\nabla\cdot(\nabla u)=\nabla^2u.
+	\]
+	旋度场旋度公式：
+	\[
+	\nabla\times(\nabla\times\bm A)
+	=\nabla(\nabla\cdot\bm A)-\nabla^2\bm A.
+	\]
+\end{methodbox}
+
+\section{场论定理}
+
+\subsection{广义Stokes定理}
+
 \[
-\nabla\times(\nabla u)=\bm0.
-\]
-旋度场无源：
-\[
-\nabla\cdot(\nabla\times\bm A)=0.
-\]
-向量积散度公式：
-\[
-\nabla\cdot(\bm A\times\bm B)
-=\bm B\cdot(\nabla\times\bm A)-\bm A\cdot(\nabla\times\bm B).
-\]
-梯度场散度公式：
-\[
-\nabla\cdot(\nabla u)=\nabla^2u.
-\]
-旋度场旋度公式：
-\[
-\nabla\times(\nabla\times\bm A)
-=\nabla(\nabla\cdot\bm A)-\nabla^2\bm A.
+\int_{\varOmega}\dd\omega=\int_{\partial\varOmega}\omega.
 \]
 
-\textbf{3. 特殊向量场}
+\subsubsection{Newton-Leibniz公式}
 
-\textbf{（1）无旋场}
+\[
+\int_{a}^{b}f'(x)\dd x=f(b)-f(a).
+\]
+
+\subsubsection{Green公式}
+
+\[
+\iint_S \nabla \times \bm A \cdot \dd \bm S=\oint_C \bm A \cdot \dd\bm l.
+\]
+
+\subsubsection{Gauss公式}
+
+\[
+\iiint_V \nabla \cdot \bm A \cdot \dd V = \oiint_S \bm A \cdot \dd\bm S.
+\]
+
+\subsection{Holmholtz定理}
+
+\[
+\bm F = \bm F_{\mathrm{s}} + \bm F_{\mathrm{i}} = -\nabla \varphi + \nabla \times \bm A
+\]
+
+其中，$\varphi$称为标量势，用于描述梯度场；$\bm A$称为向量势，用于描述旋度场。
+
+有限区域内，$\bm F$可由其散度、旋度和边界条件唯一确定，即
+
+\[
+\boldsymbol{F}(\boldsymbol{r})
+={}
+-\nabla\left[
+\int_V
+\frac{\nabla'\cdot\boldsymbol{F}(\boldsymbol{r}')}
+{4\uppi R}\,\mathrm{d}V'
+-
+\oint_S
+\frac{\boldsymbol{F}(\boldsymbol{r}')\cdot\mathrm{d}\boldsymbol{S}'}
+{4\uppi R}
+\right]
++\nabla\times\left[
+\int_V
+\frac{\nabla'\times\boldsymbol{F}(\boldsymbol{r}')}
+{4\uppi R}\,\mathrm{d}V'
++
+\oint_S
+\frac{\boldsymbol{F}(\boldsymbol{r}')\times\mathrm{d}\boldsymbol{S}'}
+{4\uppi R}
+\right]
+\]
+
+无限区域内，可认为边界条件为$\bm F(\bm r)=\bm0$，即矢量场由散度与旋度唯一确定。
+
+\[
+\boldsymbol{F}(\boldsymbol{r})
+={}
+-\nabla
+\int_{\mathbb{R}^3}
+\frac{\nabla'\cdot\boldsymbol{F}(\boldsymbol{r}')}
+{4\uppi R}\,\mathrm{d}V'
++\nabla\times
+\int_{\mathbb{R}^3}
+\frac{\nabla'\times\boldsymbol{F}(\boldsymbol{r}')}
+{4\uppi R}\,\mathrm{d}V'
+\]
+
+\section{特殊向量场}
+
+\subsection{无旋场}
 
 单连通区域内，无旋场、有势场、保守场等价。设 $\bm A\in C^1(G)$，$G\subset\RR^3$：
 \[
@@ -268,7 +302,7 @@ Laplace 算子
 
 积分与路径无关等价于保守场、旋度为 $0$，即等价于 $\nabla\times\bm A=\bm0$。
 
-\textbf{（2）无源场}
+\subsection{无源场}
 
 单连通区域内，无源场、向量有势场、保守场等价：
 \[
@@ -279,7 +313,7 @@ Laplace 算子
 \end{array}
 \]
 
-\textbf{（3）调和场}
+\subsection{调和场}
 
 调和场势函数满足 Laplace 方程
 \[
@@ -292,59 +326,6 @@ Laplace 算子
 +\frac{\partial^2u}{\partial z^2}=0.
 \]
 
-\subsection{定理}
-
-\textbf{0. Newton--Leibniz 公式}
-\[
-\int_a^b f'(x)\dd x=f(b)-f(a).
-\]
-
-\textbf{1. Green 公式}
-
-设平面有界闭域 $\sigma$ 由分段光滑的简单闭曲线围成，$\sigma$ 的边界曲线记为 $C$，函数 $P,Q\in C^1(\sigma)$，则
-\[
-\iint_{\sigma}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\dd x\dd y
-=\oint_{C^+}P\dd x+Q\dd y.
-\]
-
-\textbf{2. Stokes 公式}
-\[
-\iint_S\left(\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}\right)\dd y\wedge\dd z
-+\left(\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}\right)\dd z\wedge\dd x
-+\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\dd x\wedge\dd y
-=\oint_{C^+}P\dd x+Q\dd y+R\dd z.
-\]
-
-几何意义为旋度对面积的积分等于原函数在外曲线上的积分，即向量形式
-\[
-\iint_S(\nabla\times\bm A)\cdot\dd\bm S
-=\oint_{C^+}\bm A\cdot\dd\bm s.
-\]
-
-\textbf{3. Gauss 公式}
-
-设空间有界闭域 $V$ 由分段光滑的简单闭曲面 $S$ 围成，向量函数 $\bm A=(P,Q,R)\in C^1(V)$，则
-\[
-\iiint_V\left(\frac{\partial P}{\partial x}
-+\frac{\partial Q}{\partial y}
-+\frac{\partial R}{\partial z}\right)\dd V
-=\oiint_{S^+}P\dd y\wedge\dd z
-+Q\dd z\wedge\dd x
-+R\dd x\wedge\dd y.
-\]
-
-几何意义为散度对体积的积分等于原函数在外表面上的积分，即向量形式
-\[
-\iiint_V\nabla\cdot\bm A\dd V
-=\oiint_{S^+}\bm A\cdot\dd\bm S.
-\]
-
-上三式可以统一于如下公式，受限于知识水平不作进一步介绍。
-
-\textbf{4. 广义 Stokes 公式}
-\[
-\int_{\Omega}\dd\omega=\int_{\partial\Omega}\omega.
-\]
 
 \begin{methodbox}[广义 Stokes 公式求第二型曲线曲面积分]
 广义 Stokes 公式是解题一把好手。使用广义 Stokes 公式解题时应注意以下三点：
