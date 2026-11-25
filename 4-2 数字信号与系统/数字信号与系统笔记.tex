@@ -115,7 +115,12 @@
 
 \section{模数转换}
 
+将时域周期信号记为$\tilde{x}(t)$，其对应时限信号为$x(t)$。
+将频域连续信号记为$\tilde{X}(\varOmega)$，其对应带限信号为$X(\varOmega)$。
+
 \subsection{取样}
+
+\subsubsection{时域取样}
 
 \begin{enumerate}
   \item 时域分析
@@ -161,7 +166,11 @@
   注意：$\hat{x}(t)$是离散时间信号，仍然在时域$t-x(t)$上；而$x[n]$才是数字信号，在$n-x[n]$上。
 \end{methodbox}
 
+\subsubsection{频域取样}
+
 \subsection{内插}
+
+\subsubsection{时域内插}
 
 \begin{enumerate}
   
@@ -178,6 +187,31 @@
   \]
 
 \end{enumerate}
+
+\subsubsection{频域内插}
+
+\begin{enumerate}
+  
+  \item 内插公式
+  
+  \[
+  X(\ee^{\jj\omega}) = \sum_{k=0}^{N-1}X[k]\varPhi\left(\omega-\frac{2\uppi k}{n}\right),
+  \qquad \varPhi(\omega)=\frac{1}{N}\ee^{-\jj\frac{N-1}{2}\omega}\frac{\sin\dfrac{N\omega}{2}}{\sin\dfrac{\omega}{2}}
+  \]
+
+  \item 取样点数限制
+
+  \[
+  N \geq L = \frac{T_0}{T}
+  \]
+
+  为方便快速Fourier变换，一般取$N=2^r, \, r \in \ZZ_+$。
+
+\end{enumerate}
+
+\subsection{延拓}
+
+\subsection{频域失真}
 
 \section{信号分析}
 
@@ -280,10 +314,11 @@
     \begin{enumerate}[label=(\arabic*)]
       \item 加法：$y[n]=x_1[n] + x_2[n]$
       \item 乘法：$y[n]=x_1[n] \cdot x_2[n]$
-      \item 卷积：$y[n]=x[n] * h[n] = \displaystyle \sum_{k=-\infty}^{\infty} x[k] h[n-k]$
+      \item 线性卷积：$y[n]=x[n] \ast h[n] = \displaystyle \sum_{k=-\infty}^{\infty} x[k] h[n-k]$
+      \item 循环卷积：$y[n]=x[n] \circledast h[n] = \displaystyle \sum_{k=0}^{N-1}x[k]h[(n-k)_N]$
     \end{enumerate}
   
-  \begin{methodbox}[【技巧】卷积计算]
+  \begin{methodbox}[【技巧】线性卷积计算]
     \begin{enumerate}[label=\arabic*.]
       \item 解析式法
       
@@ -310,6 +345,43 @@
     \end{enumerate}
   \end{methodbox}
   
+  \begin{methodbox}[【技巧】循环卷积计算]
+
+  \end{methodbox}
+
+  \begin{methodbox}[【技巧】利用线性卷积求解循环卷积]
+  设卷积序列长度为$N_1$、$N_2$。
+
+  若循环卷积长度\textbf{满足$N \geq N_1 + N_2 - 1$}，
+  则线性卷积等于循环卷积。
+
+  若循环卷积长度不满足上述条件，则产生混迭。
+  例如$N=N_1$时，线性卷积与循环卷积前$N_2$个元素产生混迭。
+
+  随着$N_1=N_2$增长，线性卷积线性增长，循环卷积对数增长，
+    故一般采取循环卷积计算离散Fourier变换。
+
+    但当$N_1 \gg N_2$时，循环卷积优势不明显，可以用分段卷积克服。
+  \end{methodbox}
+  
+  \begin{methodbox}[【技巧】分段卷积]
+
+  设原始信号$x[n]$长度为$N_1$，冲击响应$h[n]$长度为$M$。
+
+    \begin{enumerate}[label=\arabic*.]
+      \item 重叠相加法
+
+      将原信号$x[n]$分成若干段，每段长度为$N_1$，
+      将其与冲击响应的\textbf{线性卷积或循环卷积}结果叠加，即得到$y[n]$。
+      
+      \item 重叠保留法
+      
+      将原信号$x[n]$分成若干段，每段长度为$N_1 + M - 1$，
+      得到其与冲击响应的\textbf{循环卷积}结果，去掉前$M - 1$个元素，相加得到最终的卷积结果。
+    \end{enumerate}
+
+  \end{methodbox}
+
 \end{enumerate}
 
 \subsection{连续频域分析}
@@ -588,7 +660,9 @@ x[n] = \FF^{-1} \left\{ X(e^{\jj\omega}) \right\} = \int_{-\uppi}^{\uppi} X(e^{\
   \]
 \end{enumerate}
 
-\subsubsection{离散Fourier级数，DFS}
+\subsubsection{离散Fourier级数（Discrete Fourier Series）}
+
+离散Fourier级数的变换对象是时域周期信号。
 
 \begin{enumerate}
   \item 定义
@@ -671,9 +745,38 @@ x[n] = \FF^{-1} \left\{ X(e^{\jj\omega}) \right\} = \int_{-\uppi}^{\uppi} X(e^{\
   \end{center}
 \end{enumerate}
 
-\subsubsection{离散Fourier变换，DFT}
+\subsubsection{离散Fourier变换（Discrete Fourier Transform）}
 
-\subsubsection{快速Fourier变换，FFT}
+离散Fourier变换的变换对象是时限信号。这是离散Fourier级数和离散Fourier变换的主要区别。
+
+\begin{enumerate}
+  \item 定义
+  
+  \[
+  \dft\left\{x[n]\right\} = \sum_{n=0}^{N-1} x[n] \ee^{-\jj\frac{2\uppi}{N}kn}
+  = \sum_{n=0}^{N-1} x[n] W_N^{kn}
+  \]
+  \[
+  \idft\left\{X[k]\right\} = \frac{1}{N} \sum_{k=0}^{N-1} X[k] \ee^{\jj\frac{2\uppi}{N}kn}
+  = \frac{1}{N} \sum_{k=0}^{N-1} X[k] W_N^{-kn}
+  \]
+
+  注：从工程角度看，离散Fourier级数与离散Fourier变换没有本质区别。
+
+  \item 
+\end{enumerate}
+
+\textbf{离散Fourier变换应用}
+
+\begin{enumerate}
+  \item 频谱分析
+  
+  \item 栅栏效应
+\end{enumerate}
+
+\subsubsection{快速Fourier变换（Fast Fourier Transform）}
+
+乘法次数$\dfrac{N}{2}\log_2 N$
 
 \section{系统分析}
 

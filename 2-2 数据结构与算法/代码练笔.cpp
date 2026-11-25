@@ -206,7 +206,7 @@ struct DulNode {
     DulNode<T>* prior, next;
 };
 
-// 在节点p前插入
+// 前插
 
 template <class T>
 void InsertBefore(DulNode<T>* p, T x) {
@@ -239,3 +239,5 @@ T DeleteNode(DulNode<T>* p) {
     delete p;
     return data;
 }
+
+// 静态链表是由一位结构数组实现的，将数组的下标作为指针使用，数组元素的结构体中包含数据域和指针域。静态链表的特点是空间利用率高，但插入和删除操作较为复杂。

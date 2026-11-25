@@ -1,0 +1,122 @@
+\documentclass[UTF8,fontset=fandol,zihao=5]{ctexart}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{upgreek}
+\usepackage[nolimits]{cmupint}
+\usepackage{booktabs,tabularx,array}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+
+\usetikzlibrary{
+  positioning,
+  calc,
+  decorations.pathreplacing,
+  arrows.meta
+}
+
+% relationbox 中知识关系图的统一样式
+\tikzset{
+  relnode/.style={
+    font=\small,
+    align=center
+  },
+  relline/.style={
+    thick
+  },
+  relarrow/.style={
+    -{Stealth},
+    thick
+  }
+}
+
+\DeclareTextFontCommand{\textbf}{\heiti\color{main}}
+
+\definecolor{main}{HTML}{D0645A}
+\definecolor{mainlight}{HTML}{FFF0F0}
+\definecolor{method}{HTML}{C96A70}
+\definecolor{methodlight}{HTML}{FFF0F0}
+
+\hypersetup{colorlinks=true,linkcolor=main,urlcolor=main}
+\setlength{\parindent}{2em}
+\linespread{1.5}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlist[itemize]{leftmargin=2em,itemsep=0.1em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=0.1em,topsep=0.2em}
+
+\newfontfamily\headingfont{TeX Gyre Heros}
+
+\ctexset{
+  section={format=\centering\heiti\headingfont\zihao{3}\color{main},
+            name={第,章},number=\chinese{section},aftername=\quad,
+            beforeskip=0.9em,afterskip=0.5em},
+  subsection={format=\heiti\headingfont\zihao{5}\color{main},
+              name={,、},number=\chinese{subsection},aftername=,
+              beforeskip=0.6em,afterskip=0.22em},
+  subsubsection={format=\heiti\headingfont\zihao{5}\color{main},
+                  number={（\chinese{subsubsection}）},aftername=,
+                  beforeskip=0.55em,afterskip=0.15em}
+}
+
+\newtcolorbox{relationbox}{
+  enhanced,breakable,colback=mainlight,colframe=main,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm
+}
+\newtcolorbox{methodbox}[1][]{
+  enhanced,breakable,colback=methodlight,colframe=method,
+  boxrule=0.65pt,arc=1.4mm,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm,
+  title=#1,fonttitle=\kaishu,fontupper=\kaishu,
+  before upper={\setlength{\parindent}{2em}}
+}
+
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\Res}{\operatorname{Res}}
+\let\bm\boldsymbol
+
+\begin{document}
+
+\begin{center}
+  {\heiti\headingfont\zihao{1}\color{main} 数学物理方法笔记}
+\end{center}
+
+\section{数学物理方程}
+
+\subsection{波动方程}
+
+波动方程的一般形式为
+
+\[
+\frac{\partial^2 u}{\partial t^2} = v^2 \nabla^2 u
+\]
+
+其中$v$为波速。
+
+\subsection{Poisson方程}
+
+Poisson方程的一般形式为
+
+\[
+\nabla^2 u(\bm{r}) = f(\bm{r})
+\]
+
+Laplace方程是Poisson方程的特例。$f(\bm{r})=0$时，Poisson方程退化为Laplace方程，
+即
+
+\[
+\nabla^2 u(\bm{r}) = 0
+\]
+
+\end{document}

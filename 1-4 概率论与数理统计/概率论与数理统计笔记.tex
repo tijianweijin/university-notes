@@ -179,17 +179,46 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
   \end{tabularx}
 \end{center}
 
-  \begin{methodbox}[独立性]
+  \begin{methodbox}[独立性判定]
+    \begin{enumerate}
+      \item 一般判定
     
+      \[
+      F(x, y) = F_X(x)F_Y(y)
+      \]
+
+      \item 离散型随机变量
+
+      \[
+      \forall x_i,y_j,\quad P(X=x_i,Y=y_j)=P(X=x_i)P(Y=y_j)
+      \]
+
+      \item 连续型随机变量
+      
+      \[
+      f(x, y) = f_x(x)
+      \]
+    \end{enumerate}
   \end{methodbox}
 
   \item 联合分布与边缘分布
+  
   \[
-  F_X(x)=F(x,\, \infty)=\int_{y_1(x)}^{y_2(x)} f_{X,Y}(x,y)\dd y
+  F_X(x) = F(x,\, \infty) = \int_{-\infty}^{+\infty} \dd x \int_{-\infty}^{x} f(x, y) \dd y
   \]
+
+  \[
+  f_X(x) = \int_{-\infty}^{+\infty} f(x,y)\dd y
+  \]
+
+  考虑到概率密度函数常常有大部分值为0，计算时通常不从负无穷积分到正无穷，
+  而是先画图求出积分域上下界，随后求积分。
 
   \item 条件分布
 
+  \[
+  f_{X|Y}(x|y) = \frac{f_{X,Y}(x,y)}{f_Y(y)}
+  \]
 \end{enumerate}
 
 \subsubsection{随机变量函数}
@@ -485,13 +514,13 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
   \textbf{{\russiansans Чебышёв}不等式是目前估计概率唯一方法！}
 \end{enumerate}
 
-\subsubsection{协方差$\mathbf{Cov}$}
+\subsubsection{协方差Cov}
 
 \begin{enumerate}
   \item 定义
 
   \[
-  \mathbf{Cov}(\vect X,\vect Y) = \vect E[(\vect X-\vect E(\vect X))(\vect Y-\vect E(\vect Y))]
+  \operatorname{Cov}(X,Y) = E[(X-E(X)- E(Y))]
   \]
 
   \item 重要计算公式
@@ -626,6 +655,10 @@ F(x, +\infty) \ne 0 \,\text{且}\, F(+\infty, y) \ne 0
   \lim_{n\to\infty} P\left\{\left|\frac{1}{n}\sum_{i=1}^{n}X_i - 0\right| = 0\right\} = 1
   \]
 \end{enumerate}
+
+\begin{methodbox}
+  大数定律的本质就是用不同的方式来描述同一个结论：当$n$足够大时，均值稳定于期望。
+\end{methodbox}
 
 \begin{methodbox}[Monte Carlo方法]
   Monte Carlo方法是利用计算机模拟随机事件的发生过程，进而求解概率问题的一种数值计算方法。
